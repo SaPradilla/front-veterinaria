@@ -4,8 +4,10 @@
 
 <template>
     <div class="servicios">
+
         <div class="overlap-group-wrapper">
             <div class="overlap-group">
+                <div class="text-wrapper-7">Nuestros Servicios</div>
                 <div class="frame">
                     <div class="ser">
                         <div class="text-wrapper">Consultas</div>
@@ -32,38 +34,44 @@
                         <div class="text-wrapper-6">Funebres</div>
                     </div>
                 </div>
-                <div class="text-wrapper-7">Nuestros Servicios</div>
+
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-.frame div:hover{
+.frame div:hover {
     cursor: pointer;
-    transform: scale(0.9); 
+    transform: scale(0.9);
 }
-.frame div:hover{
+
+.frame div:hover {
     transition: all 0.2s ease;
 
 }
+
 .servicios {
+    overflow-x: hidden;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: 130vh;
+    overflow-y: hidden;
+
 }
 
 .servicios .overlap-group-wrapper {
-    height: 1024px;
+    height: 130vh;
     width: 1920px;
 }
 
 .servicios .overlap-group {
     background-image: url(../assets/img/fondo-imagen.png);
     background-size: 100% 100%;
-    height: 1024px;
+    height: 130vh;
+
     position: relative;
 }
 
@@ -269,4 +277,40 @@
     top: 64px;
     white-space: nowrap;
 }
-</style>
+
+@media (max-width: 768px) {
+    .servicios {
+        overflow-x: hidden;
+    }
+
+    .servicios .text-wrapper-7 {
+        font-size: 40px;
+        left: unset;
+        text-align: center;
+        font-weight: 800;
+        top: 20px;
+        position: relative;
+
+    }
+
+    .servicios .overlap-group-wrapper {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .servicios .overlap-group {
+        background-size: auto;
+        /* background-size: contain; */
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 130vh;
+        width: 100%;
+    }
+    .servicios .frame {
+        gap: 10px;
+        height: 10px;
+        left: 10px;
+        top: 10px;
+
+    }
+}</style>

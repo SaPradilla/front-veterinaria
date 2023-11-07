@@ -5,13 +5,14 @@
     <div>
         <div class="inicio">
             <div class="overlap-group-wrapper">
-                <div class="overlap-group">
+              
                     <div class="blur-shapes">
                         <div class="ellipse"></div>
                         <div class="ellipse-2"></div>
                     </div>
                     <div class="contenedor-inicio">
                         <div class="contenedor-textos">
+                            <img class="veterinaria-fondo" src="../assets/img/veterinaria-fondo.svg" alt="veterinaria" >
                             <div class="text-wrapper">Veterinaria</div>
                             <img class="texto-pelitos" alt="Texto pelitos" src="../assets/img/texto-pelitos.png" />
                             <button class="botonCita"> Solicitar Cita</button>
@@ -19,7 +20,7 @@
                         <img class="vector-veterinaria" alt="Vector veterinaria"
                             src="../assets/img/vector-veterinaria.png" />
                     </div>
-                </div>
+             
             </div>
         </div>
     </div>
@@ -27,6 +28,9 @@
 
 
 <style scoped>
+.veterinaria-fondo{
+    display: none;
+}
 .botonCita{
     padding: 20px;
     border-style: none;
@@ -44,12 +48,12 @@
 
 }
 .inicio {
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
     height: 100vh;
+    
 }
 .inicio .blur-shapes {
     left: 0;
@@ -114,5 +118,80 @@
 .inicio .vector-veterinaria {
     height: 506px;
     width: 489px;
+    transition: all 0.2s ease;
+
+}
+.inicio .vector-veterinaria:hover{
+    transform: scale(1.06); 
+
+}
+@media (max-width: 768px) { 
+    .veterinaria-fondo{
+        height:300px;
+        width: 300px;
+        display: unset;
+        margin-bottom: 50px;
+    }
+    img.vector-veterinaria{
+        display: none;
+    }
+    .inicio{
+        overflow-x: hidden;
+        display: block;
+    }    
+    .inicio .ellipse{
+        left: 10px;
+    }
+    .inicio .contenedor-inicio {
+
+        margin: 0 auto;
+        margin-top: 14vh;
+        justify-content: center;
+        width: 100px;
+        
+    }
+    .inicio .contenedor-textos {
+        height: 300px;
+        width: 400px;
+
+    }
+        
+    .inicio .text-wrapper {
+        margin-bottom: 50px;
+        font-size: 7em;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 16px;
+        text-align: center;
+    }
+    .inicio .texto-pelitos {
+        height: 100px;
+        width: 350px;
+        margin-bottom: 70px;
+    }
+    .inicio .overlap-group-wrapper{
+        display: flex;
+    }
+    .inicio .ellipse-2 {
+        filter: blur(200px);
+        top: 600px;
+        width: 108px;
+        height: 200px;
+        border-radius: 164px;
+
+
+    }
+    .inicio .ellipse {
+        height: 100px;
+        width: 100px;
+        top: 100px;
+        filter: blur(100px);
+        left: 400px;
+
+    }
+    .botonCita{
+        width: 18em;
+        font-size: large;
+    }
 }
 </style>
