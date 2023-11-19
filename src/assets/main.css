@@ -1,6 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Roboto+Condensed:wght@300&display=swap');
 
+:root {
+    --color-rojo: #D9755E;
+    --color-gris-claro: #F2F2F287;
+    --color-blanco: #FFFFFF;
+    --color-gris: #979797;
+    --color-gris-oscuro: #CCCCCC;
+    --color-blanco-input:#F8FFF4;
+    --color-morado-general:#4c0ea4;
+    --color-morado-oscuro-general:#5A0FC3;
+    --color-morado-claro-general:rgba(90, 15, 195, 0.86);
+}
+
 
 *{
     font-family: 'Montserrat';
@@ -8,8 +20,129 @@
     margin: 0;
 }
 
-@media (max-width: 576px) {
-   div#app{
+@media (max-width: 768px) {
+   #app{
     overflow-x: hidden;
    }
+}
+
+
+/* ---- Estilos de de FormKit ---- */
+/* Mensajes */
+.formkit-messages li{
+    color: var(--color-rojo);
+}
+/* Estilos input */
+input.formkit-input{
+    padding: 13px;
+    border-radius: 20px;
+}
+/* Contenedor del input*/
+div.formkit-inner  {
+    width: 300px;
+    height: 50px;
+    border-style: none;
+    background-color: var(--color-blanco-input);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+/* Al selecionar */
+div.formkit-inner:focus-within{
+    box-shadow: 0px 0px 10px 0px var(--color-morado-general);
+}
+.formkit-wrapper .formkit-inner input.formkit-input:-webkit-autofill{ 
+    /* all: unset !important; */
+    /* opacity: 0.4; */
+
+    box-shadow: 0 0 0 1000px white inset !important;
+    
+}
+/* Quita los estilos del tema default */
+div.formkit-outer .formkit-icon.formkit-prefix-icon {
+    background: unset;
+    box-shadow: unset;
+}
+.formkit-outer .formkit-icon svg.eyeCloseIcon,.formkit-outer .formkit-icon svg.eyeOpenIcon {
+    max-width: unset !important;
+    max-height:unset !important;
+    
+}
+.formkit-outer .formkit-icon svg {
+    max-width: unset !important;
+    max-height:unset !important;
+}
+.formkit-outer .formkit-icon.formkit-suffix-icon{
+    box-sizing:unset !important;
+}   
+
+/* Estilos del los iconos de los inputs */
+/* Contraseña */
+.formkit-outer .formkit-icon svg.pwdIcon {
+    width: 1.6em;
+}
+/* Ojo  Hover*/
+.formkit-outer .formkit-suffix-icon svg:hover path{
+    fill: var(--color-morado-oscuro-general);
+    transition: all ease;
+}
+.formkit-outer .formkit-select-icon{
+    width: 2.6em !important; 
+    color: var(--color-morado-general);
+}
+/* Email */
+.formkit-outer .formkit-icon svg.emailIcon {
+    width: 1.4em;
+}
+/* Phone */
+.formkit-outer .formkit-icon svg.phoneIcon {
+    width: 1.6em;
+}
+
+/* CheckBox */
+span.formkit-decorator{
+    border-color: var(--color-morado-general);
+    /* box-shadow: 0 0 0 1px var(--color-morado-general) inset !important; */
+}
+[data-type="checkbox"] .formkit-input:checked ~ .formkit-decorator{
+    box-shadow: 0 0 0 1px var(--color-morado-general) inset !important;
+    outline: 0.25em solid  var(--color-morado-claro-general) !important; 
+}
+[data-type="checkbox"] .formkit-input:focus ~ .formkit-decorator{
+    outline: 0.25em solid  var(--color-morado-claro-general) !important; 
+    box-shadow: 0 0 1px var(--color-morado-general) !important;
+
+}
+/* Boton Submit*/
+div.formkit-wrapper:has(.formkit-input#botonRegistrarContrasena){
+    display: flex !important; 
+    justify-content: center !important;
+   
+  }
+[data-type="submit"] .formkit-input {
+    border-radius: 25px !important;
+    background-color: var(--color-morado-general) !important;
+    font-size: 1.1em !important;
+    font-weight: 600;
+    padding: 10px !important;
+    width: auto ;
+
+}
+[data-type="submit"] .formkit-input:hover {
+    background-color: var(--color-morado-claro-general) !important;
+    transition: all 0.2s ease;
+}
+/* Boton */
+[data-type="button"] .formkit-input {
+    border-radius: 25px !important;
+    background-color: var(--color-morado-general) !important;
+    font-size: 1.1em !important;
+    font-weight: 600;
+    padding: 10px !important;
+    width: auto ;
+
+}
+[data-type="button"] .formkit-input:hover {
+    background-color: #87c44a !important;
+    transition: all 0.2s ease;
+
 }

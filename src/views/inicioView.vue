@@ -52,7 +52,7 @@ div.header {
   position: sticky;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .contenedor-inicio{
     overflow-x: hidden;
   }

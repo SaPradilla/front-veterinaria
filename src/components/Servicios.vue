@@ -5,312 +5,189 @@
 <template>
     <div class="servicios">
 
-        <div class="overlap-group-wrapper">
-            <div class="overlap-group">
-                <div class="text-wrapper-7">Nuestros Servicios</div>
-                <div class="frame">
-                    <div class="ser">
-                        <div class="text-wrapper">Consultas</div>
+
+        <div class="overlap-group">
+            <h1 class="text-tittle">Nuestros Servicios</h1>
+
+            <div class="content-services">
+
+                <div class="services-cols">
+                    <div class="service-1 service">
                         <img class="citas-icon" alt="Citas icon" src="../assets/img/citas-icon.png" />
+                        <h2 class="text-service">Consultas</h2>
                     </div>
-                    <div class="div">
-                        <div class="text-wrapper-2">Guarderia</div>
+                    <div class="service-2 service">
                         <img class="guarderia-icon" alt="Guarderia icon" src="../assets/img/guarderia-icon.png" />
+                        <h2 class="text-service">Guarderia</h2>
                     </div>
-                    <div class="ser-2">
-                        <div class="text-wrapper-3">Estetica</div>
+                    <div class="service-3 service">
                         <img class="perro-icon" alt="Perro icon" src="../assets/img/perro-icon.png" />
+                        <h2 class="text-service">Estetica</h2>
                     </div>
-                    <div class="ser-3">
-                        <div class="text-wrapper-4">Cirugias</div>
+
+                </div>
+                <div class="services-cols">
+                    <div class="service-1 service">
                         <img class="cirugia-icon" alt="Cirugia icon" src="../assets/img/cirugia-icon.png" />
+                        <h2 class="text-service">Cirugias</h2>
                     </div>
-                    <div class="ser-4">
+                    <div class="service-2 service">
                         <img class="urgencia-icon" alt="Urgencia icon" src="../assets/img/urgencia-icon.png" />
-                        <div class="text-wrapper-5">Urgencias</div>
+                        <h2 class="text-service">Urgencias</h2>
                     </div>
-                    <div class="ser-5">
+                    <div class="service-3 service">
                         <img class="funeraria-icon" alt="Funeraria icon" src="../assets/img/funeraria-icon.png" />
-                        <div class="text-wrapper-6">Funebres</div>
+                        <h2 class="text-service">Funebres</h2>
                     </div>
                 </div>
-
             </div>
+
+
         </div>
+
     </div>
 </template>
 
 <style scoped>
-.frame div:hover {
-    cursor: pointer;
-    transform: scale(0.9);
-}
-
-.frame div:hover {
-    transition: all 0.2s ease;
-
-}
-
+/* Contenedor principal */
 .servicios {
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    overflow: hidden;
     width: 100%;
-    height: 130vh;
-    overflow-y: hidden;
-
+    height: 100vh;
 }
 
-.servicios .overlap-group-wrapper {
-    height: 130vh;
-    width: 1920px;
-}
+/* Contenedor */
 
+/* Imagen de fondo */
 .servicios .overlap-group {
     background-image: url(../assets/img/fondo-imagen.png);
     background-size: 100% 100%;
-    height: 130vh;
-
     position: relative;
+    height: 100%;
 }
 
-.servicios .frame {
-    align-items: center;
+/* Titulo  */
+h1.text-tittle {
+    color: #ffffff;
+    font-family: "Montserrat-Medium", Helvetica;
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10vh;
+}
+
+
+/* Padre de servicios */
+.content-services {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 74px 100px;
-    height: 562px;
+    flex-direction: column;
     justify-content: center;
-    left: 308px;
-    position: absolute;
-    top: 231px;
-    width: 1304px;
+    align-items: center;
+    gap: 300px;
+
 }
 
-.servicios .ser {
-    height: 178px;
-    position: relative;
-    width: 330px;
+/* Contenedor de servicios */
+.services-cols {
+    display: flex;
+    gap: 100px;
 }
 
-.servicios .text-wrapper {
+/* Servicio */
+.service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Texto de servicio */
+.servicios .text-service {
     color: #ffffff;
     font-family: "Montserrat-Light", Helvetica;
     font-size: 60px;
     font-weight: 300;
-    height: 14px;
+    height: 1px;
     left: 0;
     letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
+
+
     text-align: center;
     top: 164px;
     white-space: nowrap;
     width: 328px;
 }
 
+/* tamaño icons */
 .servicios .citas-icon {
     height: 134px;
-    left: 87px;
-    position: absolute;
-    top: -2px;
     width: 153px;
-}
-
-.servicios .div {
-    height: 186.39px;
-    position: relative;
-    width: 336px;
-}
-
-.servicios .text-wrapper-2 {
-    color: #ffffff;
-    font-family: "Montserrat-Light", Helvetica;
-    font-size: 60px;
-    font-weight: 300;
-    height: 20px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 166px;
-    width: 334px;
 }
 
 .servicios .guarderia-icon {
     height: 133px;
-    left: 108px;
-    position: absolute;
-    top: -2px;
+
     width: 118px;
-}
-
-.servicios .ser-2 {
-    height: 226px;
-    position: relative;
-    width: 280px;
-}
-
-.servicios .text-wrapper-3 {
-    color: #ffffff;
-    font-family: "Montserrat-Light", Helvetica;
-    font-size: 60px;
-    font-weight: 300;
-    height: 20px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 206px;
-    width: 278px;
 }
 
 .servicios .perro-icon {
     height: 184px;
-    left: 95px;
-    position: absolute;
-    top: 0;
     width: 123px;
-}
-
-.servicios .ser-3 {
-    height: 196px;
-    position: relative;
-    width: 383px;
-}
-
-.servicios .text-wrapper-4 {
-    color: #ffffff;
-    font-family: "Montserrat-Light", Helvetica;
-    font-size: 64px;
-    font-weight: 300;
-    height: 23px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 173px;
-    width: 381px;
 }
 
 .servicios .cirugia-icon {
     height: 146px;
-    left: 117px;
-    position: absolute;
-    top: 0;
     width: 146px;
-}
-
-.servicios .ser-4 {
-    height: 202px;
-    position: relative;
-    width: 383px;
 }
 
 .servicios .urgencia-icon {
     height: 157px;
-    left: 111px;
-    position: absolute;
-    top: 0;
     width: 157px;
-}
-
-.servicios .text-wrapper-5 {
-    color: #ffffff;
-    font-family: "Montserrat-Light", Helvetica;
-    font-size: 64px;
-    font-weight: 300;
-    height: 23px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 179px;
-    width: 381px;
-}
-
-.servicios .ser-5 {
-    height: 187px;
-    position: relative;
-    width: 383px;
 }
 
 .servicios .funeraria-icon {
     height: 127px;
-    left: 118px;
-    position: absolute;
-    top: 0;
     width: 127px;
 }
 
-.servicios .text-wrapper-6 {
-    color: #ffffff;
-    font-family: "Montserrat-Light", Helvetica;
-    font-size: 64px;
-    font-weight: 300;
-    height: 23px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 164px;
-    width: 381px;
-}
+/* Hover servicios */
+.service:hover {
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
 
-.servicios .text-wrapper-7 {
-    color: #ffffff;
-    font-family: "Montserrat-Medium", Helvetica;
-    font-size: 64px;
-    font-weight: 500;
-    height: 16px;
-    left: 662px;
-    letter-spacing: 0;
-    line-height: 16px;
-    position: absolute;
-    text-align: center;
-    top: 64px;
-    white-space: nowrap;
 }
-
 @media (max-width: 768px) {
-    .servicios {
-        overflow-x: hidden;
+    h1.text-tittle {
+        margin-bottom: 20vh;
     }
 
-    .servicios .text-wrapper-7 {
-        font-size: 40px;
-        left: unset;
-        text-align: center;
-        font-weight: 800;
-        top: 20px;
-        position: relative;
+    .content-services {
 
+        gap: 40px;
     }
 
-    .servicios .overlap-group-wrapper {
-        height: 100vh;
-        width: 100%;
+    .service {
+        width: 30px;
     }
 
-    .servicios .overlap-group {
-        background-size: auto;
-        /* background-size: contain; */
-        background-repeat: no-repeat;
-        background-position-x: center;
-        height: 130vh;
-        width: 100%;
+    .services-cols {
+        gap: 10vhpx;
     }
-    .servicios .frame {
-        gap: 10px;
-        height: 10px;
-        left: 10px;
-        top: 10px;
+
+    .servicios .citas-icon,
+    .servicios .guarderia-icon,
+    .servicios .perro-icon,
+    .servicios .cirugia-icon,
+    .servicios .urgencia-icon,
+    .servicios .funeraria-icon {
+        height: 60px;
+        width: 60px;
+    }
+
+    .servicios .text-service {
+        font-size: 20px;
 
     }
 }</style>

@@ -139,9 +139,7 @@
         overflow-x: hidden;
         display: block;
     }    
-    .inicio .ellipse{
-        left: 10px;
-    }
+
     .inicio .contenedor-inicio {
 
         margin: 0 auto;
@@ -158,7 +156,7 @@
         
     .inicio .text-wrapper {
         margin-bottom: 50px;
-        font-size: 7em;
+        font-size: 6em;
         font-weight: 400;
         letter-spacing: 0;
         line-height: 16px;
@@ -173,20 +171,20 @@
         display: flex;
     }
     .inicio .ellipse-2 {
-        filter: blur(200px);
-        top: 600px;
+    
+        filter: blur(140px);
+        top: 500px;
         width: 108px;
         height: 200px;
         border-radius: 164px;
-
-
+        left: 150px;
     }
     .inicio .ellipse {
         height: 100px;
         width: 100px;
-        top: 100px;
+        top: 300px;
         filter: blur(100px);
-        left: 400px;
+        left: 30px;
 
     }
     .botonCita{

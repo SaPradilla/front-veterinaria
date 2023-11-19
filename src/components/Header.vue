@@ -1,17 +1,24 @@
 <script setup>
     import {ref} from 'vue'
     import modalMenu from './UI/modalMenu.vue';
-
+    import { useAuthStore } from '../stores/auth';
+    import { useRouter } from 'vue-router'
+    const router = useRouter ()
+    // States
     const modal = ref(false)
     const animar = ref(false)
-
+    // Props
     const props = defineProps({
         scrolled:{
             type: String,
             required:true
         }
     })
+    // Store
+    const Auth = useAuthStore()
 
+
+    // Metodos
     const toggleModal = () => {
         if (!modal.value) {
             modal.value = true;
@@ -24,6 +31,9 @@
                 modal.value = false;
             }, 300);
         }
+    }
+    const redirigirLogin = () =>{
+        router.push({name:'auth'})
     }
 
 </script>
@@ -45,7 +55,9 @@
                 <div class="label"><a href="#contacto">Contacto</a></div>
                 <div class="label"><a href="#pqr">PQR</a></div>
                 <img class="linea" alt="Linea" src="../assets/img/Linea.svg" />
-                <img class="avatar" alt="Avatar" src="../assets/img/avatar.svg" />
+                
+                <img v-if="Auth.token" class="avatar" alt="Avatar" src="../assets/img/avatar.svg" />
+                <div v-else class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
             </div>
             <div 
             @click="toggleModal"
@@ -58,6 +70,9 @@
     </div>
 </template>
 <style>
+.frame{
+    width: 100%;
+}
 .menu-mobile img{
     height: 60px;
     width: 60px;
@@ -86,9 +101,11 @@
 }
 
 .nav-bar .frame {
-    align-items: flex-end;
-    display: inline-flex;
-    gap: 534px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
 }
 .frame a{
     all: unset;
@@ -102,11 +119,10 @@
 }
 
 .nav-bar .menu-container {
-    align-items: center;
-    display: flex;
+    margin: 0 auto;
+    display: flex;   
     gap: 13px;
-    padding: 1px 4px;
-    width: 557px;
+    margin-right: 5vh;
 }
 
 .nav-bar .label {
@@ -128,7 +144,10 @@
 .label:hover {
     transform: scale(0.9);
 }
-
+.label.singIn{
+    color: black;
+    font-weight: 600;
+}
 .nav-bar .linea {
     height: 20px;
     position: relative;

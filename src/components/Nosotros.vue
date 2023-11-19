@@ -225,7 +225,7 @@
         width: 70%;
     }
     .contenedor-footer p{
-        line-height: 17px;
+        line-height: 16px;
         font-size: 15px;
         font-weight: bold;
     }
@@ -285,6 +285,7 @@
         width: 100px;
         top: 100px;
         left: 300px;
+        position: absolute;
     }
 
     .ellipse-3 {
@@ -292,6 +293,8 @@
         
         left: 400px;
         filter: blur(180px);
+        position: unset;
+
 
 
     }

@@ -3,80 +3,104 @@
 </script>
 
 <template>
-  <div>
-    <div class="testimonios">
-      <div class="overlap-wrapper">
-        <div class="overlap">
-          <div class="blur-shapes">
-            <div class="ellipse"></div>
-            <div class="ellipse1"></div>
+  <div class="testimonios">
+
+    <div class="container-testimonios">
+
+      <div class="blur-shapes">
+        <div class="ellipse"></div>
+        <div class="ellipse1"></div>
+      </div>
+
+      <div class="contenedor">
+        <div class="text-wrapper">TESTIMONIOS</div>
+        <hr>
+
+        <div class="contenedor-testi">
+
+          <div class="cards">
+            <!-- Carta 1 -->
+            <div class="card">
+
+              <div class="contenido-card">
+
+                <div class="imagenes-perfil">
+                  <img class="perfiles" alt="María R" src="../assets/img/cara2.jpg" />
+                </div>
+
+                <div class="title">María R</div>
+                <p class="message">
+                  Pelitos es el lugar perfecto para cuidar a nuestras mascotas. Siempre se preocupan por el bienestar
+                  de nuestros peludos amigos. ¡Gracias por ser tan atentos y profesionales!
+                </p>
+
+              </div>
+            </div>
+            <!-- Carta 2 -->
+            <div class="card">
+
+              <div class="contenido-card">
+
+                <div class="imagenes-perfil">
+                  <img class="perfiles" alt="Juan P." src="../assets/img/cara1.jfif" />
+                </div>
+
+                <div class="title">Juan P.</div>
+
+                <p class="message">
+                  Llevo a mi perro a Pelitos desde que era un cachorro, y siempre he recibido un servicio excepcional.
+                  El equipo de veterinarios se preocupa realmente por los animales y su salud.
+                </p>
+
+              </div>
+            </div>
           </div>
-          <div class="contenedor">
-            <div class="text-wrapper">TESTIMONIOS</div>
-            <hr>
-            <div class="contenedor-testi">
 
-              <div class="card">
-                <div class="contenido-card">
-                  <div class="imagenes-perfil">
+          <div class="cards">
+            <!-- Carta 3 -->
+            <div class="card">
 
-                    <img class="perfiles" alt="María R" src="../assets/img/cara2.jpg" />
+              <div class="contenido-card">
 
-                  </div>
-                  <div class="title">María R</div>
-                  <p class="message">
-                    Pelitos es el lugar perfecto para cuidar a nuestras mascotas. Siempre se preocupan por el bienestar
-                    de nuestros peludos amigos. ¡Gracias por ser tan atentos y profesionales!
-                  </p>
+                <div class="imagenes-perfil">
+                  <img class="perfiles" alt="Carolina D" src="../assets/img/cara3.jpg" />
                 </div>
+
+                <div class="title">Carolina D</div>
+
+                <p class="message">
+                  Siempre me siento bienvenida en Pelitos. Los veterinarios son apasionados por lo que hacen, y eso se
+                  nota en la atención que brindan a mis mascotas.
+                </p>
+
               </div>
 
-              <div class="card">
-                <div class="div">
-                  <div class="imagenes-perfil">
+            </div>
+            <!-- Carta 4 -->
+            <div class="card">
 
-                    <img class="perfiles" alt="Juan P." src="../assets/img/cara1.jfif" />
+              <div class="contenido-card">
 
-                  </div>
-                  <div class="title">Juan P.</div>
-                  <p class="message">
-                    Llevo a mi perro a Pelitos desde que era un cachorro, y siempre he recibido un servicio excepcional.
-                    El equipo de veterinarios se preocupa realmente por los animales y su salud.
-                  </p>
+                <div class="imagenes-perfil">
+                  <img class="perfiles" alt="Ana M" src="../assets/img/cara4.jpg" />
                 </div>
-              </div>
 
-              <div class="card">
-                <div class="contenido-card-2">
-                  <div class="imagenes-perfil">
-                    <img class="perfiles" alt="Carolina D" src="../assets/img/cara3.jpg" />
-                  </div>
-                  <div class="title">Carolina D</div>
-                  <p class="message">
-                    Siempre me siento bienvenida en Pelitos. Los veterinarios son apasionados por lo que hacen, y eso se
-                    nota en la atención que brindan a mis mascotas.
-                  </p>
-                </div>
-              </div>
+                <div class="title">Ana M</div>
 
-              <div class="card">
-                <div class="div">
-                  <div class="imagenes-perfil">
-                    <img class="perfiles" alt="Ana M" src="../assets/img/cara4.jpg" />
-                  </div>
-                  <div class="title">Ana M</div>
-                  <p class="message">
-                    El equipo de Pelitos es tan amable y comprensivo. Siempre están dispuestos a responder a todas mis
-                    preguntas y preocupaciones sobre la salud de mis animales.
-                  </p>
-                </div>
-              </div>
+                <p class="message">
+                  El equipo de Pelitos es tan amable y comprensivo. Siempre están dispuestos a responder a todas mis
+                  preguntas y preocupaciones sobre la salud de mis animales.
+                </p>
 
+              </div>
 
             </div>
           </div>
+
         </div>
+        
       </div>
+
     </div>
   </div>
 </template>
@@ -85,26 +109,21 @@
 <style scoped>
 .testimonios {
   background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
 
 }
 
-.testimonios .overlap-wrapper {
+.testimonios .container-testimonios {
   background-color: #ffffff;
-  height: 1024px;
-  width: 1920px;
-}
+  height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 
-.testimonios .overlap {
-  height: 997px;
-  left: 168px;
   position: relative;
-  top: 21px;
-  width: 1472px;
+
 }
 
 .testimonios .blur-shapes {
@@ -126,6 +145,7 @@
   transform: rotate(5.86deg);
   width: 328px;
 }
+
 .testimonios .ellipse1 {
   background: linear-gradient(180deg, rgba(90, 15, 195, 0.37) 0%, rgb(90, 15, 195) 100%);
   border-radius: 14px/160px;
@@ -138,23 +158,17 @@
   width: 108px;
 }
 
-.testimonios .img {
-  height: 565px;
-  left: 920px;
-  position: absolute;
-  top: 438px;
-  width: 808px;
-}
+
 
 .testimonios .contenedor {
-  align-items: center;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  height: 623px;
-  justify-content: space-between;
-  left: 239px;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
   position: absolute;
-  top: 180px;
+  gap: 100px;
 }
 
 .testimonios .text-wrapper {
@@ -181,11 +195,13 @@
 }
 
 .testimonios .contenedor-testi {
-  align-items: flex-start;
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
   position: relative;
+  width: 100%;
 }
 
 .testimonios .card {
@@ -195,8 +211,11 @@
   height: 483px;
   position: relative;
   width: 239px;
+  margin: 20px;
 }
-
+.testimonios .cards{
+  display: flex;
+}
 .testimonios .contenido-card {
   align-items: center;
   display: flex;
@@ -209,14 +228,16 @@
   top: 17px;
   width: 191px;
 }
-
+.testimonios .card:hover{
+  cursor: pointer;
+    transform: translateY(-3px);
+    transition: all 0.2s ease;
+}
 .testimonios .imagenes-perfil {
   height: max-content;
   width: max-content;
 
 }
-
-
 
 .testimonios .perfiles {
   height: 70px;
@@ -231,11 +252,12 @@
   font-family: var(--h3-font-family);
   font-size: var(--h3-font-size);
   font-style: var(--h3-font-style);
-  font-weight: var(--h3-font-weight);
+  font-weight: 800;
   letter-spacing: var(--h3-letter-spacing);
   line-height: var(--h3-line-height);
   position: relative;
   text-align: center;
+
 }
 
 .testimonios .message {
@@ -251,30 +273,49 @@
   text-align: center;
 }
 
-.testimonios .div {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 57px;
-  height: 386px;
-  justify-content: center;
-  left: 20px;
-  position: relative;
-  top: 29px;
-  width: 191px;
-}
 
+@media (max-width: 768px) {
+  .testimonios .ellipse {
+    width: 200px;
+    top: 50px;
+  }
+  .testimonios .ellipse1{
+    left: 500px;
+  }
+  .testimonios .text-wrapper{
+    font-size: 40px;
+  }
+  .testimonios hr{
+    height: 10px;
+    width: 200px;
+  }
+  .testimonios .contenedor{
+    gap: 50px;
+  }
+  .testimonios .cards{
+    display: unset;
+  }
+  .testimonios .card{
+    height: 250px;
+    width: 140px;
+  }
+  .testimonios .contenido-card{
+    gap: 10px;
+    top: 1px;
+    height: 200px;
+    width: 140px;
+    left: 0;
 
-.testimonios .contenido-card-2 {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 57px;
-  height: 362px;
-  justify-content: center;
-  left: 20px;
-  position: relative;
-  top: 41px;
-  width: 191px;
+  }
+  .testimonios .title{
+    font-size: 15px;
+  }
+  .testimonios .message{
+    font-size: 13px;
+  }
+  .testimonios .perfiles{
+    height: 60px;
+    width: 60px;
+  }
 }
 </style>

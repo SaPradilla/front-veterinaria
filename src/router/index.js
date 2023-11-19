@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import inicioView from '../views/inicioView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -8,7 +9,12 @@ const router = createRouter({
       name: 'home',
       component: inicioView
     }
-    //,
+    ,{
+      path:'/auth',
+      name:'auth',
+      component: () => import('../views/authView.vue')
+    }
+    // ,
     // {
     //   path: '/about',
     //   name: 'about',
