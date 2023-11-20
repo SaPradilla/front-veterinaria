@@ -19,9 +19,10 @@
                 <div class="content-logo">
                     <img class="logo" src="../../assets/img/pelitos-4.png" alt="" srcset="">
                 </div>
-                <h2>Iniciar Sesion</h2>
+                <h2>¡Bienvenido!</h2>
+                <h3>Ingresar como empleado</h3>
 
-                <FormKit type="form" id="form" @submit="Auth.loguear" :actions="false"
+                <FormKit type="form" id="form" @submit="Auth.loginEmpleado" :actions="false"
                     incomplete-message="Ingrese todos sus datos para continuar">
 
                     <FormKit
@@ -57,9 +58,9 @@
                             <p>Recuerdame</p>
                             <FormKit type="checkbox" name="remember_me" decorator-icon="checkkIcon" />
                         </div>
-                        <FormKit style="width: 240px;" type="submit" label="Ingresar" id="login" />
-                        <p id="singUp">Aún no tienes cuenta? <span @click="Modal.handleClickModal">Registrate Aquí</span></p>
-                        <p id="negrilla" @click="Modal.handleClickModalEmpleado">Eres de nuestros empleados?</p>
+                        <FormKit style="width: 240px;" type="submit" label="Entrar" id="login" />
+                        <p>No eres empleado? <span @click="Modal.handleClickModalEmpleado">Click Aqui</span></p>
+
                     </div>
                 </FormKit>
             </div>
@@ -89,6 +90,13 @@
     font-size: 2.8em;
     font-weight: 600;
     color: var(--color-morado-general);
+    margin-bottom: 2vh;
+}
+.content-login h3 {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: black;
     margin-bottom: 7vh;
 }
 
@@ -97,7 +105,7 @@
     text-align: center;
 }
 
-.forms-login span ,p#negrilla{
+.forms-login span ,#negrilla{
     cursor: pointer;
     font-weight: 700;
     color: var(--color-verde);

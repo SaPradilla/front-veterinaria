@@ -28,7 +28,6 @@ const handleScroll = () => {
 
 <template>
   <div class="contenedor-inicio">
-
     <div class="header">
       <HeaderVue :scrolled="{ 'scrolled': scrolled }" />
     </div>

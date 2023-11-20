@@ -51,10 +51,11 @@
                 <div class="label"> <a href="#nosotros">Nosotros</a></div>
                 <div class="label"> <a href="#servicios">Servicios</a></div>
                 <div class="label"><a href="#testimonios">Testimonios</a></div>
-                <div class="label"><a href="#productos">Productos</a></div>
                 <div class="label"><a href="#contacto">Contacto</a></div>
                 <div class="label"><a href="#pqr">PQR</a></div>
+
                 <img class="linea" alt="Linea" src="../assets/img/Linea.svg" />
+                <div class="label shop"><a href="#productos">Tienda</a></div>
                 
                 <img v-if="Auth.token" class="avatar" alt="Avatar" src="../assets/img/avatar.svg" />
                 <div v-else class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
@@ -123,6 +124,7 @@
     display: flex;   
     gap: 13px;
     margin-right: 5vh;
+    align-items: center;
 }
 
 .nav-bar .label {
@@ -143,6 +145,14 @@
 
 .label:hover {
     transform: scale(0.9);
+}
+.label.shop{
+  
+    color: white;
+    padding: 10px ;
+    border-radius: 10px;
+    width: 60px;
+    background-color: #5a0fc3;
 }
 .label.singIn{
     color: black;

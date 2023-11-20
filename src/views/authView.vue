@@ -1,16 +1,46 @@
 <script setup>
     import Login from '../components/auth/Login.vue';
+    import Registro from '../components/auth/Registro.vue';
+    import LoginEmpledos from '../components/auth/LoginEmpledos.vue';
+    import { useModalAuthStore} from '../stores/modalAuth'
+    const Modal = useModalAuthStore()
+
+    import { useAuthStore } from '../stores/auth';
+    const Auth = useAuthStore()
+
 </script>
 
 <template>
+
     <div class="login">
         <div class="blur-shapes">
                 <div class="ellipse"></div>
                 <div class="ellipse-2"></div>
             </div>
         <div class="contenedor-login">
-            <div class="contenido-login">
-                <Login/>
+
+            <div 
+                v-if="Modal.modalLogin.showModalLogin"
+                class="contenido-login "
+                :class="Modal.modalLogin.animateModalLogin ? 'open' : 'close'"
+            >
+                <Login />
+            </div>
+
+            <div 
+                v-else-if="Modal.modalRegister.showModalRegister"
+                class="contenido-registro"
+                :class="Modal.modalRegister.animateModalRegister ? 'open' : 'close'"
+            >
+                <Registro/>
+            </div>
+
+            <div 
+                v-else-if="Modal.modalLoginEmpleado.showModalLoginEmpleado"
+                class="contenido-login-empleado"
+                :class="Modal.modalLoginEmpleado.animateModalLoginEmpleado ? 'open' : 'close'"
+            >
+                <LoginEmpledos/>
             </div>
             <div class="fondo-imagen">
                 <img src="../assets/img/fondoLogin.jpg" alt="fondoLogin">
@@ -60,11 +90,10 @@
     }
     .contenedor-login{
         z-index: 1004;
-
         display: grid;
         grid-template-columns: 40% 60%;
     }
-    .contenido-login{ 
+    .contenido-login,.contenido-registro,.contenido-login-empleado{ 
         z-index: 1004;
 
         width: 100%;
@@ -89,6 +118,42 @@
         object-fit: cover;
         position: relative;
         z-index: 10001;
-
     }
+
+    .contenido-login.open,
+    .contenido-registro.open,
+    .contenido-login-empleado.open {
+        opacity: 0;
+    }
+
+    .contenido-login.close,
+    .contenido-registro.close,
+    .contenido-login-empleado.open  {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .login .ellipse{
+            height: 100px;
+            width: 150px;
+            filter: blur(150px);
+
+        }
+        .login .ellipse-2{
+            left: 200px;
+            top: 800px;
+            filter: blur(100px);
+
+        }
+        .contenedor-login{
+            z-index: 1004;
+            display: unset;
+    
+        }
+        .fondo-imagen{
+            display: none;
+        }
+    }
+
+
 </style>
