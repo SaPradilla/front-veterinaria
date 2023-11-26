@@ -9,21 +9,39 @@ const router = createRouter({
       name: 'home',
       component: inicioView
     }
-    ,{
-      path:'/auth',
-      name:'auth',
+    , {
+      path: '/auth',
+      name: 'auth',
       component: () => import('../views/authView.vue')
+    }, {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/dashboardView.vue'),
+      // Ruta protegida
+      // meta: { requireAuth: true },
     }
-    // ,
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
   ]
 })
+
+// Validación para las rutas protegidas
+router.beforeEach((to, from, next) => {
+  //Busca si la la ruta protegida tiene un meta requeriAuth = true y retorna false o true
+  if (to.matched.some(record => record.meta.requireAuth)) {
+
+    if (localStorage.getItem('')) {
+      // sigue a la ruta protegida
+      next()
+    } else {
+      // se sale de la ruta porque esta protegida
+      next('/')
+
+    }
+  } else {
+    // Si la ruta no requiere autenticación, permite el acceso
+    next()
+  }
+
+})
+
 
 export default router

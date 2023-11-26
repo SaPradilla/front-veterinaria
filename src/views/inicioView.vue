@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HeaderVue from '../components/Header.vue'
-import Inicio from '../components/Inicio.Vue';
+import Inicio from '/workspaces/front-veterinaria/src/components/Inicio.vue';
 import Nosotros from '../components/Nosotros.vue';
 import Servicios from '../components/Servicios.vue';
 import Testimonios from '../components/Testimonios.vue';

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Roboto+Condensed:wght@300&display=swap');
 
 :root {
+    --color-verde-ok:rgba(115, 182, 126, 1);
     --color-rojo: #D9755E;
     --color-gris-claro: #F2F2F287;
     --color-blanco: #FFFFFF;
@@ -11,7 +12,29 @@
     --color-morado-general:#4c0ea4;
     --color-morado-oscuro-general:#5A0FC3;
     --color-morado-claro-general:rgba(90, 15, 195, 0.86);
+
+    
 }
+
+.vs__search::placeholder,
+.vs__dropdown-toggle,
+ul.vs__dropdown-menu{
+    width: 300px;
+}
+
+.vs__dropdown-toggle{
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 20px !important;
+    height:50px;
+}
+ul#vs6__listbox{
+    width: 300px;
+
+}
+.vs-selected-bg{
+    background-color:  #664cc3;
+}
+
 
 
 *{
@@ -43,8 +66,12 @@ div.formkit-inner  {
     height: 50px;
     border-style: none;
     background-color: var(--color-blanco-input);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
+}
+div.nombre-mascota div.formkit-inner{
+    width: 190px;
+
 }
 /* Al selecionar */
 div.formkit-inner:focus-within{
