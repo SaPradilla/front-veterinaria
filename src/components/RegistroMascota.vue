@@ -53,7 +53,8 @@ const tipo = [
             razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
         }
     );
-  
+    
+
     watch(
         genero,
         (newGenero) => {
