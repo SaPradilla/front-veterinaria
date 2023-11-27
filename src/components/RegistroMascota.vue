@@ -1,16 +1,17 @@
 <script setup>
 import { ref, watch, reactive } from 'vue';
-import Multiselect from 'vue-multiselect';
 
 const genero = ref(null)
 
 const mascota = ref({
     clienteId: '',
+    tipo_mascota: '',
     nombre: '',
-    genero: '',
-    tipo: '',
+    genero: true ? 'Macho' : 'Hembra',
     edad: '',
-    raza: ''
+    raza: '',
+    vacunas:'',
+
 });
 
 const dueno = [
@@ -21,46 +22,58 @@ const dueno = [
 ];
 
 const tipo = [
-     'Perro' ,
-     'Gato' ,
-     'Hámster' ,
-     'Ave' ,
-     'Pez' ,
-     'Reptil' ,
-     'Invertebrado' ,
-     'Conejo',
+    'Perro',
+    'Gato',
+    'Hámster',
+    'Ave',
+    'Pez',
+    'Reptil',
+    'Invertebrado',
+    'Conejo',
+];
+const vacunas = [
+    'Parvovirosis',
+    'Pentavalente ',
+    'Rabia',
+    'Moquillo',
+    'Adenovirus',
+    'Traqueobronquitis infecciosa canina ',
+    'Leptospira'
+];
+const tiposDeMascotas = [
+    { tipo: 'Perro', razas: ['Labrador', 'Poodle', 'Bulldog', 'Bulldog', 'Bulldog', 'Bulldog'] },
+    { tipo: 'Gato', razas: ['Siamés', 'Persa', 'Maine Coon'] },
+    { tipo: 'Hámster', razas: ['Dorado', 'Sirio', 'Ruso'] },
+    { tipo: 'Ave', razas: ['Canario', 'Periquito', 'Loro'] },
+    { tipo: 'Pez', razas: ['Guppy', 'Beta', 'Goldfish'] },
+    { tipo: 'Reptil', razas: ['Iguana', 'Gecko', 'Tortuga'] },
+    { tipo: 'Invertebrado', razas: ['Araña', 'Caracol', 'Cangrejo'] },
+    { tipo: 'Conejo', razas: ['Holandés', 'Angora', 'Mini Rex'] },
 ];
 
-    const tiposDeMascotas = [
-        { tipo: 'Perro', razas: ['Labrador', 'Poodle', 'Bulldog'] },
-        { tipo: 'Gato', razas: ['Siamés', 'Persa', 'Maine Coon'] },
-        { tipo: 'Hámster', razas: ['Dorado', 'Sirio', 'Ruso'] },
-        { tipo: 'Ave', razas: ['Canario', 'Periquito', 'Loro'] },
-        { tipo: 'Pez', razas: ['Guppy', 'Beta', 'Goldfish'] },
-        { tipo: 'Reptil', razas: ['Iguana', 'Gecko', 'Tortuga'] },
-        { tipo: 'Invertebrado', razas: ['Araña', 'Caracol', 'Cangrejo'] },
-        { tipo: 'Conejo', razas: ['Holandés', 'Angora', 'Mini Rex'] },
-    ];
 
+const razas = ref([]);
 
-    const razas = ref([]);
-    
-    watch(() => mascota.value.tipo,(newTipo) => {
-            const mascotaSeleccionada = tiposDeMascotas.find(
-                (mascota) => mascota.tipo === newTipo
-            );
-            mascota.value.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
-            razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
-        }
+watch(() => mascota.value.tipo, (newTipo) => {
+    const mascotaSeleccionada = tiposDeMascotas.find(
+        (mascota) => mascota.tipo === newTipo
     );
-    
+    mascota.value.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
+    razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
+}
+);
 
-    watch(
-        genero,
-        (newGenero) => {
-            mascota.value.genero = newGenero ? 'Macho' : 'Hembra';
-        }
-    );
+
+watch(
+    genero,
+    (newGenero) => {
+        mascota.value.genero = newGenero ? 'Macho' : 'Hembra';
+    }
+);
+
+const enviar = ()=>{
+    console.log(mascota.value)
+}
 </script>
 
 <template>
@@ -68,13 +81,18 @@ const tipo = [
         <h1>Registrar Mascota</h1>
         <div class="contenedor-formulario">
             <div class="registro">
+
+                <h2>Datos Mascota</h2>
+
                 <FormKit type="form" id="form" @submit="" :actions="false"
                     incomplete-message="Ingrese todos sus datos para continuar">
                     <div class="inputs">
 
-                        <v-select v-model="mascota.clienteId" placeholder="Nombre del Dueño" name="clienteId" :options="dueno"
-                            label="nombre"></v-select>
+                        <v-select v-model="mascota.clienteId" placeholder="Nombre del Dueño" name="clienteId"
+                            :options="dueno" label="nombre"></v-select>
+
                         <div class="contenedor-genero">
+
                             <div class="nombre-mascota">
                                 <FormKit v-model="mascota.nombre" name="nombre" type="text" placeholder="Nombre"
                                     validation="required" :validation-messages="{
@@ -82,51 +100,105 @@ const tipo = [
                                     }" />
                             </div>
                             <div class="checkbox-wrapper-34">
-                                <input v-model="genero" class='tgl tgl-ios' id='toggle-34' type='checkbox'>
+                                <input v-model="mascota.genero" class='tgl tgl-ios' id='toggle-34' type='checkbox'>
                                 <label class='tgl-btn' for='toggle-34'></label>
                             </div>
+
                         </div>
-    
-                        <v-select v-model="mascota.tipo" placeholder="Tipo de Mascota" name="tipo" :options="tipo" label="tipo">
-                           
+
+                        <v-select v-model="mascota.tipo" placeholder="Tipo de Mascota" name="tipo" :options="tipo"
+                            label="tipo">
+
                         </v-select>
-    
-                        <FormKit v-model="mascota.edad" type="text" placeholder="Edad" name="edad" validation="number|required|"
-                            :validation-messages="{
+
+                        <FormKit v-model="mascota.edad" type="text" placeholder="Edad" name="edad"
+                            validation="number|required|" :validation-messages="{
                                 required: 'Edad es obligatoria',
                                 number: 'No puedes ingresar letras'
                             }" />
-    
+
                         <v-select v-model="mascota.raza" placeholder="Raza" name="raza" :options="razas" label="razas">
-                           
+
                         </v-select>
                     </div>
                 </FormKit>
             </div>
             <div class="vacunas">
-
+                <h2>Vacunas</h2>
+                <v-select id="vacunas" multiple v-model="mascota.vacunas" placeholder="Seleccione las vacunas"
+                    :options="vacunas" />
             </div>
         </div>
+        <button v-on:click="enviar" class="agregar"> Agregar </button>
+
     </div>
 </template>
 <style scoped>
-h1{
+h1 {
     text-align: center;
-    color:var(--color-morado-general);
+    color: var(--color-morado-general);
+    font-size: 2.4em;
+    font-weight: bold;
 }
->>> {
 
-  --vs-dropdown-option--active-bg: #5A0FC3;
-  --vs-dropdown-option--active-color: #eeeeee;
+h2 {
+    margin-bottom: 5vh;
+    font-size: 2em;
+    color: var(--color-morado-general);
+    font-weight: 600;
+
 }
-.contenedor-formulario {
-    width: 60vh;
+
+>>> {
+    --vs-dropdown-option--active-bg: #5A0FC3;
+    --vs-dropdown-option--active-color: #eeeeee;
 }
-.inputs{
+    .agregar{
+        margin-right: 5vh;
+        
+        float: right;
+        font-size: 1.2em;
+        padding:10px;
+        border-style: none;
+        background-color: #5a0fc3;
+        color: white;
+        border-radius: 20px;
+        width: 8em;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+    }
+    .agregar:hover{
+        transform: scale(0.9); 
+        background-color: #6413d7;
+    }
+    
+.contenedor-registro {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap:30px;
+    gap: 7vh;
 }
+
+.contenedor-formulario {
+    /* width: 60vh; */
+    /* background-color: var( --color-morado-claro-general); */
+    padding: 10px;
+    border-radius: 20px;
+
+    max-height: max-content;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .registro .contenedor-genero {
     display: flex;
     align-items: center;
@@ -248,5 +320,4 @@ h1{
     content: "Macho ";
     left: 10px;
     color: #fff;
-}
-</style>
+}</style>

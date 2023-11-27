@@ -13,12 +13,18 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: () => import('../views/authView.vue')
-    }, {
+    },{
       path: '/admin',
       name: 'admin',
       component: () => import('../views/dashboardView.vue'),
       // Ruta protegida
-      // meta: { requireAuth: true },
+      meta: { requireAuth: true },
+    },{
+      path: '/medico',
+      name: 'Médico',
+      component: () => import('../views/dashboardView.vue'),
+      // Ruta protegida
+      meta: { requireAuth: true },
     }
   ]
 })
@@ -28,7 +34,7 @@ router.beforeEach((to, from, next) => {
   //Busca si la la ruta protegida tiene un meta requeriAuth = true y retorna false o true
   if (to.matched.some(record => record.meta.requireAuth)) {
 
-    if (localStorage.getItem('admin')) {
+    if (localStorage.getItem('token')) {
       // sigue a la ruta protegida
       next()
     } else {

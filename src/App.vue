@@ -12,7 +12,9 @@
 <style scoped>
 @media (max-width: 768px) {
   .contenedor{
+    height: 100%;
     overflow-x: hidden;
+    
   }
 }
 </style>
