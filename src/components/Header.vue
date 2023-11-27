@@ -33,7 +33,7 @@
         }
     }
     const redirigirLogin = () =>{
-    const router = useRouter ()
+
         router.push({name:'auth'})
     }
 
