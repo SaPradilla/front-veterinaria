@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
   //Busca si la la ruta protegida tiene un meta requeriAuth = true y retorna false o true
   if (to.matched.some(record => record.meta.requireAuth)) {
 
-    if (localStorage.getItem('')) {
+    if (localStorage.getItem('admin')) {
       // sigue a la ruta protegida
       next()
     } else {
