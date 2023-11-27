@@ -51,7 +51,6 @@ const tiposDeMascotas = [
     { tipo: 'Conejo', razas: ['Holandés', 'Angora', 'Mini Rex'] },
 ];
 
-
 const razas = ref([]);
 
 watch(() => mascota.value.tipo, (newTipo) => {
@@ -61,8 +60,7 @@ watch(() => mascota.value.tipo, (newTipo) => {
     mascota.value.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
     razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
 }
-);
-
+)
 
 watch(
     genero,
