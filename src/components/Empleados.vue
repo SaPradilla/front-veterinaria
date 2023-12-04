@@ -5,7 +5,9 @@
 	import { useAuthStore } from '../stores/auth';
 	import {usePaginacion} from '../stores/paginacion'
 	import { useCliente } from '../stores/cliente';
+	import { useEmpleado } from '../stores/empleado';
 
+	const Empleado  = useEmpleado()
 	const Cliente = useCliente()
 	const Paginacion = usePaginacion()
     const dashboard = useDashboard()
@@ -13,7 +15,7 @@
 
 	onMounted(()=>{
 		Auth.ObtenerToken()
-		// Mascota.obtenerMascotas()
+		Empleado.verEmpleados()
 	})
 
 </script>
@@ -44,73 +46,36 @@
 					</thead>
 
 					<tbody>
-	
-						<!-- <tr v-for="mascota in Mascota.mascotas "> -->
-						<tr>
-							<!-- <td>
-								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
-							</td>
-	 -->
-							<td> Santiago </td>
-							<td> Pradilla </td>
-							<td> 57 317288723 </td>
+
+						<tr v-for="empleado in Empleado.empleados ">
+
+
+							<td> {{empleado.nombre}} </td>
+							<td> {{ empleado.apellido }} </td>
+							<td> {{ empleado.numero_celular}}</td>
 							<td> 123@correo.com </td>
-							
+
 							<td>
                                 <div class="rol">
                                     <img @click="" src="../assets/img/Cliente.svg" alt="">
-                                    <p>Admin</p>
+                                    <p>{{ empleado.rol}}</p>
                                 </div>
                             </td>
 
 							<td>
 								<div class="contenedor-estado activo"
 								@click=""
+								:class="empleado.isActive ? 'activo' : 'inactivo'"
 								>
 									<div class="circulo"></div>
-									<p class="titulo-estado">Activo</p>
+									<p class="titulo-estado">{{ empleado.isActive ? 'Activo' : 'Inactivo' }}</p>
 								</div>
 	
 							</td>
 
 							<td>
 								<div class="boton-perfil">
-									<button @click="">Ver</button>
-								</div>
-							</td>
-							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
-						</tr>
-
-                        <tr>
-							<!-- <td>
-								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
-							</td>
-	 -->
-							<td> Santiago </td>
-							<td> Pradilla </td>
-							<td> 57 317288723 </td>
-							<td> 123@correo.com </td>
-							
-							<td>
-                                <div class="rol">
-                                    <img @click="" src="../assets/img/Cliente.svg" alt="">
-                                    <p>Admin</p>
-                                </div>
-                            </td>
-
-							<td>
-								<div class="contenedor-estado activo"
-								@click=""
-								>
-									<div class="circulo"></div>
-									<p class="titulo-estado">Activo</p>
-								</div>
-	
-							</td>
-
-							<td>
-								<div class="boton-perfil">
-									<button @click="">Ver</button>
+									<button @click="dashboard.handleVerEmpleado(empleado)">Ver</button>
 								</div>
 							</td>
 							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
@@ -124,7 +89,7 @@
 					<button
 					class="paginacionBotones"
 					v-if="Paginacion.currentPage > 1"
-					@click="Paginacion.cambiarPaginaAnterior()">Anterior</button>
+					@click="Paginacion.cambiarPaginaAnteriorEmpleado()">Anterior</button>
 
 					<p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
 						
@@ -138,7 +103,7 @@
 					</p>
 
 					<p class="currentPage"> {{ Paginacion.currentPage }}</p>
-					<button class="paginacionBotones"  @click="Paginacion.cambiarPagina()">Siguiente</button>
+					<button class="paginacionBotones"  @click="Paginacion.cambiarPaginaEmpleado()">Siguiente</button>
 				</div>
 			</div>
 		</div>

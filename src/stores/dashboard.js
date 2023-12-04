@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { ref, reactive } from 'vue'
 import {useRouter} from 'vue-router'
 import {useMascota} from './mascota'
+import { useEmpleado } from "./empleado";
 export const useDashboard = defineStore('dashboard',  () =>{
     const router = useRouter ()
     const Mascota = useMascota()
-    
+    const Empleado = useEmpleado()
     // states
 
 
@@ -20,6 +21,7 @@ export const useDashboard = defineStore('dashboard',  () =>{
     const registroMascota = ref(false)
     const inicioMascota = ref(true)
     const verMascota = ref(false)
+    const verEmpleado = ref(false)
 
     const registroEmpleado = ref(false)
     const inicioEmpleado = ref(true)
@@ -46,12 +48,19 @@ export const useDashboard = defineStore('dashboard',  () =>{
         registroMascota.value = false
         verMascota.value = false   
     }
+
+    const handleVolverEmpleado = () =>{   
+        registroEmpleado.value = false
+        verEmpleado.value = false
+        inicioEmpleado.value = true
+    }
     const handleVerMascota = (mascota) =>{
         registroMascota.value = false
         inicioMascota.value = false
         verMascota.value = true
         console.log(mascota)
         Mascota.perfilMascota = mascota
+        
     }
 
     const handleDashboard = () =>{
@@ -118,6 +127,11 @@ export const useDashboard = defineStore('dashboard',  () =>{
         verMascota.value = false
 
     }
+    const handleVerEmpleado = (empleado)=>{
+        verEmpleado.value = true
+        inicioEmpleado.value = false
+        Empleado.perfilEmpleado = empleado
+    }
     return {
         mascota,
         registroMascota,
@@ -129,7 +143,8 @@ export const useDashboard = defineStore('dashboard',  () =>{
         empleados,
         inicioEmpleado,
         registroEmpleado,
-
+        verEmpleado,
+        
         handleMascota,
         handleRegistroMascota,
         handleVolver,
@@ -138,7 +153,9 @@ export const useDashboard = defineStore('dashboard',  () =>{
         handleTienda,
         handleCirugia,
         handleEmpleados,
-        handleRegistroEmpleado
-
+        handleRegistroEmpleado,
+        handleVolverEmpleado,
+        handleVerEmpleado,
+        
     }
 })

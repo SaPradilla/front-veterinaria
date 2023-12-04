@@ -4,14 +4,18 @@ import empleadoService from "../services/empleadoService"
 import { useAuthStore } from "./auth";
 import { useModals } from "./modals";
 import {toast} from 'vue3-toastify'
+import { usePaginacion } from "./paginacion";
 
 export const useEmpleado = defineStore('empleado', () => {
     // Stores
     const Auth = useAuthStore()
     const Modals = useModals()
+    const Paginacion = usePaginacion()
     // states
     const empleados = ref([])
     const empleado = ref({})
+    
+    const perfilEmpleado = ref({})
     // Metodos
     
     const registrarEmpleado = (data) =>{
@@ -33,33 +37,23 @@ export const useEmpleado = defineStore('empleado', () => {
         })
     }
 
-    // const verClientes = ()=>{
-    //     clienteService.obtenerClientes(Auth.token)
-    //     .then(res =>{
-    //         console.log(res)
-    //         clientes.value = res.data.Cliente
-    //     }).catch(err =>{
-    //         console.log(err)
-    //     })
-    // }
-    // const verCliente = (id,token) =>{
-    //     clienteService.obtenerCliente(id,token)
-    //     .then(res =>{
-    //         console.log(res)
-    //         cliente.value = res.data.Cliente
-    //         Modals.toggleModalCliente()
-    //     }).catch(err =>{
-    //         console.log(err)
-    //     })
-    // }
+    const verEmpleados =()=>{
+        empleadoService.obtenerEmpleados(Auth.token,Paginacion.currentPage,Paginacion.size)
+        .then(res =>{
+            console.log(res)
+            empleados.value = res.data.user
+        }).catch(err =>{
 
-
-
+            console.log(err)
+        })
+    }
     return {
         empleados,
         empleado,
+        perfilEmpleado,
 
-        registrarEmpleado
+        registrarEmpleado,
+        verEmpleados
 
     }
 })

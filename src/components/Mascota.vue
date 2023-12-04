@@ -28,7 +28,7 @@
                 <table>
 
                 <thead>
-                    <tr>                    
+                    <tr>
                         <th>Tipo</th>
                         <th>Empleado</th>
                         <th>Lugar</th>

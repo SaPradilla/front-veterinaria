@@ -2,12 +2,14 @@ import { defineStore } from "pinia";
 import { ref, reactive,computed,watch} from 'vue'
 import { useMascota } from "./mascota";
 import { useAuthStore } from "./auth";
+import { useEmpleado } from "./empleado";
 
 export const usePaginacion = defineStore('paginacion', () => {
     
     //stores
     const Mascota = useMascota()
     const Auth = useAuthStore()
+    const Empleado = useEmpleado()
 
     // states
     const size = ref(4);
@@ -20,7 +22,19 @@ export const usePaginacion = defineStore('paginacion', () => {
        
 
     })
-  
+    const cambiarPaginaEmpleado = () => {
+        // Cambiar a la página seleccionada
+        currentPage.value += 1;
+
+        Empleado.verEmpleados(Auth.token,currentPage.value,size.value)
+         
+    };
+    const cambiarPaginaAnteriorEmpleado = () => {
+        // Cambiar a la página seleccionada
+        currentPage.value -= 1;
+        Empleado.verEmpleados(Auth.token,currentPage.value,size.value)
+         
+    };
     const cambiarPagina = () => {
         // Cambiar a la página seleccionada
         currentPage.value += 1;
@@ -48,7 +62,9 @@ export const usePaginacion = defineStore('paginacion', () => {
         currentPage,
         totalPages,
         cambiarPagina,
-        cambiarPaginaAnterior
+        cambiarPaginaAnterior,
+        cambiarPaginaEmpleado,
+        cambiarPaginaAnteriorEmpleado
         
 
     }

@@ -20,6 +20,10 @@
 </script>
 
 <template>
+    <div class="con">
+        <div></div>
+        <button @click="Dashboard.handleVolverEmpleado()" class="botonVolver"> Volver </button>
+    </div>
     <div class="contenido-registro">
         <h1>Registro Empleado</h1>
         <div class="formulario">
@@ -96,6 +100,12 @@
         flex-direction: column;
     }
     .formulario{
+        
+    }
+    .con{
+        position: absolute;
+        top: 10vh;
+        right: 0;
         
     }
 </style>

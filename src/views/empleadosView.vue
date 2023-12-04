@@ -4,7 +4,11 @@ import { useDashboard } from '../stores/dashboard'
 import userAuth from '../components/auth/userAuth.vue';
 import Empleados from '../components/Empleados.vue';
 import RegistroEmpleado from '../components/RegistroEmpleado.vue';
+import Empleado from '../components/Empleado.vue';
+
 const dashboard = useDashboard()
+
+
 </script>
 
 <template>
@@ -24,8 +28,8 @@ const dashboard = useDashboard()
             <div class="div"></div>
 
             <div class="contenido-principal">
-                
                 <Empleados v-if="dashboard.inicioEmpleado"/>
+                <Empleado v-if="dashboard.verEmpleado"/>
                 <RegistroEmpleado v-if="dashboard.registroEmpleado"/>
                 
             </div>

@@ -16,6 +16,7 @@
 	onMounted(()=>{
 		Auth.ObtenerToken()
 		Mascota.obtenerMascotas()
+		
 	})
 
 </script>
@@ -23,7 +24,7 @@
 <template>
 	<div class="contenedor-mascotas">
 		<div class="contenedor-boton">
-			<button 
+			<button
 			@click="dashboard.handleRegistroMascota"
 			class="botonAgregar">Añadir Mascota</button>
 		</div>
@@ -48,7 +49,7 @@
 					</thead>
 
 					<tbody>
-	
+
 						<tr v-for="mascota in Mascota.mascotas ">
 							<!-- <td>
 								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
@@ -70,7 +71,7 @@
 									<div class="circulo"></div>
 									<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
 								</div>
-	
+
 							</td>
 							<td>
 								<div class="boton-perfil">
@@ -80,10 +81,10 @@
 							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
 						</tr>
 
-						
+
 					</tbody>
 				</table>
-	
+
 			</div>
 			<div class="paginacion">
 				<div class="contenedor-paginacion">
@@ -181,7 +182,7 @@ table {
 	width: 800px;
 	border-collapse: collapse;
 	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
 }
 
 thead {

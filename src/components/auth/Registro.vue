@@ -15,17 +15,17 @@
                 <h2>Bienvenido!</h2>
                 <FormKit type="form" id="form" @submit="Auth.registrar" :actions="false"
                     incomplete-message="Ingrese todos sus datos para continuar">
-                    
+
                     <FormKit
-                    
+
                         type="text"
                         prefix-icon="userIcon"
                         placeholder="Nombres"
                         name="nombre"
-                        validation="required" 
+                        validation="required"
                         :validation-messages="{
                             required: 'El Nombre es Obligatorio',
-                        }" 
+                        }"
 
                     />
                     <FormKit
@@ -33,13 +33,13 @@
                         prefix-icon="userIcon"
                         placeholder="Apellidos"
                         name="apellido"
-                        validation="required" 
+                        validation="required"
                         :validation-messages="{
                             required: 'Los Apellidos son Obligatorios',
-                        }" 
+                        }"
 
                     />
-                    <FormKit 
+                    <FormKit
                         type="text"
                         placeholder="Teléfono - ej: 310-000-0000"
                         prefix-icon="phoneIcon"
@@ -60,7 +60,7 @@
                         :validation-messages="{
                             required: 'El correo es Obligatorio',
                             email: 'Ingrese un correo valido',
-                        }" 
+                        }"
                         placeholder="Correo"
                         prefix-icon="emailIcon"
 
@@ -68,9 +68,9 @@
 
 
                     <FormKit 
-                        placeholder="Ingrese su contraseña" 
+                        placeholder="Ingrese su contraseña"
                         name="contrasena" type="password"
-                        prefix-icon="segurity" 
+                        prefix-icon="segurity"
                         validation="required|?length:8"
                         suffix-icon="eyeClose" @suffix-icon-click="Modal.handleIconClick" 
                         :validation-messages="{
