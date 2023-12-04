@@ -4,12 +4,18 @@ import Mascotas from '../components/Mascotas.vue';
 import userAuth from '../components/auth/userAuth.vue';
 import RegistroMascota from '../components/RegistroMascota.vue';
 import Mascota from '../components/Mascota.vue';
+import modalCliente from '../components/UI/modalCliente.vue';
 import { useDashboard } from '../stores/dashboard'
-
+import { useModals } from '../stores/modals';
+const Modals = useModals()
 const dashboard = useDashboard()
 </script>
 
 <template>
+    <div  v-if="Modals.modalCliente" class="modalCliente">
+        <modalCliente
+        />
+    </div>
     <div class="contenedor-principal">
 
         <div class="menu-dashboard">
@@ -26,7 +32,22 @@ const dashboard = useDashboard()
         <div class="contenedor-dashboard">
             <div class="div"></div>
             <div class="contenido-principal">
-                <p>DASHBOARD</p>
+
+                <div class="mascota">
+
+                    <div v-if="dashboard.inicioMascota" class="mascotas">
+                        <Mascotas />
+                    </div>
+
+                    <div v-if="dashboard.registroMascota" class="registro-mascota">
+                        <RegistroMascota />
+                    </div>
+                    
+                    <div v-if="dashboard.verMascota" class="ver-mascota">
+                        <Mascota />
+                    </div>
+
+                </div>
             </div>
 
         </div>
@@ -35,6 +56,7 @@ const dashboard = useDashboard()
 
 
 <style scoped>
+
 .headerUser {
     position: fixed;
     top: 0;
@@ -48,6 +70,19 @@ h1 {
     font-weight: bold;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    right:0;
+
+}
+.contenido-header{
+    
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    align-items: center;
+}
 .contenedor-principal {
     margin-left: 2vh;
     margin-right: 2vh;
@@ -73,9 +108,36 @@ h1 {
     text-align: left;
 }
 
-
+.contenido-menu {
+    /* overflow-y: hidden; */
+    /* position: relative; */
+}
 
 .contenido-principal {
     margin-top: 10vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap:35vh; */
+    align-items: center;
+
+}
+
+.registro-mascota {
+    /* margin: 0 auto; */
+    display: flex;
+    flex-direction: column;
+    gap: 6vh;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.mascota {
+    /* overflow-y: scroll; */
+
 }
 </style>

@@ -1,18 +1,15 @@
 <script setup>
-import { ref, watch, reactive } from 'vue';
-
-const genero = ref(null)
-
-const mascota = ref({
-    clienteId: '',
-    tipo_mascota: '',
-    nombre: '',
-    genero: true ? 'Macho' : 'Hembra',
-    edad: '',
-    raza: '',
-    vacunas:'',
-
-});
+import { ref, watch, reactive,onMounted } from 'vue';
+import { useMascota } from '../stores/mascota';
+import { useAuthStore} from '../stores/auth';
+import { useDashboard } from '../stores/dashboard';
+import { useCliente } from '../stores/cliente';
+// Stores
+const Mascota = useMascota()
+const Auth = useAuthStore()
+const dashboard = useDashboard()
+const Cliente = useCliente()
+// States
 
 const dueno = [
     { nombre: "Andres" },
@@ -20,7 +17,6 @@ const dueno = [
     { nombre: "Garces " },
     { nombre: " Pradilla " }
 ];
-
 const tipo = [
     'Perro',
     'Gato',
@@ -53,92 +49,117 @@ const tiposDeMascotas = [
 
 const razas = ref([]);
 
-watch(() => mascota.value.tipo, (newTipo) => {
+onMounted(() => {
+    Auth.ObtenerToken()
+    Cliente.verClientes()
+})
+
+watch(() => Mascota.mascota.tipo_mascota, (newTipo) => {
     const mascotaSeleccionada = tiposDeMascotas.find(
         (mascota) => mascota.tipo === newTipo
     );
-    mascota.value.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
+    Mascota.mascota.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
     razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
 }
 )
 
-watch(
-    genero,
-    (newGenero) => {
-        mascota.value.genero = newGenero ? 'Macho' : 'Hembra';
-    }
-);
 
-const enviar = ()=>{
-    console.log(mascota.value)
+watch(() => Mascota.mascota.vacunas, (newTipo) => {
+    filtrarVacunasDisponibles();
+    console.log('sadf')
 }
+)
+const filtrarVacunasDisponibles = ()=>{
+    // Si la vacuna que esta en el state mascota.vacuna es igual al que esta en vacunas, se deja de mostrar
+
+    return vacunas.filter(vacuna => Mascota.mascota.vacunas.indexOf(vacuna) === -1);
+    
+}
+
 </script>
 
 <template>
+
+    <h1>Registrar Mascota</h1>
+
+    <div class="con">
+        <div></div>
+        <button @click="dashboard.handleVolver()" class="botonVolver"> Volver </button>
+    </div>
+
     <div class="contenedor-registro">
-        <h1>Registrar Mascota</h1>
         <div class="contenedor-formulario">
-            <div class="registro">
 
-                <h2>Datos Mascota</h2>
-
-                <FormKit type="form" id="form" @submit="" :actions="false"
-                    incomplete-message="Ingrese todos sus datos para continuar">
-                    <div class="inputs">
-
-                        <v-select v-model="mascota.clienteId" placeholder="Nombre del Dueño" name="clienteId"
-                            :options="dueno" label="nombre"></v-select>
-
-                        <div class="contenedor-genero">
-
-                            <div class="nombre-mascota">
-                                <FormKit v-model="mascota.nombre" name="nombre" type="text" placeholder="Nombre"
-                                    validation="required" :validation-messages="{
-                                        required: 'El Nombre es Obligatorio',
-                                    }" />
+            <div class="formulario">
+                <div class="registro">
+    
+                    <h2>Datos Mascota</h2>
+    
+                    <FormKit type="form" id="form" @submit="" :actions="false"
+                        incomplete-message="Ingrese todos sus datos para continuar">
+                        <div class="inputs">
+    
+                            <v-select  v-model="Mascota.mascota.clienteId" placeholder="Nombre del Dueño" name="clienteId"
+                                :options="Cliente.clientes" :reduce="nombre => nombre.id" label="nombre"></v-select>
+    
+                            <div class="contenedor-genero">
+    
+                                <div class="nombre-mascota">
+                                    <FormKit v-model="Mascota.mascota.nombre" name="nombre" type="text" placeholder="Nombre Mascota" 
+                                        validation="required" :validation-messages="{
+                                            required: 'El Nombre es Obligatorio',
+                                        }" />
+                                </div>
+                                <div class="checkbox-wrapper-34">
+                                    <input v-model="Mascota.mascota.genero" class='tgl tgl-ios' id='toggle-34' type='checkbox'>
+                                    <label class='tgl-btn' for='toggle-34'></label>
+                                </div>
+    
                             </div>
-                            <div class="checkbox-wrapper-34">
-                                <input v-model="mascota.genero" class='tgl tgl-ios' id='toggle-34' type='checkbox'>
-                                <label class='tgl-btn' for='toggle-34'></label>
-                            </div>
-
+    
+                            <v-select v-model="Mascota.mascota.tipo_mascota" placeholder="Tipo de Mascota" name="tipo_mascota" :options="tipo"
+                                label="tipo">
+    
+                            </v-select>
+    
+                            <FormKit v-model="Mascota.mascota.edad" type="text" placeholder="Edad" name="edad"
+                                validation="number|required|" :validation-messages="{
+                                    required: 'Edad es obligatoria',
+                                    number: 'No puedes ingresar letras'
+                                }" />
+    
+                            <v-select v-model="Mascota.mascota.raza" placeholder="Raza" name="raza" :options="razas" label="razas">
+    
+                            </v-select>
                         </div>
-
-                        <v-select v-model="mascota.tipo" placeholder="Tipo de Mascota" name="tipo" :options="tipo"
-                            label="tipo">
-
-                        </v-select>
-
-                        <FormKit v-model="mascota.edad" type="text" placeholder="Edad" name="edad"
-                            validation="number|required|" :validation-messages="{
-                                required: 'Edad es obligatoria',
-                                number: 'No puedes ingresar letras'
-                            }" />
-
-                        <v-select v-model="mascota.raza" placeholder="Raza" name="raza" :options="razas" label="razas">
-
-                        </v-select>
-                    </div>
-                </FormKit>
+                    </FormKit>
+                </div>
+                <div class="vacunas">
+                    <h2>Vacunas</h2>
+                    <v-select id="vacunas" multiple v-model="Mascota.mascota.vacunas" placeholder="Seleccione las vacunas"
+                        :options="filtrarVacunasDisponibles()" 
+                    />
+                </div>
             </div>
-            <div class="vacunas">
-                <h2>Vacunas</h2>
-                <v-select id="vacunas" multiple v-model="mascota.vacunas" placeholder="Seleccione las vacunas"
-                    :options="vacunas" />
-            </div>
+            
+            <button v-on:click="Mascota.registrarMascota" class="agregar"> Agregar </button>
         </div>
-        <button v-on:click="enviar" class="agregar"> Agregar </button>
 
     </div>
 </template>
 <style scoped>
+.con{
+    position: absolute;
+    top: 10vh;
+    right: 0;
+    
+}
 h1 {
     text-align: center;
     color: var(--color-morado-general);
     font-size: 2.4em;
     font-weight: bold;
 }
-
 h2 {
     margin-bottom: 5vh;
     font-size: 2em;
@@ -151,44 +172,52 @@ h2 {
     --vs-dropdown-option--active-bg: #5A0FC3;
     --vs-dropdown-option--active-color: #eeeeee;
 }
-    .agregar{
-        margin-right: 5vh;
-        
-        float: right;
-        font-size: 1.2em;
-        padding:10px;
-        border-style: none;
-        background-color: #5a0fc3;
-        color: white;
-        border-radius: 20px;
-        width: 8em;
-        transition: all 0.2s ease;
-        cursor: pointer;
+.agregar{
+    margin-right: 5vh;
+    margin: 0 auto;
+    font-size: 1.2em;
+    padding:10px;
+    border-style: none;
+    background-color: #5a0fc3;
+    color: white;
+    border-radius: 20px;
+    width: 8em;
+    transition: all 0.2s ease;
+    cursor: pointer;
 
-    }
-    .agregar:hover{
-        transform: scale(0.9); 
-        background-color: #6413d7;
-    }
+}
+.agregar:hover{
+    transform: translateY(-1px); 
+    background-color: #6413d7;
+}
     
+.formulario {
+    /* max-height: max-content; */
+    /* width: 40vh; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 50px;
+}
 .contenedor-registro {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 7vh;
 }
 
 .contenedor-formulario {
     /* width: 60vh; */
     /* background-color: var( --color-morado-claro-general); */
-    padding: 10px;
-    border-radius: 20px;
-
-    max-height: max-content;
-    position: relative;
+    /* padding: 20px; */
+    /* border-radius: 20px; */
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    /* justify-content: left; */
+    /* align-items: left; */
+    gap: 2vh;
+
 }
 
 .inputs {

@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-// baseURL: 'http://localhost:6060/api/admin'
 
+// baseURL:'https://api-veterinaria-production.up.railway.app/api'
 const api = axios.create({
-    baseURL:'https://api-veterinaria-production.up.railway.app/api'
+    baseURL: 'http://localhost:6060/api'
+    
 
 })
 

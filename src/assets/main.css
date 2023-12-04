@@ -9,11 +9,12 @@
     --color-gris-claro: #F2F2F287;
     --color-blanco: #FFFFFF;
     --color-gris: #979797;
-    --color-gris-oscuro: #CCCCCC;
+    --color-gris-oscuro: #696969;
     --color-blanco-input:#F8FFF4;
     --color-morado-general:#4c0ea4;
     --color-morado-oscuro-general:#5A0FC3;
     --color-morado-claro-general:rgba(90, 15, 195, 0.86); 
+    --color-morado-muy-claro:rgba(102, 47, 180, 0.86); 
 }
 
 .vs__search::placeholder,
@@ -58,6 +59,28 @@ ul#vs6__listbox{
    #app{
     overflow-x: hidden;
    }
+}
+
+
+/* Estilos botones */
+
+.botonVolver{
+    margin-right: 5vh;
+    position: relative;
+    font-size: 1.2em;
+    padding:10px;
+    border-style: none;
+    background-color: #5a0fc3;
+    color: white;
+    border-radius: 20px;
+    width: 8em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+}
+.botonVolver:hover{
+    transform: scale(0.9); 
+    background-color: #6413d7;
 }
 
 

@@ -8,7 +8,8 @@ export default {
         return api.post('/auth/login/employee',data)
     },
     registar(data){
-        return api.post('/register/client',data)
+        return api.post('/auth/register/client',data)
+
     }
 
 }

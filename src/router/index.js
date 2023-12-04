@@ -20,9 +20,27 @@ const router = createRouter({
       // Ruta protegida
       meta: { requireAuth: true },
     },{
-      path: '/medico',
-      name: 'Médico',
-      component: () => import('../views/dashboardView.vue'),
+      path: '/mascotas',
+      name: 'mascotas',
+      component: () => import('../views/mascotasView.vue'),
+      // Ruta protegida
+      meta: { requireAuth: true },
+    },{
+      path: '/tiendas',
+      name: 'tiendas',
+      component: () => import('../views/tiendasView.vue'),
+      // Ruta protegida
+      meta: { requireAuth: true },
+    },{
+      path: '/cirugias',
+      name: 'cirugias',
+      component: () => import('../views/cirugiasView.vue'),
+      // Ruta protegida
+      meta: { requireAuth: true },
+    },{
+      path: '/empleados',
+      name: 'empleados',
+      component: () => import('../views/empleadosView.vue'),
       // Ruta protegida
       meta: { requireAuth: true },
     }

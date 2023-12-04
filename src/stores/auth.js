@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () =>{
     const Modal = useModalAuthStore()
 
     const token = ref(null)
-
+    
     const loguear = (data) =>{
         authService.loguear(data)
         .then(res =>{
@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', () =>{
             console.log(res)
             // Guarda token
             localStorage.setItem('token', res.data.data.token)
+            token.value = res.data.data.token
         })
         .catch(err =>{
             toast.error(err.response.data.msg,{
@@ -62,9 +63,10 @@ export const useAuthStore = defineStore('auth', () =>{
 
             Permisos.rolUser = res.data.data.rol
             localStorage.setItem('rol', res.data.rol)
+            token.value = res.data.data.token
 
             router.push({name:res.data.rol})
-
+            extraerToken()
         })
         .catch(err =>{
             toast.error(err.response.data.msg,{
@@ -79,8 +81,23 @@ export const useAuthStore = defineStore('auth', () =>{
         if (localStorage.getItem('token')) {
           // Guarda el token en setToken y lo asigna a state
           token.value = localStorage.getItem('token')
+          extraerToken()
+
         }
         return
+    }
+    const extraerToken = ()=>{
+        if(token.value){
+            const payloadBase64 = token.value.split('.')[1];
+            const decodedPayload = decodeURIComponent(
+              atob(payloadBase64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+            );
+            const userInfo = JSON.parse(decodedPayload);
+            Permisos.userLogin = userInfo.user;
+        }
+    
+        return
+
     }
     const validarAdmin = (isAdmin) =>{
 
@@ -90,6 +107,8 @@ export const useAuthStore = defineStore('auth', () =>{
 
         loguear,
         registrar,
-        loginEmpleado
+        loginEmpleado,
+        ObtenerToken,
+        extraerToken
     }
 })

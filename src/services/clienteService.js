@@ -1,17 +1,18 @@
 import api from "../lib/axios";
 
 export default {
-    obtenerCliente(data){
-        return api.post('/admin/client/all',data,
-            headers: {
-                'Authorization': `token ${access_token}`
-        })
+    obtenerClientes(token){
+        return api.get('/admin/list/client',
+           { headers: {'auth-token': token}}
+        )
     },
-    obtenerClientes(data){
-        return api.post('/auth/login/employee',data)
+    obtenerCliente(id,token){
+        return api.get(`/admin/list/client/${id}`,
+        { headers: {'auth-token': token}}
+        )
     },
     registar(data){
-        return api.post('/register/client',data)
+        return api.post('/auth/register/client',data)
     }
 
 }

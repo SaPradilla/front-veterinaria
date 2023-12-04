@@ -1,11 +1,9 @@
 <script setup>
 import menuDashboard from '../components/UI/menuDashboard.vue';
-import Mascotas from '../components/Mascotas.vue';
-import userAuth from '../components/auth/userAuth.vue';
-import RegistroMascota from '../components/RegistroMascota.vue';
-import Mascota from '../components/Mascota.vue';
 import { useDashboard } from '../stores/dashboard'
-
+import userAuth from '../components/auth/userAuth.vue';
+import Empleados from '../components/Empleados.vue';
+import RegistroEmpleado from '../components/RegistroEmpleado.vue';
 const dashboard = useDashboard()
 </script>
 
@@ -17,7 +15,6 @@ const dashboard = useDashboard()
                 <userAuth />
             </div>
             <div class="contenido-menu">
-
                 <menuDashboard />
             </div>
 
@@ -25,8 +22,12 @@ const dashboard = useDashboard()
 
         <div class="contenedor-dashboard">
             <div class="div"></div>
+
             <div class="contenido-principal">
-                <p>DASHBOARD</p>
+                
+                <Empleados v-if="dashboard.inicioEmpleado"/>
+                <RegistroEmpleado v-if="dashboard.registroEmpleado"/>
+                
             </div>
 
         </div>

@@ -1,18 +1,40 @@
 <script setup>
+	import {onMounted} from 'vue'
+	import { useDashboard } from '../stores/dashboard';
+	import { useMascota } from '../stores/mascota';
+	import { useAuthStore } from '../stores/auth';
+	import {usePaginacion} from '../stores/paginacion'
+	import { useModals } from '../stores/modals';
+	import { useCliente } from '../stores/cliente';
+
+	const Cliente = useCliente()
+	const Paginacion = usePaginacion()
+    const dashboard = useDashboard()
+	const Mascota = useMascota()
+	const Auth = useAuthStore()
+
+	onMounted(()=>{
+		Auth.ObtenerToken()
+		Mascota.obtenerMascotas()
+	})
+
 </script>
 
 <template>
 	<div class="contenedor-mascotas">
 		<div class="contenedor-boton">
-			<button class="botonAgregar">Añadir Mascota</button>
+			<button 
+			@click="dashboard.handleRegistroMascota"
+			class="botonAgregar">Añadir Mascota</button>
 		</div>
 		<div class="contenido-mascotas">
 			<h1>Listado de mascotas</h1>
 			<div class="lista-mascotas">
 				<table>
+
 					<thead>
 						<tr>
-							<th></th>
+							<!-- <th></th> -->
 							<th>Nombre</th>
 							<th>Tipo</th>
 							<th>Edad</th>
@@ -24,92 +46,65 @@
 							<th></th>
 						</tr>
 					</thead>
+
 					<tbody>
 	
-						<tr>
-							<td>
+						<tr v-for="mascota in Mascota.mascotas ">
+							<!-- <td>
 								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
 							</td>
-	
-							<td>Matias</td>
-							<td>Perro</td>
-							<td>7 años </td>
-							<td>Pekines</td>
-							<td>Macho</td>
-							<td><img src="../assets/img/Cliente.svg" alt=""></td>
+	 -->
+							<td>{{ mascota.nombre }}</td>
+							<td>{{mascota.tipo_mascota}}</td>
+							<td>{{mascota.edad}} años </td>
+							<td>{{mascota.raza}}</td>
+							<td>{{mascota.genero}}</td>
+
+							<td><img @click="Cliente.verCliente(mascota.cliente.id,Auth.token)" src="../assets/img/Cliente.svg" alt=""></td>
+
 							<td>
-								<div class="contenedor-estado">
+								<div class="contenedor-estado"
+								@click="Mascota.cambiarEstadoMascota(Auth.token,mascota.id)"
+								:class="mascota.isActive ? 'activo' : 'inactivo'"
+								>
 									<div class="circulo"></div>
-									<p class="titulo-estado">Activo</p>
+									<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
 								</div>
 	
 							</td>
 							<td>
 								<div class="boton-perfil">
-									<button>Ver Perfil</button>
+									<button @click="dashboard.handleVerMascota(mascota)" >Ver Perfil</button>
 								</div>
 							</td>
 							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
 						</tr>
-						<tr>
-							<td>
-								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
-							</td>
-	
-							<td>Matias</td>
-							<td>Perro</td>
-							<td>7 años </td>
-							<td>Pekines</td>
-							<td>Macho</td>
-							<td><img src="../assets/img/Cliente.svg" alt=""></td>
-							<td>
-								<div class="contenedor-estado">
-									<div class="circulo"></div>
-									<p class="titulo-estado">Activo</p>
-								</div>
-							</td>
-							<td>
-								<div class="boton-perfil">
-									<button>Ver Perfil</button>
-	
-								</div>
-							</td>
-							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
-						</tr>
-						<tr>
-							<td>
-								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
-							</td>
-	
-							<td>Matias</td>
-							<td>Perro</td>
-							<td>7 años </td>
-							<td>Pekines</td>
-							<td>Macho</td>
-							<td><img src="../assets/img/Cliente.svg" alt=""></td>
-							<td>
-								<div class="contenedor-estado">
-									<div class="circulo"></div>
-									<p class="titulo-estado">Activo</p>
-								</div>
-							</td>
-							<td>
-								<div class="boton-perfil">
-									<button>Ver Perfil</button>
-								</div>
-							</td>
-							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
-						</tr>
+
+						
 					</tbody>
 				</table>
 	
 			</div>
 			<div class="paginacion">
 				<div class="contenedor-paginacion">
-					<p>1</p>
-					<p>2</p>
-					<p>3</p>
-					<p>..</p>
+					<button
+					class="paginacionBotones"
+					v-if="Paginacion.currentPage > 1"
+					@click="Paginacion.cambiarPaginaAnterior()">Anterior</button>
+
+					<p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+						
+						{{  Paginacion.currentPage - pageNumber - 1 < 1 ?  '' : Paginacion.currentPage - pageNumber - 1 }}
+
+					</p>
+					 <p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+						
+						{{  Paginacion.currentPage - pageNumber  < 1 ? '' : Paginacion.currentPage - pageNumber  }}
+
+					</p>
+
+					<p class="currentPage"> {{ Paginacion.currentPage }}</p>
+					<button class="paginacionBotones"  @click="Paginacion.cambiarPagina()">Siguiente</button>
 				</div>
 			</div>
 		</div>
@@ -117,18 +112,44 @@
 </template>
 
 <style scoped>
+td img{
+	transition: all 0.2s ease;
+	cursor: pointer;
+}
+
+td img:hover{
+	filter: brightness(50%) ;
+	transform: translateY(-0.4px);
+}
+.paginacionBotones{
+	background-color: var(--color-morado-general);
+	border: none;
+	color:white;
+	padding: 6px;
+	border-radius: 10px;
+	cursor:pointer;
+	transition: all 0.2s ease;
+}
+.paginacionBotones:hover{
+	background-color: var(--color-morado-claro-general);
+	transform: translateY(-1px);
+}
+p.currentPage{
+	color: var(--color-morado-general);
+	/* font-size: 1.4em; */
+	font-weight: 700;
+}
 h1{
 	color: var(--color-morado-general);
 	font-weight:700;
 }
 .contenido-mascotas {
 	overflow-y: hidden;
-
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	gap: 5vh;
+	gap: 3vh;
 } 
 
 .contenedor-boton {
@@ -169,10 +190,10 @@ thead {
 }
 
 th {
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 1.3em;
 	padding-left: 50px;
-	color: var(--color-morado-general);
+	color: var(--color-morado-claro-general);
 }
 
 td {
@@ -208,22 +229,24 @@ div.circulo {
 
 p.titulo-estado {
 	text-align: center;
-	color: var(--color-verde-ok);
 }
-
-div.circulo.activo {
+div.contenedor-estado{
+	transition: all 0.2s ease;
+	cursor: pointer;
+}
+div.contenedor-estado:hover{
+	filter: brightness(50%);
+}
+div.contenedor-estado.activo .circulo{
 	background-color: var(--color-verde-ok);
 }
-
-p.titulo-estado.activo {
+div.contenedor-estado.activo p.titulo-estado{
 	color: var(--color-verde-ok);
 }
-
-div.circulo.inactivo {
+div.contenedor-estado.inactivo .circulo{
 	background-color: var(--color-rojo);
 }
-
-p.titulo-estado.inactivo {
+div.contenedor-estado.inactivo p.titulo-estado{
 	color: var(--color-rojo);
 }
 

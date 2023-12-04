@@ -6,12 +6,17 @@ export const usePermisosUser = defineStore('permisosUser', () => {
     
     const rolUser = ref('')
     const isAdmin = ref('')
-
+    const userLogin = reactive({
+        nombre:'',
+        rol:'',
+        apellido:'',
+    })
     // Metodos
     
     return {
         rolUser,
-        isAdmin
+        isAdmin,
+        userLogin
 
     }
 })
