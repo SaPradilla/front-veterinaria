@@ -66,7 +66,6 @@ watch(() => Mascota.mascota.tipo_mascota, (newTipo) => {
 
 watch(() => Mascota.mascota.vacunas, (newTipo) => {
     filtrarVacunasDisponibles();
-    console.log('sadf')
 }
 )
 const filtrarVacunasDisponibles = ()=>{

@@ -19,50 +19,52 @@
                 <div class="content-logo">
                     <img class="logo" src="../../assets/img/pelitos-4.png" alt="" srcset="">
                 </div>
-                <h2>¡Bienvenido!</h2>
-                <h3>Ingresar como empleado</h3>
+                <h2>Ingresar como empleado</h2>
+                
+                <div class="formulario">
 
-                <FormKit type="form" id="form" @submit="Auth.loginEmpleado" :actions="false"
-                    incomplete-message="Ingrese todos sus datos para continuar">
-
-                    <FormKit
-                    type="email"
-                    validation="required|email|"
-                    name="email"
-                    :validation-messages="{
-                        required: 'El correo es Obligatorio',
-                        email: 'Ingrese un correo valido',
-                    }" 
-                    placeholder="Correo"
-                    prefix-icon="emailIcon"
-
-                    />
-
-
-                    <FormKit 
-                        type="password"
-                        placeholder="Ingrese su contraseña" 
-                        name="contrasena" 
-                        prefix-icon="segurity" 
-                        validation="required|?length:8"
-                        suffix-icon="eyeClose" @suffix-icon-click="Modal.handleIconClick" :validation-messages="{
-                            required: 'La contraseña es obligatoria',
-                            length: 'La contraseña debe tener al menos 8 caracteres',
-
+                    <FormKit type="form" id="form" @submit="Auth.loginEmpleado" :actions="false"
+                        incomplete-message="Ingrese todos sus datos para continuar">
+    
+                        <FormKit
+                        type="email"
+                        validation="required|email|"
+                        name="email"
+                        :validation-messages="{
+                            required: 'El correo es Obligatorio',
+                            email: 'Ingrese un correo valido',
                         }" 
-                    />
-
-                    <div class="container-text-login">
-                        <p id="negrilla" >Olvidaste tu Contraseña?</p>
-                        <div class="remember_me">
-                            <p>Recuerdame</p>
-                            <FormKit type="checkbox" name="remember_me" decorator-icon="checkkIcon" />
+                        placeholder="Correo"
+                        prefix-icon="emailIcon"
+    
+                        />
+    
+    
+                        <FormKit 
+                            type="password"
+                            placeholder="Ingrese su contraseña" 
+                            name="contrasena" 
+                            prefix-icon="segurity" 
+                            validation="required|?length:8"
+                            suffix-icon="eyeClose" @suffix-icon-click="Modal.handleIconClick" :validation-messages="{
+                                required: 'La contraseña es obligatoria',
+                                length: 'La contraseña debe tener al menos 8 caracteres',
+    
+                            }" 
+                        />
+    
+                        <div class="container-text-login">
+                            <p id="negrilla" >Olvidaste tu Contraseña?</p>
+                            <div class="remember_me">
+                                <p>Recuerdame</p>
+                                <FormKit type="checkbox" name="remember_me" decorator-icon="checkkIcon" />
+                            </div>
+                            <FormKit style="width: 240px;" type="submit" label="Entrar" id="login" />
+                            <p>No eres empleado? <span @click="Modal.handleClickModalEmpleado">Click Aqui</span></p>
+    
                         </div>
-                        <FormKit style="width: 240px;" type="submit" label="Entrar" id="login" />
-                        <p>No eres empleado? <span @click="Modal.handleClickModalEmpleado">Click Aqui</span></p>
-
-                    </div>
-                </FormKit>
+                    </FormKit>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +89,7 @@
 }
 .content-login h2 {
     text-align: center;
-    font-size: 2.8em;
+    font-size: 1.9em;
     font-weight: 600;
     color: var(--color-morado-general);
     margin-bottom: 2vh;
@@ -115,10 +117,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 3vh;
     gap: 20px;
 }
-
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .remember_me {
     gap: 10px;
     align-items: center;

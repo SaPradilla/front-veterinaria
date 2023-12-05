@@ -32,7 +32,7 @@
             <h1>Cirugias</h1>
             <div class="contenedor-citas">
 
-                <table>
+                <table >
 
                 <thead>
                     <tr>
@@ -56,7 +56,7 @@
 
                 </tbody>
             </table>
-            <p > No hay citas</p>
+            <p> No hay Cirugias</p>
             <!-- <p v-if="Mascota.perfilMascota.citas_medicas.length === 0"> No hay citas</p> -->
             </div>
         </div>
@@ -162,7 +162,7 @@
         width: 100%;
         border-collapse: collapse;
         overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
     }
 
     thead {

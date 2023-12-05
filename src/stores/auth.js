@@ -52,11 +52,16 @@ export const useAuthStore = defineStore('auth', () =>{
         })
     }
     const loginEmpleado = (data)=>{
+        const update = toast.loading(
+            'Por favor espere...',
+            {
+                position: toast.POSITION.TOP_LEFT,
+            },
+          )
         authService.loguearEmpleado(data)
         .then(res =>{
-            toast.success(res.data.msg,{
-                position: toast.POSITION.TOP_LEFT,
-            });
+            
+           
 
             console.log(res)
             localStorage.setItem('token', res.data.data.token)
@@ -67,13 +72,35 @@ export const useAuthStore = defineStore('auth', () =>{
 
             router.push({name:res.data.rol})
             extraerToken()
+
+            toast.update(update, {
+                render(){
+                    return 'Logueado'
+                },
+                autoClose: true,
+                closeOnClick: true,
+                closeButton: true,
+                type: 'success',
+                isLoading: false,
+            })
         })
         .catch(err =>{
-            toast.error(err.response.data.msg,{
-                position: toast.POSITION.TOP_LEFT,
-            });
+            const error = err.response.data.msg
+            toast.update(update, {
+                render(){
+                    return error
+                },
+                autoClose: true,
+                closeOnClick: true,
+                closeButton: true,
+                type: 'error',
+                isLoading: false,
+            })
+
             console.log(err.response.data.msg)
         })
+              
+        // toast.done(update);
     }
     
     const ObtenerToken = () => {

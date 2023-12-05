@@ -3,6 +3,7 @@ import { ref, reactive,computed,watch} from 'vue'
 import { useMascota } from "./mascota";
 import { useAuthStore } from "./auth";
 import { useEmpleado } from "./empleado";
+import {toast} from 'vue3-toastify'
 
 export const usePaginacion = defineStore('paginacion', () => {
     
@@ -13,56 +14,75 @@ export const usePaginacion = defineStore('paginacion', () => {
 
     // states
     const size = ref(4);
-    const currentPage = ref(1); 
-    const totalPages = ref(1)
+    const currentPageMascota = ref(1); 
+    const totalPagesMascota = ref(1)
 
+    const currentPageEmpleado = ref(1); 
+    const totalPagesEmpleado= ref(1)
   
     const CalculartotalPages = computed(() => {
         // Calcular el número total de páginas
        
-
     })
-    const cambiarPaginaEmpleado = () => {
-        // Cambiar a la página seleccionada
-        currentPage.value += 1;
 
-        Empleado.verEmpleados(Auth.token,currentPage.value,size.value)
+    const cambiarPaginaEmpleado = () => {
+        
+        currentPageEmpleado.value += 1;
+
+        Empleado.verEmpleados(Auth.token,currentPageEmpleado.value,size.value)
          
     };
     const cambiarPaginaAnteriorEmpleado = () => {
-        // Cambiar a la página seleccionada
-        currentPage.value -= 1;
-        Empleado.verEmpleados(Auth.token,currentPage.value,size.value)
+        
+        currentPageEmpleado.value -= 1;
+        Empleado.verEmpleados(Auth.token,currentPageEmpleado.value,size.value)
          
     };
-    const cambiarPagina = () => {
-        // Cambiar a la página seleccionada
-        currentPage.value += 1;
+    const validarPagina = () =>{
 
-        Mascota.obtenerMascotas(Auth.token,currentPage.value,size.value)
-         
-    };
-    const cambiarPaginaAnterior = () => {
-        // Cambiar a la página seleccionada
-        currentPage.value -= 1;
-        Mascota.obtenerMascotas(Auth.token,currentPage.value,size.value)
-         
-    };
-
-    watch(() => currentPage.value, (newPage) => {
-        console.log('se ejecuto')
-        totalPages.value =  Math.ceil(Mascota.mascotas.length / size.value);
-        console.log(Mascota.mascotas.length)
     }
-    )
+    const cambiarPaginaMascota = () => {
+                
+        currentPageMascota.value += 1;
+        Mascota.obtenerMascotas(Auth.token,currentPageMascota.value,size.value)
+        .then(resultado => {
+            if (!resultado) {
+                currentPageMascota.value -= 1;
+                toast.error('No hay mas informacion',{
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        });
+        
+         
+    };
+    const cambiarPaginaAnteriorMascota = () => {
+        
+        currentPageMascota.value -= 1;
+        Mascota.obtenerMascotas(Auth.token,currentPageMascota.value,size.value)
+         
+    };
+
+    watch(() => currentPageMascota.value, (newPage) => {
+        
+        totalPagesEmpleado.value =  Math.ceil(Mascota.mascotas.length / size.value);
+        
+    })
+    watch(() => currentPageEmpleado.value, (newPage) => {
+        
+        totalPagesEmpleado.value =  Math.ceil(Empleado.empleados.length / size.value);
+        
+    })
     // Metodos
     
     return {
         size,
-        currentPage,
-        totalPages,
-        cambiarPagina,
-        cambiarPaginaAnterior,
+        currentPageMascota,
+        totalPagesMascota,
+        currentPageEmpleado,
+        totalPagesEmpleado,
+        cambiarPaginaMascota,
+        cambiarPaginaAnteriorMascota,
         cambiarPaginaEmpleado,
         cambiarPaginaAnteriorEmpleado
         

@@ -27,8 +27,6 @@ export const useMascota = defineStore('mascota', () => {
 
     const registrarMascota = () =>{
         mascota.value.vacunas = JSON.stringify(mascota.value.vacunas)
-        console.log(mascota.value)
-        console.log(Auth.token)
         mascotaService.registarMascota(mascota.value,Auth.token)
         .then( res =>{
             console.log(res)
@@ -56,21 +54,25 @@ export const useMascota = defineStore('mascota', () => {
     }
 
     const obtenerMascotas = ()=>{
-        mascotaService.obtenerMascotas(Auth.token,Paginacion.currentPage,Paginacion.size)
+        return mascotaService.obtenerMascotas(Auth.token,Paginacion.currentPageMascota,Paginacion.size)
         .then(res=>{
-            console.log(res)
             mascotas.value = res.data.Mascotas
+            return true
+        })
+        .catch(err =>{
+            return false
         })
     }
 
     const cambiarEstadoMascota = (token,id) =>{
-        
-        console.log(token)
-        console.log(id)
+        const findMascota = mascotas.value.find(mascota => mascota.id === id)
+        if(findMascota){
+            findMascota.isActive = !findMascota.isActive
+        }
         mascotaService.cambiarEstado(token,id)
 
         .then(res=>{
-            console.log(res)
+
              // Mensaje 
              toast.success(res.data.msg,{
                 position: toast.POSITION.TOP_RIGHT
@@ -78,6 +80,9 @@ export const useMascota = defineStore('mascota', () => {
         })
         .catch(err=>{
             console.log(err)
+            toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_RIGHT
+            })
         })
     }
     return {

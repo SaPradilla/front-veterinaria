@@ -1,5 +1,5 @@
 <script setup>
-	import {onMounted} from 'vue'
+	import {onMounted,watch} from 'vue'
 	import { useDashboard } from '../stores/dashboard';
 	import { useMascota } from '../stores/mascota';
 	import { useAuthStore } from '../stores/auth';
@@ -18,7 +18,9 @@
 		Mascota.obtenerMascotas()
 		
 	})
+	watch(() => Mascota.mascotas.isActive, (newTipo) => {
 
+	})
 </script>
 
 <template>
@@ -90,22 +92,22 @@
 				<div class="contenedor-paginacion">
 					<button
 					class="paginacionBotones"
-					v-if="Paginacion.currentPage > 1"
-					@click="Paginacion.cambiarPaginaAnterior()">Anterior</button>
+					v-if="Paginacion.currentPageMascota > 1"
+					@click="Paginacion.cambiarPaginaAnteriorMascota()">Anterior</button>
 
-					<p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+					<p v-for="pageNumber in Paginacion.totalPagesMascota" :key="Paginacion.totalPagesMascota"  >
 						
-						{{  Paginacion.currentPage - pageNumber - 1 < 1 ?  '' : Paginacion.currentPage - pageNumber - 1 }}
+						{{  Paginacion.currentPageMascota - pageNumber - 1 < 1 ?  '' : Paginacion.currentPageMascota - pageNumber - 1 }}
 
 					</p>
-					 <p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+					 <p v-for="pageNumber in Paginacion.totalPagesMascota" :key="Paginacion.totalPagesMascota"  >
 						
-						{{  Paginacion.currentPage - pageNumber  < 1 ? '' : Paginacion.currentPage - pageNumber  }}
+						{{  Paginacion.currentPageMascota - pageNumber  < 1 ? '' : Paginacion.currentPageMascota - pageNumber  }}
 
 					</p>
 
-					<p class="currentPage"> {{ Paginacion.currentPage }}</p>
-					<button class="paginacionBotones"  @click="Paginacion.cambiarPagina()">Siguiente</button>
+					<p class="currentPage"> {{ Paginacion.currentPageMascota }}</p>
+					<button class="paginacionBotones"  @click="Paginacion.cambiarPaginaMascota()">Siguiente</button>
 				</div>
 			</div>
 		</div>

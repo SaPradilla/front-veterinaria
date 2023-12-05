@@ -17,6 +17,11 @@ export default {
         return api.post('/admin/register/employee',data,
             { headers: {'auth-token': token}}
         )
+    },
+    cambiarEstado(token,id){
+        return api.put(`/admin/status/employee/${id}`, {}, {
+            headers: {'auth-token': token}
+        })
     }
 
 }

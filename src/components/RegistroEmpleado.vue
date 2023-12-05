@@ -92,6 +92,9 @@
     </div>
 </template>
 <style scoped>
+    h1{
+        color: var(--color-morado-claro-general);
+    }
     .contenido-registro{
         gap: 10vh;
         display: flex;

@@ -1,5 +1,5 @@
 <script setup>
-	import {onMounted} from 'vue'
+	import {onMounted,watch} from 'vue'
 	import { useDashboard } from '../stores/dashboard';
 	import { useMascota } from '../stores/mascota';
 	import { useAuthStore } from '../stores/auth';
@@ -17,7 +17,8 @@
 		Auth.ObtenerToken()
 		Empleado.verEmpleados()
 	})
-
+	watch(() => Empleado.empleados.isActive, (newTipo) => {
+	})
 </script>
 
 <template>
@@ -64,7 +65,7 @@
 
 							<td>
 								<div class="contenedor-estado activo"
-								@click=""
+								@click="Empleado.cambiarEstadoEmpleado(Auth.token,empleado.id)"
 								:class="empleado.isActive ? 'activo' : 'inactivo'"
 								>
 									<div class="circulo"></div>
@@ -88,21 +89,21 @@
 				<div class="contenedor-paginacion">
 					<button
 					class="paginacionBotones"
-					v-if="Paginacion.currentPage > 1"
+					v-if="Paginacion.currentPageEmpleado > 1"
 					@click="Paginacion.cambiarPaginaAnteriorEmpleado()">Anterior</button>
 
-					<p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+					<p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
 						
-						{{  Paginacion.currentPage - pageNumber - 1 < 1 ?  '' : Paginacion.currentPage - pageNumber - 1 }}
+						{{  Paginacion.currentPageEmpleado - pageNumber - 1 < 1 ?  '' : Paginacion.currentPageEmpleado - pageNumber - 1 }}
 
 					</p>
-					 <p v-for="pageNumber in Paginacion.totalPages" :key="Paginacion.totalPages"  >
+					 <p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
 						
-						{{  Paginacion.currentPage - pageNumber  < 1 ? '' : Paginacion.currentPage - pageNumber  }}
+						{{  Paginacion.currentPageEmpleado - pageNumber  < 1 ? '' : Paginacion.currentPageEmpleado - pageNumber  }}
 
 					</p>
 
-					<p class="currentPage"> {{ Paginacion.currentPage }}</p>
+					<p class="currentPage"> {{ Paginacion.currentPageEmpleado }}</p>
 					<button class="paginacionBotones"  @click="Paginacion.cambiarPaginaEmpleado()">Siguiente</button>
 				</div>
 			</div>
@@ -178,10 +179,9 @@ h1{
 
 
 table {
-	width: 100vh;
+	width: 120vh;
 	border-collapse: collapse;
 	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     text-align: center;
@@ -195,7 +195,9 @@ thead {
 th {
 	font-weight: 500;
 	font-size: 1.3em;
-	color: black;
+	padding-left: 50px;
+
+	color: white;
 }
 
 td {
