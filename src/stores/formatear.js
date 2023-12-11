@@ -20,7 +20,8 @@ export const useFormatear = defineStore('formatear', () => {
     }    
     
     return {
-        formatearFecha
+        formatearFecha,
+
 
     }
 })

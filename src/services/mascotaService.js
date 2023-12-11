@@ -16,6 +16,11 @@ export default {
         return api.put(`/admin/status/pet/${id}`, {}, {
             headers: {'auth-token': token}
         })
-    }
+    },
+    editarMascota(token,id,data){
+        return api.put(`/admin/edit/pet/${id}`, data, {
+            headers: {'auth-token': token}
+        })
+    },
 
 }

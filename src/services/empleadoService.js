@@ -22,6 +22,11 @@ export default {
         return api.put(`/admin/status/employee/${id}`, {}, {
             headers: {'auth-token': token}
         })
+    },
+    editarEmpleado(token,id,data){
+        return api.put(`/admin/edit/employee/${id}`,data,{
+            headers: {'auth-token': token}
+        })
     }
 
 }

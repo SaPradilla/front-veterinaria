@@ -4,6 +4,8 @@ import { useMascota } from "./mascota";
 import { useAuthStore } from "./auth";
 import { useEmpleado } from "./empleado";
 import {toast} from 'vue3-toastify'
+import { useShop } from "./shop";
+import { useCita } from "./citas";
 
 export const usePaginacion = defineStore('paginacion', () => {
     
@@ -11,8 +13,10 @@ export const usePaginacion = defineStore('paginacion', () => {
     const Mascota = useMascota()
     const Auth = useAuthStore()
     const Empleado = useEmpleado()
-
+    const Shop = useShop()
+    const Citas = useCita()
     // states
+
     const size = ref(4);
     const currentPageMascota = ref(1); 
     const totalPagesMascota = ref(1)
@@ -20,16 +24,33 @@ export const usePaginacion = defineStore('paginacion', () => {
     const currentPageEmpleado = ref(1); 
     const totalPagesEmpleado= ref(1)
   
-    const CalculartotalPages = computed(() => {
-        // Calcular el número total de páginas
-       
-    })
+    const sizeShop = ref(12)
+    const currentPageShopMedicine = ref(1)
+    const totalPagesShopMedicine = ref(1)
 
+    const currentPageShopAccesory = ref(1)
+    const totalPagesShopAccesory = ref(1)
+
+
+    const currentPageCita = ref(1)
+    const totalPagesCita= ref(1)
+
+    // Empleado
     const cambiarPaginaEmpleado = () => {
         
         currentPageEmpleado.value += 1;
 
         Empleado.verEmpleados(Auth.token,currentPageEmpleado.value,size.value)
+        .then(resultado => {
+            if (!resultado) {
+                currentPageEmpleado.value -= 1;
+                toast.error('No hay mas informacion',{
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        }).catch(err=>{
+            Auth.verificarSesion(err.response.data)
+        })
          
     };
     const cambiarPaginaAnteriorEmpleado = () => {
@@ -38,9 +59,7 @@ export const usePaginacion = defineStore('paginacion', () => {
         Empleado.verEmpleados(Auth.token,currentPageEmpleado.value,size.value)
          
     };
-    const validarPagina = () =>{
-
-    }
+    // Mascota 
     const cambiarPaginaMascota = () => {
                 
         currentPageMascota.value += 1;
@@ -52,9 +71,9 @@ export const usePaginacion = defineStore('paginacion', () => {
                     position: toast.POSITION.TOP_RIGHT,
                 });
             }
-        });
-        
-         
+        }).catch(err =>{
+            Auth.verificarSesion(err.response.data)
+        })
     };
     const cambiarPaginaAnteriorMascota = () => {
         
@@ -62,6 +81,52 @@ export const usePaginacion = defineStore('paginacion', () => {
         Mascota.obtenerMascotas(Auth.token,currentPageMascota.value,size.value)
          
     };
+    // Medicamento
+    const cambiarPaginaMedicamento = ()=>{
+        currentPageShopMedicine.value += 1
+        Shop.verMedicamentos()
+        .then(resultado => {
+            if (!resultado) {
+                currentPageShopMedicine.value -= 1;
+                toast.error('No hay mas informacion',{
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        }).catch(err =>{
+            Auth.verificarSesion(err.response.data)
+        })
+    }
+    const cambiarPaginaAnteriorMedicamento = () =>{
+        currentPageShopMedicine.value -= 1
+        Shop.verMedicamentos()
+    }
+
+    // Cita
+    const cambiarPaginaCita = ()=>{
+        currentPageCita.value += 1
+        Citas.verCitas()
+        .then(resultado => {
+            if (!resultado) {
+                currentPageCita.value -= 1;
+                toast.error('No hay mas informacion',{
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        }).catch(err =>{
+            Auth.verificarSesion(err.response.data)
+        })
+    }
+    const cambiarPaginaAnteriorCita = () =>{
+        currentPageCita.value -= 1
+        Citas.verCitas()
+    }
+
+    watch(() => currentPageCita.value, (newPage) => {
+        
+        totalPagesCita.value =  Math.ceil(Citas.citas.length / size.value);
+        
+    })
+
 
     watch(() => currentPageMascota.value, (newPage) => {
         
@@ -73,9 +138,22 @@ export const usePaginacion = defineStore('paginacion', () => {
         totalPagesEmpleado.value =  Math.ceil(Empleado.empleados.length / size.value);
         
     })
-    // Metodos
+    watch(() => currentPageShopMedicine.value, (newPage) => {
+        
+        totalPagesShopMedicine.value =  Math.ceil(Shop.medicamentos.length / sizeShop.value);
+        
+    })
+    watch(() => currentPageShopAccesory.value, (newPage) => {
+        
+        totalPagesShopAccesory.value =  Math.ceil(Shop.accesorios.length / sizeShop.value);
+        
+    })
+
+    
     
     return {
+        currentPageCita,
+        totalPagesCita,
         size,
         currentPageMascota,
         totalPagesMascota,
@@ -84,8 +162,15 @@ export const usePaginacion = defineStore('paginacion', () => {
         cambiarPaginaMascota,
         cambiarPaginaAnteriorMascota,
         cambiarPaginaEmpleado,
-        cambiarPaginaAnteriorEmpleado
-        
-
+        cambiarPaginaAnteriorEmpleado,
+        sizeShop,
+        totalPagesShopMedicine,
+        currentPageShopMedicine,
+        totalPagesShopAccesory,
+        currentPageShopAccesory,
+        cambiarPaginaMedicamento,
+        cambiarPaginaAnteriorMedicamento,
+        cambiarPaginaCita,
+        cambiarPaginaAnteriorCita,
     }
 })

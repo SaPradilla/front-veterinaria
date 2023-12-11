@@ -16,11 +16,16 @@
     --color-morado-claro-general:rgba(90, 15, 195, 0.86); 
     --color-morado-muy-claro:rgba(102, 47, 180, 0.86); 
 }
+.vs__dropdown-toggle{
+    background-color: white !important;
 
+}
 .vs__search::placeholder,
 div#vacunas .vs__dropdown-toggle{
     width: 500px;
     height: max-content;
+   
+    
 }
 div#vacunas span.vs__selected{
     background-color:  #664cc3;
@@ -99,7 +104,7 @@ div.formkit-inner  {
     width: 300px;
     height: 50px;
     border-style: none;
-    background-color: var(--color-blanco-input);
+    background-color: white;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
 }

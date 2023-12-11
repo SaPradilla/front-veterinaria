@@ -1,10 +1,12 @@
 <script setup>
     import { reactive,ref} from 'vue'
-    import { useDashboard } from '../stores/dashboard';
-    import { useModalAuthStore } from '../stores/modalAuth';
-    import {useEmpleado} from '../stores/empleado'
+    import {useAdmin} from '../../stores/admin'
+
+    import { useModalAuthStore } from '../../stores/modalAuth';
+    import {useEmpleado} from '../../stores/empleado'
+
+    const Admin = useAdmin()
     const Modal = useModalAuthStore()
-    const Dashboard = useDashboard()
     const Empleado = useEmpleado()
 
     const dataEmpleado = reactive({
@@ -22,7 +24,7 @@
 <template>
     <div class="con">
         <div></div>
-        <button @click="Dashboard.handleVolverEmpleado()" class="botonVolver"> Volver </button>
+        <button @click="Admin.handleEmpleado" class="botonVolver"> Volver </button>
     </div>
     <div class="contenido-registro">
         <h1>Registro Empleado</h1>
@@ -85,7 +87,7 @@
                     name="isAdmin"
                 />
 
-                <FormKit style="width: 240px;" type="submit" label="Registrar" id="login" />
+                <FormKit style="width: 240px;" type="submit" label="Registrar" />
 
             </FormKit>
         </div>
@@ -107,7 +109,7 @@
     }
     .con{
         position: absolute;
-        top: 10vh;
+        top: 25vh;
         right: 0;
         
     }

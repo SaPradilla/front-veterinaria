@@ -13,30 +13,30 @@
 
                 <div class="services-cols">
                     <div class="service-1 service">
-                        <img class="citas-icon" alt="Citas icon" src="../assets/img/citas-icon.png" />
+                        <img class="citas-icon" alt="Citas icon" src="../../assets/img/citas-icon.png" />
                         <h2 class="text-service">Consultas</h2>
                     </div>
                     <div class="service-2 service">
-                        <img class="guarderia-icon" alt="Guarderia icon" src="../assets/img/guarderia-icon.png" />
+                        <img class="guarderia-icon" alt="Guarderia icon" src="../../assets/img/guarderia-icon.png" />
                         <h2 class="text-service">Guarderia</h2>
                     </div>
                     <div class="service-3 service">
-                        <img class="perro-icon" alt="Perro icon" src="../assets/img/perro-icon.png" />
+                        <img class="perro-icon" alt="Perro icon" src="../../assets/img/perro-icon.png" />
                         <h2 class="text-service">Estetica</h2>
                     </div>
 
                 </div>
                 <div class="services-cols">
                     <div class="service-1 service">
-                        <img class="cirugia-icon" alt="Cirugia icon" src="../assets/img/cirugia-icon.png" />
+                        <img class="cirugia-icon" alt="Cirugia icon" src="../../assets/img/cirugia-icon.png" />
                         <h2 class="text-service">Cirugias</h2>
                     </div>
                     <div class="service-2 service">
-                        <img class="urgencia-icon" alt="Urgencia icon" src="../assets/img/urgencia-icon.png" />
+                        <img class="urgencia-icon" alt="Urgencia icon" src="../../assets/img/urgencia-icon.png" />
                         <h2 class="text-service">Urgencias</h2>
                     </div>
                     <div class="service-3 service">
-                        <img class="funeraria-icon" alt="Funeraria icon" src="../assets/img/funeraria-icon.png" />
+                        <img class="funeraria-icon" alt="Funeraria icon" src="../../assets/img/funeraria-icon.png" />
                         <h2 class="text-service">Funebres</h2>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
 
 /* Imagen de fondo */
 .servicios .overlap-group {
-    background-image: url(../assets/img/fondo-imagen.png);
+    background-image: url(../../assets/img/fondo-imagen.png);
     background-size: 100% 100%;
     position: relative;
     height: 100%;

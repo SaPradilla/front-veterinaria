@@ -1,5 +1,8 @@
 <script setup>
+import { useInicio } from '../../stores/inicio';
 
+// Stores
+const Inicio = useInicio()
 </script>
 
 <template>
@@ -13,12 +16,12 @@
                 </div>
                 <div class="contenedor-inicio">
                     <div class="contenedor-textos">
-                        <img class="veterinaria-fondo" src="../assets/img/veterinaria-fondo.svg" alt="veterinaria">
+                        <img class="veterinaria-fondo" src="../../assets/img/veterinaria-fondo.svg" alt="veterinaria">
                         <div class="text-wrapper">Veterinaria</div>
-                        <img class="texto-pelitos" alt="Texto pelitos" src="../assets/img/texto-pelitos.png" />
-                        <button class="botonCita"> Solicitar Cita</button>
+                        <img class="texto-pelitos" alt="Texto pelitos" src="../../assets/img/texto-pelitos.png" />
+                        <button @click="Inicio.redirigirSolicitudCita" class="botonCita"> Agendar Cita</button>
                     </div>
-                    <img class="vector-veterinaria" alt="Vector veterinaria" src="../assets/img/vector-veterinaria.png" />
+                    <img class="vector-veterinaria" alt="Vector veterinaria" src="../../assets/img/vector-veterinaria.png" />
                 </div>
 
             </div>
@@ -32,14 +35,15 @@
 }
 
 .botonCita {
-    padding: 20px;
+    padding: 10px;
     border-style: none;
     background-color: #5a0fc3;
     color: white;
     border-radius: 10px;
-    width: 15em;
+    width: 10em;
     transition: all 0.2s ease;
     cursor: pointer;
+    font-size: 1.5em;
 
 }
 

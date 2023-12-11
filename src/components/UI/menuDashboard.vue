@@ -1,14 +1,21 @@
 <script setup>
-    import { useDashboard } from '../../stores/dashboard';
 
-    const Dashboard = useDashboard()
+    import { useRoute } from 'vue-router';
+    import { useAdmin } from '../../stores/admin';
+
+    const route = useRoute()
+
+    const Admin = useAdmin()
+
+
 </script>
 
 <template>
     <div class="contenedor-menu">
+        
         <div class="menu dashboard"
-            @click="Dashboard.handleDashboard()"
-            :class=" Dashboard.dashboard ? 'seleccionado' : '' "
+            @click="Admin.handleDashboard"
+            :class="route.name === 'dashboard' ? 'seleccionado' : '' "
         >
             <svg class="icons iconDashboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path
@@ -17,8 +24,8 @@
             <h1> Dashboard</h1>
         </div>
         <div class="menu mascota"
-            @click="Dashboard.handleMascota()"
-            :class=" Dashboard.mascota ? 'seleccionado' : '' "
+            @click="Admin.handleMascota"
+            :class=" route.name === 'mascotas' ||  route.name === 'registro-mascota' ||  route.name === 'editar-mascota' ? 'seleccionado' : '' "
         >
             <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
@@ -27,8 +34,8 @@
             <h1>Mascotas</h1>
         </div>
         <div class="menu empleado"
-        @click="Dashboard.handleEmpleados()"
-        :class=" Dashboard.empleados ? 'seleccionado' : '' "
+        @click="Admin.handleEmpleado"
+        :class=" route.name === 'empleados' || route.name === 'empleado'  || route.name === 'editar-empleado' || route.name === 'registro-empleado'  ? 'seleccionado' : '' "
         >
             <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 51">
                 <path
@@ -37,8 +44,8 @@
             <h1>Empleados</h1>
         </div>
         <div class="menu cirugia"
-        @click="Dashboard.handleCirugia()"
-        :class=" Dashboard.cirugias ? 'seleccionado' : '' "
+        @click="Admin.handleCirugia"
+        :class=" route.name === 'cirugias'  ? 'seleccionado' : '' "
         >
             <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57 66">
                 <path
@@ -47,9 +54,8 @@
             <h1>Cirugias</h1>
         </div>
         <div class="menu tienda"
-        
-        @click="Dashboard.handleTienda()"
-        :class=" Dashboard.tienda ? 'seleccionado' : '' "
+        @click="Admin.handleTienda"
+        :class=" route.name === 'tiendas'  ? 'seleccionado' : '' "
 
         >
             <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -58,27 +64,43 @@
             </svg>
             <h1>Tienda</h1>
         </div>
+
+        <div class="menu tienda"
+        @click="Admin.handlCitas"
+        :class=" route.name === 'citas'  ? 'seleccionado' : '' "
+
+        >
+        <svg  class="icons cita" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path  d="M12 14.154q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23Zm-4 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23Zm8 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23ZM12 18q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q12.31 18 12 18Zm-4 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q8.31 18 8 18Zm8 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q16.31 18 16 18ZM5.615 21q-.69 0-1.152-.462Q4 20.075 4 19.385V6.615q0-.69.463-1.152Q4.925 5 5.615 5h1.77V2.77h1.077V5h7.153V2.77h1V5h1.77q.69 0 1.152.463q.463.462.463 1.152v12.77q0 .69-.462 1.152q-.463.463-1.153.463H5.615Zm0-1h12.77q.23 0 .423-.192q.192-.193.192-.423v-8.77H5v8.77q0 .23.192.423q.193.192.423.192Z"/>
+        </svg>
+
+        <h1>Citas</h1>
+        </div>
     </div>
 </template>
 
 <style scoped>
+
 .contenedor-menu {
     display: flex;
     flex-direction: column;
     gap: 60px;
+    padding: 2vh;
 }
-
 
 .menu {
     text-align: center;
 }
 
 svg.icons {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     fill: #B0A09B
 }
-
+svg.cita{
+    width: 50px;
+    height: 50px;
+}
 h1 {
     font-size: 1.3em;
     color: #B0A09B

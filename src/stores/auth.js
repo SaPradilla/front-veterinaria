@@ -5,34 +5,71 @@ import {toast} from 'vue3-toastify'
 import {useModalAuthStore} from './modalAuth'
 import { usePermisosUser } from "./permisosUser"
 import { useRouter } from "vue-router"
+import { useUltimasPaginas } from "./ultimasPaginas"
 
 export const useAuthStore = defineStore('auth', () =>{
     const router = useRouter ()
 
     const Permisos = usePermisosUser()
-
     const Modal = useModalAuthStore()
+    const Pagina = useUltimasPaginas()
 
     const token = ref(null)
-    
+
+
+    // Cliente
     const loguear = (data) =>{
+        const update = toast.loading(
+            'Por favor espere...',
+            {
+                position: toast.POSITION.TOP_LEFT,
+            },
+          )
         authService.loguear(data)
         .then(res =>{
-            // Mensaje 
-            toast.success(res.data.msg,{
-                position: toast.POSITION.TOP_LEFT
-            })
-            console.log(res)
             // Guarda token
             localStorage.setItem('token', res.data.data.token)
             token.value = res.data.data.token
+            Permisos.rolUser = 'cliente'
+            localStorage.setItem('rol', Permisos.rolUser)
+
+            toast.update(update, {
+                render(){
+                    return 'Logueado'
+                },
+                autoClose: true,
+                closeOnClick: true,
+                closeButton: true,
+                type: 'success',
+                isLoading: false,
+            })
+            if(Pagina.ultimaPagina === ''){
+                router.push('/')
+                
+            }
+            if(Pagina.ultimaPagina === 'solicitud-cita'){
+                setTimeout(()=>{
+                    router.push({name:'solicitud-cita'})
+                })
+            }
         })
         .catch(err =>{
-            toast.error(err.response.data.msg,{
-                position: toast.POSITION.TOP_LEFT
+            const error = err.response.data.msg
+            toast.update(update, {
+                render(){
+                    return error
+                },
+                autoClose: true,
+                closeOnClick: true,
+                closeButton: true,
+                type: 'error',
+                isLoading: false,
             })
             console.log(err.response.data.msg)
         })
+
+    
+       
     }
     
     const registrar = (data)=>{
@@ -41,7 +78,6 @@ export const useAuthStore = defineStore('auth', () =>{
             toast.success(res.data.msg,{
                 position: toast.POSITION.TOP_LEFT,
             });
-            console.log(res)
             Modal.handleClickModal()
         })
         .catch(err =>{
@@ -51,6 +87,7 @@ export const useAuthStore = defineStore('auth', () =>{
             console.log(err)
         })
     }
+    // Empleado
     const loginEmpleado = (data)=>{
         const update = toast.loading(
             'Por favor espere...',
@@ -60,10 +97,7 @@ export const useAuthStore = defineStore('auth', () =>{
           )
         authService.loguearEmpleado(data)
         .then(res =>{
-            
-           
-
-            console.log(res)
+        
             localStorage.setItem('token', res.data.data.token)
 
             Permisos.rolUser = res.data.data.rol
@@ -122,20 +156,48 @@ export const useAuthStore = defineStore('auth', () =>{
             const userInfo = JSON.parse(decodedPayload);
             Permisos.userLogin = userInfo.user;
         }
-    
+
         return
 
     }
-    const validarAdmin = (isAdmin) =>{
-
+    const cerrarSesion = ()=>{
+        localStorage.clear()
+        token.value = null
+        toast.info('No has iniciado sesión',
+        { position: toast.POSITION.TOP_CENTER}
+        )
+        setTimeout(()=>{
+            router.push({name:'home'})
+        },1200)
+       
     }
+
+    const verificarSesion = (msg) =>{
+        if(msg=== 'token no es válido' || msg === 'Error al autenticar el token'){
+
+            localStorage.clear()
+            token.value = null
+            toast.info('No has iniciado sesión',
+            { position: toast.POSITION.TOP_CENTER}
+            )
+            setTimeout(()=>{
+                router.push({name:'auth'})
+            },1200)
+
+            return
+        }
+        return
+    }
+
+
     return{
         token,
-
         loguear,
         registrar,
         loginEmpleado,
         ObtenerToken,
-        extraerToken
+        extraerToken,
+        cerrarSesion,
+        verificarSesion,
     }
 })

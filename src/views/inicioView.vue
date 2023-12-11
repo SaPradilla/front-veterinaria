@@ -1,18 +1,22 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HeaderVue from '../components/Header.vue'
+import HeaderVue from '../components/UI/Header.vue'
 // import Inicio from '/workspaces/front-veterinaria/src/components/Inicio.vue';
-import Inicio from '../components/Inicio.vue'
-import Nosotros from '../components/Nosotros.vue';
-import Servicios from '../components/Servicios.vue';
-import Testimonios from '../components/Testimonios.vue';
+import Inicio from '../components/Inicio/Inicio.vue'
+import Nosotros from '../components/Inicio/Nosotros.vue';
+import Servicios from '../components/Inicio/Servicios.vue';
+import Testimonios from '../components/Inicio/Testimonios.vue';
 import { onMounted, ref } from 'vue'
-
+import { useAuthStore } from '../stores/auth';
+// stores
+const Auth = useAuthStore()
 // States
+
 const scrolled = ref(false)
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
+  Auth.ObtenerToken()
 })
 
 // Metodos

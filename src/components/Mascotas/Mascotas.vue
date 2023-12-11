@@ -4,42 +4,46 @@
 	import { useMascota } from '../stores/mascota';
 	import { useAuthStore } from '../stores/auth';
 	import {usePaginacion} from '../stores/paginacion'
+	import { useModals } from '../stores/modals';
 	import { useCliente } from '../stores/cliente';
-	import { useEmpleado } from '../stores/empleado';
 
-	const Empleado  = useEmpleado()
 	const Cliente = useCliente()
 	const Paginacion = usePaginacion()
     const dashboard = useDashboard()
+	const Mascota = useMascota()
 	const Auth = useAuthStore()
 
 	onMounted(()=>{
 		Auth.ObtenerToken()
-		Empleado.verEmpleados()
+		Mascota.obtenerMascotas()
+		
 	})
-	watch(() => Empleado.empleados.isActive, (newTipo) => {
+	watch(() => Mascota.mascotas.isActive, (newTipo) => {
+
 	})
 </script>
 
 <template>
 	<div class="contenedor-mascotas">
 		<div class="contenedor-boton">
-			<button 
-			@click="dashboard.handleRegistroEmpleado"
-			class="botonAgregar">Registrar Empleado</button>
+			<button
+			@click="dashboard.handleRegistroMascota"
+			class="botonAgregar">Añadir Mascota</button>
 		</div>
 		<div class="contenido-mascotas">
-			<h1>Empleados</h1>
+			<h1>Listado de mascotas</h1>
 			<div class="lista-mascotas">
 				<table>
 
 					<thead>
 						<tr>
+							<!-- <th></th> -->
 							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>Celular</th>
-							<th>Email</th>
-							<th>Rol</th>
+							<th>Tipo</th>
+							<th>Edad</th>
+							<th>Raza</th>
+							<th>Genero</th>
+							<th>Dueño</th>
 							<th>Estado</th>
 							<th></th>
 							<th></th>
@@ -48,63 +52,64 @@
 
 					<tbody>
 
-						<tr v-for="empleado in Empleado.empleados ">
+						<tr v-for="mascota in Mascota.mascotas ">
+							<!-- <td>
+								<img class="foto-mascota" src="../assets/img/wally.jpeg" alt="">
+							</td>
+	 -->
+							<td>{{ mascota.nombre }}</td>
+							<td>{{mascota.tipo_mascota}}</td>
+							<td>{{mascota.edad}} años </td>
+							<td>{{mascota.raza}}</td>
+							<td>{{mascota.genero}}</td>
 
-
-							<td> {{empleado.nombre}} </td>
-							<td> {{ empleado.apellido }} </td>
-							<td> {{ empleado.numero_celular}}</td>
-							<td> 123@correo.com </td>
-
-							<td>
-                                <div class="rol">
-                                    <img @click="" src="../assets/img/Cliente.svg" alt="">
-                                    <p>{{ empleado.rol}}</p>
-                                </div>
-                            </td>
+							<td><img @click="Cliente.verCliente(mascota.cliente.id,Auth.token)" src="../assets/img/Cliente.svg" alt=""></td>
 
 							<td>
-								<div class="contenedor-estado activo"
-								@click="Empleado.cambiarEstadoEmpleado(Auth.token,empleado.id)"
-								:class="empleado.isActive ? 'activo' : 'inactivo'"
+								<div class="contenedor-estado"
+								@click="Mascota.cambiarEstadoMascota(Auth.token,mascota.id)"
+								:class="mascota.isActive ? 'activo' : 'inactivo'"
 								>
 									<div class="circulo"></div>
-									<p class="titulo-estado">{{ empleado.isActive ? 'Activo' : 'Inactivo' }}</p>
+									<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
 								</div>
-	
-							</td>
 
+							</td>
 							<td>
 								<div class="boton-perfil">
-									<button @click="dashboard.handleVerEmpleado(empleado)">Ver</button>
+									<button @click="dashboard.handleVerMascota(mascota)" >Ver Perfil</button>
 								</div>
 							</td>
-							<td><img src="../assets/img/editar.svg" alt="" srcset=""></td>
+							<td
+							@click="dashboard.handleEditarMascota()"
+							><img src="../assets/img/editar.svg" alt="" srcset=""></td>
 						</tr>
+
+
 					</tbody>
 				</table>
-	
+
 			</div>
 			<div class="paginacion">
 				<div class="contenedor-paginacion">
 					<button
 					class="paginacionBotones"
-					v-if="Paginacion.currentPageEmpleado > 1"
-					@click="Paginacion.cambiarPaginaAnteriorEmpleado()">Anterior</button>
+					v-if="Paginacion.currentPageMascota > 1"
+					@click="Paginacion.cambiarPaginaAnteriorMascota()">Anterior</button>
 
-					<p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
+					<p v-for="pageNumber in Paginacion.totalPagesMascota" :key="Paginacion.totalPagesMascota"  >
 						
-						{{  Paginacion.currentPageEmpleado - pageNumber - 1 < 1 ?  '' : Paginacion.currentPageEmpleado - pageNumber - 1 }}
+						{{  Paginacion.currentPageMascota - pageNumber - 1 < 1 ?  '' : Paginacion.currentPageMascota - pageNumber - 1 }}
 
 					</p>
-					 <p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
+					 <p v-for="pageNumber in Paginacion.totalPagesMascota" :key="Paginacion.totalPagesMascota"  >
 						
-						{{  Paginacion.currentPageEmpleado - pageNumber  < 1 ? '' : Paginacion.currentPageEmpleado - pageNumber  }}
+						{{  Paginacion.currentPageMascota - pageNumber  < 1 ? '' : Paginacion.currentPageMascota - pageNumber  }}
 
 					</p>
 
-					<p class="currentPage"> {{ Paginacion.currentPageEmpleado }}</p>
-					<button class="paginacionBotones"  @click="Paginacion.cambiarPaginaEmpleado()">Siguiente</button>
+					<p class="currentPage"> {{ Paginacion.currentPageMascota }}</p>
+					<button class="paginacionBotones"  @click="Paginacion.cambiarPaginaMascota()">Siguiente</button>
 				</div>
 			</div>
 		</div>
@@ -150,6 +155,8 @@ h1{
 	justify-content: center;
 	align-items: center;
 	gap: 3vh;
+
+
 } 
 
 .contenedor-boton {
@@ -158,15 +165,14 @@ h1{
 }
 
 .botonAgregar {
-
 	padding: 10px;
 	border-style: none;
 	background-color: #5a0fc3;
 	color: white;
 	border-radius: 25px;
-	width: 25vh;
+	width: 10em;
 	cursor: pointer;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	transition: all 0.2s ease;
 }
 
@@ -179,31 +185,36 @@ h1{
 
 
 table {
-	width: 120vh;
+	
+	width: 800px;
 	border-collapse: collapse;
 	overflow: hidden;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    text-align: center;
+	
 }
 
 thead {
-    background-color: var(--color-morado-muy-claro);
+	margin-bottom: 50px;
+	background-color: var(--color-morado-general);
     height: 50px;
+
 }
 
 th {
 	font-weight: 500;
 	font-size: 1.3em;
 	padding-left: 50px;
-
 	color: white;
 }
 
 td {
-    padding: 20px;
+	padding: 1vh;
+	margin: 0 auto;
+	padding-left: 50px;
+	padding-top: 3vh;
 	background-color: rgba(255, 255, 255, 0.2);
-	color: black;
+	color: var(--color-gris);
 
 }
 
@@ -276,6 +287,8 @@ div.contenedor-estado.inactivo p.titulo-estado{
 	gap: 5vh;
 	text-align: center;
 }
-
+.contenedor-paginacion p{
+	
+}
 
 </style>

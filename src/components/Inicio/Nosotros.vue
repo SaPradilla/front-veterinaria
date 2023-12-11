@@ -13,7 +13,7 @@
 
                 <div class="texto-nosotros">¿Quienes Somos?</div>
                 <div class="contenedor-contenido">
-                    <img class="fondo-shape" alt="Fondo shape" src="../assets/img/fondo-shape.png" />
+                    <img class="fondo-shape" alt="Fondo shape" src="../../assets/img/fondo-shape.png" />
                     <div class="flexcontainer">
                         <p class="text">
                             <span class="text-wrapper">

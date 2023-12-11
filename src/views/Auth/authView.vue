@@ -1,12 +1,14 @@
 <script setup>
-    import Login from '../components/auth/Login.vue';
-    import Registro from '../components/auth/Registro.vue';
-    import LoginEmpledos from '../components/auth/LoginEmpledos.vue';
-    import { useModalAuthStore} from '../stores/modalAuth'
+
+    import Login from '../../components/auth/Login.vue';
+    import Registro from '../../components/auth/Registro.vue';
+    import LoginEmpledos from '../../components/auth/LoginEmpledos.vue';
+    import { useModalAuthStore} from '../../stores/modalAuth'
     const Modal = useModalAuthStore()
 
-    import { useAuthStore } from '../stores/auth';
+    import { useAuthStore } from '../../stores/auth';
     const Auth = useAuthStore()
+
 
 </script>
 
@@ -43,7 +45,7 @@
                 <LoginEmpledos/>
             </div>
             <div class="fondo-imagen">
-                <img src="../assets/img/fondoLogin.jpg" alt="fondoLogin">
+                <img src="../../assets/img/fondoLogin.jpg" alt="fondoLogin">
             </div>
   
         </div>
@@ -117,7 +119,7 @@
         height: 100%;
         object-fit: cover;
         position: relative;
-        z-index: 10001;
+        z-index: 1000;
     }
 
     .contenido-login.open,

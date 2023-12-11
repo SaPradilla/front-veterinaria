@@ -25,7 +25,7 @@
               <div class="contenido-card">
 
                 <div class="imagenes-perfil">
-                  <img class="perfiles" alt="María R" src="../assets/img/cara2.jpg" />
+                  <img class="perfiles" alt="María R" src="../../assets/img/cara2.jpg" />
                 </div>
 
                 <div class="title">María R</div>
@@ -42,7 +42,7 @@
               <div class="contenido-card">
 
                 <div class="imagenes-perfil">
-                  <img class="perfiles" alt="Juan P." src="../assets/img/cara1.jfif" />
+                  <img class="perfiles" alt="Juan P." src="../../assets/img/cara1.jfif" />
                 </div>
 
                 <div class="title">Juan P.</div>
@@ -63,7 +63,7 @@
               <div class="contenido-card">
 
                 <div class="imagenes-perfil">
-                  <img class="perfiles" alt="Carolina D" src="../assets/img/cara3.jpg" />
+                  <img class="perfiles" alt="Carolina D" src="../../assets/img/cara3.jpg" />
                 </div>
 
                 <div class="title">Carolina D</div>
@@ -82,7 +82,7 @@
               <div class="contenido-card">
 
                 <div class="imagenes-perfil">
-                  <img class="perfiles" alt="Ana M" src="../assets/img/cara4.jpg" />
+                  <img class="perfiles" alt="Ana M" src="../../assets/img/cara4.jpg" />
                 </div>
 
                 <div class="title">Ana M</div>
