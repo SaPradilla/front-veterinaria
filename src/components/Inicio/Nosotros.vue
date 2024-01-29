@@ -35,8 +35,8 @@
     <div class="footer-nosotros">
         <div class="contenedor-footer">
 
-            <p>Pelitos ha marcado una diferencia significativa en la salud y la felicidad de las mascotas. Su pasión y
-                compromiso hacia el futuro de los animales son evidentes en cada consulta y tratamiento, garantizando un
+            <p>Pelitos ha marcado una diferencia significativa en la <strong>salud</strong>  y la <strong>felicidad</strong> de las mascotas. <strong>Su pasión y
+                compromiso </strong> hacia el futuro de los animales son evidentes en cada consulta y tratamiento, garantizando un
                 mañana más brillante para nuestras adoradas mascotas.</p>
             <button class="botonInfo">Leer Más</button>
         </div>
@@ -53,14 +53,9 @@
 }
 
 .contenedor-footer p {
-    color: hsl(0, 0%, 100%);
+    color: var(--color-morado-oscuro-general);
     text-align: center;
-    font-family: Montserrat;
     font-size: 27px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 34px;
-
 }
 
 .footer-nosotros {
@@ -69,11 +64,11 @@
     display: flex;
     overflow: hidden;
     width: 60%;
-    background-color: rgb(90, 15, 195, 86%);
+    /* background-color: rgb(90, 15, 195, 86%); */
     height: 300px;
     border-radius: 50px;
     margin-bottom: 100px;
-    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3);
+    /* box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3); */
 }
 
 .blur-shapes {
@@ -122,13 +117,14 @@
     background-color: #ffffff;
     color: #5a0fc3;
     border-radius: 10px;
-    width: 300px;
+    /* width: ; */
     transition: all 0.2s ease;
     cursor: pointer;
-    font-size: 1.6em;
+    font-size: 1.3em;
     height: 60px;
     font-weight: 800;
-
+    padding: 1em;
+    text-align: center;
 }
 
 .botonInfo:hover {
@@ -142,8 +138,6 @@
     justify-content: center;
     width: 100%;
     height: max-width;
-
-
 }
 
 
@@ -159,10 +153,8 @@
 
 .nosotros .texto-nosotros {
     color: #5a0fc3;
-    font-family: "Montserrat-Bold", Helvetica;
     font-size: 5em;
     font-weight: 700;
-    letter-spacing: 0;
     line-height: 16px;
     position: relative;
     text-align: center;
@@ -197,19 +189,15 @@
 
 .nosotros .text {
     align-self: stretch;
-    color: #5a0fc3;
-    font-family: "Montserrat-Bold", Helvetica;
-    font-size: 1.3em;
-    font-weight: 700;
+    font-size: 1.2em;
+    font-weight: 600;
     line-height: 47.5px;
     position: relative;
 }
 
 .nosotros .text-wrapper {
-    color: #5a0fc3;
     font-family: "Montserrat-Bold", Helvetica;
     font-size: 1.3em;
-    letter-spacing: 0;
 }
 
 @media (max-width: 768px) {
@@ -299,4 +287,5 @@
 
     }
 
-}</style>
+}
+</style>

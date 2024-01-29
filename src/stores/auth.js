@@ -104,7 +104,7 @@ export const useAuthStore = defineStore('auth', () =>{
             localStorage.setItem('rol', res.data.rol)
             token.value = res.data.data.token
 
-            router.push({name:res.data.rol})
+            router.push({name:'dashboard'})
             extraerToken()
 
             toast.update(update, {

@@ -21,24 +21,25 @@
                 </div>
                 <h2>Iniciar Sesion</h2>
 
-                <FormKit type="form" id="form" @submit="Auth.loguear" :actions="false"
+                <FormKit type="form"   id="form" @submit="Auth.loguear" :actions="false"
                     incomplete-message="Ingrese todos sus datos para continuar">
 
                     <FormKit
-                    type="email"
-                    validation="required|email|"
-                    name="email"
-                    :validation-messages="{
-                        required: 'El correo es Obligatorio',
-                        email: 'Ingrese un correo valido',
-                    }" 
-                    placeholder="Correo"
-                    prefix-icon="emailIcon"
+                        type="email"
+                        validation="required|email|"
+                        name="email"
+                        :validation-messages="{
+                            required: 'El correo es Obligatorio',
+                            email: 'Ingrese un correo valido',
+                        }" 
+                        placeholder="Correo"
+                        prefix-icon="emailIcon"
 
                     />
 
 
                     <FormKit 
+                       
                         type="password"
                         placeholder="Ingrese su contraseña" 
                         name="contrasena" 
@@ -69,6 +70,7 @@
 
 
 <style scoped>
+
 .container-login {
     display: grid;
     justify-content: center;

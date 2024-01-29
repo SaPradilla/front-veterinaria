@@ -54,7 +54,7 @@
     @toggleModal="toggleModal"
     />
     <div class="nav-bar" :class="scrolled">
-        <div class="frame"  >
+        <div class="frame">
             <img class="pelitos" alt="Pelitos" src="../../assets/img/pelitos-4.png" />
             <div
             class="menu-container">
@@ -65,7 +65,10 @@
                 <div class="label"><a href="#pqr">PQR</a></div>
 
                 <img class="linea" alt="Linea" src="../../assets/img/Linea.svg" />
-                <div @click="redirigirTienda" class="label shop"><a>Tienda</a></div>
+                <div @click="redirigirTienda" class="label shop">
+                    <a>Tienda</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#ffffff" d="M11.15 22.825L1.175 12.85L11.975 2h10v10zM17.475 8q.625 0 1.063-.437t.437-1.063q0-.625-.437-1.062T17.475 5q-.625 0-1.062.438T15.975 6.5q0 .625.438 1.063T17.475 8"/></svg>
+                </div>
                 
                 <div  v-if="Auth.token === null" class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
                 <img @click="toggleUserModal" v-else class="avatar" alt="Avatar" src="../../assets/img/avatar.svg" />
@@ -99,7 +102,7 @@
     justify-content:right;
     align-items: left;
     gap: 1vh;
-    border-radius: 10px;
+    border-radius: 20px;
     position: absolute;
     background-color: white;
 
@@ -143,20 +146,19 @@
 .nav-bar {
     overflow-x: hidden;
     overflow-y: hidden;
-
     margin: 0 auto;
     background-color: #ffffff;
-    border-radius: 50px;
-    box-shadow: 3px 3px 10px #00000040;
-    height: 60px;
-    width: 1350px;
+    border-radius: 0em 0em 2.5em 2.5em;
+    box-shadow: 3px 3px 20px #0000001b;
+    height: 70px;
+    width: 70em;
     color:#5a0fc3;
 }
 .scrolled{
     background-color: #ffffff17;
     color: rgb(0, 0, 0);
-    box-shadow: 5px 5px 10px #00000040;
-
+    box-shadow: 3px 3px 20px #0000001b;
+    backdrop-filter: blur(10px);
 }
 
 .nav-bar .frame {
@@ -184,19 +186,16 @@
     margin-right: 5vh;
     align-items: center;
 }
+.label a{
+    font-weight: 600;
+    font-size: 1.1em;
+}
 
-.nav-bar .label {
+.label {
     cursor: pointer;
     color: var(--black);
-    font-family: var(--button-text-font-family);
-    font-size: var(--button-text-font-size);
-    font-style: var(--button-text-font-style);
-    font-weight: var(--button-text-font-weight);
-    letter-spacing: var(--button-text-letter-spacing);
-    line-height: var(--button-text-line-height);
-    position: relative;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
     width: fit-content;
 }
@@ -204,13 +203,20 @@
 .label:hover {
     transform: scale(0.9);
 }
-.label.shop{
-  
+.shop{
     color: white;
-    padding: 10px ;
+    padding: 5px ;
     border-radius: 10px;
-    width: 60px;
+    display: flex;
+    width: max-content;
+    align-items: center;
     background-color: #5a0fc3;
+    justify-content: center;
+    gap: 10px;
+}
+.shop svg {
+    width: 1.6em;
+
 }
 .label.singIn{
     color: black;
