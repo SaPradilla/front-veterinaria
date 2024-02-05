@@ -59,7 +59,7 @@
 	 -->
 							<td>{{ mascota.nombre }}</td>
 							<td>{{mascota.tipo_mascota}}</td>
-							<td>{{mascota.edad}} años </td>
+							<td>{{mascota.edad}} </td>
 							<td>{{mascota.raza}}</td>
 							<td>{{mascota.genero}}</td>
 

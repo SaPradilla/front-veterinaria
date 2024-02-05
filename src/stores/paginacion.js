@@ -81,6 +81,7 @@ export const usePaginacion = defineStore('paginacion', () => {
         Mascota.obtenerMascotas(Auth.token,currentPageMascota.value,size.value)
          
     };
+
     // Medicamento
     const cambiarPaginaMedicamento = ()=>{
         currentPageShopMedicine.value += 1
@@ -126,7 +127,6 @@ export const usePaginacion = defineStore('paginacion', () => {
         totalPagesCita.value =  Math.ceil(Citas.citas.length / size.value);
         
     })
-
 
     watch(() => currentPageMascota.value, (newPage) => {
         

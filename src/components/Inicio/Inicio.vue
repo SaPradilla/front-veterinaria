@@ -6,30 +6,81 @@ const Inicio = useInicio()
 </script>
 
 <template>
-    <div>
-        <div class="inicio">
-            <div class="overlap-group-wrapper">
 
-                <div class="blur-shapes">
-                    <div class="ellipse"></div>
-                    <div class="ellipse-2"></div>
-                </div>
-                <div class="contenedor-inicio">
-                    <div class="contenedor-textos">
-                        <img class="veterinaria-fondo" src="../../assets/img/veterinaria-fondo.svg" alt="veterinaria">
-                        <div class="text-wrapper">Veterinaria</div>
-                        <img class="texto-pelitos" alt="Texto pelitos" src="../../assets/img/texto-pelitos.png" />
-                        <button @click="Inicio.redirigirSolicitudCita" class="botonCita"> Agendar Cita</button>
-                    </div>
-                    <img class="vector-veterinaria" alt="Vector veterinaria" src="../../assets/img/vector-veterinaria.png" />
-                </div>
+    <div class="inicio">
+        <div class="contenedor-inicio">
 
+            <div class="contenedor-textos">
+
+                <img class="veterinaria-fondo" src="../../assets/img/veterinaria-fondo.svg" alt="veterinaria">
+
+                <div class="text-veterinaria">Veterinaria</div>
+                <div class="pelitos"> PELITOS </div>
+                
+                <button @click="Inicio.redirigirSolicitudCita" class="botonCita"> Agendar Cita</button>
+            
             </div>
+
+            <img class="vector-veterinaria" alt="Vector veterinaria" src="../../assets/img/vector-veterinaria.png" />
+
         </div>
     </div>
+ 
 </template>
 
 <style scoped>
+.inicio {
+    width: 100%;
+    display: flex;
+    justify-content: center ;
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+    height: max-content;
+    height: 100vh;
+}
+.inicio .contenedor-inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.inicio .contenedor-textos {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+
+.inicio .text-veterinaria {
+
+    color: #000000;
+    font-family: 'Oooh Baby', cursive;
+    font-size: clamp(4em,10vw,10em);
+    font-weight: 400;
+    text-align: center;
+    height: auto;  
+
+}
+.pelitos{
+    font-size: clamp(4em,10vw,6.3em);
+    font-weight: 900;
+}
+
+.inicio .vector-veterinaria {
+    height: auto;
+    width: 400px;
+    max-width: 100%;
+    transition: all 0.2s ease;
+}
+
+.inicio .vector-veterinaria:hover {
+    transform: scale(1.01);
+}
+
 .veterinaria-fondo {
     display: none;
 }
@@ -39,7 +90,7 @@ const Inicio = useInicio()
     border-style: none;
     background-color: #5a0fc3;
     color: white;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 10em;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -52,88 +103,6 @@ const Inicio = useInicio()
     background-color: #6413d7;
 
 }
-
-.inicio {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-
-}
-
-.inicio .blur-shapes {
-    left: 0;
-    position: absolute;
-    top: 0;
-}
-
-.inicio .ellipse {
-    background: linear-gradient(180deg, rgb(90, 15, 195) 0%, rgb(90, 15, 195) 100%);
-    border-radius: 164px/160px;
-    filter: blur(267px);
-    height: 320px;
-    left: 1424px;
-    position: absolute;
-    top: 0;
-    width: 328px;
-}
-
-.inicio .ellipse-2 {
-    background: linear-gradient(180deg, rgb(90, 15, 195) 0%, rgb(90, 15, 195) 100%);
-    border-radius: 164px/160px;
-    filter: blur(267px);
-    height: 320px;
-    left: 0;
-    position: absolute;
-    top: 892px;
-    width: 328px;
-}
-
-.inicio .contenedor-inicio {
-    margin-top: 14vh;
-    align-items: center;
-    display: flex;
-    top: 305px;
-    width: 1315px;
-}
-
-.inicio .contenedor-textos {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 300px;
-    justify-content: space-between;
-    width: 737px;
-}
-
-.inicio .text-wrapper {
-    color: #000000;
-    font-family: 'Oooh Baby', cursive;
-    font-size: 10em;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 16px;
-    text-align: center;
-}
-
-.inicio .texto-pelitos {
-    height: 100px;
-    width: 497px;
-}
-
-.inicio .vector-veterinaria {
-    height: 506px;
-    width: 489px;
-    transition: all 0.2s ease;
-
-}
-
-.inicio .vector-veterinaria:hover {
-    transform: scale(1.06);
-
-}
-
 @media (max-width: 768px) {
     .veterinaria-fondo {
         height: 300px;
@@ -148,64 +117,18 @@ const Inicio = useInicio()
 
     .inicio {
         overflow-x: hidden;
-        display: block;
     }
 
     .inicio .contenedor-inicio {
-
         margin: 0 auto;
-        margin-top: 14vh;
-        justify-content: center;
-        width: 100px;
-
     }
-
-    .inicio .contenedor-textos {
-        height: 300px;
-        width: 400px;
-
+    .contenedor-textos{
+        gap: 1px;
     }
-
-    .inicio .text-wrapper {
-        margin-bottom: 50px;
-        font-size: 6em;
-        font-weight: 400;
-        letter-spacing: 0;
-        line-height: 16px;
-        text-align: center;
-    }
-
-    .inicio .texto-pelitos {
-        height: 100px;
-        width: 350px;
-        margin-bottom: 70px;
-    }
-
-    .inicio .overlap-group-wrapper {
-        display: flex;
-    }
-
-    .inicio .ellipse-2 {
-
-        filter: blur(140px);
-        top: 500px;
-        width: 108px;
-        height: 200px;
-        border-radius: 164px;
-        left: 150px;
-    }
-
-    .inicio .ellipse {
-        height: 100px;
-        width: 100px;
-        top: 300px;
-        filter: blur(100px);
-        left: 30px;
-
-    }
-
     .botonCita {
-        width: 18em;
+        width: 14em;
+        border-radius: 18px;
         font-size: large;
     }
-}</style>
+}
+</style>

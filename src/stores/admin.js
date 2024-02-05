@@ -39,6 +39,9 @@ export const useAdmin = defineStore('admin',  () =>{
     const handlRegistrarMedicinas = () =>{
         router.push({name:'register-medicina'})
     }
+    const handlRegistrarAccesorio = () =>{
+        router.push({name:'register-accesorio'})
+    }
     const handlCitas = () =>{
         router.push({name:'citas'})
     }
@@ -51,6 +54,7 @@ export const useAdmin = defineStore('admin',  () =>{
         handleEmpleado,
         handleRegistroMascota,
         handleRegistroEmpleado,
+        handlRegistrarAccesorio,
         handlRegistrarMedicinas,
         handlCitas,
     }

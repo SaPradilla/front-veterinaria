@@ -96,6 +96,13 @@ const router = createRouter({
           meta: { requireAuth: true },
         },
         {
+          path: 'register-accesorio',
+          name: 'register-accesorio',
+          component: () => import('../views/Tienda/RegistroAccesorio.vue'),
+          // Ruta protegida
+          meta: { requireAuth: true },
+        },
+        {
           path: 'cirugias',
           name: 'cirugias',
           component: () => import('../views/Cirugias/cirugiasView.vue'),

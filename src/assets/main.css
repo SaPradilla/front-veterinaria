@@ -8,7 +8,7 @@ body{
 }
 html {
     scroll-behavior: smooth;
-  }
+}
 :root {
     --color-verde-ok:rgba(115, 182, 126, 1);
     --color-rojo: #D9755E;
@@ -34,7 +34,7 @@ div#vacunas .vs__dropdown-toggle{
     
 }
 div#vacunas span.vs__selected{
-    background-color:  #664cc3;
+    background-color:  #664cc364;
     color: white;
     border-radius: 20px;
 }
@@ -62,7 +62,7 @@ ul#vs6__listbox{
 
 *{
     font-family: 'Montserrat', sans-serif;
-    padding: 0;
+    /* padding: 0; */
     margin: 0;
 }
 
@@ -83,7 +83,7 @@ ul#vs6__listbox{
     border-style: none;
     background-color: #5a0fc3;
     color: white;
-    border-radius: 20px;
+    border-radius: 14px;
     width: 8em;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -111,7 +111,7 @@ div.formkit-inner  {
     height: 50px;
     border-style: none;
     background-color: white;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.093);
     border-radius: 20px;
 }
 div.nombre-mascota div.formkit-inner{
@@ -120,7 +120,7 @@ div.nombre-mascota div.formkit-inner{
 }
 /* Al selecionar */
 div.formkit-inner:focus-within{
-    box-shadow: 0px 0px 10px 0px var(--color-morado-general);
+    box-shadow: 0px 0px 10px 0px #6513d76f;
 }
 .formkit-wrapper .formkit-inner input.formkit-input:-webkit-autofill{ 
     /* all: unset !important; */

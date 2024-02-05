@@ -6,12 +6,6 @@
   <div class="testimonios">
 
     <div class="container-testimonios">
-
-      <div class="blur-shapes">
-        <div class="ellipse"></div>
-        <div class="ellipse1"></div>
-      </div>
-
       <div class="contenedor">
         <div class="text-wrapper">TESTIMONIOS</div>
         <hr>
@@ -35,6 +29,7 @@
                 </p>
 
               </div>
+
             </div>
             <!-- Carta 2 -->
             <div class="card">
@@ -54,9 +49,6 @@
 
               </div>
             </div>
-          </div>
-
-          <div class="cards">
             <!-- Carta 3 -->
             <div class="card">
 
@@ -75,7 +67,7 @@
 
               </div>
 
-            </div>
+              </div>
             <!-- Carta 4 -->
             <div class="card">
 
@@ -94,11 +86,11 @@
 
               </div>
 
-            </div>
+              </div>
           </div>
 
         </div>
-        
+
       </div>
 
     </div>
@@ -108,85 +100,33 @@
 
 <style scoped>
 .testimonios {
-  background-color: #ffffff;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-
+  margin-top: 10vh;
 }
-
 .testimonios .container-testimonios {
   background-color: #ffffff;
-  height: 100vh;
   width: 100%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-
-  position: relative;
 
 }
-
-.testimonios .blur-shapes {
-  height: 997px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 1472px;
-}
-
-.testimonios .ellipse {
-  background: linear-gradient(180deg, rgba(90, 15, 195, 0.37) 0%, rgb(90, 15, 195) 100%);
-  border-radius: 164px/160px;
-  filter: blur(200px);
-  height: 320px;
-  left: 15px;
-  position: absolute;
-  top: 16px;
-  transform: rotate(5.86deg);
-  width: 328px;
-}
-
-.testimonios .ellipse1 {
-  background: linear-gradient(180deg, rgba(90, 15, 195, 0.37) 0%, rgb(90, 15, 195) 100%);
-  border-radius: 14px/160px;
-  filter: blur(160px);
-  height: 500px;
-  left: 900px;
-  position: absolute;
-  top: 400px;
-  transform: rotate(5.86deg);
-  width: 108px;
-}
-
-
-
 .testimonios .contenedor {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   width: 100%;
   justify-content: center;
-  position: absolute;
-  gap: 100px;
+  gap: 60px;
 }
 
 .testimonios .text-wrapper {
   color: #5a0fc3;
-  font-family: "Montserrat-Bold", Helvetica;
-  font-size: 64px;
+  font-size: clamp(2.4em,5vw,4em);
   font-weight: 700;
-  letter-spacing: 0;
-  line-height: 16px;
-  margin-top: -1px;
-  position: relative;
   text-align: center;
-  white-space: nowrap;
   width: fit-content;
 }
 
 .testimonios hr {
-  height: 15px;
+  height: 3px;
   border-style: none;
   border-radius: 10px;
   background-color: #5a0fc3;
@@ -204,35 +144,43 @@
   width: 100%;
 }
 
+.testimonios .cards {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 50px;
+  margin: 0 auto;
+  /* height: 100%; */
+  place-items: center;
+} 
 .testimonios .card {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 15px #00000040;
-  height: 483px;
+  height: 400px;
   position: relative;
   width: 239px;
   margin: 20px;
-}
-.testimonios .cards{
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .testimonios .contenido-card {
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 57px;
-  height: 410px;
-  justify-content: center;
-  left: 20px;
-  position: relative;
-  top: 17px;
-  width: 191px;
+  height: max-content;
+  justify-content: space-evenly;
+  align-items: center;
+
 }
-.testimonios .card:hover{
+
+.testimonios .card:hover {
   cursor: pointer;
-    transform: translateY(-3px);
-    transition: all 0.2s ease;
+  transform: translateY(-3px);
+  transition: all 0.2s ease;
 }
+
 .testimonios .imagenes-perfil {
   height: max-content;
   width: max-content;
@@ -249,57 +197,39 @@
 .testimonios .title {
   align-self: stretch;
   color: #000000;
-  font-family: var(--h3-font-family);
-  font-size: var(--h3-font-size);
-  font-style: var(--h3-font-style);
   font-weight: 800;
-  letter-spacing: var(--h3-letter-spacing);
-  line-height: var(--h3-line-height);
   position: relative;
   text-align: center;
-
+  font-size: clamp(0.5em,10vw,1em);
 }
 
 .testimonios .message {
   align-self: stretch;
   color: #000000;
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size);
-  font-style: var(--body-font-style);
-  font-weight: var(--body-font-weight);
-  letter-spacing: var(--body-letter-spacing);
-  line-height: var(--body-line-height);
   position: relative;
   text-align: center;
 }
 
 
 @media (max-width: 768px) {
-  .testimonios .ellipse {
-    width: 200px;
-    top: 50px;
-  }
-  .testimonios .ellipse1{
-    left: 500px;
-  }
-  .testimonios .text-wrapper{
-    font-size: 40px;
-  }
-  .testimonios hr{
-    height: 10px;
+  .testimonios hr {
     width: 200px;
   }
-  .testimonios .contenedor{
-    gap: 50px;
+  /* 
+  .testimonios .contenedor {
+    gap: 30px;
   }
-  .testimonios .cards{
+
+  .testimonios .cards {
     display: unset;
   }
-  .testimonios .card{
+
+  .testimonios .card {
     height: 250px;
     width: 140px;
   }
-  .testimonios .contenido-card{
+
+  .testimonios .contenido-card {
     gap: 10px;
     top: 1px;
     height: 200px;
@@ -307,13 +237,9 @@
     left: 0;
 
   }
-  .testimonios .title{
-    font-size: 15px;
-  }
-  .testimonios .message{
-    font-size: 13px;
-  }
-  .testimonios .perfiles{
+  */
+
+  .testimonios .perfiles {
     height: 60px;
     width: 60px;
   }

@@ -46,6 +46,7 @@
 <style scoped>
 
 .user {
+    z-index: 1000;
 
     width: 100%;
     position: fixed;
@@ -68,7 +69,6 @@ h1 {
 }
 .contenedor-principal {
     
-    background-color: #F4F6FA;
     height: 100vh;
     /* width: 100%; */
     /* overflow-y: hidden; */

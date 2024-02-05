@@ -1,14 +1,22 @@
 import api from "../lib/axios";
 
 export default{
-    obtenerMedicamentos(page,size){
-        return api.get(`/shop/list/products/medicines?page=${page}&size=${size}`)
+    obtenerMedicamentos(){
+        return api.get(`/shop/list/products/medicines`)
     },
-    obtenerAcesorios(page,size){
-        return api.get(`/shop/list/products/accesories?page=${page}&size=${size}`)
+    obtenerAcesorios(){
+        return api.get(`/shop/list/products/accesories`)
+    },
+    obtenerProductos(){
+        return api.get(`/shop/list/products`)
     },
     registrarMedicina(token,data){
         return api.post('/admin/register/product/medicine',data,
+            { headers: {'auth-token': token}}
+        )
+    },
+    registrarAccesorio(token,data){
+        return api.post('/admin/register/product/accessory',data,
             { headers: {'auth-token': token}}
         )
     },
@@ -16,5 +24,10 @@ export default{
         return api.get('/admin/list/type-medicine',
             { headers: {'auth-token': token}}
         )
-    }
+    },
+    obtenerTipoAccesorio(token){
+        return api.get('/admin/list/type-accesory',
+            { headers: {'auth-token': token}}
+        )
+    },
 }

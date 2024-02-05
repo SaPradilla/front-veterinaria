@@ -3,59 +3,103 @@
 </script>
 <template>
     <div class="nosotros">
-        <div class="overlap-group-wrapper">
-            <div class="blur-shapes">
-                <div class="ellipse"></div>
-                <div class="ellipse-2"></div>
-                <div class="ellipse-3"></div>
-            </div>
-            <div class="contenido">
 
-                <div class="texto-nosotros">¿Quienes Somos?</div>
-                <div class="contenedor-contenido">
-                    <img class="fondo-shape" alt="Fondo shape" src="../../assets/img/fondo-shape.png" />
-                    <div class="flexcontainer">
-                        <p class="text">
-                            <span class="text-wrapper">
-                                En Pelitos tenemos un corazón profundamente comprometido con el futuro de los animales.
-                            </span>
-                        </p>
-                        <p class="text">
-                            <span class="text-wrapper">
-                                Nuestro amor inquebrantable por las criaturas de nuestro planeta nos ha llevado a la
-                                creación de la
-                                empresa Pelitos que salva vidas día tras día.
-                            </span>
-                        </p>
-                    </div>
+        <div class="contenido">
+            <div class="texto-nosotros">¿Quienes Somos?</div>
+            <div class="contenedor-contenido">
+                <img class="fondo-shape" alt="Fondo shape" src="../../assets/img/fondo-shape.png" />
+
+                <div class="flexcontainer">
+                    <p class="text">
+                        En Pelitos tenemos un corazón profundamente comprometido con el futuro de los animales.
+
+                    </p>
+                    <p class="text">
+                        Nuestro amor inquebrantable por las criaturas de nuestro planeta nos ha llevado a la
+                        creación de la
+                        empresa Pelitos que salva vidas día tras día.
+                    </p>
                 </div>
+
             </div>
         </div>
-    </div>
-    <div class="footer-nosotros">
-        <div class="contenedor-footer">
 
-            <p>Pelitos ha marcado una diferencia significativa en la <strong>salud</strong>  y la <strong>felicidad</strong> de las mascotas. <strong>Su pasión y
-                compromiso </strong> hacia el futuro de los animales son evidentes en cada consulta y tratamiento, garantizando un
-                mañana más brillante para nuestras adoradas mascotas.</p>
-            <button class="botonInfo">Leer Más</button>
+        <div class="footer-nosotros">
+            <div class="contenedor-footer">
+
+                <p>Pelitos ha marcado una diferencia significativa en la <strong>salud</strong> y la
+                    <strong>felicidad</strong> de las mascotas. <strong>Su pasión y
+                        compromiso </strong> hacia el futuro de los animales son evidentes en cada consulta y tratamiento,
+                    garantizando un
+                    mañana más brillante para nuestras adoradas mascotas.</p>
+
+                <button class="botonInfo">Leer Más</button>
+
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped >
-.contenedor-footer {
+.nosotros {
+    margin-top: 10vh;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    height: max-content;
+    justify-content: space-between;
 }
 
-.contenedor-footer p {
-    color: var(--color-morado-oscuro-general);
+
+.nosotros .contenido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: max-content;
+    width: 100%;
+}
+
+.nosotros .texto-nosotros {
+    color: #5a0fc3;
+    font-size: clamp(2rem, 5vw, 4em);
+    font-weight: 700;
+    position: relative;
     text-align: center;
-    font-size: 27px;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.nosotros .contenedor-contenido {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0px 19px; */
+    position: relative;
+    height: 60vh;
+}
+
+.nosotros .fondo-shape {
+    height: 400px;
+    object-fit: cover;
+    position: relative;
+}
+
+.nosotros .flexcontainer {
+    display: flex;
+    height: max-content;
+    /* max-height: 250px; */
+    flex-direction: column;
+    gap: 74px;
+}
+
+
+.flexcontainer .text {
+    font-weight: 600;
+    line-height: 1em;
+    position: relative;
+    font-size: clamp(.5em, 4vw, 1.6em);
 }
 
 .footer-nosotros {
@@ -63,52 +107,23 @@
     justify-content: center;
     display: flex;
     overflow: hidden;
-    width: 60%;
-    /* background-color: rgb(90, 15, 195, 86%); */
-    height: 300px;
-    border-radius: 50px;
     margin-bottom: 100px;
-    /* box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3); */
 }
 
-.blur-shapes {
-    left: 30;
-    position: absolute;
-    top: 30;
+.contenedor-footer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-end; */
+    align-items: center;
+    gap: 10px;
 }
 
-.ellipse {
-    background: linear-gradient(180deg, rgb(90, 15, 195) 0%, rgb(90, 15, 195) 100%);
-    border-radius: 164px/160px;
-    filter: blur(267px);
-    height: 320px;
-    left: 1270px;
-    position: absolute;
-    top: 0;
-    width: 328px;
+.contenedor-footer p {
+    color: var(--color-morado-oscuro-general);
+    text-align: center;
+    font-size: clamp(1em, 3vw, 1.7em);
 }
 
-.ellipse-2 {
-    background: linear-gradient(180deg, rgb(90, 15, 195) 0%, rgb(90, 15, 195) 100%);
-    border-radius: 164px/160px;
-    filter: blur(267px);
-    height: 320px;
-    left: 0;
-    position: absolute;
-    top: 892px;
-    width: 328px;
-}
-
-.ellipse-3 {
-    background: linear-gradient(180deg, rgb(90, 15, 195) 0%, rgb(90, 15, 195) 100%);
-    border-radius: 164px/160px;
-    filter: blur(250px);
-    height: 320px;
-    left: 700px;
-    position: absolute;
-    top: 500px;
-    width: 328px;
-}
 
 .botonInfo {
     margin: 10px;
@@ -117,7 +132,6 @@
     background-color: #ffffff;
     color: #5a0fc3;
     border-radius: 10px;
-    /* width: ; */
     transition: all 0.2s ease;
     cursor: pointer;
     font-size: 1.3em;
@@ -132,160 +146,62 @@
     background-color: #ebddff;
 }
 
-.nosotros {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    height: max-width;
-}
 
 
-.nosotros .contenido {
-    align-items: center;
-    display: inline-flex;
-    flex-direction: column;
-    height: 712px;
-    justify-content: space-between;
-    padding: 21px 0px;
-    top: 169px;
-}
-
-.nosotros .texto-nosotros {
-    color: #5a0fc3;
-    font-size: 5em;
-    font-weight: 700;
-    line-height: 16px;
-    position: relative;
-    text-align: center;
-    white-space: nowrap;
-    width: fit-content;
-}
-
-.nosotros .contenedor-contenido {
-    align-items: center;
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: space-between;
-    padding: 0px 19px;
-    position: relative;
-    width: 1315px;
-}
-
-.nosotros .fondo-shape {
-    height: 625px;
-    object-fit: cover;
-    position: relative;
-    width: 621px;
-}
-
-.nosotros .flexcontainer {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 74px;
-    width: 704px;
-}
-
-.nosotros .text {
-    align-self: stretch;
-    font-size: 1.2em;
-    font-weight: 600;
-    line-height: 47.5px;
-    position: relative;
-}
-
-.nosotros .text-wrapper {
-    font-family: "Montserrat-Bold", Helvetica;
-    font-size: 1.3em;
-}
 
 @media (max-width: 768px) {
-    .botonInfo {
-        width: 250px;
-        font-weight: 800;
-        
-    }
-    .footer-nosotros{
-        margin-top: 10px;
-        padding: 10px;
-        height: 200px;
-        width: 70%;
-    }
-    .contenedor-footer p{
-        line-height: 16px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .nosotros .contenido{
-        height: 600px;
-    }
-    .footer-nosotros{
-        margin-top: 40px;
-        margin-bottom: 50px;
-        border-radius: 40px;
-
-    }
     .nosotros {
         padding: 0px;
         overflow-x: hidden;
         overflow-y: hidden;
-
     }
-    .nosotros .texto-nosotros{
-        font-size: 3em;
 
-    }
-    .nosotros .fondo-shape{
+
+    .nosotros .fondo-shape {
         margin-top: 40px;
         height: 300px;
         width: 300px;
     }
-    .nosotros .text{
+
+    .nosotros .text {
         text-align: center;
-        font-size: 1.2em;
         line-height: 26px;
-        font-weight: bold;
     }
-    .nosotros .flexcontainer{
-        gap: 20px;
-        width: 400px;
-    }
-    .nosotros .contenedor-contenido{
-        width: 1000px;
+
+    .nosotros .contenedor-contenido {
+        /* width: 1000px; */
         display: flex;
         flex-direction: column;
     }
-    .ellipse {
-        filter: blur(100px);
 
-        left: 50px;
-        top: 800px;
-
-        height: 200px;
-        height: 100px;
+    .nosotros .flexcontainer {
+        gap: 10px;
     }
 
-    .ellipse-2 {
-        filter: blur(100px);
+    .footer-nosotros {
 
-        height: 100px;
-        width: 100px;
-        top: 100px;
-        left: 300px;
-        position: absolute;
+        margin-top: 80px;
+        margin-bottom: 50px;
     }
 
-    .ellipse-3 {
-        height:100px;
-        
-        left: 400px;
-        filter: blur(180px);
-        position: unset;
-
-
+    .contenedor-footer {
+        height: max-content;
+        /* display: inline; */
+        gap: 1px;
 
     }
 
-}
-</style>
+    .contenedor-footer p {
+        line-height: 1.3em;
+        font-weight: 500;
+    }
+
+    .botonInfo {
+        font-size: 1em;
+        width: max-content;
+        font-weight: 800;
+    }
+
+
+
+}</style>

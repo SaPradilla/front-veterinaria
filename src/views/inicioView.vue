@@ -1,11 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+
 import HeaderVue from '../components/UI/Header.vue'
-// import Inicio from '/workspaces/front-veterinaria/src/components/Inicio.vue';
 import Inicio from '../components/Inicio/Inicio.vue'
 import Nosotros from '../components/Inicio/Nosotros.vue';
 import Servicios from '../components/Inicio/Servicios.vue';
 import Testimonios from '../components/Inicio/Testimonios.vue';
+import Contacto from '../components/Inicio/Contacto.vue';
+import Footer from '../components/Inicio/Footer.vue'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '../stores/auth';
 // stores
@@ -36,16 +38,22 @@ const handleScroll = () => {
     <div class="header">
       <HeaderVue :scrolled="{ 'scrolled': scrolled }" />
     </div>
-    <Inicio />
-    <div class="nosotros" id="nosotros">
+    <div class="inicio-component" id="inicio">
+      <Inicio />
+    </div>
+    <div class="nosotros-component" id="nosotros">
       <Nosotros />
+
     </div>
-    <div class="servicios" id="servicios">
-      <Servicios />
-    </div>
-    <div class="testimonios" id="testimonios">
+    <Servicios id="servicios" />
+
+    <div class="testimonios-component" id="testimonios">
       <Testimonios />
+    </div> 
+    <div class="contacto-component" id="contacto">
+      <Contacto/>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -56,9 +64,25 @@ div.header {
   position: sticky;
 }
 
+.contenedor-inicio{
+
+}
+.inicio-component,
+.nosotros-component,
+.testimonios-component,
+.contacto-component{
+  width: 60%;
+  margin: 0 auto;
+
+}
+
 @media (max-width: 768px) {
-  .contenedor-inicio{
-    overflow-x: hidden;
+  .inicio-component,
+  .nosotros-component,
+  .testimonios-component,
+  .contacto-component{
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>

@@ -1,105 +1,111 @@
 <script setup>
-    import {ref} from 'vue'
-    import modalMenu from './modalMenu.vue';
-    import { useAuthStore } from '../../stores/auth';
-    import { useRouter } from 'vue-router'
-    const router = useRouter ()
+import { ref } from 'vue'
+import modalMenu from './modalMenu.vue';
+import { useAuthStore } from '../../stores/auth';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-    // States
-    const modal = ref(false)
-    const animar = ref(false)
-    const userModal = ref(false)
-    // Props
-    const props = defineProps({
-        scrolled:{
-            type: String,
-            required:true
-        }
-    })
-    // Store
-    const Auth = useAuthStore()
-
-
-    // Metodos
-    const toggleModal = () => {
-        if (!modal.value) {
-            modal.value = true;
-            setTimeout(() => {
-                animar.value = true;
-            }, 300);
-        } else {
-            animar.value = false;
-            setTimeout(() => {
-                modal.value = false;
-            }, 300);
-        }
+// States
+const modal = ref(false)
+const animar = ref(false)
+const userModal = ref(false)
+// Props
+const props = defineProps({
+    scrolled: {
+        type: String,
+        required: true
     }
-    const redirigirLogin = () =>{
+})
+// Store
+const Auth = useAuthStore()
 
-        router.push({name:'auth'})
-    }
-    const redirigirTienda = () =>{
 
-        router.push({name:'tienda'})
+// Metodos
+const toggleModal = () => {
+    if (!modal.value) {
+        modal.value = true;
+        setTimeout(() => {
+            animar.value = true;
+        }, 300);
+    } else {
+        animar.value = false;
+        setTimeout(() => {
+            modal.value = false;
+        }, 300);
     }
-    const toggleUserModal = ()=>{
-        userModal.value = !userModal.value
-    }
+}
+const redirigirLogin = () => {
+
+    router.push({ name: 'auth' })
+}
+const redirigirTienda = () => {
+
+    router.push({ name: 'tienda' })
+}
+const toggleUserModal = () => {
+    userModal.value = !userModal.value
+}
 </script>
 
 <template>
-    <modalMenu
-    v-if="modal"
-    :animar="animar"
-    @toggleModal="toggleModal"
-    />
-    <div class="nav-bar" :class="scrolled">
+    
+    <modalMenu v-if="modal" :animar="animar" @toggleModal="toggleModal" />
+
+    <div class="nav-bar" :class="{ 'scrolled' : scrolled && !modal }" >
+
         <div class="frame">
-            <img class="pelitos" alt="Pelitos" src="../../assets/img/pelitos-4.png" />
-            <div
-            class="menu-container">
+            <a href="#inicio" >
+                <img class="pelitos" alt="Pelitos" src="../../assets/img/pelitos-4.png" />
+            </a>
+            <div class="menu-container">
                 <div class="label"> <a href="#nosotros">Nosotros</a></div>
                 <div class="label"> <a href="#servicios">Servicios</a></div>
                 <div class="label"><a href="#testimonios">Testimonios</a></div>
                 <div class="label"><a href="#contacto">Contacto</a></div>
-                <div class="label"><a href="#pqr">PQR</a></div>
+                <!-- <div class="label"><a href="#pqr">PQR</a></div> -->
 
                 <img class="linea" alt="Linea" src="../../assets/img/Linea.svg" />
                 <div @click="redirigirTienda" class="label shop">
                     <a>Tienda</a>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#ffffff" d="M11.15 22.825L1.175 12.85L11.975 2h10v10zM17.475 8q.625 0 1.063-.437t.437-1.063q0-.625-.437-1.062T17.475 5q-.625 0-1.062.438T15.975 6.5q0 .625.438 1.063T17.475 8"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="#ffffff"
+                            d="M11.15 22.825L1.175 12.85L11.975 2h10v10zM17.475 8q.625 0 1.063-.437t.437-1.063q0-.625-.437-1.062T17.475 5q-.625 0-1.062.438T15.975 6.5q0 .625.438 1.063T17.475 8" />
+                    </svg>
                 </div>
-                
-                <div  v-if="Auth.token === null" class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
+
+                <div v-if="Auth.token === null" class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
                 <img @click="toggleUserModal" v-else class="avatar" alt="Avatar" src="../../assets/img/avatar.svg" />
             </div>
-            <div 
-            @click="toggleModal"
-            class="menu-mobile">
-                <img v-if="modal" class="x-menu"  src="../../assets/img/X.svg" alt="menu">
+            <div @click="toggleModal" class="menu-mobile">
+                <img v-if="modal" class="x-menu" src="../../assets/img/X.svg" alt="menu">
                 <img v-else src="../../assets/img/MENU.svg" alt="menu">
             </div>
-           
+
         </div>
         <div @click="toggleUserModal" v-if="userModal" class="menu-user">
-           <div class="menu">
-            <div><p  class="arriba">Ver Cuenta</p></div>
-            <div @click="Auth.cerrarSesion"><p  class="abajo">Cerrar Sesion</p></div>
-            
-           </div>
+            <div class="menu">
+                <div>
+                    <p class="arriba">Ver Cuenta</p>
+                </div>
+                <div @click="Auth.cerrarSesion">
+                    <p class="abajo">Cerrar Sesion</p>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
 <style scoped>
-.menu-user{
+.menu-user {
 
     float: right;
     width: 100px;
 }
-.menu{
+
+.menu {
     display: flex;
     flex-direction: column;
-    justify-content:right;
+    justify-content: right;
     align-items: left;
     gap: 1vh;
     border-radius: 20px;
@@ -107,54 +113,65 @@
     background-color: white;
 
 }
-.menu-user p{
+
+.menu-user p {
     cursor: pointer;
     color: var(--color-morado-claro-general);
     padding: 10px;
 }
-.menu-user p.arriba{
+
+.menu-user p.arriba {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    
+
 }
-.menu-user p.abajo{
+
+.menu-user p.abajo {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.menu-user  p:hover{
+
+.menu-user p:hover {
 
 
-    background-color:var(--color-morado-oscuro-general);
-    color:white ;
+    background-color: var(--color-morado-oscuro-general);
+    color: white;
     padding: 10px;
 }
-.frame{
+
+.frame {
     width: 100%;
     display: flex;
 
 }
-.menu-mobile img{
+
+.menu-mobile img {
+    cursor: pointer;
     height: 60px;
     width: 60px;
     display: none;
 }
-.menu-mobile .x-menu{
+
+.menu-mobile .x-menu {
+    position: fixed;
     z-index: 1000;
-    position: relative;
+    top: 0;
+    right: 0;
+    /* position: relative; */
 }
 
 .nav-bar {
-    overflow-x: hidden;
-    overflow-y: hidden;
+
     margin: 0 auto;
     background-color: #ffffff;
     border-radius: 0em 0em 2.5em 2.5em;
     box-shadow: 3px 3px 20px #0000001b;
     height: 70px;
     width: 70em;
-    color:#5a0fc3;
+    color: #5a0fc3;
 }
-.scrolled{
+
+.scrolled {
     background-color: #ffffff17;
     color: rgb(0, 0, 0);
     box-shadow: 3px 3px 20px #0000001b;
@@ -168,7 +185,8 @@
     align-items: center;
 
 }
-.frame a{
+
+.frame a {
     all: unset;
 }
 
@@ -176,17 +194,19 @@
     height: 52px;
     width: 85px;
     margin-left: 20px;
-    
+    cursor: pointer;
+
 }
 
 .nav-bar .menu-container {
     margin: 0 auto;
-    display: flex;   
+    display: flex;
     gap: 13px;
     margin-right: 5vh;
     align-items: center;
 }
-.label a{
+
+.label a {
     font-weight: 600;
     font-size: 1.1em;
 }
@@ -203,9 +223,10 @@
 .label:hover {
     transform: scale(0.9);
 }
-.shop{
+
+.shop {
     color: white;
-    padding: 5px ;
+    padding: 5px;
     border-radius: 10px;
     display: flex;
     width: max-content;
@@ -214,14 +235,17 @@
     justify-content: center;
     gap: 10px;
 }
+
 .shop svg {
     width: 1.6em;
 
 }
-.label.singIn{
+
+.label.singIn {
     color: black;
     font-weight: 600;
 }
+
 .nav-bar .linea {
     height: 20px;
     position: relative;
@@ -239,25 +263,29 @@
 .avatar:hover {
     transform: scale(0.9);
 }
-@media (max-width: 768px) { 
-    .menu-mobile img{
+
+@media (max-width: 768px) {
+    .menu-mobile img {
         display: unset;
         color: red;
     }
-    .menu-container .label , .menu-container .linea , .avatar{
+    .menu-container .label,
+    .menu-container .linea,
+    .avatar {
         display: none;
     }
-    .nav-bar{
+
+    .nav-bar {
         overflow-x: unset;
         background-color: unset;
         box-shadow: none;
         width: 100%;
-        
+
     }
-    .nav-bar .frame{
+
+    .nav-bar .frame {
         width: 100%;
         display: flex;
         gap: 80px;
     }
- }
-</style>
+}</style>

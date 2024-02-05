@@ -1,10 +1,22 @@
 <script setup>
+import { useAuthStore } from '../../stores/auth';
+import { useRouter } from 'vue-router'
+
 defineProps({
     animar: {
         type: Boolean,
         required: true
     }
 })
+
+const Auth = useAuthStore()
+const router = useRouter()
+
+const redirigirLogin = () => router.push({ name: 'auth' })
+
+const redirigirTienda = () => router.push({ name: 'tienda' })
+
+
 const emit = defineEmits(['toggleModal'])
 
 </script>
@@ -22,7 +34,19 @@ const emit = defineEmits(['toggleModal'])
                     <a @click="$emit('toggleModal')" href="#testimonios">Testimonios</a>
                     <a @click="$emit('toggleModal')" href="#productos">Productos</a>
                     <a @click="$emit('toggleModal')" href="#contacto">Contacto</a>
-                    <a @click="$emit('toggleModal')" href="#pqr">PQR</a>
+                    
+                    <div @click="redirigirTienda" class="tienda">
+
+                        <a>Tienda</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="#ffffff"
+                            d="M11.15 22.825L1.175 12.85L11.975 2h10v10zM17.475 8q.625 0 1.063-.437t.437-1.063q0-.625-.437-1.062T17.475 5q-.625 0-1.062.438T15.975 6.5q0 .625.438 1.063T17.475 8" />
+                        </svg>
+                    </div>
+
+                    <div class="login" v-if="Auth.token === null" ><a @click="redirigirLogin">Iniciar Sesion</a></div>
+
+                    <!-- <a @click="$emit('toggleModal')" href="#pqr">PQR</a> -->
 
                 </div>
             </div>
@@ -33,6 +57,29 @@ const emit = defineEmits(['toggleModal'])
 
 
 <style scoped>
+.login{
+    cursor: pointer;
+}
+div.tienda{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+}
+.tienda:hover, a  {
+    transform: scale(0.9);
+}
+svg{
+    height: 40px;
+}
+/* {
+    transform: scale(0.9);
+} */
 .modal {
     position: fixed;
     top: 0;
@@ -79,15 +126,12 @@ const emit = defineEmits(['toggleModal'])
     color: white;
     text-decoration: none;
     text-align: center;
-    font-size: 3.4em;
+    font-size: 2.5em;
     font-weight: 800;
     margin: 30px 0;
     transition: all 0.2s ease;
 
 }
 
-.titulos a:hover {
-    transform: scale(0.9);
 
-}
 </style>
