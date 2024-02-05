@@ -26,7 +26,7 @@ export const useInventario = defineStore('inventario', () => {
         precio:'',
         tipo_accesorioId:'',
         descripcion:'',
-        cantidad_total:''
+        cantidad_total:0
     })
 
     const medicamentos = ref([])
@@ -126,6 +126,16 @@ export const useInventario = defineStore('inventario', () => {
         })
     }
 
+    const agregarTipoAccesorio = (newTypeAccesory)=>{
+        productoService.registrarTipoAccesorio(Auth.token,newTypeAccesory)
+            .then(res => {
+
+                tipo_accesorio.value.push(res.data.TipoAccesorio)
+
+                console.log(res)
+            }).catch(err => console.log(err))
+    }
+
     const verTipoMedicinas = ()=>{
         productoService.obtenerTipoMedicamentos(Auth.token)
         .then(res=>{
@@ -150,6 +160,7 @@ export const useInventario = defineStore('inventario', () => {
         accesoryData,
         agregarAccesorio,
         agregarMedicinas,
+        agregarTipoAccesorio,
         verTipoMedicinas,
         verTipoAccesorio,
         productos,

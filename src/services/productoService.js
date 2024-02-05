@@ -20,6 +20,11 @@ export default{
             { headers: {'auth-token': token}}
         )
     },
+    registrarTipoAccesorio(token,data){
+        return api.post('/admin/register/type-accessory',data,
+            { headers: {'auth-token': token}}
+        )
+    },
     obtenerTipoMedicamentos(token){
         return api.get('/admin/list/type-medicine',
             { headers: {'auth-token': token}}
@@ -30,4 +35,5 @@ export default{
             { headers: {'auth-token': token}}
         )
     },
+
 }

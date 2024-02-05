@@ -1,5 +1,6 @@
 import './assets/main.css'
 import 'primevue/resources/themes/aura-light-purple/theme.css'
+import 'primeicons/primeicons.css'
 
 import  vSelect   from 'vue-select';
 import "vue-select/dist/vue-select.css";

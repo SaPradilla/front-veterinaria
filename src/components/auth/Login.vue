@@ -1,5 +1,6 @@
 <script setup>
-  
+//   import FloatLabel from 'primevue/floatlabel';
+//   import InputText from 'primevue/inputtext';
     import { reactive } from 'vue'
     import { useAuthStore } from '../../stores/auth';
     import { useModalAuthStore} from '../../stores/modalAuth'
