@@ -47,7 +47,8 @@ export default{
     },  
     cambiarEstadoMedicina(token,id){
         console.log(token)
-        return api.put(`/admin/status/producto/medicine/${id}`, {}, {
+        // /status/product/medicine/
+        return api.put(`/admin/status/product/medicine/${id}`, {}, {
             headers: {'auth-token': token}
         })
     }
