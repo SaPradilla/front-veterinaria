@@ -4,29 +4,31 @@ import productoService from "../services/productoService";
 import { useAuthStore } from "./auth";
 import {toast} from 'vue3-toastify'
 import { usePaginacion } from "./paginacion";
+import { useFormatear } from "./formatear";
 
 export const useInventario = defineStore('inventario', () => {
 
     // Stores
     const Auth = useAuthStore()
     const Paginacion = usePaginacion()
-
+    const Formato = useFormatear()
     
     // states
+    const tipoVolumen = ref(null)
+
     const medicinaData = ref({
         nombre:'',
         tipo_medicinaId:null,
         precio:'',
-        volumen:'',
+        volumen:null,
         fecha_venciminento:'',
-        cantidad_total:''
+        cantidad_total:null
     })
     const accesoryData = ref({
         nombre:'',
         precio:'',
         tipo_accesorioId:'',
-        descripcion:'',
-        cantidad_total:0
+        cantidad_total:null
     })
 
     const medicamentos = ref([])
@@ -35,6 +37,10 @@ export const useInventario = defineStore('inventario', () => {
 
     const tipo_medicina = ref([])
     const tipo_accesorio = ref([])
+
+
+
+
     // Metodos
     
     const obtenerProductos = ()=>{
@@ -77,7 +83,16 @@ export const useInventario = defineStore('inventario', () => {
     }
 
     const agregarMedicinas = ()=>{
-        
+        if(validateData(medicinaData.value)){
+            toast.error('Todos los campos son obligatorios',{
+                position: toast.POSITION.TOP_CENTER
+            })
+            return
+        }
+        medicinaData.value.volumen = medicinaData.value.volumen + tipoVolumen.value  
+        medicinaData.value.tipo_medicinaId = medicinaData.value.tipo_medicinaId.id
+        medicinaData.value.fecha_venciminento = Formato.formatearFecha(medicinaData.value.fecha_venciminento)
+
         productoService.registrarMedicina(Auth.token,medicinaData.value)
         .then(res =>{
             console.log(res)
@@ -103,6 +118,14 @@ export const useInventario = defineStore('inventario', () => {
 
     }
     const agregarAccesorio = ()=>{
+        if(validateData(accesoryData.value)){
+            toast.error('Todos los campos son obligatorios',{
+                position: toast.POSITION.TOP_CENTER
+            })
+            return
+        }
+        accesoryData.value.tipo_accesorioId =  accesoryData.value.tipo_accesorioId.id
+        console.log(accesoryData.value)
         productoService.registrarAccesorio(Auth.token,accesoryData.value)
         .then(res =>{
             console.log(res)
@@ -135,6 +158,13 @@ export const useInventario = defineStore('inventario', () => {
                 console.log(res)
             }).catch(err => console.log(err))
     }
+    const agregarTipoMedicamento = (newTypeMedical)=>{
+        productoService.registrarTipoMedicamento(Auth.token,newTypeMedical)
+            .then(res => {
+                tipo_medicina.value.push(res.data.TipoMedicina)
+                console.log(res)
+            }).catch(err => console.log(err))
+    }
 
     const verTipoMedicinas = ()=>{
         productoService.obtenerTipoMedicamentos(Auth.token)
@@ -153,6 +183,13 @@ export const useInventario = defineStore('inventario', () => {
         }).catch(err => console.log(err))
     }
 
+    const validateData = (dataObject)=>{
+        console.log(dataObject)
+        console.log(medicinaData.value)
+        // si algun objecto tiene nulo o '' retorna true 
+        return Object.values(dataObject).some(value => value === null || value === '');
+    }
+
     return {
         medicinaData,
         tipo_medicina,
@@ -161,12 +198,14 @@ export const useInventario = defineStore('inventario', () => {
         agregarAccesorio,
         agregarMedicinas,
         agregarTipoAccesorio,
+        agregarTipoMedicamento,
         verTipoMedicinas,
         verTipoAccesorio,
         productos,
         medicamentos,
         verMedicamentos,
         verAccesorios,
-        accesorios
+        accesorios,
+        tipoVolumen,
     }
 })

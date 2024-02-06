@@ -25,6 +25,11 @@ export default{
             { headers: {'auth-token': token}}
         )
     },
+    registrarTipoMedicamento(token,data){
+        return api.post('/admin/register/type-medicine',data,
+            { headers: {'auth-token': token}}
+        )
+    },
     obtenerTipoMedicamentos(token){
         return api.get('/admin/list/type-medicine',
             { headers: {'auth-token': token}}

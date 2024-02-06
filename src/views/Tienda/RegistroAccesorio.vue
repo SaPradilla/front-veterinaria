@@ -9,8 +9,10 @@ import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 import InputGroup from 'primevue/inputgroup';
 import Button from 'primevue/button';
+import Textarea from 'primevue/textarea';
+
 import InputGroupAddon from 'primevue/inputgroupaddon';
-// import FloatLabel from 'primevue/floatlabel';
+    // import FloatLabel from 'primevue/floatlabel';
 
 const Admin = useAdmin()
 const Inventario = useInventario()
@@ -61,8 +63,10 @@ const agregarTipo = ()=>{
                 
                 <!-- <InputText type="text" v-model="value" placeholder="Nombre"/> -->
                 <InputText v-model.number="Inventario.accesoryData.cantidad_total" placeholder="Cantidad" />
-                <Slider v-model="Inventario.accesoryData.cantidad_total" />
-                <Button @click="Inventario.agregarAccesorio"  label="Agregar" />
+                <Slider v-model="Inventario.accesoryData.cantidad_total"  />
+                
+                <Textarea v-model="Inventario.accesoryData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
+                <Button @click="Inventario.agregarMedicinas"  label="Agregar" />
 
 
             </form>

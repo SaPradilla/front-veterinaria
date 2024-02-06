@@ -3,6 +3,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 html {
     scroll-behavior: smooth;
 }
@@ -14,10 +15,10 @@ html {
     --color-gris: #979797;
     --color-gris-oscuro: #696969;
     --color-blanco-input:#F8FFF4;
-    --color-morado-general:#4c0ea4;
-    --color-morado-oscuro-general:#5A0FC3;
-    --color-morado-claro-general:rgba(90, 15, 195, 0.86); 
-    --color-morado-muy-claro:rgba(102, 47, 180, 0.86); 
+    --color-morado-general:#8B5CF6;
+    --color-morado-oscuro-general: #6140AC ;
+    --color-morado-claro-general:#A17BF8; 
+    --color-morado-muy-claro:#F5F3FF; 
 }
 .vs__dropdown-toggle{
     background-color: white !important;
@@ -69,7 +70,9 @@ ul#vs6__listbox{
    }
 }
 
-
+.p-datatable-wrapper{
+	height: 29vh;
+}
 /* Estilos botones */
 
 .botonVolver{

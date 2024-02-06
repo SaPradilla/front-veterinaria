@@ -9,6 +9,9 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 // import SelectButton from 'primevue/selectbutton'
 import SelectButton from 'primevue/selectbutton';
+
+import Divider from 'primevue/divider';
+
 import { useFormatear } from '../../stores/formatear';
 
 const Admin = useAdmin()
@@ -73,7 +76,7 @@ const items = [
 				<!-- Medicamentos -->
 				<div class="medicamentos">
 					<h2>Medicamentos</h2>
-					<DataTable class="lista" :value="Inventario.medicamentos" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+					<DataTable :value="Inventario.medicamentos" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
 						<Column class="col" field="medicamento.nombre" header="Nombre" sortable   style="width: 25%"></Column>
 						<Column class="col" field="medicamento.precio" header="Precio" sortable  style="width: 25%"></Column>
 						<Column class="col" field="medicamento.tipo_medicina.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
@@ -88,6 +91,7 @@ const items = [
 						<Column class="col" field="unidades_disponibles" sortable  header="Disponibles" style="width: 25%"></Column>
 					</DataTable>
 				</div>
+				<Divider />
 				<div class="accesorios">
 					<h2>Accesorios</h2>
 					<DataTable class="lista" :value="Inventario.accesorios" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
@@ -109,6 +113,15 @@ const items = [
 
 
 <style scoped>
+.p-datatable-wrapper{
+	/* height: 60vh; */
+}
+.medicamentos{
+}
+.lista{
+	/* height: 60vh; */
+	
+}
 .agregar{
 	color: white;
 	background-color: #8B5CF6;
@@ -153,6 +166,7 @@ table.p-datatable-wrapper{
 }
 h1{
 	text-align: center;
+	font-size: clamp(1em,5vw,3em);
 }
 .contenido-productos{
 	/* overflow-y: hidden; */
