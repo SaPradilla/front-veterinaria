@@ -84,7 +84,8 @@
 .contenedor-menu {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    
+    gap: clamp(10px,1vw,60px);
     padding: 2vh;
 }
 
@@ -93,16 +94,16 @@
 }
 
 svg.icons {
-    width: 40px;
-    height: 40px;
+    width: clamp(8px,3vw,40px);
+    height: clamp(10px,3vw,40px);
     fill: #B0A09B
 }
 svg.cita{
-    width: 50px;
-    height: 50px;
+    width: clamp(8px,3vw,40px);
+    height: clamp(10px,3vw,40px);
 }
 h1 {
-    font-size: 1.3em;
+    font-size: clamp(.5em,1vw,1.3em);
     color: #B0A09B
 }
 

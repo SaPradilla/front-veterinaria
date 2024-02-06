@@ -40,5 +40,16 @@ export default{
             { headers: {'auth-token': token}}
         )
     },
+    editarMedicina(token,id,data){
+        return api.put(`/admin/edit/product/medicine/${id}`,data,
+            { headers: {'auth-token': token}} 
+        )
+    },  
+    cambiarEstadoMedicina(token,id){
+        console.log(token)
+        return api.put(`/admin/status/producto/medicine/${id}`, {}, {
+            headers: {'auth-token': token}
+        })
+    }
 
 }

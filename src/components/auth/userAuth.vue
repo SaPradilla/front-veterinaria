@@ -35,8 +35,8 @@
 
 <style scoped>
     .container{
+        /* max-height: clamp(3vh,6vw,15vh); */
         border-bottom: solid 1px rgb(197, 197, 197);
-        /* margin: 1vh; */
         background-color: var(--color-morado-general);
 	    box-shadow: 0px 2px 4px -3px rgba(0,0,0,0.5);
     }
@@ -65,15 +65,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px;
+        padding: .5em;
         width: 100%;
-        /* margin-bottom:100px ;   */
-        /* margin: 1vh; */
+        /* max-height: clamp(3vh,6vw,15vh); */
 
- 
     }
     .saludo{
-        margin-left: 20vh;  
+        margin-left: clamp(5vh,1vw,20vh);  
     }
     .pelitos {
         
@@ -98,7 +96,7 @@
     }
     p.nombrePerfil{
         color: white;
-        font-size: 1.7em;
+        font-size: clamp(1em,5vw,1.7em);
         font-weight: 600;
     }
     span{
@@ -107,7 +105,7 @@
 
     }
     img{
-        height: 50px;
-        width: 50px;
+        /* height: 50px;
+        width: 50px; */
     }
 </style>

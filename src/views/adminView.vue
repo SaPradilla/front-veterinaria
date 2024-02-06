@@ -46,10 +46,12 @@
 <style scoped>
 
 .user {
-    z-index: 1000;
+    z-index: 1001;
+    max-height: clamp(3vh,6vw,15vh);
 
     width: 100%;
     position: fixed;
+    /* height: 100px; */
 
 }
 

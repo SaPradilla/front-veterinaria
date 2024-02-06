@@ -8,17 +8,17 @@ html {
     scroll-behavior: smooth;
 }
 :root {
-    --color-verde-ok:rgba(115, 182, 126, 1);
-    --color-rojo: #D9755E;
-    --color-gris-claro: #F2F2F287;
-    --color-blanco: #FFFFFF;
-    --color-gris: #979797;
-    --color-gris-oscuro: #696969;
-    --color-blanco-input:#F8FFF4;
-    --color-morado-general:#8B5CF6;
-    --color-morado-oscuro-general: #6140AC ;
-    --color-morado-claro-general:#A17BF8; 
-    --color-morado-muy-claro:#F5F3FF; 
+        --color-verde-ok:rgba(115, 182, 126, 1);
+        --color-rojo: #D9755E;
+        --color-gris-claro: #F2F2F287;
+        --color-blanco: #FFFFFF;
+        --color-gris: #979797;
+        --color-gris-oscuro: #696969;
+        --color-blanco-input:#F8FFF4;
+        --color-morado-general:#8B5CF6;
+        --color-morado-oscuro-general: #6140AC ;
+        --color-morado-claro-general:#A17BF8; 
+        --color-morado-muy-claro:#F5F3FF; 
 }
 .vs__dropdown-toggle{
     background-color: white !important;
@@ -70,9 +70,9 @@ ul#vs6__listbox{
    }
 }
 
-.p-datatable-wrapper{
+/* .p-datatable-wrapper{
 	height: 29vh;
-}
+} */
 /* Estilos botones */
 
 .botonVolver{

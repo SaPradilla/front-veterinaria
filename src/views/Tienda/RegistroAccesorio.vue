@@ -55,6 +55,8 @@ const agregarTipo = ()=>{
                     
                     <InputGroup v-if="tipoModal">
                         <InputText v-model="nuevoTipo" placeholder="Agregar Tipo" />
+                        <Button @click="handleTipoModal" outlined  icon="pi pi-times" severity="danger"  />
+
                         <Button @click="agregarTipo" icon="pi pi-check" />
                     </InputGroup>
                 </div>
@@ -66,7 +68,7 @@ const agregarTipo = ()=>{
                 <Slider v-model="Inventario.accesoryData.cantidad_total"  />
                 
                 <Textarea v-model="Inventario.accesoryData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
-                <Button @click="Inventario.agregarMedicinas"  label="Agregar" />
+                <Button @click="Inventario.agregarAccesorio"  label="Agregar" />
 
 
             </form>

@@ -37,8 +37,9 @@ let month = today.getMonth();
 let minMonth = (month + 2) % 12;
 let minYear = year + Math.floor((month + 2) / 12);
 
-const minDate = ref(new Date(minYear, minMonth, 1)); // Establecer el primer día del mes permitido
+const minDate = ref(new Date(minYear, minMonth, 1)); 
 const maxDate = ref();
+
 </script>
 
 <template>
@@ -50,10 +51,10 @@ const maxDate = ref();
         <h1>Registro Medicina</h1>
         <div class="formulario">
             <form>
-                <InputText type="text" v-model="Inventario.medicinaData.nombre" placeholder="Nombre" />
+                <InputText type="text" v-model="Inventario.updateMedicinadata.nombre" placeholder="Nombre" />
 
                 <div class="select">
-                    <Dropdown v-model="Inventario.medicinaData.tipo_medicinaId" :options="Inventario.tipo_medicina" checkmark  optionLabel="nombre" showClear   placeholder="Tipo de medicina" />
+                    <Dropdown v-model="Inventario.updateMedicinadata.tipo_medicinaId" :options="Inventario.tipo_medicina" checkmark  optionLabel="nombre" placeholder="Tipo de medicina" />
 
                     <small @click="handleTipoModal"> Agregar </small>
 
@@ -64,18 +65,18 @@ const maxDate = ref();
                     </InputGroup>
                 </div>
 
-                <InputNumber v-model="Inventario.medicinaData.precio" inputId="currency-us" mode="currency" currency="COP" locale="es-ES" placeholder="Precio" />
-                <Calendar v-model="Inventario.medicinaData.fecha_venciminento" placeholder="Fecha de  Caducación" :minDate="minDate"  :manualInput="false" />
+                <InputNumber v-model="Inventario.updateMedicinadata.precio" inputId="currency-us" mode="currency" currency="COP" locale="es-ES" placeholder="Precio" />
+                <Calendar v-model="Inventario.updateMedicinadata.fecha_venciminento" placeholder="Fecha de  Caducación" :minDate="minDate"  :manualInput="false" />
                 <div class="volumen">
-                    <Dropdown v-model="Inventario.tipoVolumen" editable  :options="['cm','gr']"  checkmark placeholder="Tipo de volumen" />
+                    <Dropdown :value="Inventario.tipoxd " v-model="Inventario.tipoVolumen" editable  :options="['cm','gr','mg']"  checkmark placeholder="Tipo de volumen" />
                     
-                    <InputNumber v-model="Inventario.medicinaData.volumen" :suffix="Inventario.tipoVolumen"   placeholder="Volumen" />
+                    <InputNumber v-model="Inventario.updateMedicinadata.volumen" :suffix="Inventario.tipoVolumen"   placeholder="Volumen" />
                 </div>
                 
-                <InputNumber v-model.number="Inventario.medicinaData.cantidad_total" placeholder="Cantidad" />
-                <Slider v-model="Inventario.medicinaData.cantidad_total"  />
+                <InputNumber v-model.number="Inventario.updateMedicinadata.cantidad_total" placeholder="Cantidad" />
+                <Slider v-model="Inventario.updateMedicinadata.cantidad_total"  />
 
-                <Button @click="Inventario.agregarMedicinas"  label="Agregar" />
+                <Button @click="Inventario.actualizarMedicina"  label="Agregar" />
 
               
             </form>

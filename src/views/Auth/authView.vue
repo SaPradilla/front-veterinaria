@@ -15,10 +15,7 @@
 <template>
 
     <div class="login">
-        <div class="blur-shapes">
-                <div class="ellipse"></div>
-                <div class="ellipse-2"></div>
-            </div>
+       
         <div class="contenedor-login">
 
             <div 

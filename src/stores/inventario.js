@@ -5,8 +5,11 @@ import { useAuthStore } from "./auth";
 import {toast} from 'vue3-toastify'
 import { usePaginacion } from "./paginacion";
 import { useFormatear } from "./formatear";
+import { useRouter } from "vue-router";
 
 export const useInventario = defineStore('inventario', () => {
+
+    const router = useRouter()
 
     // Stores
     const Auth = useAuthStore()
@@ -25,16 +28,18 @@ export const useInventario = defineStore('inventario', () => {
         cantidad_total:null
     })
     const accesoryData = ref({
-        nombre:'',
-        precio:'',
-        tipo_accesorioId:'',
+        nombre:null,
+        precio:null,
+        tipo_accesorioId:null,
         cantidad_total:null
     })
+    const updateMedicinadata = ref({})
 
     const medicamentos = ref([])
     const accesorios = ref([])
     const productos = ref([])
 
+    const tipoxd = ref('')
     const tipo_medicina = ref([])
     const tipo_accesorio = ref([])
 
@@ -43,6 +48,33 @@ export const useInventario = defineStore('inventario', () => {
 
     // Metodos
     
+
+    const cambiarEstadoMedicine = (token,id) =>{
+        const findmedicamentos = medicamentos.value.find(medicamentoData => medicamentoData.medicamento.id === id)
+        if(findmedicamentos){
+            findmedicamentos.estado = findmedicamentos.estado === 'Disponible' ? 'Agotado' : 'Disponible'
+        }
+        console.log(id)
+        // console.log(token)
+        productoService.cambiarEstadoMedicina(token,id)
+
+        .then(res=>{
+             // Mensaje 
+             toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_RIGHT
+            })
+        })
+        .catch(err=>{
+            Auth.verificarSesion(err.response.data)
+            console.log(err)
+            // toast.success(res.data.msg,{
+            //     position: toast.POSITION.TOP_RIGHT
+            // })
+        })
+    }
+
+
+
     const obtenerProductos = ()=>{
         productoService.obtenerProductos()
         .then(res=>{
@@ -118,12 +150,7 @@ export const useInventario = defineStore('inventario', () => {
 
     }
     const agregarAccesorio = ()=>{
-        if(validateData(accesoryData.value)){
-            toast.error('Todos los campos son obligatorios',{
-                position: toast.POSITION.TOP_CENTER
-            })
-            return
-        }
+        if(validateDataAccesory()) return 
         accesoryData.value.tipo_accesorioId =  accesoryData.value.tipo_accesorioId.id
         console.log(accesoryData.value)
         productoService.registrarAccesorio(Auth.token,accesoryData.value)
@@ -183,9 +210,67 @@ export const useInventario = defineStore('inventario', () => {
         }).catch(err => console.log(err))
     }
 
+    const actualizarMedicina = ()=>{
+        console.log(updateMedicinadata.value)
+        if(validateData(medicinaData)){
+            toast.error('Todos los campos son obligatorios',{
+                position: toast.POSITION.TOP_CENTER
+            })
+            return
+        }
+        updateMedicinadata.value.tipo_medicinaId = updateMedicinadata.value.tipo_medicinaId.id
+        updateMedicinadata.value.volumen = updateMedicinadata.value.volumen.toString() + tipoVolumen.value.toString()
+        productoService.editarMedicina(Auth.token,updateMedicinadata.value.idMedicina,updateMedicinadata.value)
+        .then(res =>{
+            console.log(res.data)
+            Object.assign(updateMedicinadata.value,{})
+            toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_CENTER
+            })
+            setTimeout(()=>{
+                router.push({name:'tiendas'})
+            },100)
+            
+        }).catch(err =>{
+            console.log(err)
+            Auth.verificarSesion(err.response.data)
+            toast.error('Error al actualizar la medicina',{
+                position: toast.POSITION.TOP_CENTER
+            })
+        })
+
+    }
+
+
+    const validateDataAccesory = () =>{
+        let empyData = false
+        if(accesoryData.value.nombre === null) {
+            notificationData()
+            empyData = true
+        }
+        if(accesoryData.value.precio === null) {
+            notificationData()
+            empyData = true
+        }
+        if(accesoryData.value.tipo_accesorioId === null) {
+            notificationData()
+            empyData = true
+        }
+        if(accesoryData.value.cantidad_total === null) {
+            empyData = true
+            notificationData()
+        }
+    
+        return empyData
+
+    }
+    const notificationData = () =>{
+        toast.error('Todos los campos son obligatorios',{
+            position: toast.POSITION.TOP_CENTER
+        })
+        return 
+    }
     const validateData = (dataObject)=>{
-        console.log(dataObject)
-        console.log(medicinaData.value)
         // si algun objecto tiene nulo o '' retorna true 
         return Object.values(dataObject).some(value => value === null || value === '');
     }
@@ -207,5 +292,10 @@ export const useInventario = defineStore('inventario', () => {
         verAccesorios,
         accesorios,
         tipoVolumen,
+
+        actualizarMedicina,
+        updateMedicinadata,
+        tipoxd,
+        cambiarEstadoMedicine,
     }
 })

@@ -2,6 +2,7 @@
 import { useAdmin } from '../../stores/admin';
 import { useInventario } from '../../stores/inventario';
 import {ref, onMounted} from 'vue'
+import { useRouter} from 'vue-router'
 import SpeedDial from 'primevue/speeddial';
 import SplitButton from 'primevue/splitbutton';
 import Paginator from 'primevue/paginator';
@@ -9,18 +10,30 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 // import SelectButton from 'primevue/selectbutton'
 import SelectButton from 'primevue/selectbutton';
+import Tag from 'primevue/tag'
+import Button from 'primevue/button';
 
+// import SpeedDial from 'primevue/speeddial';
 import Divider from 'primevue/divider';
 
+
 import { useFormatear } from '../../stores/formatear';
+import { useAuthStore } from '../../stores/auth';
 
 const Admin = useAdmin()
 const Inventario = useInventario()
 const Formato = useFormatear()
-
-
+const router = useRouter()
+const Auth = useAuthStore()
 const modal = ref(false)
+const selectOptionMedicine = ref(false)
+
+const selectMedicine = ref(null)
+const selectAccesory = ref(null)
+
+// metodos
 const handleModal = ()=> modal.value = !modal.value
+const handleSelectionMedicine = ()=> selectOptionMedicine.value = !selectOptionMedicine.value
 
 onMounted(()=>{
 	Inventario.verMedicamentos()
@@ -29,15 +42,60 @@ onMounted(()=>{
 
 const items = [
 	{
-		label:'Accesorio',
-		command: ()=> Admin.handlRegistrarAccesorio()
-	},
-	{
 		label:'Medicamento',
 		command: ()=> Admin.handlRegistrarMedicinas()
 		
+	},
+	{
+		label:'Accesorio',
+		command: ()=> Admin.handlRegistrarAccesorio()
 	}
 ]
+const itemsAcciones = [
+	{
+		label:'Editar',
+		icon: 'pi pi-pencil',	
+		command:()=> handleSelectionMedicine()
+	},
+	{
+		label:'Borrar',
+		icon: 'pi pi-trash',	
+		command:()=> show()
+	}
+]
+
+const edit = ()=>{
+	handleSelectionMedicine()
+	
+	router.push({name:"editar-medicina"})
+
+	Inventario.updateMedicinadata.nombre = selectMedicine.value.medicamento.nombre
+	Inventario.updateMedicinadata.tipo_medicinaId = selectMedicine.value.medicamento.tipo_medicina
+	// Inventario.updateMedicinadata.estado = selectMedicine.value.estado
+	Inventario.updateMedicinadata.precio = selectMedicine.value.medicamento.precio
+	// Inventario.updateMedicinadata.volumen = selectMedicine.value.medicamento.volumen
+
+	Inventario.updateMedicinadata.fecha_venciminento = Formato.formatoFechaDDMMYY(selectMedicine.value.medicamento.fecha_venciminento)
+	Inventario.updateMedicinadata.idMedicina = selectMedicine.value.medicamento.id
+	Inventario.tipoVolumen = Formato.extraerString(selectMedicine.value.medicamento.volumen)
+
+	Inventario.updateMedicinadata.volumen = Formato.extraerNumbers(selectMedicine.value.medicamento.volumen)
+
+	Inventario.updateMedicinadata.cantidad_total = selectMedicine.value.cantidad_total
+
+	// Inventario.tipoxd = selectMedicine.value.medicamento.tipo_medicina.nombre
+	// console.log()
+
+	// Inventario.actualizarMedicina()
+}
+const getSeverity = (product)=>{
+	console.log(product)
+	if(product === 'Disponible') return 'success'
+	if(product === 'Agotado') return 'warning'
+}
+// const cambiarEstadoMedicine = (id)=>{
+// 	Inventario.cambiarEstadoMedicine(Auth.token,id)
+// }
 </script>
 
 <template>
@@ -48,24 +106,6 @@ const items = [
 				<SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
 					<span class="agregar">Agregar</span>
 				</SplitButton>
-				<!-- <button
-					@click="handleModal"
-					class="botonAgregar"
-					:class="modal ? 'border-menu' : '' "
-					>Añadir Producto
-				</button> -->
-				<!-- <div v-if="modal" class="menu-user">
-	
-					<div class="menu">
-						<div @click="">
-							<p class="arriba">Accesorio</p>
-						</div>
-						<div @click="">
-							<p class="abajo">Medicina</p>
-						</div>
-	
-					</div>
-				</div> -->
 			</div>
 
 		</div>
@@ -75,33 +115,75 @@ const items = [
 			<div class="listado-productos">
 				<!-- Medicamentos -->
 				<div class="medicamentos">
-					<h2>Medicamentos</h2>
-					<DataTable :value="Inventario.medicamentos" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
-						<Column class="col" field="medicamento.nombre" header="Nombre" sortable   style="width: 25%"></Column>
-						<Column class="col" field="medicamento.precio" header="Precio" sortable  style="width: 25%"></Column>
-						<Column class="col" field="medicamento.tipo_medicina.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
-						<Column class="col" field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
-						<Column class="col" field="estado" header="Estado"  sortable  style="width: 25%"></Column>
-						<Column class="col" field="medicamento.volumen"  header="Volumen" style="width: 25%"></Column>
-						<Column class="col" field="medicamento.fecha_venciminento" sortable  header="Caducación" style="width: 25%">
-							<template #body="slotProps">
-								{{ Formato.formatearFecha(slotProps.data.medicamento.fecha_venciminento) }}
-							</template>
-						</Column>
-						<Column class="col" field="unidades_disponibles" sortable  header="Disponibles" style="width: 25%"></Column>
-					</DataTable>
+					<div class="titulo-medicamentos">
+						<h2>Medicamentos</h2>
+						<div class="botones">
+							<div class="acciones">
+								<SpeedDial  buttonClass="p-button-outlined"  showIcon="pi pi-bars" hideIcon="pi pi-times"   :transitionDelay="80" 	 :model="itemsAcciones" direction="right" />
+								
+							</div>
+							<div v-if="selectOptionMedicine" @click="handleSelectionMedicine()" class="cancelar">
+								<Button @click="edit" icon="pi pi-pencil" severity="success" rounded outlined aria-label="Search" />
+
+								<Button icon="pi pi-times" severity="danger" rounded outlined aria-label="Cancel" />
+	
+							</div>
+						</div>
+
+					</div>
+						
+					<div v-if="Inventario.medicamentos.length !== 0">
+						<DataTable v-model:selection="selectMedicine" dataKey="id"  :value="Inventario.medicamentos" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+							<Column v-if="selectOptionMedicine" selectionMode="single" headerStyle="width: 3rem"></Column>
+							<Column class="col" field="medicamento.nombre" header="Nombre" sortable   style="width: 25%"></Column>
+							<Column class="col" field="medicamento.precio" header="Precio" sortable  style="width: 25%"></Column>
+							<Column class="col" field="medicamento.tipo_medicina.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
+							<Column class="col" field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
+							<!-- <Column class="col" field="estado" header="Estado"  sortable  style="width: 25%"></Column> -->
+							<Column header="Estado">
+								<template #body="slotProps">
+									<Tag  @click="Inventario.cambiarEstadoMedicine(Auth.token,slotProps.data.medicamento.id)" :value="slotProps.data.estado" :severity="getSeverity(slotProps.data.estado)" />
+								</template>
+							</Column>
+
+							<!-- <div class="contenedor-estado"
+								@click="Mascota.cambiarEstadoMascota(Auth.token,mascota.id)"
+								:class="mascota.isActive ? 'activo' : 'inactivo'"
+								>
+								<div class="circulo"></div>
+								<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
+							</div> -->
+
+
+							<Column class="col" field="medicamento.volumen"  header="Volumen" style="width: 25%"></Column>
+							<Column class="col" field="medicamento.fecha_venciminento" sortable  header="Caducación" style="width: 25%">
+								<template #body="slotProps">
+									{{ Formato.formatearFecha(slotProps.data.medicamento.fecha_venciminento) }}
+								</template>
+							</Column>
+							<Column class="col" field="unidades_disponibles" sortable  header="Disponibles" style="width: 25%"></Column>
+						</DataTable>
+					</div>
+					<div v-else>
+						<p>No hay medicamento :( </p>
+					</div>
 				</div>
 				<Divider />
 				<div class="accesorios">
 					<h2>Accesorios</h2>
-					<DataTable class="lista" :value="Inventario.accesorios" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
-						<Column field="accesorio.nombre" header="Nombre" sortable   style="width: 25%"></Column>
-						<Column field="accesorio.precio" header="Precio" sortable  style="width: 25%"></Column>
-						<Column field="accesorio.tipo_accesorio.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
-						<Column field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
-						<Column field="estado" header="Estado"  sortable  style="width: 25%"></Column>
-						<Column field="unidades_disponibles" sortable  header="Disponibles" style="width: 25%"></Column>
-					</DataTable>
+					<div v-if="Inventario.accesorios.length !== 0">
+						<DataTable class="lista" :value="Inventario.accesorios" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+							<Column field="accesorio.nombre" header="Nombre" sortable   style="width: 25%"></Column>
+							<Column field="accesorio.precio" header="Precio" sortable  style="width: 25%"></Column>
+							<Column field="accesorio.tipo_accesorio.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
+							<Column field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
+							<Column field="estado" header="Estado"  sortable  style="width: 25%"></Column>
+							<Column field="unidades_disponibles" sortable  header="Disponibles" style="width: 25%"></Column>
+						</DataTable>
+					</div>
+					<div v-else>
+						<p>No hay accesorios :(</p>
+					</div>
 
 				</div>
 			</div>
@@ -113,13 +195,44 @@ const items = [
 
 
 <style scoped>
-.p-datatable-wrapper{
-	/* height: 60vh; */
+
+div.circulo {
+	border-radius: 100%;
+	height: 20px;
+	width: 20px;
+	margin: 0 auto;
 }
-.medicamentos{
+
+div.circulo {
+	color: var(--color-verde-ok);
+	background-color: var(--color-verde-ok);
 }
-.lista{
-	/* height: 60vh; */
+div.contenedor-estado.activo .circulo{
+	background-color: var(--color-verde-ok);
+}
+div.contenedor-estado.activo p.titulo-estado{
+	color: var(--color-verde-ok);
+}
+div.contenedor-estado.inactivo .circulo{
+	background-color: var(--color-rojo);
+}
+
+.acciones{
+	display: flex;
+	/* justify-content: space-between; */
+	/* width: 200px; */
+}
+.titulo-medicamentos{
+	display: flex;
+	gap: 5px;
+	flex-direction: column;
+	position: relative;
+	height: 100px;
+}
+.botones{
+	display: flex;
+	justify-content: space-between;
+
 	
 }
 .agregar{
@@ -143,6 +256,7 @@ h2{
 	display: flex;
 	flex-direction: column;
 	gap: 6vh;
+	justify-content: left;
 }
 p {
     line-height: 1.75;
@@ -162,6 +276,7 @@ table.p-datatable-wrapper{
 }
 .contenido-boton{
 	display: flex;
+	z-index: 1;
 	flex-direction: column;
 }
 h1{
