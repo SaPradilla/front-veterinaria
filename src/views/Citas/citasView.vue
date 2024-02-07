@@ -58,13 +58,14 @@ watch(() => Citas.solicitudes.isAprobada, (newTipo) => {
 
                 <tbody>
                     <tr v-for="solicitud in Citas.solicitudes">
+
                         <td>{{ solicitud.servicio.nombre }}</td>
                         <td> {{ solicitud.cliente.nombre }} {{ solicitud.cliente.apellido }}</td>
                         <td>{{ Formato.formatearFecha(solicitud.fecha) }}</td>
                         <td>{{ solicitud.isAprobada ? 'Aprobada' : 'No Aprobada ' }}</td>
                         <td> 
                             <!-- Terminar AQUI -->
-                            <div @click="Citas.aprobarSolicitud(solicitud.id)" class="aprobar"> Aprobar</div>
+                            <div @click="Citas.aprobarSolicitud(solicitud)" class="aprobar"> Aprobar</div>
                         </td>
                     </tr>
                 </tbody>

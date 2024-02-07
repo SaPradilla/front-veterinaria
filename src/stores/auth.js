@@ -176,7 +176,17 @@ export const useAuthStore = defineStore('auth', () =>{
         },1200)
        
     }
-
+    const cerroSesion = ()=>{
+        localStorage.clear()
+        token.value = null
+        toast.info('Sesion Cerrada',
+        { position: toast.POSITION.TOP_CENTER}
+        )
+        setTimeout(()=>{
+            router.push({name:'home'})
+        },1200)
+    
+    }
     const verificarSesion = (msg) =>{
         if(msg=== 'token no es válido' || msg === 'Error al autenticar el token'){
 
@@ -204,5 +214,6 @@ export const useAuthStore = defineStore('auth', () =>{
         extraerUserToken,
         cerrarSesion,
         verificarSesion,
+        cerroSesion,
     }
 })

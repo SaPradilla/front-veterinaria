@@ -164,8 +164,18 @@ const router = createRouter({
           name:'registrar-citas',
           component: ()=> import('../views/Citas/registrarCitasView.vue'),
           meta: { requireAuth: true },
+        },
+        {
+          path:'aceptar-citas',
+          name:'aceptar-citas',
+          component: ()=> import('../views/Citas/AceptarCitaView.vue'),
+          meta: { requireAuth: true },
         }
       ]
+    },{
+      path:'/perfil',
+      name:'perfil',
+      component: ()=> import('../views/User/PerfilUserView.vue')
     }
   ]
 })

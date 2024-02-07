@@ -1,14 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import modalMenu from './modalMenu.vue';
 import { useAuthStore } from '../../stores/auth';
 import { useRouter } from 'vue-router'
 const router = useRouter()
+import SplitButton from 'primevue/splitbutton';
+import Avatar from 'primevue/avatar';
 
+import { usePermisosUser } from '../../stores/permisosUser';
 // States
 const modal = ref(false)
 const animar = ref(false)
 const userModal = ref(false)
+const adminOpcion = ref(false)
 // Props
 const props = defineProps({
     scrolled: {
@@ -18,7 +22,13 @@ const props = defineProps({
 })
 // Store
 const Auth = useAuthStore()
-
+const Permisos = usePermisosUser()
+onMounted(()=>{
+    Auth.extraerUserToken()
+    if(localStorage.getItem('rol')){
+       if( localStorage.getItem('rol') === 'admin') adminOpcion.value = true
+    }
+})
 
 // Metodos
 const toggleModal = () => {
@@ -45,6 +55,13 @@ const redirigirTienda = () => {
 const toggleUserModal = () => {
     userModal.value = !userModal.value
 }
+const items = [
+    {
+        label:'',
+
+    }
+]
+
 </script>
 
 <template>
@@ -74,21 +91,39 @@ const toggleUserModal = () => {
                 </div>
 
                 <div v-if="Auth.token === null" class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
-                <img @click="toggleUserModal" v-else class="avatar" alt="Avatar" src="../../assets/img/avatar.svg" />
+                
+                <div v-else class="avatar" @click="toggleUserModal" >
+                    <Avatar :label="Permisos.userLogin.nombre.substr(-20, 2)" class="mr-2" size="large" shape="circle"  style=" cursor: pointer; background-color: var(--color-morado-claro-general); color: white"  />
+                
+                </div>
+                <!-- <img  v-else  alt="Avatar" src="../../assets/img/avatar.svg" /> -->
             </div>
             <div @click="toggleModal" class="menu-mobile">
+                
                 <img v-if="modal" class="x-menu" src="../../assets/img/X.svg" alt="menu">
+
                 <img v-else src="../../assets/img/MENU.svg" alt="menu">
             </div>
 
         </div>
         <div @click="toggleUserModal" v-if="userModal" class="menu-user">
+
             <div class="menu">
-                <div>
+                <div class="user-cuenta" @click="router.push({name:'perfil'})">
                     <p class="arriba">Ver Cuenta</p>
+                    <i class="pi pi-user" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></i>
                 </div>
-                <div @click="Auth.cerrarSesion">
-                    <p class="abajo">Cerrar Sesion</p>
+                <!-- <hr> -->
+                <div v-if="adminOpcion" class="admin-menu" @click="router.push({name:'admin'})">
+                    <p>Adminstrar</p>
+                    <li class="pi pi-cog" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></li>
+                    <!-- <hr> -->
+                </div>
+                <div @click="Auth.cerroSesion">
+                    <div class="cerrar-sesion">
+                        <p class="abajo">Cerrar Sesion</p>
+                        <li class="pi pi-sign-out" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></li>
+                    </div>
                 </div>
 
             </div>
@@ -96,10 +131,15 @@ const toggleUserModal = () => {
     </div>
 </template>
 <style scoped>
+.user-cuenta,.cerrar-sesion,.admin-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 .menu-user {
-
     float: right;
-    width: 100px;
+    width: 200px;
 }
 
 .menu {
@@ -108,35 +148,45 @@ const toggleUserModal = () => {
     justify-content: right;
     align-items: left;
     gap: 1vh;
-    border-radius: 20px;
+    border-radius: 15px;
     position: absolute;
-    background-color: white;
-
+    border: 1px solid #eee;
+    background: #f7f7f7;
 }
+
 
 .menu-user p {
     cursor: pointer;
+    font-size: 1em;
     color: var(--color-morado-claro-general);
-    padding: 10px;
+    /* padding: 10px; */
 }
 
-.menu-user p.arriba {
+.menu-user .user-cuenta {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
 }
 
-.menu-user p.abajo {
+.menu-user .cerrar-sesion {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+.menu-user .user-cuenta,
+.menu-user .cerrar-sesion,
+.menu-user .admin-menu{
+    /* background-color: var(--color-morado-oscuro-general);
+    color: white; */
+    padding: 10px;
+    /* border: 1px solid; */
+}
 
-.menu-user p:hover {
-
-
+.menu-user .user-cuenta:hover,
+.menu-user .cerrar-sesion:hover,
+.menu-user .admin-menu:hover{
     background-color: var(--color-morado-oscuro-general);
     color: white;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .frame {
@@ -221,7 +271,7 @@ const toggleUserModal = () => {
 }
 
 .label:hover {
-    transform: scale(0.9);
+    transform: scale(0.98);
 }
 
 .shop {

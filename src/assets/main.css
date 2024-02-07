@@ -78,7 +78,10 @@ ul#vs6__listbox{
     margin-left: 20px;
 }
 
-
+.p-overlaypanel .p-overlaypanel-content,
+.p-overlaypanel .p-overlaypanel-content  {
+    padding: 0;
+}
 /* Estilos botones */
 
 .botonVolver{

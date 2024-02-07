@@ -86,36 +86,35 @@ if (minMonth >= 12) {
 
 const minDate = ref(new Date(minYear, minMonth, day));
 
-
 </script>
 
 <template>
     <div class="contenedor-cita">
         <div class="contenedor-registro">
-            <h1>Crear Cita</h1> 
+            <h1>Aceptar Cita</h1> 
             <div class="formulario">
                 <form>
+                    <InputText type="text" v-model="Cita.solicitudData.cliente.nombre" placeholder="Cliente" disabled  />
+                    <InputText type="text" v-model="Cita.solicitudData.servicio.nombre" placeholder="Nombre del consultorio" disabled  />
+
                     <!-- Cliente -->
-                    <div class="menu-input">
-
-                        <Dropdown v-model="Cita.citaData.clienteId" :options="Cliente.clientes"   checkmark  optionLabel="nombre"    placeholder="Cliente" />
+                    <!-- <div class="menu-input">
+                        <Dropdown v-model="Cita.solicitudData.cliente" :options="Cliente.clientes"   checkmark  optionLabel="nombre"    placeholder="Cliente" />
                         <small @click="">¿El cliente no se encuentra? <strong>Agregar</strong> </small>
+                    </div> -->
+
+                    <!-- <Dropdown v-model="Cita.solicitudData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" /> -->
                     
-                    </div>
-                    <Dropdown v-model="Cita.citaData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" />
                     <div class="menu-input">
-                        <Dropdown v-model="Cita.citaData.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
+                        <Dropdown v-model="Cita.solicitudData.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
                         <small @click="">¿El cliente no tiene mascotas? <strong>Agregar</strong> </small>
-
                     </div>
 
-                    <Calendar v-model="Cita.citaData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
-                    <InputText type="text" v-model="Cita.citaData.consultorio" placeholder="Nombre del consultorio" />
-                    <Textarea v-model="Cita.citaData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
+                    <Calendar v-model="Cita.solicitudData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+                    <InputText type="text" v-model="Cita.solicitudData.consultorio" placeholder="Nombre del consultorio" />
+                    <Textarea v-model="Cita.solicitudData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
                     <Button @click="Cita.crearCita"  label="Agregar" />
-                    
-
-
+                
                 </form>
             </div>
         </div>

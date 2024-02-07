@@ -12,6 +12,7 @@ export const useCita= defineStore('citas',  () =>{
 
     const Auth = useAuthStore()
     const Paginacion = usePaginacion()
+    const router = useRouter()
 
     const citas = ref([])
     const solicitudes = ref([])
@@ -27,6 +28,8 @@ export const useCita= defineStore('citas',  () =>{
         // estado:estado,
         // descripcion:descripcion
     })
+    const solicitudData = ref({})
+
     const verCitas = () =>{
         
         return citasService.obtenerCitas(Auth.token,Paginacion.currentPageCita,Paginacion.totalPagesCita)
@@ -50,18 +53,25 @@ export const useCita= defineStore('citas',  () =>{
         })
     }
 
-    const aprobarSolicitud = (id)=>{
-        citasService.aprobarSolicitudes(Auth.token,id)
-        .then(res=>{
+    const aprobarSolicitud = (solicitud)=>{
+        console.log(solicitud)
+        solicitudData.value = solicitud
+        // citaData.value = solicitud
+        // citaData.value.clienteId = solicitud.cliente
+        // citaData.value.tipo_cita = solicitud.servicio
+        router.push({name:'aceptar-citas'})
 
-            toast.success('Solicitud Aprobada',{
-                position: toast.POSITION.TOP_RIGHT
-            })
+        // citasService.aprobarSolicitudes(Auth.token,id)
+        // .then(res=>{
 
-        }).catch(err => {
-            console.log(err)
-            Auth.verificarSesion(err.response.data.message)
-        })
+        //     toast.success('Solicitud Aprobada',{
+        //         position: toast.POSITION.TOP_RIGHT
+        //     })
+
+        // }).catch(err => {
+        //     console.log(err)
+        //     Auth.verificarSesion(err.response.data.message)
+        // })
     }
     const crearCita = ()=>{
         citaData.value.empleadoId = Permisos.userLogin.id
@@ -101,5 +111,6 @@ export const useCita= defineStore('citas',  () =>{
         aprobarSolicitud,
         citaData,
         crearCita,
+        solicitudData,
     }
 })
