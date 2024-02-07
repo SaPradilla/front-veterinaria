@@ -118,9 +118,8 @@ const getSeverity = (product)=>{
 					<div class="titulo-medicamentos">
 						<h2>Medicamentos</h2>
 						<div class="botones">
-							<div class="acciones">
-								<SpeedDial  buttonClass="p-button-outlined"  showIcon="pi pi-bars" hideIcon="pi pi-times"   :transitionDelay="80" 	 :model="itemsAcciones" direction="right" />
-								
+							<div class="">
+								<SpeedDial class="acciones" buttonClass="p-button-outlined"  showIcon="pi pi-bars" hideIcon="pi pi-times"   :transitionDelay="150" 	 :model="itemsAcciones" direction="right" />
 							</div>
 							<div v-if="selectOptionMedicine" @click="handleSelectionMedicine()" class="cancelar">
 								<Button @click="edit" icon="pi pi-pencil" severity="success" rounded outlined aria-label="Search" />
@@ -142,18 +141,9 @@ const getSeverity = (product)=>{
 							<!-- <Column class="col" field="estado" header="Estado"  sortable  style="width: 25%"></Column> -->
 							<Column header="Estado">
 								<template #body="slotProps">
-									<Tag  @click="Inventario.cambiarEstadoMedicine(Auth.token,slotProps.data.medicamento.id)" :value="slotProps.data.estado" :severity="getSeverity(slotProps.data.estado)" />
+									<Tag class="tag-estado"  @click="Inventario.cambiarEstadoMedicine(Auth.token,slotProps.data.medicamento.id)" :value="slotProps.data.estado" :severity="getSeverity(slotProps.data.estado)" />
 								</template>
 							</Column>
-
-							<!-- <div class="contenedor-estado"
-								@click="Mascota.cambiarEstadoMascota(Auth.token,mascota.id)"
-								:class="mascota.isActive ? 'activo' : 'inactivo'"
-								>
-								<div class="circulo"></div>
-								<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
-							</div> -->
-
 
 							<Column class="col" field="medicamento.volumen"  header="Volumen" style="width: 25%"></Column>
 							<Column class="col" field="medicamento.fecha_venciminento" sortable  header="Caducación" style="width: 25%">
@@ -195,45 +185,33 @@ const getSeverity = (product)=>{
 
 
 <style scoped>
-
-div.circulo {
-	border-radius: 100%;
-	height: 20px;
-	width: 20px;
-	margin: 0 auto;
+.tag-estado{
+	cursor: pointer;
 }
-
-div.circulo {
-	color: var(--color-verde-ok);
-	background-color: var(--color-verde-ok);
+.medicamentos{
+	height: clamp(20vh,30vw,50vh);
 }
-div.contenedor-estado.activo .circulo{
-	background-color: var(--color-verde-ok);
-}
-div.contenedor-estado.activo p.titulo-estado{
-	color: var(--color-verde-ok);
-}
-div.contenedor-estado.inactivo .circulo{
-	background-color: var(--color-rojo);
-}
-
 .acciones{
 	display: flex;
+	align-items: center;
+	position: relative;
+	/* gap: 20px; */
 	/* justify-content: space-between; */
 	/* width: 200px; */
+	height: 10px;
 }
 .titulo-medicamentos{
 	display: flex;
-	gap: 5px;
+	/* gap: 5px; */
 	flex-direction: column;
 	position: relative;
-	height: 100px;
+	height: clamp(100px,10vw,150px);
 }
 .botones{
 	display: flex;
 	justify-content: space-between;
+	/* margin-bottom: 20px; */
 
-	
 }
 .agregar{
 	color: white;
@@ -250,7 +228,7 @@ h2{
 	margin-bottom: 3vh;
 }
 .listado-productos{
-	padding: 6rem;
+	/* padding: 6rem; */
     border-radius: 10px;
     margin-bottom: 10rem;
 	display: flex;
@@ -262,10 +240,7 @@ p {
     line-height: 1.75;
 }
     
-table.p-datatable-wrapper{
 
-	padding: 20px;
-}
 
 .contenedor-boton {
 	display: flex;

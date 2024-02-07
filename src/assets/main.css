@@ -70,9 +70,15 @@ ul#vs6__listbox{
    }
 }
 
-/* .p-datatable-wrapper{
-	height: 29vh;
-} */
+.p-datatable-wrapper{
+	height: clamp(20vh,30vw,34vh);
+}
+.p-speeddial-item{
+    /* margin: 20px; */
+    margin-left: 20px;
+}
+
+
 /* Estilos botones */
 
 .botonVolver{
