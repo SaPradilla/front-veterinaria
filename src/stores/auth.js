@@ -105,7 +105,7 @@ export const useAuthStore = defineStore('auth', () =>{
             token.value = res.data.data.token
 
             router.push({name:'dashboard'})
-            extraerToken()
+            extraerUserToken()
 
             toast.update(update, {
                 render(){
@@ -142,23 +142,28 @@ export const useAuthStore = defineStore('auth', () =>{
         if (localStorage.getItem('token')) {
           // Guarda el token en setToken y lo asigna a state
           token.value = localStorage.getItem('token')
-          extraerToken()
+          extraerUserToken()
 
         }
         return
     }
-    const extraerToken = ()=>{
+    // Estrae el rol
+    const extraerUserToken = ()=>{
         if(token.value){
-            const payloadBase64 = token.value.split('.')[1];
-            const decodedPayload = decodeURIComponent(
-              atob(payloadBase64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
-            );
-            const userInfo = JSON.parse(decodedPayload);
+            const userInfo = extraerToken(token.value)
             Permisos.userLogin = userInfo.user;
         }
 
         return
+    }
 
+    const extraerToken = (token)=>{
+        const payloadBase64 = token.split('.')[1];
+        const decodedPayload = decodeURIComponent(
+            atob(payloadBase64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+        );
+        const userInfo = JSON.parse(decodedPayload);
+        return userInfo
     }
     const cerrarSesion = ()=>{
         localStorage.clear()
@@ -196,7 +201,7 @@ export const useAuthStore = defineStore('auth', () =>{
         registrar,
         loginEmpleado,
         ObtenerToken,
-        extraerToken,
+        extraerUserToken,
         cerrarSesion,
         verificarSesion,
     }

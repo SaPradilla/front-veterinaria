@@ -2,10 +2,9 @@ import api from "../lib/axios";
 
 export default {
 
-    obtenerEmpleados(token,page,size){
-        return api.get(`/admin/list/employees?page=${page}&size=${size}`,
+    obtenerEmpleados(token){
+        return api.get(`/admin/list/employees`,
         { headers: {'auth-token': token}}
-
         )
     },
     obtenerEmpleado(id,token){

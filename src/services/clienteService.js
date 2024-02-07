@@ -19,5 +19,10 @@ export default {
         { headers: {'auth-token': token}}
         )
     },
+    obtenerMascotasCliente(token,id){
+        return api.get(`/admin/list/pets-client/${id}`,{
+            headers: {'auth-token': token}
+        })
+    }
 
 }

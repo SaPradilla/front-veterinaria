@@ -10,6 +10,7 @@ export const useCliente = defineStore('cliente', () => {
     // states
     const clientes = ref([])
     const cliente = ref({})
+    const mascotasCliente = ref([])
     // Metodos
     
     const verClientes = ()=>{
@@ -35,13 +36,25 @@ export const useCliente = defineStore('cliente', () => {
         })
     }
 
+    const verMascotasCliente = (id) => {
+        clienteService.obtenerMascotasCliente(Auth.token,id)
 
+        .then(res =>{
+            console.log(res)
+            mascotasCliente.value = res.data.Pets 
+            
+        }).catch(err =>{
+            console.log(err)
+            Auth.verificarSesion(err.response.data)
+        })
+    }
     return {
         clientes,
         cliente,
+        mascotasCliente,
 
         verClientes,
         verCliente,
-
+        verMascotasCliente,
     }
 })

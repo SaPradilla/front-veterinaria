@@ -26,7 +26,7 @@ const fechaHoy = new Date()
 onMounted(() => {
     
     Auth.ObtenerToken()
-    Auth.extraerToken()
+    Auth.extraerUserToken()
 
     servicioService.obtenerServicios(Auth.token)
         .then(res => {

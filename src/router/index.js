@@ -110,6 +110,13 @@ const router = createRouter({
           meta: { requireAuth: true },
         },
         {
+          path: 'editar-accesorio',
+          name: 'editar-accesorio',
+          component: () => import('../views/Tienda/EditarAcessorio.vue'),
+          // Ruta protegida
+          meta: { requireAuth: true },
+        },
+        {
           path: 'cirugias',
           name: 'cirugias',
           component: () => import('../views/Cirugias/cirugiasView.vue'),
@@ -151,7 +158,12 @@ const router = createRouter({
           name:'citas',
           component: ()=> import('../views/Citas/citasView.vue'),
           meta: { requireAuth: true },
-
+        },
+        {
+          path:'registrar-citas',
+          name:'registrar-citas',
+          component: ()=> import('../views/Citas/registrarCitasView.vue'),
+          meta: { requireAuth: true },
         }
       ]
     }

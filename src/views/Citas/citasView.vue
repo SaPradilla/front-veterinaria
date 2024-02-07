@@ -5,6 +5,17 @@ import { usePaginacion } from '../../stores/paginacion'
 import { useAdmin } from '../../stores/admin'
 import { useCita } from '../../stores/citas';
 import { useFormatear } from '../../stores/formatear';
+
+import SplitButton from 'primevue/splitbutton';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Tag from 'primevue/tag'
+import Button from 'primevue/button';
+import {toast} from 'vue3-toastify'
+
+
+
+
 const Paginacion = usePaginacion()
 const Admin = useAdmin()
 const Auth = useAuthStore()
@@ -12,6 +23,8 @@ const Citas = useCita()
 const Formato = useFormatear()
 onMounted(() => {
     Auth.ObtenerToken()
+    
+
     Citas.verCitas()
     console.log(Citas.citas)
     Citas.verSolicitudes()
@@ -30,6 +43,8 @@ watch(() => Citas.solicitudes.isAprobada, (newTipo) => {
     <div class="contenedor-principal">
         <div class="contenedor-solicitudes">
             <h1>Solicitudes pendientes</h1>
+
+
             <table>
                 <thead>
                     <tr>
@@ -89,7 +104,7 @@ watch(() => Citas.solicitudes.isAprobada, (newTipo) => {
                 </div>
                 <div class="contenedor-boton">
                     <button
-                        @click="Admin.handlRegistrarMedicinas"
+                        @click="Admin.handleRegistrarCita"
                         class="botonAgregar">Añadir Cita
                     </button>
                 </div>

@@ -53,7 +53,7 @@ export const useEmpleado = defineStore('empleado', () => {
     }
 
     const verEmpleados = ()=>{
-        return  empleadoService.obtenerEmpleados(Auth.token,Paginacion.currentPageEmpleado,Paginacion.size)
+        empleadoService.obtenerEmpleados(Auth.token)
         .then(res=>{
             empleados.value = res.data.user
             return true

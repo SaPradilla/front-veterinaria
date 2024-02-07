@@ -1,13 +1,28 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,computed,watch } from 'vue'
 import servicioService from '../../services/servicioService';
 import { useAuthStore } from '../../stores/auth';
 import { usePermisosUser } from '../../stores/permisosUser';
 import clienteService from '../../services/clienteService';
 import solicitudService from '../../services/solicitudService';
 import {toast} from 'vue3-toastify'
+import { useCliente } from '../../stores/cliente';
+import {useCita} from '../../stores/citas'
+
+import SplitButton from 'primevue/splitbutton';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Tag from 'primevue/tag'
+import Button from 'primevue/button';
+// import {toast} from 'vue3-toastify'
+import Dropdown from 'primevue/dropdown';
+import Calendar from 'primevue/calendar';
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
 const Auth = useAuthStore()
 const Permisos = usePermisosUser()
+const Cliente = useCliente()
+const Cita = useCita()
 const Servicios = ref([])
 
 const solicitud = ref({
@@ -21,7 +36,8 @@ const fechaHoy = new Date()
 onMounted(() => {
     
     Auth.ObtenerToken()
-    Auth.extraerToken()
+    Auth.extraerUserToken()
+    Cliente.verClientes()
 
     servicioService.obtenerServicios(Auth.token)
         .then(res => {
@@ -29,6 +45,13 @@ onMounted(() => {
         })
         .catch(err => console.log(err))
 
+})
+watch(() => Cita.citaData.clienteId, (newId) => {
+    if(newId.id){
+        console.log(newId.id)
+        Cliente.verMascotasCliente(newId.id)
+        return
+    }
 })
 
 const agendarCita = ()=>{
@@ -48,19 +71,91 @@ const agendarCita = ()=>{
     })
 }
 
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth();
+const day = today.getDate();
+
+let minYear = year;
+let minMonth = month + 2;
+
+if (minMonth >= 12) {
+    minMonth -= 12;
+    minYear++;
+}
+
+const minDate = ref(new Date(minYear, minMonth, day));
+
 
 </script>
 
 <template>
     <div class="contenedor-cita">
-        cita
+        <div class="contenedor-registro">
+            <h1>Crear Cita</h1>
+            <div class="formulario">
+                <form>
+                    <!-- Cliente -->
+                    <div class="menu-input">
+                        <Dropdown v-model="Cita.citaData.clienteId" :options="Cliente.clientes"   checkmark  optionLabel="nombre"    placeholder="Cliente" />
+                        <small @click="">¿El cliente no se encuentra? <strong>Agregar</strong> </small>
+                    </div>
+                    <Dropdown v-model="Cita.citaData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" />
+                    <div class="menu-input">
+                        <Dropdown v-model="Cita.citaData.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
+                        <small @click="">¿El cliente no tiene mascotas? <strong>Agregar</strong> </small>
+
+                    </div>
+                    <Calendar v-model="Cita.citaData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+                    <InputText type="text" v-model="Cita.citaData.consultorio" placeholder="Nombre del consultorio" />
+                    <Textarea v-model="Cita.citaData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
+                    <Button @click="Cita.crearCita"  label="Agregar" />
+                    
+
+
+                </form>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
 
 <style scoped>
+h1{
+    text-align: center;
+    
+    color: var(--color-morado-claro-general);
+}
+.menu-input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+strong{
+    cursor: pointer;
+}
+.contenedor-cita{
+    width: 100%;
 
+}
+.contenedor-registro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+.formulario{
+    width: 40%;
 
+}
+.formulario form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
 
 </style>

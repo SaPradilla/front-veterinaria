@@ -44,11 +44,19 @@ export default{
         return api.put(`/admin/edit/product/medicine/${id}`,data,
             { headers: {'auth-token': token}} 
         )
-    },  
+    },
+    editarAccesorio(token,id,data){
+        return api.put(`/admin/edit/product/accesory/${id}`,data,
+            { headers: {'auth-token': token}} 
+        )
+    },
     cambiarEstadoMedicina(token,id){
-        console.log(token)
-        // /status/product/medicine/
         return api.put(`/admin/status/product/medicine/${id}`, {}, {
+            headers: {'auth-token': token}
+        })
+    },
+    cambiarEstadoAccesorio(token,id){
+        return api.put(`/admin/status/product/accesory/${id}`,{},{
             headers: {'auth-token': token}
         })
     }

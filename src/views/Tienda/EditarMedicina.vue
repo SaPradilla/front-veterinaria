@@ -38,7 +38,7 @@ let minMonth = (month + 2) % 12;
 let minYear = year + Math.floor((month + 2) / 12);
 
 const minDate = ref(new Date(minYear, minMonth, 1)); 
-const maxDate = ref();
+
 
 </script>
 
@@ -48,7 +48,7 @@ const maxDate = ref();
         <button @click="Admin.handleTienda" class="botonVolver"> Volver </button>
     </div>
     <div class="contenido-registro">
-        <h1>Registro Medicina</h1>
+        <h1>Editar Medicina</h1>
         <div class="formulario">
             <form>
                 <InputText type="text" v-model="Inventario.updateMedicinadata.nombre" placeholder="Nombre" />
@@ -68,7 +68,7 @@ const maxDate = ref();
                 <InputNumber v-model="Inventario.updateMedicinadata.precio" inputId="currency-us" mode="currency" currency="COP" locale="es-ES" placeholder="Precio" />
                 <Calendar v-model="Inventario.updateMedicinadata.fecha_venciminento" placeholder="Fecha de  Caducación" :minDate="minDate"  :manualInput="false" />
                 <div class="volumen">
-                    <Dropdown :value="Inventario.tipoxd " v-model="Inventario.tipoVolumen" editable  :options="['cm','gr','mg']"  checkmark placeholder="Tipo de volumen" />
+                    <Dropdown  v-model="Inventario.tipoVolumen" editable  :options="['cm','gr','mg']"  checkmark placeholder="Tipo de volumen" />
                     
                     <InputNumber v-model="Inventario.updateMedicinadata.volumen" :suffix="Inventario.tipoVolumen"   placeholder="Volumen" />
                 </div>

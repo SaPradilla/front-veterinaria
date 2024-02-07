@@ -6,8 +6,8 @@ export default {
             { headers: {'auth-token': token}}
          )
     },
-    obtenerMascotas(token,page,size){
-        return api.get(`/admin/list/pet?page=${page}&size=${size}`,
+    obtenerMascotas(token){
+        return api.get(`/admin/list/pet`,
         { headers: {'auth-token': token}}
 
         )

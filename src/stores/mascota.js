@@ -74,15 +74,13 @@ export const useMascota = defineStore('mascota', () => {
     }
 
     const obtenerMascotas = ()=>{
-        return mascotaService.obtenerMascotas(Auth.token,Paginacion.currentPageMascota,Paginacion.size)
+        mascotaService.obtenerMascotas(Auth.token)
         .then(res=>{
             mascotas.value = res.data.Mascotas
-            return true
         })
         .catch(err =>{
+            console.log(err)
             Auth.verificarSesion(err.response.data.message)
-
-            return false
         })
     }
 
