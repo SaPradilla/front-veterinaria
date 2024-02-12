@@ -119,56 +119,6 @@ const getSeverity = (estado) => {
 
 
 				</DataTable>
-
-				<!-- <table>
-
-					<thead>
-						<tr>
-				
-							<th>Nombre</th>
-							<th>Tipo</th>
-							<th>Edad</th>
-							<th>Raza</th>
-							<th>Genero</th>
-							<th>Dueño</th>
-							<th>Estado</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr v-for="mascota in  ">
-
-							
-
-							
-
-							<td>
-								<div class="contenedor-estado"
-								@click=""
-								:class="mascota.isActive ? 'activo' : 'inactivo'"
-								>
-									<div class="circulo"></div>
-									<p class="titulo-estado">{{ mascota.isActive ? 'Activo' : 'Inactivo' }}</p>
-								</div>
-
-							</td>
-							<td>
-								<div class="boton-perfil">
-									<button @click="Mascota.verPerfilMascota(mascota)" >Ver Perfil</button>
-								</div>
-							</td>
-							<td
-							@click=""
-							><img src="../../assets/img/editar.svg" alt="" srcset=""></td>
-						</tr>
-
-
-					</tbody>
-				</table> -->
-
 			</div>
 			
 		</div>
@@ -193,7 +143,7 @@ const getSeverity = (estado) => {
 }.menu{
 	/* cursor: pointer; */
 	color: white;
-	background-color: #8B5CF6;
+	background-color: var(--color-morado-general);
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -205,8 +155,10 @@ const getSeverity = (estado) => {
 .tag-estado {
 	cursor: pointer;
 }
-
+	
 h1 {
+	font-size: clamp(1em,5vw,3em);
+
 	color: var(--color-morado-general);
 	font-weight: 700;
 	text-align: center;
@@ -234,7 +186,7 @@ h1 {
 .botonAgregar {
 	padding: 10px;
 	border-style: none;
-	background-color: #5a0fc3;
+	background-color: var(--color-morado-general);
 	color: white;
 	border-radius: 25px;
 	width: 10em;
@@ -245,7 +197,7 @@ h1 {
 
 .botonAgregar:hover {
 	transform: scale(0.9);
-	background-color: #6413d7;
+	background-color: var(--color-morado-oscuro-general);
 
 }
 
@@ -263,7 +215,7 @@ img.foto-mascota {
 	width: max-content;
 	padding: 10px;
 	border-style: none;
-	background-color: #5a0fc3;
+	background-color: var(--color-morado-general);
 	color: white;
 	border-radius: 20px;
 
@@ -273,6 +225,6 @@ img.foto-mascota {
 
 .boton-perfil button:hover {
 	transform: scale(0.9);
-	background-color: #6413d7;
+	background-color: var(--color-morado-oscuro-general);
 }
 </style>

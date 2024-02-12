@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted,computed,watch } from 'vue'
+import { ref, onMounted,computed,watch,onUpdated } from 'vue'
 import servicioService from '../../services/servicioService';
 import { useAuthStore } from '../../stores/auth';
 import { usePermisosUser } from '../../stores/permisosUser';
@@ -25,51 +25,20 @@ const Cliente = useCliente()
 const Cita = useCita()
 const Servicios = ref([])
 
-const solicitud = ref({
-    tipo_cita:'',
-    fecha_cita:'',
-
-})
-const fechaHoy = new Date()
-
-
 onMounted(() => {
     
     Auth.ObtenerToken()
     Auth.extraerUserToken()
+    
     Cliente.verClientes()
-
     servicioService.obtenerServicios(Auth.token)
         .then(res => {
             Servicios.value = res.data.Servicios
         })
         .catch(err => console.log(err))
 
-})
-watch(() => Cita.citaData.clienteId, (newId) => {
-    if(newId.id){
-        console.log(newId.id)
-        Cliente.verMascotasCliente(newId.id)
-        return
-    }
-})
 
-const agendarCita = ()=>{
-    solicitud.value.clienteId = Permisos.userLogin.id
-    console.log(solicitud.value)
-    solicitudService.registrarSolicitud(Auth.token,solicitud.value)
-    .then(res =>{
-        console.log(res)
-        toast.success('Solicitud Registraeda',{
-            position: toast.POSITION.TOP_CENTER
-        })
-    }).catch(err => {
-        console.log(err)
-        toast.error('Error al registrar la Solicitud',{
-            position: toast.POSITION.TOP_CENTER
-        })
-    })
-}
+})
 
 const today = new Date();
 const year = today.getFullYear();
@@ -77,7 +46,7 @@ const month = today.getMonth();
 const day = today.getDate();
 
 let minYear = year;
-let minMonth = month + 2;
+let minMonth = month;
 
 if (minMonth >= 12) {
     minMonth -= 12;
@@ -96,6 +65,7 @@ const minDate = ref(new Date(minYear, minMonth, day));
                 <form>
                     <InputText type="text" v-model="Cita.solicitudData.cliente.nombre" placeholder="Cliente" disabled  />
                     <InputText type="text" v-model="Cita.solicitudData.servicio.nombre" placeholder="Nombre del consultorio" disabled  />
+                    <InputText type="text" v-model="Cita.solicitudData.mascota.nombre" placeholder="Mascota" disabled  />
 
                     <!-- Cliente -->
                     <!-- <div class="menu-input">
@@ -104,16 +74,13 @@ const minDate = ref(new Date(minYear, minMonth, day));
                     </div> -->
 
                     <!-- <Dropdown v-model="Cita.solicitudData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" /> -->
-                    
-                    <div class="menu-input">
-                        <Dropdown v-model="Cita.solicitudData.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
-                        <small @click="">¿El cliente no tiene mascotas? <strong>Agregar</strong> </small>
-                    </div>
 
-                    <Calendar v-model="Cita.solicitudData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+
+                    <Calendar showTime hourFormat="24" v-model="Cita.solicitudData.fecha" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+                    
                     <InputText type="text" v-model="Cita.solicitudData.consultorio" placeholder="Nombre del consultorio" />
                     <Textarea v-model="Cita.solicitudData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
-                    <Button @click="Cita.crearCita"  label="Agregar" />
+                    <Button @click="Cita.aceptarSolicitudCita"  label="Agregar" />
                 
                 </form>
             </div>

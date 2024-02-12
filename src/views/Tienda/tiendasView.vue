@@ -95,7 +95,8 @@ const edit = ()=>{
 	Inventario.updateMedicinadata.precio = selectMedicine.value.medicamento.precio
 	// Inventario.updateMedicinadata.volumen = selectMedicine.value.medicamento.volumen
 
-	Inventario.updateMedicinadata.fecha_venciminento = Formato.formatoFechaDDMMYY(selectMedicine.value.medicamento.fecha_venciminento)
+	Inventario.updateMedicinadata.fecha_venciminento = Formato.formartoFechaInput(selectMedicine.value.medicamento.fecha_venciminento)
+	
 	Inventario.updateMedicinadata.idMedicina = selectMedicine.value.medicamento.id
 	Inventario.tipoVolumen = Formato.extraerString(selectMedicine.value.medicamento.volumen)
 
@@ -147,6 +148,7 @@ const editAccesory = ()=>{
 		<div class="contenido-productos">
 			<h1>Productos</h1>
 			<div class="listado-productos">
+
 				<!-- Medicamentos -->
 				<div class="medicamentos">
 					<div class="titulo-medicamentos">
@@ -192,7 +194,9 @@ const editAccesory = ()=>{
 						<p>No hay medicamento :( </p>
 					</div>
 				</div>
+
 				<Divider />
+
 				<div class="accesorios">
 					<div class="titulo-accesorio">
 						<h2>Accesorios</h2>
@@ -233,6 +237,7 @@ const editAccesory = ()=>{
 					</div>
 
 				</div>
+
 			</div>
 		</div>
 
@@ -277,14 +282,15 @@ const editAccesory = ()=>{
 }
 
 h2{
-	color: #454545;
+	color: var(--color-morado-oscuro-general);
+
 	margin-bottom: 3vh;
 }
 .listado-productos{
 	/* padding: 6rem; */
     border-radius: 10px;
     margin-bottom: 10rem;
-	display: flex;
+	display: flex;	
 	flex-direction: column;
 	gap: 6vh;
 	justify-content: left;
@@ -305,7 +311,7 @@ p {
 	flex-direction: column;
 }.agregar{
 	color: white;
-	background-color: #8B5CF6;
+	background-color: var(--color-morado-general);
 	display: flex;
 	align-items: center;
 	/* margin-right: 22px; */
@@ -316,6 +322,8 @@ p {
 h1{
 	text-align: center;
 	font-size: clamp(1em,5vw,3em);
+	color: var(--color-morado-general);
+
 }
 .contenido-productos{
 	/* overflow-y: hidden; */
@@ -389,7 +397,7 @@ h1{
 
 .botonAgregar:hover {
 	transform: scale(0.96);
-	background-color: #6413d7;
+	background-color: var(--color-morado-oscuro-general);
 
 }
 

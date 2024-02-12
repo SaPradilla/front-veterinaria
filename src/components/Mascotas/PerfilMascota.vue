@@ -222,7 +222,8 @@ p.x:hover {
 }
 
 .modal {
-    z-index: 1001;
+    z-index: 1200;
+
     position: fixed;
     height: 100%;
     width: 100%;

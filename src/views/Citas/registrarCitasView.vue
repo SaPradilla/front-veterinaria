@@ -8,6 +8,7 @@ import solicitudService from '../../services/solicitudService';
 import {toast} from 'vue3-toastify'
 import { useCliente } from '../../stores/cliente';
 import {useCita} from '../../stores/citas'
+import {useRouter} from 'vue-router'
 
 import SplitButton from 'primevue/splitbutton';
 import DataTable from 'primevue/datatable';
@@ -19,12 +20,13 @@ import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
+
 const Auth = useAuthStore()
 const Permisos = usePermisosUser()
 const Cliente = useCliente()
 const Cita = useCita()
+const router = useRouter()
 const Servicios = ref([])
-
 const solicitud = ref({
     tipo_cita:'',
     fecha_cita:'',
@@ -90,6 +92,10 @@ const minDate = ref(new Date(minYear, minMonth, day));
 </script>
 
 <template>
+     <div class="con">
+        <div></div>
+        <button @click="router.push({name:'citas'})" class="botonVolver"> Volver </button>
+    </div>
     <div class="contenedor-cita">
         <div class="contenedor-registro">
             <h1>Crear Cita</h1> 
@@ -126,6 +132,12 @@ const minDate = ref(new Date(minYear, minMonth, day));
 
 
 <style scoped>
+.con{
+        position: absolute;
+        top: 25vh;
+        right: 0;
+        
+    }
 h1{
     text-align: center;
     

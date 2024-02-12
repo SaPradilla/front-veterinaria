@@ -7,12 +7,15 @@ import citasService from "../services/citasService";
 import { useAuthStore } from "./auth";
 import { usePaginacion } from "./paginacion";
 import { usePermisosUser } from "./permisosUser";
+import { useFormatear } from "./formatear";
 
 export const useCita= defineStore('citas',  () =>{
 
     const Auth = useAuthStore()
     const Paginacion = usePaginacion()
     const router = useRouter()
+    const Formato = useFormatear()
+
 
     const citas = ref([])
     const solicitudes = ref([])
@@ -29,20 +32,35 @@ export const useCita= defineStore('citas',  () =>{
         // descripcion:descripcion
     })
     const solicitudData = ref({})
+    
+    const citasFormat = ref(null)
 
-    const verCitas = () =>{
+    // const verCitas = () =>{
         
-        return citasService.obtenerCitas(Auth.token,Paginacion.currentPageCita,Paginacion.totalPagesCita)
-        .then(res=>{
-            citas.value = res.data.CitaMedica
-            return true
-        })
-        .catch(err =>{
-            Auth.verificarSesion(err.response.data.message)
-            return false
-        })
-    }
-
+    //     citasService.obtenerCitas(Auth.token)
+    //     .then(res=>{
+    //         citas.value = res.data.CitaMedica
+    //         // citasFormat.value = Formato.formatearCitasCalendar(res.data.CitaMedica)
+    //         return citas.value            
+    //     })
+    //     .catch(err =>{
+    //         Auth.verificarSesion(err.response.data.message)
+            
+    //     })
+    // }
+    const verCitas = () => {
+        return new Promise((resolve, reject) => {
+          citasService.obtenerCitas(Auth.token)
+            .then(res => {
+              citas.value = res.data.CitaMedica;
+            //   citasFormat.value = Formato.formatearCitasCalendar(res.data.CitaMedica);
+              resolve(res.data.CitaMedica); // Resuelve la promesa después de actualizar las citas
+            })
+            .catch(err => {
+              reject(err); // Rechaza la promesa si hay un error
+            });
+        });
+      };
     const verSolicitudes = ()=>{
         citasService.obtenerSolicitudes(Auth.token)
         .then(res=>{
@@ -52,13 +70,43 @@ export const useCita= defineStore('citas',  () =>{
             Auth.verificarSesion(err.response.data.message)
         })
     }
+    const aceptarSolicitudCita = () =>{
+        if(!solicitudData.value.consultorio){
+            toast.error('Define un lugar para la cita',{
+                position: toast.POSITION.TOP_CENTER
+            })
+            return
+        }
+        solicitudData.value.empleadoId = Permisos.userLogin.id
+        solicitudData.value.fecha_cita = solicitudData.value.fecha
+
+        citasService.aprobarSolicitudes(Auth.token,solicitudData.value.id,solicitudData.value)
+        .then(res =>{
+            console.log(res)
+            toast.success('Se creo la cita correctamente',{
+                position: toast.POSITION.TOP_RIGHT
+            })
+            setTimeout(()=>{
+                
+                router.push({name:'citas'})
+            },999)
+        }).catch(err => {
+            console.log(err)
+            Auth.verificarSesion(err.response.data.message)
+        })
+    }
 
     const aprobarSolicitud = (solicitud)=>{
+
         console.log(solicitud)
         solicitudData.value = solicitud
+        solicitudData.value.fecha = new Date(solicitudData.value.fecha).toISOString().slice(0, 19).replace('T', ' '),
+        // Formato.formartoFechaInput(solicitudData.value.fecha)
         // citaData.value = solicitud
         // citaData.value.clienteId = solicitud.cliente
         // citaData.value.tipo_cita = solicitud.servicio
+
+
         router.push({name:'aceptar-citas'})
 
         // citasService.aprobarSolicitudes(Auth.token,id)
@@ -99,10 +147,24 @@ export const useCita= defineStore('citas',  () =>{
         })
 
     }
+
+
     const validateData = (dataObject)=>{
         // si algun objecto tiene nulo o '' retorna true 
         return Object.values(dataObject).some(value => value === null || value === '');
     }
+
+    const cambiarFecha = (id,days)=>{
+        console.log(days)
+        citasService.cambiarFechaCita(Auth.token,id,days)
+        .then(res =>{
+            console.log(res)
+        }).catch(err =>{
+            console.log(err)
+            Auth.verificarSesion(err.response.data.message)
+        })
+    }
+
     return {
         verCitas,
         citas,
@@ -112,5 +174,8 @@ export const useCita= defineStore('citas',  () =>{
         citaData,
         crearCita,
         solicitudData,
+        aceptarSolicitudCita,
+        citasFormat,
+        cambiarFecha,
     }
 })

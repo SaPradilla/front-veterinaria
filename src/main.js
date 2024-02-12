@@ -1,6 +1,12 @@
 import './assets/main.css'
 import 'primevue/resources/themes/aura-light-purple/theme.css'
 import 'primeicons/primeicons.css'
+// import '@fullcalendar/common/main.css'
+// import '@fullcalendar/daygrid/main.css'
+
+import FullCalendar from '@fullcalendar/vue3'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
 
 import  vSelect   from 'vue-select';
 import "vue-select/dist/vue-select.css";
@@ -19,8 +25,13 @@ const app = createApp(App)
 
 app.component("v-select", vSelect )
 
+app.component(FullCalendar)
+app.use(dayGridPlugin)
+app.use(interactionPlugin)
+
 app.use(PrimeVue);
 app.use(createPinia())
+
 app.use(router)
 app.use(plugin,defaultConfig(config))
 app.use(Vue3Toasity,{autoClose:3000})

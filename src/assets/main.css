@@ -77,11 +77,16 @@ ul#vs6__listbox{
     /* margin: 20px; */
     margin-left: 20px;
 }
-
+/* .contenedor-principal-user .p-component 
+{
+    z-index: 1400 !important;
+}  */
 .p-overlaypanel .p-overlaypanel-content,
 .p-overlaypanel .p-overlaypanel-content  {
     padding: 0;
 }
+
+
 /* Estilos botones */
 
 .botonVolver{
@@ -90,7 +95,7 @@ ul#vs6__listbox{
     font-size: 1.2em;
     padding:10px;
     border-style: none;
-    background-color: #5a0fc3;
+    background-color: var(--color-morado-general);
     color: white;
     border-radius: 14px;
     width: 8em;
@@ -100,10 +105,47 @@ ul#vs6__listbox{
 }
 .botonVolver:hover{
     transform: scale(0.9); 
-    background-color: #6413d7;
+    background-color: var(--color-morado-oscuro-general);
 }
 
 
+
+/* Estilos full calendar */
+.fc-event {
+    border: none;
+    /* Cambia el fondo de todos los eventos a un color específico */
+}
+.fc-event:hover{
+    background-color: none;
+}
+.fc .fc-toolbar-title {
+    text-transform: uppercase;
+    color: var(--color-morado-claro-general);
+    font-size: clamp(1em,5vw,1.5em);
+}
+.fc .fc-col-header-cell-cushion{
+    color: var(--color-gris-oscuro);
+}
+.fc .fc-button-primary{
+    background-color: var(--color-morado-oscuro-general);
+    transition: all 0.2s ease;
+    border: none;
+    border-radius: 30px;
+}
+.fc .fc-button-primary:disabled{
+    background-color: var(--color-morado-claro-general);
+}
+.fc .fc-button-primary:hover{
+    background-color: var(--color-morado-general);
+}
+.fc .fc-button-primary:active{
+    box-shadow: none;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+    background-color: var(--color-morado-oscuro-general);
+    
+}
 /* ---- Estilos de de FormKit ---- */
 /* Mensajes */
 .formkit-messages li{

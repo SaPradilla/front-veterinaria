@@ -10,14 +10,18 @@
 
 <template>
     <div
+    class="modals"
     v-if="Modals.modalEmpleado">
         <PerfilEmpleado/>
     </div>
     <div
+    class="modals"
     v-if="Modals.modalMascotaPerfil">
         <PerfilMascota/>
     </div>
-    <div v-if="Modals.modalCliente">
+    <div 
+    class="modals"
+    v-if="Modals.modalCliente">
         <modalCliente/>
     </div>
     <div class="contenedor-principal">
@@ -39,16 +43,18 @@
             </div>
 
         </div>
-    </div>
+    </div>  
 </template>
 
 
 <style scoped>
-
+.modals{
+        z-index: 1200;
+}
 .user {
-    z-index: 1001;
-    max-height: clamp(3vh,6vw,15vh);
 
+    max-height: clamp(3vh,6vw,15vh);
+    z-index: 1100;
     width: 100%;
     position: fixed;
     /* height: 100px; */

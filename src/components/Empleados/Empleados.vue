@@ -160,7 +160,7 @@ h1{
 
 	padding: 10px;
 	border-style: none;
-	background-color: #5a0fc3;
+	background-color: var(--color-morado-general);
 	color: white;
 	border-radius: 25px;
 	width: 25vh;
@@ -171,7 +171,7 @@ h1{
 
 .botonAgregar:hover {
 	transform: scale(0.9);
-	background-color: #6413d7;
+	background-color: var(--color-morado-oscuro-general);
 
 }
 
@@ -256,7 +256,7 @@ div.contenedor-estado.inactivo p.titulo-estado{
 	width: max-content;
 	padding: 10px;
 	border-style: none;
-	background-color: #5a0fc3;
+	background-color: var(--color-morado-general);
 	color: white;
 	border-radius: 20px;
 
@@ -266,7 +266,7 @@ div.contenedor-estado.inactivo p.titulo-estado{
 
 .boton-perfil button:hover {
 	transform: scale(0.9);
-	background-color: #6413d7;
+	background-color: var(--color-morado-oscuro-general);
 }
 
 .contenedor-paginacion{

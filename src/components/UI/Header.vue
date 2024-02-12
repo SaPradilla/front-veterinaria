@@ -218,7 +218,7 @@ const items = [
     box-shadow: 3px 3px 20px #0000001b;
     height: 70px;
     width: 70em;
-    color: #5a0fc3;
+    color: var(--color-morado-general);
 }
 
 .scrolled {
@@ -281,7 +281,7 @@ const items = [
     display: flex;
     width: max-content;
     align-items: center;
-    background-color: #5a0fc3;
+    background-color: var(--color-morado-general);
     justify-content: center;
     gap: 10px;
 }

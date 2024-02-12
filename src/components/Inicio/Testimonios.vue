@@ -118,7 +118,7 @@
 }
 
 .testimonios .text-wrapper {
-  color: #5a0fc3;
+  color: var(--color-morado-general);
   font-size: clamp(2.4em,5vw,4em);
   font-weight: 700;
   text-align: center;
@@ -129,7 +129,7 @@
   height: 3px;
   border-style: none;
   border-radius: 10px;
-  background-color: #5a0fc3;
+  background-color: var(--color-morado-general);
   position: relative;
   width: 345px;
 }

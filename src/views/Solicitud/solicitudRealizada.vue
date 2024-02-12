@@ -32,7 +32,7 @@ const inicio = ()=> Router.push({name:'home'})
     font-size: 1.2em;
     padding:10px;
     border-style: none;
-    background-color: #5a0fc3;
+    background-color: var(--color-morado-general);
     color: white;
     border-radius: 20px;
     width: 8em;
@@ -42,7 +42,7 @@ const inicio = ()=> Router.push({name:'home'})
 }
 .agregar:hover{
     transform: translateY(-1px); 
-    background-color: #6413d7;
+    background-color: var(--color-morado-oscuro-general);
 }
 .atento{
     display: flex;

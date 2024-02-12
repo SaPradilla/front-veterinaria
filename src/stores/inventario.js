@@ -233,6 +233,7 @@ export const useInventario = defineStore('inventario', () => {
         updateMedicinadata.value.tipo_medicinaId = updateMedicinadata.value.tipo_medicinaId.id
         updateMedicinadata.value.volumen = updateMedicinadata.value.volumen.toString() + tipoVolumen.value.toString()
         productoService.editarMedicina(Auth.token,updateMedicinadata.value.idMedicina,updateMedicinadata.value)
+        
         .then(res =>{
             console.log(res.data)
             Object.assign(updateMedicinadata.value,{})

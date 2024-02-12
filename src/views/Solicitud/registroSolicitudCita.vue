@@ -13,22 +13,25 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
+
+import ProgressSpinner from 'primevue/progressspinner';
+
+
 import { useCliente } from '../../stores/cliente';
-
-
+import { useFormatear } from '../../stores/formatear';
 
 const Auth = useAuthStore()
 const Permisos = usePermisosUser()
+const Formato = useFormatear()
+
 const Servicios = ref([])
+const loading = ref(false)
 const Router = useRouter()
 const Cliente = useCliente()
 const solicitud = ref({
     tipo_cita:'',
     fecha_cita:'',
 })
-
-const fechaHoy = new Date()
-
 
 onMounted(() => {
     
@@ -53,9 +56,22 @@ const redirigirHome = () =>{
 }
 const agendarCita = ()=>{
 
+    if(!solicitud.value.mascotaId || !solicitud.value.fecha_cita || !solicitud.value.tipo_cita){
+        toast.error('Todos los campos son obligatorios',{
+            position: toast.POSITION.TOP_CENTER
+        })
+        return
+    }
+    // loading.value = true
+
+    // console.log(solicitud.value.fecha_cita)  
+    
     solicitud.value.clienteId = Permisos.userLogin.id
-
-
+    solicitud.value.tipo_cita = solicitud.value.tipo_cita.id 
+    solicitud.value.mascotaId = solicitud.value.mascotaId.id 
+    console.log(solicitud.value)
+    solicitud.value.fecha_cita = new Date(solicitud.value.fecha_cita).toISOString();
+    console.log(solicitud.value.fecha_cita)
     // solicitudService.registrarSolicitud(Auth.token,solicitud.value)
     // .then(res =>{
     //     console.log(res)
@@ -64,6 +80,7 @@ const agendarCita = ()=>{
     //     })
     //     setTimeout(()=>{
     //         Router.push({name:'solicitud-realizada'})
+    //         loading.value = false
     //     },1200)
     // }).catch(err => {
     //     Auth.verificarSesion(err.response.data)
@@ -81,7 +98,7 @@ const month = today.getMonth();
 const day = today.getDate() + 1;
 
 let minYear = year;
-let minMonth = month + 2;
+let minMonth = month ;
 
 if (minMonth >= 12) {
     minMonth -= 12;
@@ -97,41 +114,33 @@ const minDate = ref(new Date(minYear, minMonth, day));
         <div class="formulario">
             <div class="fondo"></div>
             <div class="contenedor-formulario">
-           
-                    <div class="contenido">
+                    <div class="loading" v-if="loading">
+                        <div class="titulos-loading">
+                            <h2>Agendando..</h2>
+                            <strong>Espere por favor</strong>
+                        </div>
+                        <ProgressSpinner  animationDuration=".5s"  />
+
+                    </div>
+                    <div class="contenido" v-else>      
 
                         <div class="titulo">
                             <h2>Agendar Cita</h2>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path  d="M12 14.154q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23Zm-4 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23Zm8 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.539q-.23.23-.54.23ZM12 18q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q12.31 18 12 18Zm-4 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q8.31 18 8 18Zm8 0q-.31 0-.54-.23q-.23-.23-.23-.54q0-.309.23-.539q.23-.23.54-.23q.31 0 .54.23q.23.23.23.54q0 .31-.23.54Q16.31 18 16 18ZM5.615 21q-.69 0-1.152-.462Q4 20.075 4 19.385V6.615q0-.69.463-1.152Q4.925 5 5.615 5h1.77V2.77h1.077V5h7.153V2.77h1V5h1.77q.69 0 1.152.463q.463.462.463 1.152v12.77q0 .69-.462 1.152q-.463.463-1.153.463H5.615Zm0-1h12.77q.23 0 .423-.192q.192-.193.192-.423v-8.77H5v8.77q0 .23.192.423q.193.192.423.192Z"/></svg>
                         </div>
                         <Dropdown v-model="solicitud.tipo_cita" :options="Servicios" checkmark  optionLabel="nombre"  placeholder="Servicio" />
-                        <Calendar showTime hourFormat="12" v-model="solicitud.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" />
+                        
+                        <Calendar showTime hourFormat="12" dateFormat="dd/mm/yy" v-model="solicitud.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" />
+                        
                         <div class="menu-input">
                             <Dropdown v-model="solicitud.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
                             <small @click="">¿Aún no tienes mascotas registradas? <strong>Agregar</strong> </small>
 
                         </div>
-                        <!-- <div class="opciones">
-                            <v-select placeholder="Servicio" name="servicio" v-model="" :options="" :reduce="servicio => servicio.id" label="nombre">
-            
-                            </v-select>
-            
-                        </div>
-                        <FormKit
-                            type="datetime-local"
-                            placeholder="Fecha"
-                            v-model=""
-                            :validation="`required|date_after:${fechaHoy}`"
-                            validation-visibility="live"
-                            :validation-messages="{
-                                required:'Fecha es requerida',
-                                date_after:'Solo se permite fechas proximas a la actual'
-                            }"
-                        /> -->
                         <div class="botones">
                             <Button @click="agendarCita"  label="Agendar" />
 
-                            <!-- <FormKit style="width: 240px;" type="submit" label="Agendar"/> -->
+     
                             <small @click="redirigirHome">Cancelar</small>
 
                         </div>
@@ -146,7 +155,18 @@ const minDate = ref(new Date(minYear, minMonth, day));
 
 
 <style scoped>
-
+.loading{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+.titulos-loading{
+    text-align: center;
+}
+small{
+    cursor: pointer;
+}
 .menu-input{
     display: flex;
     flex-direction: column;

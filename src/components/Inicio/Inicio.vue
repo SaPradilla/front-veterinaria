@@ -88,7 +88,7 @@ const Inicio = useInicio()
 .botonCita {
     padding: 10px;
     border-style: none;
-    background-color: #5a0fc3;
+    background-color: var(--color-morado-general);
     color: white;
     border-radius: 15px;
     width: 10em;
@@ -100,7 +100,7 @@ const Inicio = useInicio()
 
 .botonCita:hover {
     transform: scale(0.9);
-    background-color: #6413d7;
+    background-color: var(--color-morado-oscuro-general);
 
 }
 @media (max-width: 768px) {

@@ -6,8 +6,8 @@ export default {
             { headers: {'auth-token': token}}
         )
     },
-    obtenerCitas(token,page,size){
-        return api.get(`/admin/list/medical-appointment?page=${page}&size=${size}`,
+    obtenerCitas(token){
+        return api.get(`/admin/list/medical-appointment`,
             { headers: {'auth-token': token}}
         )
     },
@@ -16,10 +16,15 @@ export default {
         { headers: {'auth-token': token}}
     )},
 
-    aprobarSolicitudes(token,id){
-        return api.put(`/admin/approve/request-appointment/${id}`, {}, {
+    aprobarSolicitudes(token,id,data){
+        return api.put(`/admin/approve/request-appointment/${id}`, data, {
             headers: {'auth-token': token}
         })
     },
+    cambiarFechaCita(token,id,data){
+        return api.put(`/admin/edit/date/medical-appointment/${id}`,data,{
+            headers: {'auth-token': token}
+        })
+    }
     
 }

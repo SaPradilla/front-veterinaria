@@ -207,7 +207,7 @@ h2 {
 }
 
 >>> {
-    --vs-dropdown-option--active-bg: #5A0FC3;
+    --vs-dropdown-option--active-bg: var(--color-morado-general);
     --vs-dropdown-option--active-color: #eeeeee;
 }
 .agregar{
@@ -216,7 +216,7 @@ h2 {
     font-size: 1.2em;
     padding:10px;
     border-style: none;
-    background-color: #5a0fc3;
+    background-color: var(--color-morado-general);
     color: white;
     border-radius: 20px;
     width: 8em;
@@ -226,7 +226,7 @@ h2 {
 }
 .agregar:hover{
     transform: translateY(-1px); 
-    background-color: #6413d7;
+    background-color: var(--color-morado-oscuro-general);
 }
     
 .formulario {

@@ -62,7 +62,7 @@
 }
 
 .nosotros .texto-nosotros {
-    color: #5a0fc3;
+    color: var(--color-morado-general);
     font-size: clamp(2rem, 5vw, 4em);
     font-weight: 700;
     position: relative;
@@ -130,7 +130,7 @@
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-style: none;
     background-color: #ffffff;
-    color: #5a0fc3;
+    color: var(--color-morado-general);
     border-radius: 10px;
     transition: all 0.2s ease;
     cursor: pointer;

@@ -68,6 +68,7 @@ const getSeverity = (estado) => {
 
 <template>
 	<div class="contenedor-empleados">
+
 		<div class="contenedor-boton">
 			<div class="contenido-boton">
 				<SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
@@ -78,9 +79,7 @@ const getSeverity = (estado) => {
 				</SplitButton>
 			</div>
 		</div>
-		<!-- <div class="contenedor-boton">
-			<button @click="" class="botonAgregar">Añadir Empleado</button>
-		</div> -->
+
 		<div class="contenido-empleados">
 			<h1>Empleados</h1>
 			<div v-if="selectOpcion" @click="handleSelectOption()" class="botones-accion">
@@ -214,6 +213,7 @@ const getSeverity = (estado) => {
 				</div>
 			</div> -->
 		</div>
+
 	</div>
 </template>
 
@@ -236,7 +236,7 @@ const getSeverity = (estado) => {
 }.menu{
 	/* cursor: pointer; */
 	color: white;
-	background-color: #8B5CF6;
+	background-color: var(--color-morado-general);
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -252,8 +252,10 @@ const getSeverity = (estado) => {
 
 h1 {
 	color: var(--color-morado-general);
-	font-weight: 700;
+	font-weight: 700;	
 	text-align: center;
+	font-size: clamp(1em,5vw,3em);
+
 }
 
 .contenido-empleados {
@@ -270,129 +272,4 @@ h1 {
 	justify-content: right;
 }
 
-.botonAgregar {
-
-	padding: 10px;
-	border-style: none;
-	background-color: #5a0fc3;
-	color: white;
-	border-radius: 25px;
-	width: 25vh;
-	cursor: pointer;
-	font-size: 1.2em;
-	transition: all 0.2s ease;
-}
-
-.botonAgregar:hover {
-	transform: scale(0.9);
-	background-color: #6413d7;
-
-}
-
-
-
-table {
-	background-color: white;
-	box-shadow: 0px 10px 15px -20px rgba(0, 0, 0, 0.1);
-	width: 120vh;
-	border-collapse: collapse;
-	overflow: hidden;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-	text-align: center;
-}
-
-thead {
-	background-color: var(--color-morado-general);
-	height: 50px;
-}
-
-th {
-	font-weight: 500;
-	font-size: 1.3em;
-	padding-left: 50px;
-
-	color: white;
-}
-
-tr {
-	border-top-style: solid;
-	border-top-color: var(--color-gris-claro);
-	border-top-width: 0, 2px;
-}
-
-td {
-	height: 10px;
-	padding: 20px;
-	background-color: rgba(255, 255, 255, 0.2);
-	color: black;
-
-}
-
-img.foto-mascota {
-
-	height: 50px;
-	width: 50px;
-	border-radius: 100%;
-
-
-}
-
-div.circulo {
-	border-radius: 100%;
-	height: 20px;
-	width: 20px;
-	margin: 0 auto;
-}
-
-div.circulo {
-	color: var(--color-verde-ok);
-	background-color: var(--color-verde-ok);
-}
-
-p.titulo-estado {
-	text-align: center;
-}
-
-div.contenedor-estado {
-	transition: all 0.2s ease;
-	cursor: pointer;
-}
-
-div.contenedor-estado:hover {
-	filter: brightness(50%);
-}
-
-div.contenedor-estado.activo .circulo {
-	background-color: var(--color-verde-ok);
-}
-
-div.contenedor-estado.activo p.titulo-estado {
-	color: var(--color-verde-ok);
-}
-
-div.contenedor-estado.inactivo .circulo {
-	background-color: var(--color-rojo);
-}
-
-div.contenedor-estado.inactivo p.titulo-estado {
-	color: var(--color-rojo);
-}
-
-
-.boton-perfil button {
-	width: max-content;
-	padding: 10px;
-	border-style: none;
-	background-color: #5a0fc3;
-	color: white;
-	border-radius: 20px;
-
-	transition: all 0.2s ease;
-	cursor: pointer;
-}
-
-.boton-perfil button:hover {
-	transform: scale(0.9);
-	background-color: #6413d7;
-}</style>
+</style>	

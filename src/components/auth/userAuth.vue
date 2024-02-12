@@ -22,7 +22,7 @@ const handleMenu = (event) => {
 <template>
     <div class="container">
 
-        <div class="contenedor-principal">
+        <div class="contenedor-principal-user">
 
             <div class="saludo">
                 <p class="nombrePerfil"> <span>Hola, </span> {{ PermisoUser.userLogin.nombre ? PermisoUser.userLogin.nombre :
@@ -74,6 +74,7 @@ const handleMenu = (event) => {
     background-color: rgb(227, 227, 227);
 }
 .container {
+    /* z-index: 1400; */
     /* max-height: clamp(3vh,6vw,15vh); */
     border-bottom: solid 1px rgb(197, 197, 197);
     background-color: var(--color-morado-general);
@@ -105,7 +106,7 @@ p.rol {
     font-style: italic;
 }
 
-.contenedor-principal {
+.contenedor-principal-user {
     display: flex;
     align-items: center;
     justify-content: space-between;

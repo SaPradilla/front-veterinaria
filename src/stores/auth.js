@@ -192,7 +192,7 @@ export const useAuthStore = defineStore('auth', () =>{
 
             localStorage.clear()
             token.value = null
-            toast.info('No has iniciado sesión',
+            toast.info('Tu sesión ha expirado',
             { position: toast.POSITION.TOP_CENTER}
             )
             setTimeout(()=>{

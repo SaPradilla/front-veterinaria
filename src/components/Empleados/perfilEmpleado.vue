@@ -119,7 +119,7 @@ p.x:hover {
     color: var(--color-morado-general);
 }
 .modal {
-    z-index: 1001;
+    z-index: 1200;
     position: fixed;
     height: 100%;
     width: 100%;
