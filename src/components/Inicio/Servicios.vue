@@ -113,34 +113,34 @@ h1.text-tittle {
 
 /* tamaño icons */
 .servicios .citas-icon {
-    height: 134px;
-    width: 153px;
+    height: 100px;
+    width: 100px;
 }
 
 .servicios .guarderia-icon {
-    height: 133px;
+    height: 100px;
 
-    width: 118px;
+    width: 100px;
 }
 
 .servicios .perro-icon {
-    height: 184px;
-    width: 123px;
+    height: 100px;
+    width: 100px;
 }
 
 .servicios .cirugia-icon {
-    height: 146px;
-    width: 146px;
+    height: 100px;
+    width: 100px;
 }
 
 .servicios .urgencia-icon {
-    height: 157px;
-    width: 157px;
+    height: 100px;
+    width: 100px;
 }
 
 .servicios .funeraria-icon {
-    height: 127px;
-    width: 127px;
+    height: 100px;
+    width: 100px;
 }
 
 /* Hover servicios */

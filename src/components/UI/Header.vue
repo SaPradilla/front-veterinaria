@@ -109,7 +109,7 @@ const items = [
         <div @click="toggleUserModal" v-if="userModal" class="menu-user">
 
             <div class="menu">
-                <div class="user-cuenta" @click="router.push({name:'perfil'})">
+                <div class="user-cuenta" @click="router.push({name:'info-perfil'})">
                     <p class="arriba">Ver Cuenta</p>
                     <i class="pi pi-user" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></i>
                 </div>

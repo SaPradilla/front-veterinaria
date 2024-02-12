@@ -7,6 +7,8 @@ import 'primeicons/primeicons.css'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
 import  vSelect   from 'vue-select';
 import "vue-select/dist/vue-select.css";
@@ -28,6 +30,9 @@ app.component("v-select", vSelect )
 app.component(FullCalendar)
 app.use(dayGridPlugin)
 app.use(interactionPlugin)
+
+app.use(ToastService);
+app.use(ConfirmationService);
 
 app.use(PrimeVue);
 app.use(createPinia())

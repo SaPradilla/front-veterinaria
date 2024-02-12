@@ -23,6 +23,11 @@ export default {
         return api.get(`/clientes/list/pets-client/${id}`,{
             headers: {'auth-token': token}
         })
+    },
+    registrarMascotaCliente(token,data){
+        return api.post('/clientes/register/pet',data,{
+            headers: {'auth-token': token}
+        })
     }
 
 }

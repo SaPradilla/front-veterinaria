@@ -70,22 +70,26 @@ ul#vs6__listbox{
    }
 }
 
+
+/* Primevue */
 .p-datatable-wrapper{
 	height: clamp(20vh,30vw,34vh);
 }
 .p-speeddial-item{
-    /* margin: 20px; */
     margin-left: 20px;
 }
-/* .contenedor-principal-user .p-component 
-{
-    z-index: 1400 !important;
-}  */
 .p-overlaypanel .p-overlaypanel-content,
 .p-overlaypanel .p-overlaypanel-content  {
     padding: 0;
 }
-
+.p-tabview .p-tabview-panels {
+    height:60vh;
+    width: 160vh;
+}
+.p-selectbutton .p-button.p-highlight::before{
+    background: var(--color-morado-claro-general);
+    color: white;
+}
 
 /* Estilos botones */
 

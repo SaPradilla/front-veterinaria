@@ -175,7 +175,18 @@ const router = createRouter({
     },{
       path:'/perfil',
       name:'perfil',
-      component: ()=> import('../views/User/PerfilUserView.vue')
+      component: ()=> import('../views/User/PerfilUserView.vue'),
+      children:[
+        {
+          path:'/perfil',
+          name:'info-perfil',
+          component: ()=> import('../views/User/InfoUser.vue')
+        }
+      ]
+    },{
+      path:'/registro-mascota',
+      name:'registro-mascota-user',
+      component: ()=> import('../views/User/RegistrarMascota.vue')
     }
   ]
 })

@@ -13,6 +13,10 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tag from 'primevue/tag'
 import Button from 'primevue/button';
+import ConfirmDialog from 'primevue/confirmdialog';
+import { useConfirm } from "primevue/useconfirm";
+
+
 import { toast } from 'vue3-toastify'
 
 const selectOpcion = ref(false)
@@ -32,9 +36,11 @@ const handleSelectOption = ()=> selectOpcion.value = !selectOpcion.value
 const Empleado = useEmpleado()
 const Cliente = useCliente()
 const Paginacion = usePaginacion()
-
 const Auth = useAuthStore()
 const Admin = useAdmin()
+
+const confirm = useConfirm();
+
 
 onMounted(() => {
 	Auth.ObtenerToken()
@@ -63,10 +69,35 @@ const handleClick = () => {
 const getSeverity = (estado) => {
 	return estado ? 'success' : 'warning'
 }
+const onRowSelect = (event) => {
+	
+	selectEmployee.value = event.data
+	confirmVerCliente()
+};
+
+
+
+const confirmVerCliente = () => {
+    confirm.require({
+        message: 'Quieres visualizar el cliente?',
+        header: 'Confirmacion',
+        icon: 'pi pi-exclamation-triangle',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        rejectLabel: 'Cancelar',
+        acceptLabel: 'Ir',
+        accept: () => {
+            Empleado.verEmpleado(selectEmployee.value)
+        },
+        reject: () => {
+           
+        }
+    });
+};
 
 </script>
 
 <template>
+	<ConfirmDialog></ConfirmDialog>
 	<div class="contenedor-empleados">
 
 		<div class="contenedor-boton">
@@ -100,8 +131,19 @@ const getSeverity = (estado) => {
 					<th>Email</th>
 					<th>Rol</th>
 					<th>Estado</th> -->
-				<DataTable v-model:selection="selectEmployee" dataKey="id" :value="Empleado.empleados" paginator :rows="5"
-					stripedRows :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+				<DataTable
+					v-model:selection="selectEmployee" 
+					dataKey="id" 
+					:value="Empleado.empleados"
+					selectionMode="single"
+					paginator 
+					:rows="5"
+					:metaKeySelection="false"
+					@row-dblclick="onRowSelect"
+					:rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
+		
+					
+					>
 
 					<Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
 
@@ -127,7 +169,7 @@ const getSeverity = (estado) => {
 								:severity="getSeverity(slotProps.data.isActive)" />
 						</template>
 					</Column>
-
+					<!-- <button @click="">Ver</button> -->
 
 				</DataTable>
 			</div>
@@ -168,7 +210,7 @@ const getSeverity = (estado) => {
 							<td>
 								<div class="boton-perfil">
 							
-									<button @click="Empleado.verEmpleado(empleado)">Ver</button>
+									
 								</div>
 							</td>
 							<td @click=""

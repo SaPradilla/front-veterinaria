@@ -7,6 +7,8 @@ import { usePaginacion } from "./paginacion";
 import { useModals } from "./modals";
 import { useRouter } from "vue-router";
 import { useFormatear } from "./formatear";
+import { usePermisosUser } from "./permisosUser";
+import clienteService from "../services/clienteService";
 
 export const useMascota = defineStore('mascota', () => {
     // Stores
@@ -16,6 +18,8 @@ export const useMascota = defineStore('mascota', () => {
     const Modals = useModals()
     const Router = useRouter()
     const Formato = useFormatear()
+    const Permiso = usePermisosUser()
+    const router = useRouter()
     // states
     const mascota = ref({
         clienteId: null,
@@ -39,14 +43,58 @@ export const useMascota = defineStore('mascota', () => {
         raza: '',
         vacunas:'',
     })
-
+    const mascotaCliente = ref({
+        genero:true
+    })
+    const opcionEdad = ref(' Años')
     // Metodos
 
 
+    const extraerNombres = (arregloDeObjetos) =>{
+        return arregloDeObjetos.map(objeto => objeto.name);
+    }
+    const registrarMascotaCliente = ()=>{
+        // mascotaCliente.value.genero = mascotaCliente.value.genero ? 'Hembra' : 'Macho' 
+
+        // console.log( mascotaCliente.value.raza)
+        mascotaCliente.value.raza = mascotaCliente.value.raza.label
+
+        mascotaCliente.value.tipo_mascota = mascotaCliente.value.tipo_mascota.label
+
+        mascotaCliente.value.vacunas = extraerNombres(mascotaCliente.value.vacunas)
+        mascotaCliente.value.vacunas = JSON.stringify(mascotaCliente.value.vacunas)
+
+        mascotaCliente.value.clienteId = Permiso.userLogin.id
+
+        const edad =  `${mascotaCliente.value.edad.toString()}${opcionEdad.value}`
+
+        mascotaCliente.value.edad = edad
+
+        console.log(mascotaCliente.value)
+        
+        clienteService.registrarMascotaCliente(Auth.token,mascotaCliente.value)
+        .then( res =>{
+            
+            toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_CENTER
+            })
+            Object.assign(mascotaCliente.value,{})
+            router.push({name:'info-perfil'})
+        })
+        .catch(err =>{
+            console.log(err)
+              toast.error('Error al Registrar la Mascota',{
+                position: toast.POSITION.TOP_CENTER
+            })
+            Auth.verificarSesion(err.response.data)
+        })
+    }
 
     const registrarMascota = () =>{
-        mascota.value.vacunas = JSON.stringify(mascota.value.vacunas)
+        
+        
         mascotaService.registarMascota(mascota.value,Auth.token)
+
         .then( res =>{
             // console.log(res)
             // Mensaje 
@@ -64,12 +112,13 @@ export const useMascota = defineStore('mascota', () => {
             })
         })
         .catch(err =>{
-            Auth.verificarSesion(err.response.data)
             console.log(err)
               // Mensaje 
               toast.error('Error al Registrar la Mascota',{
                 position: toast.POSITION.TOP_CENTER
             })
+            Auth.verificarSesion(err.response.data)
+
         })
     }
 
@@ -155,14 +204,16 @@ export const useMascota = defineStore('mascota', () => {
         mascotas,
         perfilMascota,
         MascotaUpdate,
-        
+        mascotaCliente,
+        opcionEdad,
+
         registrarMascota,
         obtenerMascotas,
         cambiarEstadoMascota,
         redirigirEditarMascota,
         verPerfilMascota,
         editarMascota,
-        
+        registrarMascotaCliente,
 
     }
 })
