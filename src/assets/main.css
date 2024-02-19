@@ -100,6 +100,18 @@ ul#vs6__listbox{
     background: var(--color-morado-claro-general);
     color: white;
 }
+.p-sidebar .p-component .p-ripple-disabled{
+    padding: 0;
+    margin: 0;
+}
+
+.p-sidebar-header{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
 
 /* Estilos botones */
 
