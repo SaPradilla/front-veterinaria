@@ -1,0 +1,14 @@
+https://console.cloud.google.com/
+
+>> URI de redireccionamiento autorizados
+https://developers.google.com/oauthplayground
+
+>> Authorize APis
+https://mail.google.com/
+
+>> https://my.stripo.email 
+
+
+
+# token vencido para probar #
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJub21icmUiOiJBbmRyZXMiLCJhcGVsbGlkbyI6IlNhbnRpYWdvIiwibnVtZXJvX2NlbHVsYXIiOiIzMTc2MTc4Mjc1NiIsImVtYWlsIjoibG9sYXB0MTk4NUBnbWFpbC5jb20iLCJkaXJlY2Npb24iOm51bGwsImNvbnRyYXNlbmEiOiIkMmIkMTAkbHhwd2FyRzk0OUdRVDVsQ1d6L04xT2VNSzdiSHNNQXBvb0ZqLjNjcU5pNDdJNnhKWGpMSnkiLCJjcmVhdGVkQXQiOiIyMDI0LTAyLTExVDEzOjU1OjE4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTAyLTExVDEzOjU1OjE4LjAwMFoifSwiaWF0IjoxNzA3NzA1MDg0LCJleHAiOjE3MDc3MTIyODR9.FOO88UV6eRDl8XhWqlVKu7-CBqbq4zTgPaSFGtrIlPU   

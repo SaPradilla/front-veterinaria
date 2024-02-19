@@ -8,17 +8,18 @@ html {
     scroll-behavior: smooth;
 }
 :root {
-        --color-verde-ok:rgba(115, 182, 126, 1);
-        --color-rojo: #D9755E;
-        --color-gris-claro: #F2F2F287;
-        --color-blanco: #FFFFFF;
-        --color-gris: #979797;
-        --color-gris-oscuro: #696969;
-        --color-blanco-input:#F8FFF4;
-        --color-morado-general:#8B5CF6;
-        --color-morado-oscuro-general: #6140AC ;
-        --color-morado-claro-general:#A17BF8; 
-        --color-morado-muy-claro:#F5F3FF; 
+    --color-verde-ok:rgba(115, 182, 126, 1);
+    --color-rojo: #D9755E;
+    --color-gris-claro: #F2F2F287;
+    --color-blanco: #FFFFFF;
+    --color-gris: #979797;
+    --color-gris-oscuro: #696969;
+    --color-blanco-input:#F8FFF4;
+    --color-morado-general:#8B5CF6;
+    --color-morado-oscuro-general: #6140AC ;
+    --color-morado-claro-general:#A17BF8; 
+    --color-morado-claro-genera1l:#cdb9fd; 
+    --color-morado-muy-claro:#F5F3FF; 
 }
 .vs__dropdown-toggle{
     background-color: white !important;
@@ -75,6 +76,11 @@ ul#vs6__listbox{
 .p-datatable-wrapper{
 	height: clamp(20vh,30vw,34vh);
 }
+.contenedor-citas .p-datatable-wrapper,
+.mis-mascotas .p-datatable-wrapper
+{
+	height: auto;
+}
 .p-speeddial-item{
     margin-left: 20px;
 }
@@ -83,8 +89,12 @@ ul#vs6__listbox{
     padding: 0;
 }
 .p-tabview .p-tabview-panels {
-    height:60vh;
-    width: 160vh;
+    height:35em;
+    /* width: 160vh; */
+}
+.info-historia .p-tabview .p-tabview-panels{
+    height:10em;
+    width:auto; 
 }
 .p-selectbutton .p-button.p-highlight::before{
     background: var(--color-morado-claro-general);

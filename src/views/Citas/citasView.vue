@@ -46,16 +46,18 @@ onMounted(async () => {
 
     try {
         const res = await citasService.obtenerCitas(Auth.token)
+        if(res.data.CitaMedica){
+            citasData.value = res.data.CitaMedica;
+            calendarEvents.value = res.data.CalendarData
+    
+            console.log(citasData.value)
+            console.log(res.data.CalendarData)
+            console.log(calendarEvents.value)
+            calendarOptions.events = res.data.CalendarData
+        }
 
-        citasData.value = res.data.CitaMedica;
-        calendarEvents.value = res.data.CalendarData
-
-        console.log(citasData.value)
-        console.log(res.data.CalendarData)
-        console.log(calendarEvents.value)
-        calendarOptions.events = res.data.CalendarData
     } catch (error) {
-        console.error('Error al cargar citas:', error);
+        // console.error('Error al cargar citas:', error);
     }
 })
 
@@ -121,17 +123,15 @@ const calendarOptions = {
     <div class="contenedor-principal">
         <!-- <h1>Citas</h1> -->
 
-
-
         <div class="contenedor-solicitudes">
             <h2>Solicitudes pendientes</h2>
-            <DataTable :value="Citas.solicitudes" tableStyle="min-width: 50rem" paginator :rows="5" stripedRows
+            <DataTable :value="Citas.solicitudes" paginator :rows="5" stripedRows
                 :rowsPerPageOptions="[5, 10, 20, 50]">
 
                 <Column field="servicio.nombre" header="Tipo"></Column>
                 <Column header="Cliente">
                     <template #body="slotProps">
-                        <img class="cliente" @click="Cliente.verCliente(slotProps.data.cliente.id, Auth.token)"
+                        <img class="cliente" @click="Cliente.verClienteAdmin(slotProps.data.cliente.id, Auth.token)"
                             src="../../assets/img/Cliente.svg" alt="">
                     </template>
                 </Column>
@@ -162,7 +162,7 @@ const calendarOptions = {
 
             <div class="calendar">
                 <h2>Calendario</h2>
-                <FullCalendar v-if="calendarEvents.length > 0" :options="calendarOptions">
+                <FullCalendar v-if=" calendarEvents &&  calendarEvents.length > 0" :options="calendarOptions">
                     <template v-slot:eventContent='arg'>
                         <div class="custom-event" :class="getSeverity(arg.event.extendedProps[2].value)">
                             <b>{{ arg.event.title }}</b>
@@ -179,7 +179,7 @@ const calendarOptions = {
                         </div>
                     </template>
                 </FullCalendar>
-
+                <p v-else>No hay citas </p>
             </div>
 
             <div class="contenedor-citas">
@@ -200,7 +200,7 @@ const calendarOptions = {
                     <div class="citas">
                         <h2>Listado</h2>
 
-                        <DataTable :value="Citas.citas" tableStyle="min-width: 5rem" paginator :rows="5" stripedRows
+                        <DataTable v-if="Citas.citas.length > 0 " :value="Citas.citas" tableStyle="min-width: 5rem" paginator :rows="5" stripedRows
                             :rowsPerPageOptions="[5, 10, 20, 50]">
                             <Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
                             <Column header="Estado">
@@ -223,7 +223,7 @@ const calendarOptions = {
 
 
                         </DataTable>
-
+                        <p v-else> No hay citas</p>
 
                     </div>
 

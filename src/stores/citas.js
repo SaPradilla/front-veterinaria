@@ -77,6 +77,12 @@ export const useCita= defineStore('citas',  () =>{
             })
             return
         }
+        // si la fecha es igual a la fecha actualizada quiere decir que la fecha no fue
+        // manipulada por lo tanto se borra, querra decir que la fecha fue aprobada
+        if(solicitudData.value.fecha_actualizada === solicitudData.value.fecha){
+            delete solicitudData.value.fecha_actualizada
+        }
+
         solicitudData.value.empleadoId = Permisos.userLogin.id
         solicitudData.value.fecha_cita = solicitudData.value.fecha
 
@@ -100,26 +106,14 @@ export const useCita= defineStore('citas',  () =>{
 
         console.log(solicitud)
         solicitudData.value = solicitud
-        solicitudData.value.fecha = new Date(solicitudData.value.fecha).toISOString().slice(0, 19).replace('T', ' '),
-        // Formato.formartoFechaInput(solicitudData.value.fecha)
-        // citaData.value = solicitud
-        // citaData.value.clienteId = solicitud.cliente
-        // citaData.value.tipo_cita = solicitud.servicio
+        const fecha = new Date(solicitudData.value.fecha).toISOString().slice(0, 19).replace('T', ' ')
 
+        solicitudData.value.fecha_actualizada = fecha
+        solicitudData.value.fecha_actualizada = fecha
 
         router.push({name:'aceptar-citas'})
 
-        // citasService.aprobarSolicitudes(Auth.token,id)
-        // .then(res=>{
 
-        //     toast.success('Solicitud Aprobada',{
-        //         position: toast.POSITION.TOP_RIGHT
-        //     })
-
-        // }).catch(err => {
-        //     console.log(err)
-        //     Auth.verificarSesion(err.response.data.message)
-        // })
     }
     const crearCita = ()=>{
         citaData.value.empleadoId = Permisos.userLogin.id

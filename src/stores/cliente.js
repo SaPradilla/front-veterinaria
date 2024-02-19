@@ -24,7 +24,7 @@ export const useCliente = defineStore('cliente', () => {
             Auth.verificarSesion(err.response.data)
         })
     }
-    const verCliente = (id,token) =>{
+    const verClienteAdmin = (id,token) =>{
         clienteService.obtenerClienteAdmin(id,token)
         .then(res =>{
             // console.log(res)
@@ -35,7 +35,19 @@ export const useCliente = defineStore('cliente', () => {
             Auth.verificarSesion(err.response.data)
         })
     }
+    const verCliente = (id,token) =>{
 
+        clienteService.obtenerCliente(id,token)
+        .then(res =>{
+            // console.log(res)
+            cliente.value = res.data.Cliente
+            Modals.toggleModalCliente()
+            
+        }).catch(err =>{
+            console.log(err)
+            Auth.verificarSesion(err.response.data)
+        })
+    }
     const verMascotasCliente = (id) => {
         clienteService.obtenerMascotasCliente(Auth.token,id)
 
@@ -53,8 +65,9 @@ export const useCliente = defineStore('cliente', () => {
         cliente,
         mascotasCliente,
 
-        verClientes,
         verCliente,
+        verClientes,
+        verClienteAdmin,
         verMascotasCliente,
     }
 })

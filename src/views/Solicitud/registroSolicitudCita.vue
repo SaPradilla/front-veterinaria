@@ -62,33 +62,31 @@ const agendarCita = ()=>{
         })
         return
     }
-    // loading.value = true
 
-    // console.log(solicitud.value.fecha_cita)  
-    
+    loading.value = true
+
     solicitud.value.clienteId = Permisos.userLogin.id
     solicitud.value.tipo_cita = solicitud.value.tipo_cita.id 
     solicitud.value.mascotaId = solicitud.value.mascotaId.id 
-    console.log(solicitud.value)
-    solicitud.value.fecha_cita = new Date(solicitud.value.fecha_cita).toISOString();
-    console.log(solicitud.value.fecha_cita)
-    // solicitudService.registrarSolicitud(Auth.token,solicitud.value)
-    // .then(res =>{
-    //     console.log(res)
-    //     toast.success('Solicitud Registrada',{
-    //         position: toast.POSITION.TOP_CENTER
-    //     })
-    //     setTimeout(()=>{
-    //         Router.push({name:'solicitud-realizada'})
-    //         loading.value = false
-    //     },1200)
-    // }).catch(err => {
-    //     Auth.verificarSesion(err.response.data)
-    //     console.log(err)
-    //     toast.error('Error al registrar la Solicitud',{
-    //         position: toast.POSITION.TOP_CENTER
-    //     })
-    // })
+
+    solicitudService.registrarSolicitud(Auth.token,solicitud.value)
+    .then(res =>{
+        console.log(res)
+        toast.success('Solicitud Registrada',{
+            position: toast.POSITION.TOP_CENTER
+        })
+        setTimeout(()=>{
+            Router.push({name:'solicitud-realizada'})
+            loading.value = false
+        },1200)
+    }).catch(err => {
+        Auth.verificarSesion(err.response.data)
+        console.log(err)
+        toast.error('Error al registrar la Solicitud',{
+            position: toast.POSITION.TOP_CENTER
+        })
+        loading.value = false   
+    })
 }
 
 
@@ -134,7 +132,7 @@ const minDate = ref(new Date(minYear, minMonth, day));
                         
                         <div class="menu-input">
                             <Dropdown v-model="solicitud.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
-                            <small @click="">¿Aún no tienes mascotas registradas? <strong>Agregar</strong> </small>
+                            <small @click="">¿Aún no tienes mascotas registradas? <strong @click="Router.push({ name: 'registro-mascota-user' })">Agregar</strong> </small>
 
                         </div>
                         <div class="botones">

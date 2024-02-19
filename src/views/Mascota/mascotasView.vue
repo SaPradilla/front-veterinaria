@@ -14,7 +14,9 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tag from 'primevue/tag'
 import Button from 'primevue/button';
-import {toast} from 'vue3-toastify'
+import { toast } from 'vue3-toastify'
+import ConfirmDialog from 'primevue/confirmdialog';
+import { useConfirm } from "primevue/useconfirm";
 
 const Cliente = useCliente()
 const Paginacion = usePaginacion()
@@ -22,16 +24,17 @@ const Paginacion = usePaginacion()
 const Mascota = useMascota()
 const Auth = useAuthStore()
 const Admin = useAdmin()
+const confirm = useConfirm();
 
 
 
 const items = [
 	{
-		label:'Nueva Mascota',
-		command:()=> Admin.handleRegistroMascota()
-	},{
-		label:'Editar',
-		command:()=> handleSelectOption()
+		label: 'Nueva Mascota',
+		command: () => Admin.handleRegistroMascota()
+	}, {
+		label: 'Editar',
+		command: () => handleSelectOption()
 	}
 ]
 const selectOpcion = ref(false)
@@ -44,11 +47,11 @@ onMounted(() => {
 })
 
 
-const handleSelectOption = ()=> selectOpcion.value = !selectOpcion.value
+const handleSelectOption = () => selectOpcion.value = !selectOpcion.value
 
-const edit = ()=>{
-	if(!selectPet.value){
-		toast.error('Selecciona una mascota para editar',{
+const edit = () => {
+	if (!selectPet.value) {
+		toast.error('Selecciona una mascota para editar', {
 			transition: toast.TRANSITIONS.ZOOM,
 			autoClose: 1000,
 			position: toast.POSITION.TOP_RIGHT
@@ -66,9 +69,35 @@ const handleClick = () => {
 const getSeverity = (estado) => {
 	return estado ? 'success' : 'warning'
 }
+const onRowSelect = (event) => {
+	
+	selectPet.value = event.data
+	confirmVerMascota()
+};
+
+
+const confirmVerMascota = () => {
+    confirm.require({
+        message: `¿Quiere ver el perfil de ${selectPet.value.nombre}?`,
+        header: 'Confirmacion',
+        // icon: 'pi pi-exclamation-triangle',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        rejectLabel: 'Cancelar',
+        acceptLabel: 'Ir',
+        accept: () => {
+			Mascota.verPerfilMascota(selectPet.value)
+            // Empleado.verEmpleado(selectEmployee.value)
+        },
+        reject: () => {
+           
+        }
+    });
+};
+
 </script>
 
 <template>
+	<ConfirmDialog></ConfirmDialog>
 	<div class="contenedor-mascotas">
 		<div class="contenedor-boton">
 			<div class="contenido-boton">
@@ -83,7 +112,7 @@ const getSeverity = (estado) => {
 		<!-- <div class="contenedor-boton">
 			<button @click="" class="botonAgregar">Añadir Mascota</button>
 		</div> -->
-		
+
 		<div class="contenido-mascotas">
 			<h1>Mascotas</h1>
 			<div v-if="selectOpcion" @click="handleSelectOption()" class="botones-accion">
@@ -93,8 +122,18 @@ const getSeverity = (estado) => {
 			</div>
 			<div class="lista-mascotas">
 
-				<DataTable v-model:selection="selectPet" dataKey="id" :value="Mascota.mascotas" paginator :rows="5"
-					stripedRows :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+				<DataTable 
+				v-model:selection="selectPet" 
+				dataKey="id" 
+				:value="Mascota.mascotas"
+				selectionMode="single"
+				paginator 
+				:rows="5"
+				stripedRows 
+				:rowsPerPageOptions="[5, 10, 20, 50]" 
+				tableStyle="min-width: 50rem"
+				@row-dblclick="onRowSelect"
+				>
 
 					<Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
 					<Column class="col" field="nombre" header="Nombre" sortable style="width: 25%"></Column>
@@ -103,9 +142,9 @@ const getSeverity = (estado) => {
 					<Column class="col" field="edad" sortable header="Edad" style="width: 25%"></Column>
 					<Column class="col" field="genero" sortable header="Genero" style="width: 25%"></Column>
 
-					<Column header="Dueño" >
+					<Column header="Dueño">
 						<template #body="slotProps">
-							<img @click="Cliente.verCliente(slotProps.data.cliente.id, Auth.token)"
+							<img @click="Cliente.verClienteAdmin(slotProps.data.cliente.id, Auth.token)"
 								src="../../assets/img/Cliente.svg" alt="">
 						</template>
 					</Column>
@@ -120,13 +159,13 @@ const getSeverity = (estado) => {
 
 				</DataTable>
 			</div>
-			
+
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.botones-accion{
+.botones-accion {
 	display: flex;
 	gap: 20px;
 
@@ -136,11 +175,14 @@ const getSeverity = (estado) => {
 	display: flex;
 	justify-content: right;
 }
-.contenido-boton{
+
+.contenido-boton {
 	display: flex;
 	z-index: 1;
 	flex-direction: column;
-}.menu{
+}
+
+.menu {
 	/* cursor: pointer; */
 	color: white;
 	background-color: var(--color-morado-general);
@@ -152,12 +194,13 @@ const getSeverity = (estado) => {
 	border-radius: 10px 0px 0px 10px;
 	text-align: center;
 }
+
 .tag-estado {
 	cursor: pointer;
 }
-	
+
 h1 {
-	font-size: clamp(1em,5vw,3em);
+	font-size: clamp(1em, 5vw, 3em);
 
 	color: var(--color-morado-general);
 	font-weight: 700;
@@ -174,7 +217,7 @@ h1 {
 }
 
 .lista-mascotas {
-	height: clamp(20vh,30vw,50vh);
+	height: clamp(20vh, 30vw, 50vh);
 	width: 100%;
 }
 
@@ -226,5 +269,4 @@ img.foto-mascota {
 .boton-perfil button:hover {
 	transform: scale(0.9);
 	background-color: var(--color-morado-oscuro-general);
-}
-</style>
+}</style>

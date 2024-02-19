@@ -10,6 +10,7 @@ import { useFormatear } from "./formatear";
 import { usePermisosUser } from "./permisosUser";
 import clienteService from "../services/clienteService";
 
+
 export const useMascota = defineStore('mascota', () => {
     // Stores
     const Paginacion = usePaginacion()
@@ -44,25 +45,71 @@ export const useMascota = defineStore('mascota', () => {
         vacunas:'',
     })
     const mascotaCliente = ref({
-        genero:true
+        genero:true,
+        raza:'',
+        tipo_mascota:'',
+        vacunas:'',
+        edad: '',
+        nombre: '',
+        clienteId: '',
+
     })
     const opcionEdad = ref(' Años')
+    const errorData = ref(false)
+    
     // Metodos
-
-
     const extraerNombres = (arregloDeObjetos) =>{
         return arregloDeObjetos.map(objeto => objeto.name);
     }
-    const registrarMascotaCliente = ()=>{
-        // mascotaCliente.value.genero = mascotaCliente.value.genero ? 'Hembra' : 'Macho' 
 
-        // console.log( mascotaCliente.value.raza)
+    const validarDatosMascotaCliente = ()=>{
+
+        if(mascotaCliente.value.raza === '') { 
+            console.log('raza') 
+            return true 
+        
+        }
+        if(mascotaCliente.value.tipo_mascota === '') { 
+            console.log('tipo') 
+            return true 
+        
+        }
+        if(mascotaCliente.value.vacunas === '') { 
+            console.log('vauna') 
+            return true 
+        
+        }
+        if(mascotaCliente.value.edad === '') { 
+            console.log('edad') 
+            return true 
+        
+        }
+        if(mascotaCliente.value.nombre === '') { 
+            console.log('nombre') 
+            return true 
+        
+        }
+        return false
+
+    }
+    const registrarMascotaCliente = ()=>{
+        
+        if(validarDatosMascotaCliente()){
+            errorData.value = true
+            setTimeout(()=>{
+                errorData.value = false
+            },1000)
+            return 
+        }
+        mascotaCliente.value.genero = mascotaCliente.value.genero ? 'Hembra' : 'Macho' 
+
+        console.log( mascotaCliente.value.raza)
         mascotaCliente.value.raza = mascotaCliente.value.raza.label
 
         mascotaCliente.value.tipo_mascota = mascotaCliente.value.tipo_mascota.label
 
+
         mascotaCliente.value.vacunas = extraerNombres(mascotaCliente.value.vacunas)
-        mascotaCliente.value.vacunas = JSON.stringify(mascotaCliente.value.vacunas)
 
         mascotaCliente.value.clienteId = Permiso.userLogin.id
 
@@ -74,11 +121,21 @@ export const useMascota = defineStore('mascota', () => {
         
         clienteService.registrarMascotaCliente(Auth.token,mascotaCliente.value)
         .then( res =>{
+
+            Object.assign(mascotaCliente.value,{
+                genero:true,
+                raza:'',
+                tipo_mascota:'',
+                vacunas:'',
+                edad: '',
+                nombre: '',
+                clienteId: '',
+            })
             
             toast.success(res.data.msg,{
                 position: toast.POSITION.TOP_CENTER
             })
-            Object.assign(mascotaCliente.value,{})
+            
             router.push({name:'info-perfil'})
         })
         .catch(err =>{
@@ -89,9 +146,7 @@ export const useMascota = defineStore('mascota', () => {
             Auth.verificarSesion(err.response.data)
         })
     }
-
     const registrarMascota = () =>{
-        
         
         mascotaService.registarMascota(mascota.value,Auth.token)
 
@@ -121,7 +176,6 @@ export const useMascota = defineStore('mascota', () => {
 
         })
     }
-
     const obtenerMascotas = ()=>{
         mascotaService.obtenerMascotas(Auth.token)
         .then(res=>{
@@ -132,7 +186,6 @@ export const useMascota = defineStore('mascota', () => {
             Auth.verificarSesion(err.response.data.message)
         })
     }
-
     const cambiarEstadoMascota = (token,id) =>{
         const findMascota = mascotas.value.find(mascota => mascota.id === id)
         if(findMascota){
@@ -155,22 +208,56 @@ export const useMascota = defineStore('mascota', () => {
             })
         })
     }
-
     const redirigirEditarMascota = (mascota)=>{
         MascotaUpdate.value = mascota
         Router.push({name:'editar-mascota'})
     }
-
     const verPerfilMascota = (mascotaData)=>{
 
         perfilMascota.value = mascotaData
 
-        Modals.toggleMascotaPerfil()
+        router.push({name:'mascota'})
 
     }
+
+    const editarMascotaCliente =  ()=>{
+
+        MascotaUpdate.value.raza = MascotaUpdate.value.raza.label  || MascotaUpdate.value.raza
+        MascotaUpdate.value.tipo_mascota = MascotaUpdate.value.tipo_mascota.label || MascotaUpdate.value.tipo_mascota;
+
+        MascotaUpdate.value.edad =  `${MascotaUpdate.value.edad.toString()}${opcionEdad.value}`
+        MascotaUpdate.value.vacunas = extraerNombres(MascotaUpdate.value.vacunas)
+
+        console.log(MascotaUpdate.value)
+        // mascotaService.editarMascota()
+        clienteService.editarMascotaCliente(Auth.token,MascotaUpdate.value.id,MascotaUpdate.value)
+        .then(res =>{
+            console.log(res)
+            // Mensaje 
+            toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_CENTER
+            })
+            Object.assign(MascotaUpdate.value,{
+                clienteId: null,
+                tipo_mascota: '',
+                nombre: '',
+                genero: null,
+                edad: '',
+                raza: '',
+                vacunas:'',
+            })
+            setTimeout(()=>{
+                Router.push({name:'info-perfil'})
+            },555)
+        }).catch(err => {
+            Auth.verificarSesion(err.response.data)
+            console.log(err)
+        })
+    }
+
     const editarMascota = ()=> {
 
-        MascotaUpdate.value.vacunas = JSON.stringify(MascotaUpdate.value.vacunas)
+        // MascotaUpdate.value.vacunas = JSON.stringify(MascotaUpdate.value.vacunas)
         mascotaService.editarMascota(Auth.token,MascotaUpdate.value.id,MascotaUpdate.value)
         .then( res =>{
             // Mensaje 
@@ -199,6 +286,7 @@ export const useMascota = defineStore('mascota', () => {
             })
         })
     }
+
     return {
         mascota,
         mascotas,
@@ -206,6 +294,7 @@ export const useMascota = defineStore('mascota', () => {
         MascotaUpdate,
         mascotaCliente,
         opcionEdad,
+        errorData,
 
         registrarMascota,
         obtenerMascotas,
@@ -214,6 +303,6 @@ export const useMascota = defineStore('mascota', () => {
         verPerfilMascota,
         editarMascota,
         registrarMascotaCliente,
-
+        editarMascotaCliente,
     }
 })

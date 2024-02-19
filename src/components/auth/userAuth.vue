@@ -78,6 +78,7 @@ const handleMenu = (event) => {
     /* max-height: clamp(3vh,6vw,15vh); */
     border-bottom: solid 1px rgb(197, 197, 197);
     background-color: var(--color-morado-general);
+    
     box-shadow: 0px 2px 4px -3px rgba(0, 0, 0, 0.5);
 }
 

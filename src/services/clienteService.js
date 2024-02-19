@@ -23,9 +23,24 @@ export default {
         return api.get(`/clientes/list/pets-client/${id}`,{
             headers: {'auth-token': token}
         })
-    },
+    },  
     registrarMascotaCliente(token,data){
         return api.post('/clientes/register/pet',data,{
+            headers: {'auth-token': token}
+        })
+    },
+    editarMascotaCliente(token,id,data){
+        return api.put(`/clientes/edit/pet/${id}`, data, {
+            headers: {'auth-token': token}
+        })
+    },
+    obtenerSolicitudCliente(token,id){
+        return api.get(`/clientes/list/request-appointment/${id}`,
+            { headers: {'auth-token': token}}
+        )
+    },
+    aprobarSolicitudAgendada(token,ids,data){
+        return api.put(`/clientes/approve/request-appointment/${ids.id_cita}/${ids.id_cliente}/${ids.id_solicitud}`,data,{
             headers: {'auth-token': token}
         })
     }

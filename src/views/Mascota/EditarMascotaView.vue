@@ -94,16 +94,11 @@ watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
         }else{
             Mascota.MascotaUpdate.vacunas = JSON.parse(Mascota.MascotaUpdate.vacunas)
         }
-
     }
-
     if(Array.isArray(Mascota.MascotaUpdate.vacunas)){
         filtrarVacunasDisponibles();
 
     }
-
-
-    
 }
 )
 const filtrarVacunasDisponibles = ()=>{

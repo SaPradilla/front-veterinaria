@@ -68,6 +68,13 @@ const router = createRouter({
           meta: { requireAuth: true },
         },
         {
+          path: 'mascota',
+          name: 'mascota',
+          component: () => import('../views/Mascota/PerfilMascotaView.vue'),
+          // Ruta protegida
+          meta: { requireAuth: true },
+        },
+        {
           path:'registrar-mascota',
           name:'registro-mascota',
           component: ()=> import('../views/Mascota/RegistroMascotaView.vue'),
@@ -187,7 +194,16 @@ const router = createRouter({
       path:'/registro-mascota',
       name:'registro-mascota-user',
       component: ()=> import('../views/User/RegistrarMascota.vue')
-    }
+    },{
+      path:'/editar-mascota',
+      name:'editar-mascota-user',
+      component: ()=> import('../views/User/EditarMascota.vue')
+    },{
+      path:'/aceptar-cita-medica/:id_cita/:id_cliente/:id_solicitud',
+      name:'aceptar-cita-medica',
+      component: ()=> import('../views/Citas/AceptarCitaClienteView.vue'),
+      props: true
+    },
   ]
 })
 

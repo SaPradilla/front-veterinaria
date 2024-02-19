@@ -1,59 +1,65 @@
 <script setup>
-    import menuDashboard from '../components/UI/menuDashboard.vue';
-    import userAuth from '../components/auth/userAuth.vue';
-    import modalCliente from '../components/UI/modalCliente.vue';
-    import PerfilMascota from '../components/Mascotas/PerfilMascota.vue';
-    import { useModals } from '../stores/modals';
-    import PerfilEmpleado from '../components/Empleados/perfilEmpleado.vue'
-    const Modals = useModals()
+import menuDashboard from '../components/UI/menuDashboard.vue';
+import userAuth from '../components/auth/userAuth.vue';
+import modalCliente from '../components/UI/modalCliente.vue';
+import PerfilMascota from '../components/Mascotas/PerfilMascota.vue';
+import { useModals } from '../stores/modals';
+import PerfilEmpleado from '../components/Empleados/perfilEmpleado.vue'
+const Modals = useModals()
 </script>
 
 <template>
-    <div
-    class="modals"
-    v-if="Modals.modalEmpleado">
-        <PerfilEmpleado/>
-    </div>
-    <div
-    class="modals"
-    v-if="Modals.modalMascotaPerfil">
-        <PerfilMascota/>
-    </div>
-    <div 
-    class="modals"
-    v-if="Modals.modalCliente">
-        <modalCliente/>
-    </div>
-    <div class="contenedor-principal">
+    <div class="fondo-admin">
 
-        <div class="menu-dashboard">
-            <div class="contenido-menu">
-                <menuDashboard />
+        <div class="modals" v-if="Modals.modalEmpleado">
+            <PerfilEmpleado />
+        </div>
+        <div class="modals" v-if="Modals.modalMascotaPerfil">
+            <PerfilMascota />
+        </div>
+        <div class="modals" v-if="Modals.modalCliente">
+            <modalCliente />
+        </div>
+        <div class="contenedor-principal">
+    
+            <div class="menu-dashboard">
+                <div class="contenido-menu">
+                    <menuDashboard />
+                </div>
+            </div>
+    
+            <div class="user">
+                <userAuth />
+            </div>
+    
+            <div class="contenedor-dashboard">
+                <div class=""></div>
+                <div class="contenido-principal">
+                    <RouterView />
+                </div>
+    
             </div>
         </div>
-
-        <div class="user">
-            <userAuth />
-        </div>
-        
-        <div class="contenedor-dashboard">
-            <div class=""></div>
-            <div class="contenido-principal">
-                <RouterView />
-            </div>
-
-        </div>
-    </div>  
+    </div>
 </template>
 
 
 <style scoped>
-.modals{
-        z-index: 1200;
+.fondo-admin{
+    /* background: url('../assets/img/fondoxd.jpg'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: hidden;
+   
 }
+.modals {
+    z-index: 1200;
+}
+
 .user {
 
-    max-height: clamp(3vh,6vw,15vh);
+    max-height: clamp(3vh, 6vw, 15vh);
     z-index: 1100;
     width: 100%;
     position: fixed;
@@ -72,14 +78,15 @@ h1 {
 .header {
     position: fixed;
     top: 0;
-    right:0;
+    right: 0;
 
 }
+
 .contenedor-principal {
-    
+
     height: 100vh;
     /* width: 100%; */
-    /* overflow-y: hidden; */
+    overflow-y: auto;
 }
 
 .contenedor-dashboard {
@@ -92,9 +99,10 @@ h1 {
 
 .menu-dashboard {
     /* background-color: var(--color-morado-general); */
+    background-image: linear-gradient(to right, #e9e0ff, #ece5ff, #efeaff, #f2eeff, #f5f3ff);
 
-    background-color: white;
-	box-shadow: 0px 2px 4px -3px rgba(0,0,0,0.4);
+    backdrop-filter: blur(70px);
+    box-shadow: 0px 2px 100px 10px #e9e0ff;
     position: fixed;
     height: 100%;
     display: flex;
@@ -111,6 +119,12 @@ h1 {
 
 .contenido-principal {
     margin-top: 20vh;
+    /* background: rgba(255, 255, 255, 0.041) ;
+    backdrop-filter: blur(70px);
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0px 2px 4px -3px rgba(0, 0, 0, 0.914); */
+
 }
 
 
@@ -127,8 +141,8 @@ h1 {
 .mascotas {
     /* overflow-y: scroll; */
 
-	border-radius: 5px;
-	padding: 40px;
+    border-radius: 5px;
+    padding: 40px;
 
 }
 </style>

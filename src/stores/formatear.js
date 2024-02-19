@@ -17,7 +17,30 @@ export const useFormatear = defineStore('formatear', () => {
         // Construir la cadena de fecha en el formato deseado
         const fechaFormateada = `${mes}-${dia}-${año}`;
         return fechaFormateada
-    }    
+    }
+    const formatearHora = (fechaString)=>{
+      const fecha = new Date(fechaString);
+
+      // Obtener la hora y los minutos
+      let horas = fecha.getUTCHours();
+      const minutos = fecha.getUTCMinutes();
+
+      // Determinar si es AM o PM
+      const ampm = horas >= 12 ? 'p. m.' : 'a. m.';
+
+      // Convertir la hora a formato de 12 horas
+      if (horas > 12) {
+        horas -= 12;
+      } else if (horas === 0) {
+        horas = 12;
+      }
+
+      // Formatear la cadena de hora
+      const horaFormateada = `${horas}:${minutos < 10 ? '0' : ''}${minutos} ${ampm}`;
+      
+      return horaFormateada;
+      
+    }
 
     const formatoFechaDDMMYY = (fechaISO)=>{
       // Crear un objeto Date a partir de la fecha ISO
@@ -113,6 +136,7 @@ export const useFormatear = defineStore('formatear', () => {
         formartoFechaInput,
         formatearCitasCalendar,
         formatoFechaYYMMDD,
+        formatearHora,
 
     }
 })

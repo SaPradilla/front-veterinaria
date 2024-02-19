@@ -14,12 +14,11 @@ const Auth = useAuthStore()
 const Cliente = useCliente()
 
 onMounted(()=>{
-
+    
     Auth.ObtenerToken()
     Auth.extraerUserToken()
-    console.log(Permisos.userLogin)
-    Cliente.verMascotasCliente(Permisos.userLogin.id)
-    console.log(Cliente.mascotasCliente)
+    Cliente.verCliente(Permisos.userLogin.id,Auth.token)
+
 })
 
 </script>
@@ -36,13 +35,14 @@ onMounted(()=>{
                 <div class="nombres">
                     <p class="nombre">{{ Permisos.userLogin.nombre }} </p>
                     <p class="apellido"> {{ Permisos.userLogin.apellido }}</p>
-                </div>
+                </div>  
                 <div class="editar-perfil">
-                    <Button label="Editar Perfil" severity="secondary" rounded />
+                    <Button  outlined label="Editar Perfil" severity="secondary" rounded />
                 </div>
             </div>
             
         </div>
+
         <div class="contenedor-user">
             <RouterView/>
          
@@ -63,13 +63,16 @@ onMounted(()=>{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 4vh;
+    gap: 5vh;
+    padding: 3em;
+    /* overflow-y: hidden; */
 }
 .info-perfil{
     display: flex;
     align-items: center;
+    justify-content: center;
     width: max-content;
-    gap: 30px;
+    gap: 10px;
 }
 .foto-perfil{
     height: 120px;
@@ -78,7 +81,7 @@ onMounted(()=>{
     border-radius: 100%;
 }
 .nombres{
-    font-size: 1.2em;
+    font-size: 1.6em;
     font-weight: 700;
 }
 .nombre{
@@ -91,8 +94,9 @@ onMounted(()=>{
 }
 
 .contenedor-user{
-    /* width: 100vh; */
-    /* height:60vh; */
+    width: 100%;
+    height:100vh;
+    /* padding: 20px; */
     /* box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.036); */
     /* border-radius: 40px; */
     /* background-color: white; */

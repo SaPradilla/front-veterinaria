@@ -1,90 +1,259 @@
 <script setup>
+import { useCliente } from '../../stores/cliente';
+import {ref} from 'vue'
+import {toast} from 'vue3-toastify'
 
 import SplitButton from 'primevue/splitbutton';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import Button from 'primevue/button';
-import { useRouter } from 'vue-router';
+import SpeedDial from 'primevue/speeddial';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Tag from 'primevue/tag';
 
+
+import { useRouter } from 'vue-router';
+import { useFormatear } from '../../stores/formatear';
+import {useMascota} from '../../stores/mascota'
 
 const router = useRouter()
+const Cliente = useCliente()
+const Formato = useFormatear()
+const Mascota = useMascota()
+
+const getSeverity = (estado) => {
+
+    if (estado === 'Programada') return 'info'
+    if (estado === 'En proceso') return 'secondary'
+    if (estado === 'Completada') return 'success'
+    if (estado === 'Cancelada') return 'danger'
+    if (estado === 'Reprogramada') return 'warning'
+}
+const selectPet = ref(null)
+const selectOptionPet = ref(false)
+const handleSelection = ()=> selectOptionPet.value = !selectOptionPet.value
+
+const items = [
+	{
+		label:'Editar',
+		icon: 'pi pi-pencil',	
+		command:()=> handleSelection()
+	},
+	// {
+	// 	label:'Borrar',
+	// 	icon: 'pi pi-trash',	
+	// 	command:()=> show()
+	// }
+]
+
+const separarStringNumeros = (cadena)=>{
+    // Utilizamos una expresión regular para encontrar el número en la cadena
+    const match = cadena.match(/\d+/);
+
+    // Si se encuentra un número en la cadena
+    if (match) {
+        // Convertimos el texto del número a un número entero
+        const numero = parseInt(match[0], 10);
+        
+        // Eliminamos el número de la cadena original
+        const restoCadena = cadena.replace(/\d+/, '').trim();
+        
+        return {numero, restoCadena };
+    } else {
+        // Si no se encuentra ningún número en la cadena, retornamos null
+        return { numero: null, restoCadena: cadena };
+    }
+}
+
+const edit  = ()=>{
+
+    console.log(selectPet.value)
+    const {numero,restoCadena} = separarStringNumeros(selectPet.value.edad)
+
+    Mascota.MascotaUpdate = selectPet.value
+    Mascota.MascotaUpdate.edad = numero
+    Mascota.opcionEdad = ' ' + restoCadena
+    router.push({name:'editar-mascota-user'})
+}
 
 </script>
 
 <template>
-    <TabView>
-        <TabPanel header="Mascotas">
-            <div class="contenedor-boton">
-                <div class="contenido-boton">
-                    <Button @click="router.push({name:'registro-mascota-user'})" style="font-size: .8em;  " label="Añadir mascota" rounded outlined />
-                </div>
-            </div>
+    <div class="contenedor-info-user">
 
-            <!-- <div class="sin-mascotas"  v-if="Cliente.mascotasCliente">
-                        <h2>No tienes mascotas registradas :( </h2>
-                    </div> -->
-            <div class="contenedor-mascotas">
-                <div class="image"></div>
-                <div class="info-mascota">
-                    <h1> Matias </h1>
-                    <div class="more-info">
-                        <strong>Perrro</strong>
-                        <p>7 años</p>
+        <TabView>
+            <TabPanel header="Mascotas">
+                <div class="contenedor-tool">
+                    <div class="contenedor-boton">
+        
+                        <Button @click="router.push({ name: 'registro-mascota-user' })" style="font-size: .8em;  "
+                            label="Añadir mascota" rounded outlined />
+                            <div class="">
+                                <SpeedDial style="position: relative;" class="acciones" buttonClass="p-button-outlined"  showIcon="pi pi-bars" hideIcon="pi pi-times"   :transitionDelay="150" 	 :model="items" direction="rigth" />
+                            </div>
+                        <!-- <div class="contenido-boton">
+                        </div> -->
                     </div>
-                    <div class="info-menu">
-                        <p>Adminstrar</p>
-                        <i class="pi pi-cog"></i>
-
+                    <div v-if="selectOptionPet" @click="handleSelection()" class="botones-accion">
+                        <Button @click="edit" icon="pi pi-pencil" severity="success" rounded outlined aria-label="Search" />
+        
+                        <Button icon="pi pi-times" severity="danger" rounded outlined aria-label="Cancel" />
+        
                     </div>
+    
                 </div>
-                <div class="info-medica">
-                    <h2>Vacunas</h2>
-                    <p>Parvovirosis Pentavalente Rabia
-                        Moquillo, Adenovirus ,traqueobronquitis infecciosa canina
-                        Leptospira
-                    </p>
+                <div class="sin-datos" v-if="!Cliente.cliente.mascotas">
+                    <h2>No tienes mascotas registradas :( </h2>
                 </div>
-            </div>
-
-        </TabPanel>
-        <TabPanel header="Citas">
-            <p class="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                Nemo enim
-                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-                qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-            </p>
-        </TabPanel>
-        <TabPanel header="Compras">
-            <p class="m-0">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-                atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
-                sunt in culpa qui
-                officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-            </p>
-        </TabPanel>
-    </TabView></template>
+    
+                <div v-else class="mis-mascotas">
+    
+                    <DataTable 
+                        v-model:selection="selectPet"
+                        :value="Cliente.cliente.mascotas" 
+                        paginator 
+                        :rows="3"
+                        :rowsPerPageOptions="[3, 6, 12]"
+                        tableStyle="min-width: 50rem"
+                        dataKey="id"
+                    >
+                        <Column v-if="selectOptionPet" selectionMode="single" headerStyle="width: 3rem"></Column>
+    
+                        <Column header="Foto">
+                            <template #body="slotProps">
+                                <div class="image"></div>
+                            </template>
+                        </Column>
+    
+                        <Column header="Info">
+                            <template #body="slotProps">
+    
+                                <div class="info-mascota">
+                                    <h1> {{ slotProps.data.nombre }} </h1>
+                                    <div class="more-info">
+                                        <strong> {{ slotProps.data.tipo_mascota }}</strong>
+                                        <p> {{ slotProps.data.edad }} </p>
+                                    </div>
+                                    <!-- <div class="info-menu">
+                                        <p>Adminstrar</p>
+                                        <i class="pi pi-cog"></i>
+    
+                                    </div> -->
+                                </div>
+                            </template>
+                        </Column>
+    
+    
+                        <Column header="Vacunas">
+                            <template #body="slotProps">
+                                <div class="info-medica">
+                                    <h2>Vacunas</h2>
+                                    <p>Parvovirosis Pentavalente Rabia
+                                        Moquillo, Adenovirus ,traqueobronquitis infecciosa canina
+                                        Leptospira
+                                    </p>
+                                </div>
+    
+                            </template>
+                        </Column>
+    
+                    </DataTable>
+    
+    
+                </div>
+    
+            </TabPanel>
+           
+            <TabPanel header="Citas">
+                <Button @click="router.push({ name: 'solicitud-cita' })" style="font-size: .8em;  "
+                    label="Agendar cita" rounded outlined />
+                <div class="sin-datos" v-if="Cliente.cliente.citas_medicas && Cliente.cliente.citas_medicas.length === 0">
+                    <h2>No tienes citas realizadas</h2>
+                </div>
+    
+                <DataTable v-else :value="Cliente.cliente.citas_medicas" tableStyle="min-width: 50rem" paginator :rows="5"
+                    stripedRows :rowsPerPageOptions="[5, 10, 20, 50]">
+    
+                    <Column field="servicio.nombre" header="Tipo"></Column>
+                    <Column field="consultorio" header="Lugar"></Column>
+                    <Column header="Empleado">
+                        <template #body="slotProps">
+                            <td>{{ slotProps.data.empleado.nombre }} {{ slotProps.data.empleado.apellido }}</td>
+                        </template>
+                    </Column>
+    
+                    <Column header="Fecha">
+                        <template #body="slotProps">
+                            {{ Formato.formatearFecha(slotProps.data.fecha_cita) }}
+                        </template>
+                    </Column>
+    
+                    <Column header="Estado">
+                        <template #body="slotProps">
+                            <Tag class="tag-estado" :value="slotProps.data.estado"
+                                :severity="getSeverity(slotProps.data.estado)" />
+                        </template>
+                    </Column>
+    
+                </DataTable>
+            </TabPanel>
+    
+            <TabPanel header="Compras">
+                <p class="m-0">
+                    No tienes compras aún
+                </p>
+            </TabPanel>
+        </TabView>
+    </div>
+</template>
 
 <style scoped>
-
-.contenedor-mascotas{
-    display: flex;
+.contenedor-info-user{
     
+}
+.botones-accion{
+    display: flex;
+    gap: 25px;
+}
+.contenedor-tool{
+    display: flex;
+    justify-content: space-between;
+}
+.acciones{
+	display: flex;
+	align-items: center;
+	position: relative;
+	gap: 20px;
+	justify-content: space-between;
+	width: 200px;
+	height: 10px; 
+}
+.mis-mascotas {
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+
+}
+
+.contenedor-mascotas {
+    display: flex;
+
     /* justify-content: left; */
     align-items: center;
     gap: 4vh;
 
 }
-.sin-mascotas{
+
+.sin-datos {
     display: flex;
     /* align-items: center; */
     justify-content: center;
     text-align: center;
     color: var(--color-gris-oscuro);
 }
-.image{
+
+.image {
     height: 100px;
     width: 100px;
     background-color: #D9D9D9;
@@ -93,54 +262,68 @@ const router = useRouter()
 
 
 .contenedor-boton {
-	display: flex;
-	justify-content: right;
+    display: flex;
+    justify-content: left;
+    gap: 20px;
+    align-items: center;
+    height: max-content;
+
     /* font-size: .3em; */
 }
-.contenido-boton{
+
+.contenido-boton {
     display: flex;
-	z-index: 1;
-	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* z-index: 1; */
+    /* flex-direction: column; */
 }
-.menu{
-	/* cursor: pointer; */
-	color: white;
-	background-color: var(--color-morado-general);
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	/* margin-right: 22px; */
-	padding: 2px;
-	border-radius: 10px 0px 0px 10px;
-	text-align: center;
+
+.menu {
+    /* cursor: pointer; */
+    color: white;
+    background-color: var(--color-morado-general);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* margin-right: 22px; */
+    padding: 2px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center;
 }
-.info-mascota{
+
+.info-mascota {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
-.more-info{
+
+.more-info {
     display: flex;
     gap: 10px;
     color: var(--color-morado-general);
 }
-h1{
-    font-size: clamp(.7em,10vw,1.4em);
+
+h1 {
+    font-size: clamp(.7em, 10vw, 1.4em);
 }
-h2{
+
+h2 {
     color: var(--color-gris-oscuro);
-    font-size: clamp(.4em,10vw,1.2em);
+    font-size: clamp(.4em, 10vw, 1.2em);
 }
-.info-menu{
+
+.info-menu {
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 10px;
 }
-.info-medica{
-    width:300px;
+
+.info-medica {
+    width: 300px;
 }
-.info-medica p{
-    font-size: clamp(.4em,3vw,.8em);
-}
-</style>
+
+.info-medica p {
+    font-size: clamp(.4em, 3vw, .8em);
+}</style>

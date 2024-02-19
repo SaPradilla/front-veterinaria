@@ -4,6 +4,7 @@ import { useMascota } from '../../stores/mascota';
 import { useAuthStore} from '../../stores/auth';
 import { useAdmin } from '../../stores/admin';
 import { useCliente } from '../../stores/cliente';
+import {toast} from 'vue3-toastify'
 
 // Primevue
 
@@ -105,36 +106,87 @@ const tiposDeMascotas = [
 
 
 const razas = ref([]);
-
+const vacunasOriginales = ref([])
 
 onMounted(() => {
     Auth.ObtenerToken()
     // Cliente.verClientes()
+    if(Mascota.MascotaUpdate.nombre === ''){
+        toast.warn('Sin valores que editar',{
+            position: toast.POSITION.TOP_CENTER
+        })
+        setTimeout(()=>{
+            router.push({name:'info-perfil'})
+
+        },1000)
+        
+    }else{
+        
+        
+
+        if(!Array.isArray(Mascota.MascotaUpdate.vacunas)){
+
+            Mascota.MascotaUpdate.vacunas = JSON.parse(Mascota.MascotaUpdate.vacunas)
+            console.log(Mascota.MascotaUpdate.vacunas)
+
+            vacunasOriginales.value = Mascota.MascotaUpdate.vacunas.map(vacuna => ({
+                label: vacuna,
+                name: vacuna,
+            }));
+        }
+    
+    }
+
+
 })
 
-watch(() => Mascota.mascotaCliente.tipo_mascota, (newTipo) => {
+watch(() => Mascota.MascotaUpdate.tipo_mascota, (newTipo) => {
 
-    const mascotaSeleccionada = tiposDeMascotas.find(
-        (mascota) => mascota.tipo === newTipo.name
-    );
+        const mascotaSeleccionada = tiposDeMascotas.find(
+            (mascota) => mascota.tipo === newTipo.name
+        );
 
-    Mascota.mascotaCliente.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : Mascota.mascotaCliente.raza?.label;
+        Mascota.MascotaUpdate.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : Mascota.MascotaUpdate.raza?.label;
 
-    razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : []; 
-    console.log(razas.value)
-}
-)
-
-
-watch(() => Mascota.mascotaCliente.vacunas, (newTipo) => {
-    filtrarVacunasDisponibles();
+        razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : []; 
+        console.log(razas.value)
     }
 )
+
+
+// watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
+//     filtrarVacunasDisponibles();
+// }
+// )
+watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
+    
+    if(!Array.isArray(Mascota.MascotaUpdate.vacunas)){
+
+        if(Mascota.MascotaUpdate.vacunas === ''){
+            Mascota.MascotaUpdate.vacunas = []
+        }else{
+            Mascota.MascotaUpdate.vacunas = JSON.parse(Mascota.MascotaUpdate.vacunas)
+        }
+    }
+    if(Array.isArray(Mascota.MascotaUpdate.vacunas)){
+        filtrarVacunasDisponibles();
+
+    }
+}
+)
+
 const filtrarVacunasDisponibles = ()=>{
     // Si la vacuna que esta en el state mascota.vacuna es igual al que esta en vacunas, se deja de mostrar
-    return vacunas.filter(vacuna => Mascota.mascotaCliente.vacunas.indexOf(vacuna) === -1);
+    return vacunas.filter(vacuna => Mascota.MascotaUpdate.vacunas.indexOf(vacuna) === -1);
+    
 }
+const editar = ()=>{
+    Mascota.MascotaUpdate.vacunas = vacunasOriginales.value
+    console.log(Mascota.MascotaUpdate.vacunas)
 
+    Mascota.editarMascotaCliente()
+    
+}
 
 </script>
 
@@ -146,7 +198,7 @@ const filtrarVacunasDisponibles = ()=>{
         
         <div class="contenedor-registro">
             <div class="titulo">
-                <h1>Registrar Mascota</h1>
+                <h1>Editar Mascota</h1>
                 <InlineMessage v-if="Mascota.errorData" severity="error"> Todos los datos son obligatorios </InlineMessage>   
             </div>
             <div class="contenedor-formulario">
@@ -160,26 +212,26 @@ const filtrarVacunasDisponibles = ()=>{
                             incomplete-message="Ingrese todos sus datos para continuar">
                             <div class="inputs">
         
-                                    <!-- <v-select  v-model="Mascota.mascotaCliente.clienteId" placeholder="Nombre del Dueño" name="clienteId"
+                                    <!-- <v-select  v-model="Mascota.MascotaUpdate.clienteId" placeholder="Nombre del Dueño" name="clienteId"
                                         :options="Cliente.clientes" :reduce="nombre => nombre.id" label="nombre"></v-select>
                                         
-                                    <Dropdown v-model="Mascota.mascotaCliente" :options="Cliente.clientes" checkmark  optionLabel="nombre"  placeholder="Nombre del dueño" />
+                                    <Dropdown v-model="Mascota.MascotaUpdate" :options="Cliente.clientes" checkmark  optionLabel="nombre"  placeholder="Nombre del dueño" />
                                      -->
                                 
     
-                                    <InputText type="text" v-model="Mascota.mascotaCliente.nombre" placeholder="Nombre Mascota" />
-                                    <Dropdown v-model="Mascota.mascotaCliente.tipo_mascota" editable  :options="tipo" checkmark  optionLabel="label"   placeholder="Tipo de Mascota"/>
-                                    <Dropdown v-model="Mascota.mascotaCliente.raza" editable :options="razas" checkmark  optionLabel="label"  placeholder="Raza"/>
+                                    <InputText type="text" v-model="Mascota.MascotaUpdate.nombre" placeholder="Nombre Mascota" />
+                                    <Dropdown v-model="Mascota.MascotaUpdate.tipo_mascota" editable  :options="tipo" checkmark  optionLabel="label"   placeholder="Tipo de Mascota"/>
+                                    <Dropdown v-model="Mascota.MascotaUpdate.raza" editable :options="razas" checkmark  optionLabel="label"  placeholder="Raza"/>
                                     <div class="genero">
-                                        <small>{{ Mascota.mascotaCliente.genero ? 'Macho' : 'Hembra'}}</small>
-                                        <InputSwitch v-model="Mascota.mascotaCliente.genero" />
+                                        <small>{{ Mascota.MascotaUpdate.genero ? 'Macho' : 'Hembra'}}</small>
+                                        <InputSwitch v-model="Mascota.MascotaUpdate.genero" />
                                     </div>
                                     
                                     
                                     <div class="">
                                         <Dropdown style="width: 14vh;" v-model="Mascota.opcionEdad" :options="[' Años',' Meses']"  checkmark placeholder="Tipo" />
                                         <!-- <InputText type="text"  placeholder="Edad" /> -->
-                                        <InputNumber v-model="Mascota.mascotaCliente.edad" :suffix="Mascota.opcionEdad" placeholder="Edad" />
+                                        <InputNumber v-model="Mascota.MascotaUpdate.edad" :suffix="Mascota.opcionEdad" placeholder="Edad" />
                                     </div>
                                     
                                     
@@ -189,7 +241,7 @@ const filtrarVacunasDisponibles = ()=>{
                     </div>
                     <div class="vacunas">
                         <h2>Vacunas</h2>
-                        <MultiSelect style="width: 200px;" v-model="Mascota.mascotaCliente.vacunas" display="chip" :options="vacunas" optionLabel="name" placeholder="Seleccione las vacunas"
+                        <MultiSelect style="width: 200px;" v-model="vacunasOriginales" display="chip" :options="vacunas" optionLabel="name" placeholder="Seleccione las vacunas"
                         :maxSelectedLabels="3" />
                     </div>
                 </div>
@@ -197,7 +249,7 @@ const filtrarVacunasDisponibles = ()=>{
                 <div class="acciones">
 
                     <Button @click="router.push({name:'info-perfil'})" label="Cancelar" severity="secondary" outlined  rounded  />
-                    <Button @click="Mascota.registrarMascotaCliente" label="Agregar" rounded  />
+                    <Button @click="editar" label="Editar" rounded  />
                 
                 </div>
                 

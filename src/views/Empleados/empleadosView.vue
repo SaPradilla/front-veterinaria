@@ -79,9 +79,8 @@ const onRowSelect = (event) => {
 
 const confirmVerCliente = () => {
     confirm.require({
-        message: 'Quieres visualizar el cliente?',
+        message: `¿Quiere visualizar el perfil de ${selectEmployee.value.nombre}?`,
         header: 'Confirmacion',
-        icon: 'pi pi-exclamation-triangle',
         rejectClass: 'p-button-secondary p-button-outlined',
         rejectLabel: 'Cancelar',
         acceptLabel: 'Ir',
@@ -119,18 +118,7 @@ const confirmVerCliente = () => {
 				<Button icon="pi pi-times" severity="danger" rounded outlined aria-label="Cancel" />
 			</div>
 			<div class="lista-empleados">
-				<!-- td> {{empleado.nombre}} </td>
-					<td> {{ empleado.apellido }} </td>
-					<td> {{ empleado.numero_celular}}</td>
-					<td> {{ empleado.email }} </td>
 
-					
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Celular</th>
-					<th>Email</th>
-					<th>Rol</th>
-					<th>Estado</th> -->
 				<DataTable
 					v-model:selection="selectEmployee" 
 					dataKey="id" 
@@ -140,7 +128,8 @@ const confirmVerCliente = () => {
 					:rows="5"
 					:metaKeySelection="false"
 					@row-dblclick="onRowSelect"
-					:rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem"
+					:rowsPerPageOptions="[5, 10, 20, 50]" 
+					tableStyle="min-width: 50rem"
 		
 					
 					>
@@ -157,7 +146,7 @@ const confirmVerCliente = () => {
                                     <img @click="Empleado.verPerfilEmpleado(slotProps.data)" src="../../assets/img/Cliente.svg" alt="">
                                     <p>{{ slotProps.data.rol}}</p>
                                 </div>
-							<!-- <img @click="Cliente.verCliente(slotProps.data.cliente.id, Auth.token)"
+							<!-- <img @click="Cliente.verClienteAdmin(slotProps.data.cliente.id, Auth.token)"
 								src="../../assets/img/Cliente.svg" alt=""> -->
 
 						</template>
@@ -173,87 +162,9 @@ const confirmVerCliente = () => {
 
 				</DataTable>
 			</div>
-			<!-- <div class="lista-mascotas">
-				<table>
-
-					<thead>
-						<tr>
 
 
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
 
-					<tbody>
-
-						<tr v-for="empleado in  ">
-
-
-							<
-
-							<td>
-                               
-                            </td>
-
-							<td>
-								<div class="contenedor-estado activo"
-								@click=""
-								:class="empleado.isActive ? 'activo' : 'inactivo'"
-								>
-									<div class="circulo"></div>
-									<p class="titulo-estado">{{ empleado.isActive ? 'Activo' : 'Inactivo' }}</p>
-								</div>
-	
-							</td>
-
-							<td>
-								<div class="boton-perfil">
-							
-									
-								</div>
-							</td>
-							<td @click=""
-							><img src="../../assets/img/editar.svg" alt="" srcset=""></td>
-						</tr>
-					</tbody>
-				</table>
-	
-			</div> -->
-
-			<!-- <div class="paginacion">
-				<div class="contenedor-paginacion">
-					<div class="paginacionBotones anterior"
-						v-if="Paginacion.currentPageEmpleado > 1"
-						@click="Paginacion.cambiarPaginaAnteriorEmpleado()"	
-					>
-					<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 12l7.35 7.35q.375.375.363.875t-.388.875q-.375.375-.875.375t-.875-.375l-7.7-7.675q-.3-.3-.45-.675t-.15-.75q0-.375.15-.75t.45-.675l7.7-7.7q.375-.375.888-.363t.887.388q.375.375.375.875t-.375.875L9.55 12Z"/></svg>
-
-					</div>
-
-
-					<p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
-						
-						{{  Paginacion.currentPageEmpleado - pageNumber - 1 < 1 ?  '' : Paginacion.currentPageEmpleado - pageNumber - 1 }}
-
-					</p>
-					 <p v-for="pageNumber in Paginacion.totalPagesEmpleado" :key="Paginacion.totalPagesEmpleado"  >
-						
-						{{  Paginacion.currentPageEmpleado - pageNumber  < 1 ? '' : Paginacion.currentPageEmpleado - pageNumber  }}
-
-					</p>
-
-					<p class="currentPage"> {{ Paginacion.currentPageEmpleado }}</p>
-
-					<div 
-					class="paginacionBotones siguiente"  
-					:class="Empleado.empleados.length < 4 ? 'nomas' : 'simas' "
-					@click="handleClick() "
-					>
-					<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path  d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887q.375-.375.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75q0 .375-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1q-.375-.375-.375-.888t.375-.887L14.475 12Z"/></svg>
-					</div>
-				</div>
-			</div> -->
 		</div>
 
 	</div>

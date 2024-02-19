@@ -63,7 +63,7 @@
 							<td>{{mascota.raza}}</td>
 							<td>{{mascota.genero}}</td>
 
-							<td><img @click="Cliente.verCliente(mascota.cliente.id,Auth.token)" src="../assets/img/Cliente.svg" alt=""></td>
+							<td><img @click="Cliente.verClienteAdmin(mascota.cliente.id,Auth.token)" src="../assets/img/Cliente.svg" alt=""></td>
 
 							<td>
 								<div class="contenedor-estado"

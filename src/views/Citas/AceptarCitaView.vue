@@ -19,15 +19,31 @@ import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
+import { useRouter } from 'vue-router';
 const Auth = useAuthStore()
 const Permisos = usePermisosUser()
 const Cliente = useCliente()
 const Cita = useCita()
 const Servicios = ref([])
+const router = useRouter()
+
 
 onMounted(() => {
-    
     Auth.ObtenerToken()
+    
+    // if(Cita.solicitudData.fecha_actualizada === ''){ 
+        
+    //     toast.warn('Sin valores',{
+    //         position: toast.POSITION.TOP_CENTER
+    //     })  
+    //     setTimeout(()=>{
+    //         router.push({name:'citas'})
+    //     },1000)
+
+    // }
+
+    console.log('se ejecuto aqui')
+
     Auth.extraerUserToken()
     
     Cliente.verClientes()
@@ -36,6 +52,7 @@ onMounted(() => {
             Servicios.value = res.data.Servicios
         })
         .catch(err => console.log(err))
+
 
 
 })
@@ -76,7 +93,7 @@ const minDate = ref(new Date(minYear, minMonth, day));
                     <!-- <Dropdown v-model="Cita.solicitudData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" /> -->
 
 
-                    <Calendar showTime hourFormat="24" v-model="Cita.solicitudData.fecha" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+                    <Calendar showTime hourFormat="24" v-model="Cita.solicitudData.fecha_actualizada" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
                     
                     <InputText type="text" v-model="Cita.solicitudData.consultorio" placeholder="Nombre del consultorio" />
                     <Textarea v-model="Cita.solicitudData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
