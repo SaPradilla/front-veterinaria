@@ -71,16 +71,19 @@ export const useCita= defineStore('citas',  () =>{
         })
     }
     const aceptarSolicitudCita = () =>{
+
         if(!solicitudData.value.consultorio){
             toast.error('Define un lugar para la cita',{
                 position: toast.POSITION.TOP_CENTER
             })
             return
         }
+        
         // si la fecha es igual a la fecha actualizada quiere decir que la fecha no fue
         // manipulada por lo tanto se borra, querra decir que la fecha fue aprobada
         if(solicitudData.value.fecha_actualizada === solicitudData.value.fecha){
             delete solicitudData.value.fecha_actualizada
+            console.log(solicitudData.value.fecha_actualizada)
         }
 
         solicitudData.value.empleadoId = Permisos.userLogin.id
