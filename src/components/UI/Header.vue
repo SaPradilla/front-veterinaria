@@ -80,7 +80,6 @@ const items = [
                 <div class="label"><a href="#testimonios">Testimonios</a></div>
                 <div class="label"><a href="#contacto">Contacto</a></div>
                 <!-- <div class="label"><a href="#pqr">PQR</a></div> -->
-
                 <img class="linea" alt="Linea" src="../../assets/img/Linea.svg" />
                 <div @click="redirigirTienda" class="label shop">
                     <a>Tienda</a>

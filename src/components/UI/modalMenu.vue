@@ -43,8 +43,10 @@ const emit = defineEmits(['toggleModal'])
                             d="M11.15 22.825L1.175 12.85L11.975 2h10v10zM17.475 8q.625 0 1.063-.437t.437-1.063q0-.625-.437-1.062T17.475 5q-.625 0-1.062.438T15.975 6.5q0 .625.438 1.063T17.475 8" />
                         </svg>
                     </div>
+                    <a  v-if="Auth.token" @click="router.push({name:'info-perfil'})">Ver cuenta</a>
 
                     <div class="login" v-if="Auth.token === null" ><a @click="redirigirLogin">Iniciar Sesion</a></div>
+                    <a v-if="Auth.token" @click="Auth.cerroSesion">Cerrar Sesion</a>
 
                     <!-- <a @click="$emit('toggleModal')" href="#pqr">PQR</a> -->
 

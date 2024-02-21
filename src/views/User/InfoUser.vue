@@ -84,6 +84,7 @@ const edit  = ()=>{
 
         <TabView>
             <TabPanel header="Mascotas">
+                
                 <div class="contenedor-tool">
                     <div class="contenedor-boton">
         
@@ -166,37 +167,73 @@ const edit  = ()=>{
             </TabPanel>
            
             <TabPanel header="Citas">
-                <Button @click="router.push({ name: 'solicitud-cita' })" style="font-size: .8em;  "
-                    label="Agendar cita" rounded outlined />
-                <div class="sin-datos" v-if="Cliente.cliente.citas_medicas && Cliente.cliente.citas_medicas.length === 0">
-                    <h2>No tienes citas realizadas</h2>
+                <Button @click="router.push({ name: 'solicitud-cita' })" style="font-size: .8em; margin-bottom: 4vh; "
+                            label="Agendar cita" rounded outlined />
+                <div class="solicitud_cita">
+
+                    <h2>Tus solicitudes</h2>
+                    <div class="sin-datos" v-if="Cliente.cliente.solicitud_cita && Cliente.cliente.solicitud_cita.length === 0">
+                        <h2>No tienes solicitudes pendientes</h2>
+                    </div>
+
+                    <DataTable v-else :value="Cliente.cliente.solicitud_cita" tableStyle="min-width: 50rem" paginator :rows="3"
+                        stripedRows :rowsPerPageOptions="[3]">
+        
+                        <Column field="servicio.nombre" header="Tipo"></Column>
+                        <Column header="Mascota">
+                            <template #body="slotProps">
+                                <td>{{ slotProps.data.mascota.nombre }} {{ slotProps.data.mascota.raza }}</td>
+                            </template>
+                        </Column>
+        
+                        <Column header="Fecha">
+                            <template #body="slotProps">
+                                {{ Formato.formatearFecha(slotProps.data.fecha) }}
+                            </template>
+                        </Column>
+        
+                        <Column header="Estado">
+                            <template #body="slotProps">
+                                <Tag class="tag-estado" :value=" slotProps.data.isAprobada ? 'Aprobada' : 'Pendiente' "
+                                    :severity=" slotProps.data.isAprobada ? 'success' : 'warning' " />
+                            </template>
+                        </Column>
+        
+                    </DataTable>
                 </div>
-    
-                <DataTable v-else :value="Cliente.cliente.citas_medicas" tableStyle="min-width: 50rem" paginator :rows="5"
-                    stripedRows :rowsPerPageOptions="[5, 10, 20, 50]">
-    
-                    <Column field="servicio.nombre" header="Tipo"></Column>
-                    <Column field="consultorio" header="Lugar"></Column>
-                    <Column header="Empleado">
-                        <template #body="slotProps">
-                            <td>{{ slotProps.data.empleado.nombre }} {{ slotProps.data.empleado.apellido }}</td>
-                        </template>
-                    </Column>
-    
-                    <Column header="Fecha">
-                        <template #body="slotProps">
-                            {{ Formato.formatearFecha(slotProps.data.fecha_cita) }}
-                        </template>
-                    </Column>
-    
-                    <Column header="Estado">
-                        <template #body="slotProps">
-                            <Tag class="tag-estado" :value="slotProps.data.estado"
-                                :severity="getSeverity(slotProps.data.estado)" />
-                        </template>
-                    </Column>
-    
-                </DataTable>
+
+                <div class="citas">
+                    <h2>Citas</h2>
+                    <div class="sin-datos" v-if="Cliente.cliente.citas_medicas && Cliente.cliente.citas_medicas.length === 0">
+                        <h2>No tienes citas realizadas</h2>
+                    </div>
+        
+                    <DataTable v-else :value="Cliente.cliente.citas_medicas" tableStyle="min-width: 50rem" paginator :rows="3"
+                        stripedRows :rowsPerPageOptions="[3, 6, 12, 24]">
+        
+                        <Column field="servicio.nombre" header="Tipo"></Column>
+                        <Column field="consultorio" header="Lugar"></Column>
+                        <Column header="Empleado">
+                            <template #body="slotProps">
+                                <td>{{ slotProps.data.empleado.nombre }} {{ slotProps.data.empleado.apellido }}</td>
+                            </template>
+                        </Column>
+        
+                        <Column header="Fecha">
+                            <template #body="slotProps">
+                                {{ Formato.formatearFecha(slotProps.data.fecha_cita) }}
+                            </template>
+                        </Column>
+        
+                        <Column header="Estado">
+                            <template #body="slotProps">
+                                <Tag class="tag-estado" :value="slotProps.data.estado"
+                                    :severity="getSeverity(slotProps.data.estado)" />
+                            </template>
+                        </Column>
+        
+                    </DataTable>
+                </div>
             </TabPanel>
     
             <TabPanel header="Compras">

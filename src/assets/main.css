@@ -74,10 +74,11 @@ ul#vs6__listbox{
 
 /* Primevue */
 .p-datatable-wrapper{
-	height: clamp(20vh,30vw,34vh);
+	height: clamp(20vh,30vw,34vh);   
 }
 .contenedor-citas .p-datatable-wrapper,
-.mis-mascotas .p-datatable-wrapper
+.mis-mascotas .p-datatable-wrapper,
+.contenedor-info-user .p-datatable-wrapper 
 {
 	height: auto;
 }
@@ -89,7 +90,7 @@ ul#vs6__listbox{
     padding: 0;
 }
 .p-tabview .p-tabview-panels {
-    height:35em;
+    /* height: max-content; */
     /* width: 160vh; */
 }
 .info-historia .p-tabview .p-tabview-panels{

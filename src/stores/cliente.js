@@ -3,6 +3,8 @@ import { ref, reactive } from 'vue'
 import clienteService from "../services/clienteService"
 import { useAuthStore } from "./auth";
 import { useModals } from "./modals";
+import {toast} from 'vue3-toastify'
+import { useRouter } from "vue-router";
 export const useCliente = defineStore('cliente', () => {
     // Stores
     const Auth = useAuthStore()
@@ -11,8 +13,30 @@ export const useCliente = defineStore('cliente', () => {
     const clientes = ref([])
     const cliente = ref({})
     const mascotasCliente = ref([])
+    const clienteUpdate = ref({})
+    const router = useRouter()
     // Metodos
     
+    const actualizarCliente = () => {
+        clienteService.editarCliente(Auth.token,clienteUpdate.value.id,clienteUpdate.value)
+        
+        .then(res =>{
+            console.log(res)
+            toast.success(res.data.msg,{
+                position: toast.POSITION.TOP_CENTER
+            });
+            // se actualiza al token
+            Auth.token = res.data.token
+            localStorage.setItem('token',res.data.token)
+            Auth.extraerUserToken()
+            
+            setTimeout(()=>{
+                router.push({name:'info-perfil'}) 
+            },100)
+
+        }).catch(err => console.log(err))
+    }
+
     const verClientes = ()=>{
         clienteService.obtenerClientes(Auth.token)
         .then(res =>{
@@ -64,10 +88,12 @@ export const useCliente = defineStore('cliente', () => {
         clientes,
         cliente,
         mascotasCliente,
+        clienteUpdate,
 
         verCliente,
         verClientes,
         verClienteAdmin,
         verMascotasCliente,
+        actualizarCliente,
     }
 })

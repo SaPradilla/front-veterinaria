@@ -85,10 +85,9 @@ export const useCita= defineStore('citas',  () =>{
             delete solicitudData.value.fecha_actualizada
             console.log(solicitudData.value.fecha_actualizada)
         }
-
         solicitudData.value.empleadoId = Permisos.userLogin.id
-        solicitudData.value.fecha_cita = solicitudData.value.fecha
 
+        console.log(solicitudData.value)
         citasService.aprobarSolicitudes(Auth.token,solicitudData.value.id,solicitudData.value)
         .then(res =>{
             console.log(res)
@@ -111,7 +110,7 @@ export const useCita= defineStore('citas',  () =>{
         solicitudData.value = solicitud
         const fecha = new Date(solicitudData.value.fecha).toISOString().slice(0, 19).replace('T', ' ')
 
-        solicitudData.value.fecha_actualizada = fecha
+        solicitudData.value.fecha = fecha
         solicitudData.value.fecha_actualizada = fecha
 
         router.push({name:'aceptar-citas'})
