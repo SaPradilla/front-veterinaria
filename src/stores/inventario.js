@@ -25,7 +25,8 @@ export const useInventario = defineStore('inventario', () => {
         precio:'',
         volumen:null,
         fecha_venciminento:'',
-        cantidad_total:null
+        cantidad_total:null,
+        imagen:null
     })
     const accesoryData = ref({
         nombre:null,
@@ -143,14 +144,14 @@ export const useInventario = defineStore('inventario', () => {
             toast.success('Medicina Registrada',{
                 position: toast.POSITION.TOP_CENTER
             })
-            Object.assign(medicinaData.value,{
-                nombre:'',
-                tipo_medicinaId:null,
-                precio:'',
-                volumen:'',
-                fecha_venciminento:'',
-                cantidad_total:''
-            })
+            // Object.assign(medicinaData.value,{
+            //     nombre:'',
+            //     tipo_medicinaId:null,
+            //     precio:'',
+            //     volumen:'',
+            //     fecha_venciminento:'',
+            //     cantidad_total:''
+            // })
         })
         .catch(err =>{
             console.log(err)

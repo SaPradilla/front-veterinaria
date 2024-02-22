@@ -125,7 +125,7 @@ const toggleModal = () => {
                         <div class="carta-producto-carrito">
                             <div class="contenedor-carta-carrito">
                                 <div>
-                                    <div class="imagen"></div>
+                                    <img class="imagen"  :src="`http://localhost:6060/uploads/products/${product.imagen}`"/>
                                     <p class="precio">{{ product.accesorioId === null ? product.medicamento.precio :
                                         product.accesorio.precio }} $</p>
                                 </div>
@@ -226,7 +226,10 @@ const toggleModal = () => {
 
                 <div v-for="producto in Shop.medicamentos" class="carta-productos">
 
-                    <div class="fondo"></div>
+                    <!-- <div class="fondo">
+                        
+                    </div> -->
+                    <img :src="`http://localhost:6060/uploads/products/${producto.imagen}`" alt="" class="fondo">
                     <div class="info-compra">
 
                         <div class="detalles">
@@ -588,11 +591,11 @@ h2 {
 
 }
 
-.carta-productos div.fondo {
+.carta-productos .fondo {
     width: 200px;
     height: 200px;
     border-radius: 7px;
-    background-color: rgba(217, 217, 217, 1);
+    /* background-color: rgba(217, 217, 217, 1); */
 }
 
 .info-compra {

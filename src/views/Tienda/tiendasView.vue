@@ -93,6 +93,7 @@ const edit = ()=>{
 	Inventario.updateMedicinadata.tipo_medicinaId = selectMedicine.value.medicamento.tipo_medicina
 	// Inventario.updateMedicinadata.estado = selectMedicine.value.estado
 	Inventario.updateMedicinadata.precio = selectMedicine.value.medicamento.precio
+	Inventario.updateMedicinadata.imagenUrl = selectMedicine.value.imagen
 	// Inventario.updateMedicinadata.volumen = selectMedicine.value.medicamento.volumen
 
 	Inventario.updateMedicinadata.fecha_venciminento = Formato.formartoFechaInput(selectMedicine.value.medicamento.fecha_venciminento)
@@ -171,6 +172,11 @@ const editAccesory = ()=>{
 						<DataTable v-model:selection="selectMedicine" dataKey="id"  :value="Inventario.medicamentos" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
 							<Column v-if="selectOptionMedicine" selectionMode="single" headerStyle="width: 3rem"></Column>
 							<Column class="col" field="medicamento.nombre" header="Nombre" sortable   style="width: 25%"></Column>
+							<Column header="Foto">
+								<template #body="slotProps">
+									<img class="image" :src="`http://localhost:6060/uploads/products/${slotProps.data.imagen}`" :alt="slotProps.data.imagen" />
+								</template>
+							</Column>
 							<Column class="col" field="medicamento.precio" header="Precio" sortable  style="width: 25%"></Column>
 							<Column class="col" field="medicamento.tipo_medicina.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
 							<Column class="col" field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
@@ -247,6 +253,11 @@ const editAccesory = ()=>{
 
 
 <style scoped>
+.image {
+	width:5em;
+	height: 5em;
+
+}
 .botones-accion{
 	display: flex;
 	gap: 20px;

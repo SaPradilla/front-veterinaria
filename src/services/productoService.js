@@ -12,12 +12,12 @@ export default{
     },
     registrarMedicina(token,data){
         return api.post('/admin/register/product/medicine',data,
-            { headers: {'auth-token': token}}
+            { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
         )
     },
     registrarAccesorio(token,data){
         return api.post('/admin/register/product/accessory',data,
-            { headers: {'auth-token': token}}
+        { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
         )
     },
     registrarTipoAccesorio(token,data){
@@ -42,12 +42,12 @@ export default{
     },
     editarMedicina(token,id,data){
         return api.put(`/admin/edit/product/medicine/${id}`,data,
-            { headers: {'auth-token': token}} 
+        { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
         )
     },
     editarAccesorio(token,id,data){
         return api.put(`/admin/edit/product/accesory/${id}`,data,
-            { headers: {'auth-token': token}} 
+        { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
         )
     },
     cambiarEstadoMedicina(token,id){
