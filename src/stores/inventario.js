@@ -32,7 +32,9 @@ export const useInventario = defineStore('inventario', () => {
         nombre:null,
         precio:null,
         tipo_accesorioId:null,
-        cantidad_total:null
+        cantidad_total:null,
+        imagen:null
+
     })
     const updateMedicinadata = ref({})
     const updateAccesorio = ref({})
@@ -144,14 +146,14 @@ export const useInventario = defineStore('inventario', () => {
             toast.success('Medicina Registrada',{
                 position: toast.POSITION.TOP_CENTER
             })
-            // Object.assign(medicinaData.value,{
-            //     nombre:'',
-            //     tipo_medicinaId:null,
-            //     precio:'',
-            //     volumen:'',
-            //     fecha_venciminento:'',
-            //     cantidad_total:''
-            // })
+            Object.assign(medicinaData.value,{
+                nombre:'',
+                tipo_medicinaId:null,
+                precio:'',
+                volumen:'',
+                fecha_venciminento:'',
+                cantidad_total:''
+            })
         })
         .catch(err =>{
             console.log(err)
@@ -196,14 +198,20 @@ export const useInventario = defineStore('inventario', () => {
                 tipo_accesorio.value.push(res.data.TipoAccesorio)
 
                 console.log(res)
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                Auth.verificarSesion(err.response.data)
+
+            })
     }
     const agregarTipoMedicamento = (newTypeMedical)=>{
         productoService.registrarTipoMedicamento(Auth.token,newTypeMedical)
             .then(res => {
                 tipo_medicina.value.push(res.data.TipoMedicina)
                 console.log(res)
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                Auth.verificarSesion(err.response.data)
+                console.log(err)
+            })
     }
 
     const verTipoMedicinas = ()=>{
@@ -211,7 +219,7 @@ export const useInventario = defineStore('inventario', () => {
         .then(res=>{
             tipo_medicina.value = res.data.tipo_medicina
         }).catch(err =>{
-            // Auth.verificarSesion(err.)
+            Auth.verificarSesion(err.response.data)
             console.log(err)
         })
     }
@@ -220,7 +228,11 @@ export const useInventario = defineStore('inventario', () => {
         productoService.obtenerTipoAccesorio(Auth.token)
         .then(res => {
             tipo_accesorio.value = res.data.tipo_accesorios
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            Auth.verificarSesion(err.response.data)
+            console.log(err)
+        })
+
     }
 
     const actualizarMedicina = ()=>{

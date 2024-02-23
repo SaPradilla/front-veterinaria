@@ -14,10 +14,16 @@ import Column from 'primevue/column';
 import Tag from 'primevue/tag'
 import Button from 'primevue/button';
 import ConfirmDialog from 'primevue/confirmdialog';
+import Avatar from 'primevue/avatar';
+
+
 import { useConfirm } from "primevue/useconfirm";
 
 
 import { toast } from 'vue3-toastify'
+import { useRouter } from 'vue-router';
+import mascotaService from '../../services/mascotaService';
+import { useMascota } from '../../stores/mascota';
 
 const selectOpcion = ref(false)
 const selectEmployee = ref(null)
@@ -38,6 +44,8 @@ const Cliente = useCliente()
 const Paginacion = usePaginacion()
 const Auth = useAuthStore()
 const Admin = useAdmin()
+const router = useRouter()
+
 
 const confirm = useConfirm();
 
@@ -48,6 +56,7 @@ onMounted(() => {
 })
 
 const edit = ()=>{
+
 	if(!selectEmployee.value){
 		toast.error('Selecciona un empleado para editar',{
 			transition: toast.TRANSITIONS.ZOOM,
@@ -56,7 +65,20 @@ const edit = ()=>{
 		})
 		return
 	}
-	Empleado.redigiriEditarEmpleado(selectEmployee.value)
+	
+	Empleado.empleadoUpdate.id = selectEmployee.value.id
+	Empleado.empleadoUpdate.nombre = selectEmployee.value.nombre
+	Empleado.empleadoUpdate.apellido = selectEmployee.value.apellido
+	Empleado.empleadoUpdate.email = selectEmployee.value.email
+	Empleado.empleadoUpdate.numero_celular = selectEmployee.value.numero_celular
+	Empleado.empleadoUpdate.imagenUrl = selectEmployee.value.imagen
+
+	const rol = {
+		label:selectEmployee.value.rol
+	}
+	Empleado.empleadoUpdate.rol = rol
+	
+	router.push({name:'editar-empleado'})
 	// Mascota.redirigirEditarMascota(selectPet.value)
 }
 
@@ -136,9 +158,20 @@ const confirmVerCliente = () => {
 
 					<Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
 
-					<Column class="col" field="nombre" header="Nombre" sortable style="width: 25%"></Column>
-					<Column class="col" field="apellido" header="Apellido" sortable style="width: 25%"></Column>
-					<Column class="col" field="numero_celular" sortable header="Celular" style="width: 25%"></Column>
+					<Column class="col" field="nombre" header="Nombre" sortable ></Column>
+					<Column header="Foto">
+						<template #body="slotProps">
+							
+							<Avatar v-if="slotProps.data.imagen" :image="`http://localhost:6060/uploads/employees/${slotProps.data.imagen}`"  size="xlarge" shape="circle" />
+							
+							<Avatar v-else :label="slotProps.data.nombre.substr(-20, 2)" size="xlarge" shape="circle"
+                        		style="background-color: var(--color-morado-claro-general); color: white" />
+
+							<!-- <img class="image" :src="" :alt="slotProps.data.imagen" /> -->
+						</template>
+					</Column>
+					<Column class="col" field="apellido" header="Apellido" sortable ></Column>
+					<Column class="col" field="numero_celular" sortable header="Celular" ></Column>
 					
 					<Column header="Rol" >
 						<template #body="slotProps">
@@ -171,7 +204,12 @@ const confirmVerCliente = () => {
 </template>
 
 <style scoped>
-
+.image {
+	width:5em;
+	height: 5em;
+	border-radius: 100%;
+	box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
 .botones-accion{
 	display: flex;
 	gap: 20px;

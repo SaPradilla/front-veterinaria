@@ -3,7 +3,8 @@ import api from "../lib/axios";
 export default {
     registarMascota(data,token){
         return api.post('/admin/register/pet',data,
-            { headers: {'auth-token': token}}
+            { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
+
          )
     },
     obtenerMascotas(token){
@@ -18,9 +19,10 @@ export default {
         })
     },
     editarMascota(token,id,data){
-        return api.put(`/admin/edit/pet/${id}`, data, {
-            headers: {'auth-token': token}
-        })
+        return api.put(`/admin/edit/pet/${id}`, data, 
+            { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
+
+        )
     },
 
 }

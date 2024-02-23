@@ -27,8 +27,19 @@ const router = createRouter({
     {
       path: '/tienda',
       name: 'tienda',
-      component: () => import('../views/Tienda/tiendaView.vue')
-
+      component: () => import('../views/Tienda/tiendaView.vue'),
+      children:[
+        {
+          path:'medicamentos',
+          name:'medicamentos',
+          component: ()=> import('../views/Tienda/MedicamentosView.vue')
+        },
+        {
+          path:'accesorios',
+          name:'accesorios',
+          component: ()=> import('../views/Tienda/AccesoriosView.vue')
+        },
+      ]
     },
     // rutas de Administrador
     {

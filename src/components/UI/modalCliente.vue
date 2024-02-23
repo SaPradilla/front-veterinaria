@@ -1,6 +1,8 @@
 <script setup>
 import { useModals } from '../../stores/modals';
 import { useCliente } from '../../stores/cliente';
+import Avatar from 'primevue/avatar';
+
 const Modals = useModals()
 const Cliente = useCliente()
 </script>
@@ -12,7 +14,12 @@ const Cliente = useCliente()
                 <p class="x" @click="Modals.toggleModalCliente()">x</p>
                 <div class="info-cliente">
 
-                    <img class="perfil" src="../../assets/img/avatar.svg" alt="" srcset="">
+                    <!-- <img class="perfil" src="../../assets/img/avatar.svg" alt="" srcset=""> -->
+                    <Avatar v-if="Cliente.cliente.imagen" :image="`http://localhost:6060/uploads/clients/${Cliente.cliente.imagen}`"  size="xlarge" shape="circle" />
+                    
+                    <Avatar v-else :label="Cliente.cliente.nombre.substr(-20, 2)" size="xlarge" shape="circle"
+                    style="background-color: var(--color-morado-claro-general); color: white" />
+                    
                     <div>
                         <h2>Nombres </h2>
                         <p>{{ Cliente.cliente.nombre }} {{ Cliente.cliente.apellido }}</p>

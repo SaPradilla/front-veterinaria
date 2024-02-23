@@ -123,8 +123,9 @@ const editAccesory = ()=>{
 	}
 	handleSelectionAccesory()
 	router.push({name:"editar-accesorio"})
-	console.log(selectAccesory.value.accesorio)
+	console.log(selectAccesory.value)
 	Inventario.updateAccesorio.idAccesorio = selectAccesory.value.accesorio.id
+	Inventario.updateAccesorio.imagenUrl = selectAccesory.value.imagen
 	Inventario.updateAccesorio.nombre = selectAccesory.value.accesorio.nombre
 	Inventario.updateAccesorio.precio = selectAccesory.value.accesorio.precio
 	Inventario.updateAccesorio.tipo = selectAccesory.value.accesorio.tipo
@@ -222,7 +223,13 @@ const editAccesory = ()=>{
 						<DataTable v-model:selection="selectAccesory" dataKey="id" class="lista" :value="Inventario.accesorios" paginator :rows="5" stripedRows  :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
 							<Column v-if="selectOptionAccesory" selectionMode="single" headerStyle="width: 3rem"></Column>
 							
+							
 							<Column field="accesorio.nombre" header="Nombre" sortable   style="width: 25%"></Column>
+							<Column header="Foto">
+								<template #body="slotProps">
+									<img class="image" :src="`http://localhost:6060/uploads/products/${slotProps.data.imagen}`" :alt="slotProps.data.imagen" />
+								</template>
+							</Column>
 							<Column field="accesorio.precio" header="Precio" sortable  style="width: 25%"></Column>
 							<Column field="accesorio.tipo_accesorio.nombre"  sortable  header="Tipo" style="width: 25%"></Column>
 							<Column field="cantidad_total" header="Cantidad Total" sortable   style="width: 25%"></Column>
@@ -267,7 +274,7 @@ const editAccesory = ()=>{
 	cursor: pointer;
 }
 .medicamentos{
-	height: clamp(20vh,30vw,50vh);
+	/* height: clamp(20vh,30vw,50vh); */
 }
 .acciones{
 	display: flex;

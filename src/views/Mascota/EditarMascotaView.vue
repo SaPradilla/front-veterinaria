@@ -1,198 +1,340 @@
 <script setup>
-import { ref, watch, reactive,onMounted } from 'vue';
+import { ref, watch, reactive, onMounted } from 'vue';
 import { useMascota } from '../../stores/mascota';
-import { useAuthStore} from '../../stores/auth';
+import { useAuthStore } from '../../stores/auth';
 import { useAdmin } from '../../stores/admin';
 import { useCliente } from '../../stores/cliente';
-import { useRouter} from 'vue-router' 
-import {toast} from 'vue3-toastify'
+// Primevue
+
+import InputText from 'primevue/inputtext';
+
+import Dropdown from 'primevue/dropdown';
+import SelectButton from 'primevue/selectbutton';
+import InputSwitch from 'primevue/inputswitch';
+import InputNumber from 'primevue/inputnumber'
+import MultiSelect from 'primevue/multiselect';
+import InlineMessage from 'primevue/inlinemessage';
+import Button from 'primevue/button';
+import FileUpload from 'primevue/fileupload';
+
+import { useRouter } from 'vue-router';
+
+
 
 // Stores
 const Mascota = useMascota()
 const Auth = useAuthStore()
 const Admin = useAdmin()
-
-
 const Cliente = useCliente()
+
 // States
-const router = useRouter()
 
 const tipo = [
-    'Perro',
-    'Gato',
-    'Hámster',
-    'Ave',
-    'Pez',
-    'Reptil',
-    'Invertebrado',
-    'Conejo',
+    { label: 'Perro', name: 'Perro' },
+    { label: 'Gato', name: 'Gato' },
+    { label: 'Hámster', name: 'Hámster' },
+    { label: 'Ave', name: 'Ave' },
+    { label: 'Pez', name: 'Pez' },
+    { label: 'Reptil', name: 'Reptil' },
+    { label: 'Invertebrado', name: 'Invertebrado' },
+    { label: 'Conejo', name: 'Conejo' },
+
 ];
 const vacunas = [
-    'Parvovirosis',
-    'Pentavalente ',
-    'Rabia',
-    'Moquillo',
-    'Adenovirus',
-    'Traqueobronquitis infecciosa canina ',
-    'Leptospira'
+    { label: 'Parvovirosis', name: 'Parvovirosis' },
+    { label: 'Pentavalente', name: 'Pentavalente' },
+    { label: 'Rabia', name: 'Rabia' },
+    { label: 'Moquillo', name: 'Moquillo' },
+    { label: 'Adenovirus', name: 'Adenovirus' },
+    { label: 'Traqueobronquitis infecciosa canina', name: 'Traqueobronquitis infecciosa canina' },
+    { label: 'Leptospira', name: 'Leptospira' },
+
 ];
 const tiposDeMascotas = [
-    { tipo: 'Perro', razas: ['Labrador', 'Poodle', 'Bulldog', 'Bulldog', 'Bulldog', 'Bulldog'] },
-    { tipo: 'Gato', razas: ['Siamés', 'Persa', 'Maine Coon'] },
-    { tipo: 'Hámster', razas: ['Dorado', 'Sirio', 'Ruso'] },
-    { tipo: 'Ave', razas: ['Canario', 'Periquito', 'Loro'] },
-    { tipo: 'Pez', razas: ['Guppy', 'Beta', 'Goldfish'] },
-    { tipo: 'Reptil', razas: ['Iguana', 'Gecko', 'Tortuga'] },
-    { tipo: 'Invertebrado', razas: ['Araña', 'Caracol', 'Cangrejo'] },
-    { tipo: 'Conejo', razas: ['Holandés', 'Angora', 'Mini Rex'] },
+    {
+        tipo: 'Perro',
+        razas: [
+            { label: 'Labrador', name: 'Labrador' },
+            { label: 'Poodle', name: 'Poodle' },
+            { label: 'Pit Bull Terrier', name: 'Pit Bull Terrier' },
+            { label: 'Terrier', name: 'Terrier' },
+            { label: 'Bloodhound', name: 'Bloodhound' },
+            { label: 'Bolognese', name: 'Bolognese' },
+            { label: 'Boxer', name: 'Boxer' },
+            { label: 'Chihuahua', name: 'Chihuahua' },
+            { label: 'Collie', name: 'Collie' },
+            { label: 'Dogo ', name: 'Dogo ' },
+            { label: 'Harrier', name: 'Harrier' }
+        ]
+    },
+    {
+        tipo: 'Gato', razas: [
+            { label: 'Siamés', name: 'Siamés' },
+            { label: 'Persa', name: 'Persa' },
+            { label: 'Maine Coon', name: 'Maine Coon' }
+        ]
+    },
+    {
+        tipo: 'Hámster', razas: [
+            { label: 'Dorado', name: 'Dorado' },
+            { label: 'Sirio', name: 'Sirio' },
+            { label: 'Ruso', name: 'Ruso' }
+        ]
+    },
+    {
+        tipo: 'Ave', razas: [
+            { label: 'Canario', name: 'Canario' },
+            { label: 'Periquito', name: 'Periquito' },
+            { label: 'Loro', name: 'Loro' }
+        ]
+    },
+    {
+        tipo: 'Pez', razas: [
+            { label: 'Guppy', name: 'Guppy' },
+            { label: 'Beta', name: 'Beta' },
+            { label: 'Goldfish', name: 'Goldfish' }
+        ]
+    },
+    {
+        tipo: 'Reptil', razas: [
+            { label: 'Iguana', name: 'Iguana' },
+            { label: 'Gecko', name: 'Gecko' },
+            { label: 'Tortuga', name: 'Tortuga' }
+        ]
+    },
+    {
+        tipo: 'Invertebrado', razas: [
+            { label: 'Araña', name: 'Araña' },
+            { label: 'Caracol', name: 'Caracol' },
+            { label: 'Cangrejo', name: 'Cangrejo' }
+        ]
+    },
+    {
+        tipo: 'Conejo', razas: [
+            { label: 'Holandés', name: 'Holandés' },
+            { label: 'Angora', name: 'Angora' },
+            { label: 'Mini Rex', name: 'Mini Rex' }
+        ]
+    }
 ];
 
 const razas = ref([]);
+const vacunasOriginales = ref([])
+const router = useRouter()
 
 onMounted(() => {
-
     Auth.ObtenerToken()
     Cliente.verClientes()
-
     if(Mascota.MascotaUpdate.nombre === ''){
         toast.warn('Sin valores que editar',{
             position: toast.POSITION.TOP_CENTER
         })
         setTimeout(()=>{
-            router.push({name:'mascotas'})
+            router.push({name:'info-perfil'})
 
         },1000)
         
     }else{
-    
+        
         if(!Array.isArray(Mascota.MascotaUpdate.vacunas)){
 
             Mascota.MascotaUpdate.vacunas = JSON.parse(Mascota.MascotaUpdate.vacunas)
+            console.log(Mascota.MascotaUpdate.vacunas)
+
+            vacunasOriginales.value = Mascota.MascotaUpdate.vacunas.map(vacuna => ({
+                label: vacuna,
+                name: vacuna,
+            }));
         }
-        
+    
     }
+
 
 })
 
-watch(() => Mascota.mascota.tipo_mascota, (newTipo) => {
+watch(() => Mascota.MascotaUpdate.tipo_mascota, (newTipo) => {
 
     const mascotaSeleccionada = tiposDeMascotas.find(
-        (mascota) => mascota.tipo === newTipo
+        (mascota) => mascota.tipo === newTipo.name
     );
-    Mascota.mascota.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : '';
+
+    Mascota.MascotaUpdate.raza = mascotaSeleccionada ? mascotaSeleccionada.razas[0] : Mascota.MascotaUpdate.raza?.label;
+
     razas.value = mascotaSeleccionada ? mascotaSeleccionada.razas : [];
 }
 )
 
 
 watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
-    
-    if(!Array.isArray(Mascota.MascotaUpdate.vacunas)){
 
-        if(Mascota.MascotaUpdate.vacunas === ''){
+    if (!Array.isArray(Mascota.MascotaUpdate.vacunas)) {
+
+        if (Mascota.MascotaUpdate.vacunas === '') {
             Mascota.MascotaUpdate.vacunas = []
-        }else{
+        } else {
             Mascota.MascotaUpdate.vacunas = JSON.parse(Mascota.MascotaUpdate.vacunas)
         }
     }
-    if(Array.isArray(Mascota.MascotaUpdate.vacunas)){
+    if (Array.isArray(Mascota.MascotaUpdate.vacunas)) {
         filtrarVacunasDisponibles();
 
     }
 }
 )
-const filtrarVacunasDisponibles = ()=>{
+const filtrarVacunasDisponibles = () => {
     // Si la vacuna que esta en el state mascota.vacuna es igual al que esta en vacunas, se deja de mostrar
-
-    return vacunas.filter(vacuna => Mascota.MascotaUpdate.vacunas.indexOf(vacuna) === -1);
-    
+    return vacunas.filter(vacuna =>  Mascota.MascotaUpdate.vacunas.indexOf(vacuna) === -1);
 }
 
+const imageUpload = ref(null)
+
+const onUpload = (event) => {
+
+    console.log(event.files[0])
+    Mascota.MascotaUpdate.imagen = event.files[0]
+
+    imageUpload.value = event.files[0].objectURL
+
+}
+
+const editar = () => {
+
+    Mascota.MascotaUpdate.vacunas = vacunasOriginales.value
+    Mascota.MascotaUpdate.genero =  Mascota.MascotaUpdate.genero ? 'Macho' : 'Hembra'
+    Mascota.editarMascota()
+
+}
 </script>
 
 <template>
-
-    <h1>Editar Mascota</h1>
-
-    <div class="con">
-        <div></div>
-        <button @click="Admin.handleMascota" class="botonVolver"> Volver </button>
-    </div>
-
     <div class="contenedor-registro">
-        <div class="contenedor-formulario">
 
-            <div class="formulario">
-                <div class="registro">
-    
-                    <h2>Datos Mascota</h2>
-    
-                    <FormKit type="form" id="form" @submit="" :actions="false"
-                        incomplete-message="Ingrese todos sus datos para continuar">
-                        <div class="inputs">
-    
-                            <v-select  v-model="Mascota.MascotaUpdate.clienteId" placeholder="Nombre del Dueño" name="clienteId"
-                                :options="Cliente.clientes" :reduce="nombre => nombre.id" label="nombre"></v-select>
-    
-                            <div class="contenedor-genero">
-    
-                                <div class="nombre-mascota">
-                                    <FormKit v-model="Mascota.MascotaUpdate.nombre" name="nombre" type="text" placeholder="Nombre Mascota" 
-                                        validation="required" :validation-messages="{
-                                            required: 'El Nombre es Obligatorio',
-                                        }" />
-                                </div>
-                                <div class="checkbox-wrapper-34">
-                                    <input v-model="Mascota.MascotaUpdate.genero"  checked class='tgl tgl-ios' id='toggle-34' type='checkbox'>
-                                    <label class='tgl-btn' for='toggle-34'></label>
-                                </div>
-    
-                            </div>
-    
-                            <v-select v-model="Mascota.MascotaUpdate.tipo_mascota" placeholder="Tipo de Mascota" name="tipo_mascota" :options="tipo"
-                                label="tipo">
-    
-                            </v-select>
-    
-                            <FormKit v-model="Mascota.MascotaUpdate.edad" type="text" placeholder="Edad" name="edad"
-                                validation="number|required|" :validation-messages="{
-                                    required: 'Edad es obligatoria',
-                                    number: 'No puedes ingresar letras'
-                                }" />
-    
-                            <v-select v-model="Mascota.MascotaUpdate.raza" placeholder="Raza" name="raza" :options="razas" label="razas">
-    
-                            </v-select>
+        <div class="titulo">
+            <h1>Editar Mascota</h1>
+            <InlineMessage v-if="Mascota.errorData" severity="error"> Todos los datos son obligatorios </InlineMessage>
+        </div>
+
+
+        <div class="formulario">
+
+
+
+            <div class="datos-mascota">
+
+                <div class="inputs">
+                    <InputText type="text" v-model="Mascota.MascotaUpdate.cliente_nombre" disabled  />
+
+                    <InputText type="text" v-model=" Mascota.MascotaUpdate.nombre" placeholder="Nombre Mascota" />
+                    <Dropdown v-model=" Mascota.MascotaUpdate.tipo_mascota" editable :options="tipo" checkmark optionLabel="label"
+                        placeholder="Tipo de Mascota" />
+                    <Dropdown v-model=" Mascota.MascotaUpdate.raza" editable :options="razas" checkmark optionLabel="label"
+                        placeholder="Raza" />
+
+                    <div class="genero">
+                        <small>{{  Mascota.MascotaUpdate.genero ? 'Macho' : 'Hembra' }}</small>
+                        <InputSwitch v-model="Mascota.MascotaUpdate.genero" />
+                    </div>
+
+
+                    <div class="edad">
+
+                        <Dropdown v-model="Mascota.opcionEdad" :options="[' Años', ' Meses']" checkmark
+                            placeholder="Tipo" />
+                        <InputNumber style="width: 100%;" v-model=" Mascota.MascotaUpdate.edad" :suffix="Mascota.opcionEdad"
+                            placeholder="Edad" />
+
+                    </div>
+
+                    <MultiSelect  v-model="vacunasOriginales" display="chip" :options="vacunas" optionLabel="name" placeholder="Seleccione las vacunas"
+                        :maxSelectedLabels="3" />
+                        
+                    <div class="image-uploaded">
+                        <div>
+                            <FileUpload mode="basic" customUpload name="demo" :auto="true" @uploader="onUpload"
+                                accept="image/*" :maxFileSize="1000000" chooseLabel="Foto" />
+                            <!-- <small v-if="imageUpload">{{  Mascota.MascotaUpdate.imagen.name }}</small> -->
                         </div>
-                    </FormKit>
+
+                        <div class="imagen">
+                            <img class="img-upload"  alt=""
+                            :src="imageUpload ? imageUpload : `http://localhost:6060/uploads/pets/${Mascota.MascotaUpdate.imagenUrl}`"
+                            >
+                            <!-- <i @click="deleteImage" class="pi pi-trash"></i> -->
+                        </div>
+                    </div>
+
                 </div>
-                <div class="vacunas">
-                    <h2>Vacunas</h2>
-                    <v-select id="vacunas" multiple v-model="Mascota.MascotaUpdate.vacunas" placeholder="Seleccione las vacunas"
-                        :options="filtrarVacunasDisponibles()" 
-                    />
-                </div>
+
             </div>
-            
-            <button v-on:click="Mascota.editarMascota" class="agregar"> Editar </button>
+
+            <div class="acciones">
+
+                <Button @click="router.push({name:'mascotas'})" label="Cancelar" severity="secondary" outlined rounded />
+                <Button @click="editar" label="Editar" rounded />
+
+            </div>
         </div>
 
     </div>
 </template>
 <style scoped>
-.con{
-    position: absolute;
-    top: 25vh;
-    right: 0;
-    
+.image-uploaded {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
+
+.image-uploaded i {
+    cursor: pointer;
+    color: var(--color-rojo);
+}
+
+.img-upload {
+    height: 50px;
+    width: 50px;
+}
+
+.imagen {
+    border: 1px solid var(--color-morado-claro-general);
+    border-radius: 5px;
+    padding: 4px;
+    display: flex;
+    /* gap: 1vh; */
+    align-items: end;
+}
+
+.contenedor-registro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+}
+
+.titulo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 3vh;
+    gap: 10px;
+}
+
+
+.genero {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--color-morado-general);
+}
+
 h1 {
-    margin-bottom: 4vh;
     text-align: center;
     color: var(--color-morado-general);
     font-size: 2.4em;
     font-weight: bold;
 }
+
 h2 {
     margin-bottom: 5vh;
     font-size: 2em;
@@ -201,183 +343,44 @@ h2 {
 
 }
 
->>> {
-    --vs-dropdown-option--active-bg: var(--color-morado-general);
-    --vs-dropdown-option--active-color: #eeeeee;
-}
-.agregar{
-    margin-right: 5vh;
-    margin: 0 auto;
-    font-size: 1.2em;
-    padding:10px;
-    border-style: none;
-    background-color: var(--color-morado-general);
-    color: white;
-    border-radius: 20px;
-    width: 8em;
-    transition: all 0.2s ease;
-    cursor: pointer;
 
-}
-.agregar:hover{
-    transform: translateY(-1px); 
-    background-color: var(--color-morado-oscuro-general);
-}
-    
 .formulario {
-    /* max-height: max-content; */
-    /* width: 40vh; */
-    position: relative;
+
     display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    gap: 50px;
-}
-.contenedor-registro {
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     /* width: 100%; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.contenedor-formulario {
-    /* width: 60vh; */
-    /* background-color: var( --color-morado-claro-general); */
-    /* padding: 20px; */
-    /* border-radius: 20px; */
-    display: flex;
-    flex-direction: column;
-    /* justify-content: left; */
-    /* align-items: left; */
-    gap: 2vh;
-
+    gap: 50px;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 50vh;
 }
 
-.registro .contenedor-genero {
+
+
+.acciones {
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
-
-.checkbox-wrapper-34 {
-    --blue: #0f30c3;
-    --g08: #d054e6;
-    margin-bottom: 1vh;
+.cliente {
+    display: flex;
+    flex-direction: column;
 }
 
-.checkbox-wrapper-34 .tgl {
-    display: none;
-
+.edad {
+    display: flex;
+    gap: 2vh;
 }
 
-.checkbox-wrapper-34 .tgl,
-.checkbox-wrapper-34 .tgl:after,
-.checkbox-wrapper-34 .tgl:before,
-.checkbox-wrapper-34 .tgl *,
-.checkbox-wrapper-34 .tgl *:after,
-.checkbox-wrapper-34 .tgl *:before,
-.checkbox-wrapper-34 .tgl+.tgl-btn {
-    box-sizing: border-box;
-}
-
-.checkbox-wrapper-34 .tgl::selection,
-.checkbox-wrapper-34 .tgl:after::selection,
-.checkbox-wrapper-34 .tgl:before::selection,
-.checkbox-wrapper-34 .tgl *::selection,
-.checkbox-wrapper-34 .tgl *:after::selection,
-.checkbox-wrapper-34 .tgl *:before::selection,
-.checkbox-wrapper-34 .tgl+.tgl-btn::selection {
-    background: none;
-}
-
-.checkbox-wrapper-34 .tgl+.tgl-btn {
-    outline: 0;
-    display: block;
-    width: 90px;
-    height: 30px;
-    position: relative;
+strong {
     cursor: pointer;
-    user-select: none;
-    font-size: 12px;
-    font-weight: 400;
-    color: #fff;
-}
-
-.checkbox-wrapper-34 .tgl+.tgl-btn:after,
-.checkbox-wrapper-34 .tgl+.tgl-btn:before {
-    position: relative;
-    display: block;
-    content: "";
-    width: 25%;
-    height: 100%;
-
-}
-
-.checkbox-wrapper-34 .tgl+.tgl-btn:after {
-    left: 0;
-}
-
-.checkbox-wrapper-34 .tgl+.tgl-btn:before {
-    display: inline;
-    position: absolute;
-    top: 7px;
-}
-
-.checkbox-wrapper-34 .tgl:checked+.tgl-btn:after {
-    left: 73%;
-}
-
-.checkbox-wrapper-34 .tgl-ios+.tgl-btn {
-    background: var(--g08);
-    border-radius: 20rem;
-    padding: 4px;
-    transition: all 0.4s ease;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-}
-
-.checkbox-wrapper-34 .tgl-ios+.tgl-btn:after {
-    border-radius: 2em;
-    background: #fff;
-    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-wrapper-34 .tgl-ios+.tgl-btn:before {
-    content: "Hembra";
-    left: 28px;
-
-    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.checkbox-wrapper-34 .tgl-ios+.tgl-btn:active {
-    box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
-}
-
-.checkbox-wrapper-34 .tgl-ios+.tgl-btn:active:after {
-    padding-right: 0.8em;
-}
-
-.checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn {
-    background: var(--blue);
-}
-
-.checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:active {
-    box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
-}
-
-.checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:active:after {
-    margin-left: -0.4em;
-}
-
-.checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:before {
-    content: "Macho ";
-    left: 10px;
-    color: #fff;
 }</style>

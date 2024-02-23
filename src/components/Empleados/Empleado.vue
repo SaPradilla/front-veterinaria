@@ -19,7 +19,7 @@
             <div class="info-empleado">
                 <h2>{{ Empleado.perfilEmpleado.nombre}}</h2>
                 <h2>{{ Empleado.perfilEmpleado.apellido}}</h2>
-                <img class="foto-mascota" src="../assets/img/fotoperfil.webp" alt="">
+                <img class="foto-mascota" :src="`http://localhost:6060/uploads/employees/${Empleado.perfilEmpleado.imagen}`" alt="">
                 <p>{{  Empleado.perfilEmpleado.rol }}</p>
                 <p class="id">ID: {{ Empleado.perfilEmpleado.id }}</p>
             </div>

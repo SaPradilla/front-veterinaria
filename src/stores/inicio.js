@@ -9,8 +9,13 @@ export const useInicio = defineStore('inicio',  () =>{
     
     const Pagina = useUltimasPaginas()
     const Router = useRouter()
+    const scrolled = (false)
+    const modalOptions = ref()
 
-
+    const handleMenu = (event) => {
+        console.log(event)
+        modalOptions.value.toggle(event);
+    }
 
     const redirigirSolicitudCita = ()=>{
 
@@ -30,6 +35,9 @@ export const useInicio = defineStore('inicio',  () =>{
     }
     
     return {
-        redirigirSolicitudCita
+        redirigirSolicitudCita,
+        scrolled,
+        handleMenu,
+        modalOptions
     }
 })

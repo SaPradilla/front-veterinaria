@@ -14,7 +14,7 @@ export default {
     },
     registarEmpleado(token,data){
         return api.post('/admin/register/employee',data,
-            { headers: {'auth-token': token}}
+            { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
         )
     },
     cambiarEstado(token,id){
@@ -23,9 +23,9 @@ export default {
         })
     },
     editarEmpleado(token,id,data){
-        return api.put(`/admin/edit/employee/${id}`,data,{
-            headers: {'auth-token': token}
-        })
+        return api.put(`/admin/edit/employee/${id}`,data,
+        { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
+        )
     }
 
 }

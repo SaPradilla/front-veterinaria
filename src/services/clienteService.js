@@ -16,7 +16,7 @@ export default {
     },
     editarCliente(token,id,data){
         return api.put(`/clientes/edit/client/${id}`,data,{
-            headers: {'auth-token': token}
+            headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',}
         })
     },
     obtenerCliente(id,token){
@@ -31,12 +31,12 @@ export default {
     },  
     registrarMascotaCliente(token,data){
         return api.post('/clientes/register/pet',data,{
-            headers: {'auth-token': token}
+            headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',}
         })
     },
     editarMascotaCliente(token,id,data){
         return api.put(`/clientes/edit/pet/${id}`, data, {
-            headers: {'auth-token': token}
+            headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',}
         })
     },
     obtenerSolicitudCliente(token,id){

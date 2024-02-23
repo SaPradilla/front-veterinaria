@@ -16,6 +16,8 @@ import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect';
 import InlineMessage from 'primevue/inlinemessage';
 import Button from 'primevue/button';
+import FileUpload from 'primevue/fileupload';
+
 import { useRouter } from 'vue-router';
 
 // Stores
@@ -135,7 +137,22 @@ const filtrarVacunasDisponibles = ()=>{
     return vacunas.filter(vacuna => Mascota.mascotaCliente.vacunas.indexOf(vacuna) === -1);
 }
 
+const imageUpload = ref(null)
 
+const onUpload = (event) => {
+
+    console.log(event.files[0])
+
+    Mascota.mascotaCliente.imagen = event.files[0]
+
+    imageUpload.value = event.files[0].objectURL
+
+}
+
+const deleteImage = () => {
+    Mascota.mascotaCliente.imagen = null
+    imageUpload.value = null
+}
 </script>
 
 <template>
@@ -191,6 +208,20 @@ const filtrarVacunasDisponibles = ()=>{
                         <h2>Vacunas</h2>
                         <MultiSelect style="width: 200px;" v-model="Mascota.mascotaCliente.vacunas" display="chip" :options="vacunas" optionLabel="name" placeholder="Seleccione las vacunas"
                         :maxSelectedLabels="3" />
+
+                        <div class="image-uploaded">
+                            <div>
+                                <FileUpload style="display: flex;" mode="basic" customUpload name="demo" :auto="true" @uploader="onUpload"
+                                    accept="image/*" :maxFileSize="1000000" chooseLabel="Foto" />
+                                <small v-if="imageUpload">{{ Mascota.mascotaCliente.imagen.name }}</small>
+                            </div>
+    
+                            <div class="imagen" v-if="imageUpload">
+                                <img v-if="imageUpload" class="img-upload" :src="imageUpload" alt="">
+                                <i @click="deleteImage" v-if="imageUpload" class="pi pi-trash"></i>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 
@@ -208,6 +239,32 @@ const filtrarVacunasDisponibles = ()=>{
     </div>
 </template>
 <style scoped>
+
+
+.image-uploaded{
+    display: flex;
+    align-items: start;
+    width :100%;
+    flex-direction: column;
+    justify-content: left;
+}
+.image-uploaded i{
+    cursor: pointer;
+    color: var(--color-rojo);
+}
+.img-upload{
+    height: 50px;
+    width: 50px;
+}
+.imagen{
+    border: 1px solid var(--color-morado-claro-general);
+    border-radius:5px;
+    padding: 4px ;
+    display: flex;
+    /* gap: 1vh; */
+    align-items: end;
+}
+
 .acciones{
     width: 100%;
     display: flex;
@@ -223,7 +280,10 @@ const filtrarVacunasDisponibles = ()=>{
     gap: 10px;
 }
 .vacunas{
-    width: 200px;
+    width: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }
 .genero{
     display: flex;

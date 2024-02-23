@@ -3,6 +3,7 @@
     import { useAdmin } from '../../stores/admin';
     import { useEmpleado } from '../../stores/empleado';
     import {useFormatear} from '../../stores/formatear'
+    import Avatar from 'primevue/avatar';
 
     const Empleado = useEmpleado()
 
@@ -22,7 +23,11 @@
             <div class="info-empleado">
                 <h2>{{ Empleado.perfilEmpleado.nombre}}</h2>
                 <h2>{{ Empleado.perfilEmpleado.apellido}}</h2>
-                <img class="foto-mascota" src="../../assets/img/fotoperfil.webp" alt="">
+                <Avatar v-if="Empleado.perfilEmpleado.imagen" :image="`http://localhost:6060/uploads/employees/${Empleado.perfilEmpleado.imagen}`"  size="xlarge" shape="circle" />
+							
+                <Avatar v-else :label="Empleado.perfilEmpleado.nombre.substr(-20, 2)" size="xlarge" shape="circle"
+                    style="background-color: var(--color-morado-claro-general); color: white" />
+                <!-- <img class="foto-mascota" :src="`http://localhost:6060/uploads/employees/${Empleado.perfilEmpleado.imagen}`" alt=""> -->
                 <p>{{  Empleado.perfilEmpleado.rol }}</p>
                 <p class="id">ID: {{ Empleado.perfilEmpleado.id }}</p>
             </div>

@@ -26,10 +26,11 @@ export const useMascota = defineStore('mascota', () => {
         clienteId: null,
         tipo_mascota: '',
         nombre: '',
-        genero: null,
+        genero: false,
         edad: '',
         raza: '',
         vacunas:'',
+        imagen:''
     });
     const perfilMascota = ref({})
 
@@ -39,7 +40,7 @@ export const useMascota = defineStore('mascota', () => {
         clienteId: null,
         tipo_mascota: '',
         nombre: '',
-        genero: null,
+        genero: false,
         edad: '',
         raza: '',
         vacunas:'',
@@ -52,6 +53,7 @@ export const useMascota = defineStore('mascota', () => {
         edad: '',
         nombre: '',
         clienteId: '',
+        imagen:''
 
     })
     const opcionEdad = ref(' Años')
@@ -62,30 +64,30 @@ export const useMascota = defineStore('mascota', () => {
         return arregloDeObjetos.map(objeto => objeto.name);
     }
 
-    const validarDatosMascotaCliente = ()=>{
+    const validarDatosMascotaCliente = (mascota)=>{
 
-        if(mascotaCliente.value.raza === '') { 
-            console.log('raza') 
+        if(mascota.raza === '') { 
+           
             return true 
         
         }
-        if(mascotaCliente.value.tipo_mascota === '') { 
-            console.log('tipo') 
+        if(mascota.tipo_mascota === '') { 
+            
             return true 
         
         }
-        if(mascotaCliente.value.vacunas === '') { 
-            console.log('vauna') 
+        if(mascota.vacunas === '') { 
+            
             return true 
         
         }
-        if(mascotaCliente.value.edad === '') { 
-            console.log('edad') 
+        if(mascota.edad === '') { 
+           
             return true 
         
         }
-        if(mascotaCliente.value.nombre === '') { 
-            console.log('nombre') 
+        if(mascota.nombre === '') { 
+           
             return true 
         
         }
@@ -94,20 +96,19 @@ export const useMascota = defineStore('mascota', () => {
     }
     const registrarMascotaCliente = ()=>{
         
-        if(validarDatosMascotaCliente()){
+        if(validarDatosMascotaCliente(mascotaCliente.value)){
             errorData.value = true
             setTimeout(()=>{
                 errorData.value = false
             },1000)
             return 
         }
-        mascotaCliente.value.genero = mascotaCliente.value.genero ? 'Hembra' : 'Macho' 
+        // mascota.genero = mascotaCliente.value.genero ? 'Hembra' : 'Macho' 
 
         console.log( mascotaCliente.value.raza)
         mascotaCliente.value.raza = mascotaCliente.value.raza.label
 
         mascotaCliente.value.tipo_mascota = mascotaCliente.value.tipo_mascota.label
-
 
         mascotaCliente.value.vacunas = extraerNombres(mascotaCliente.value.vacunas)
 
@@ -146,10 +147,31 @@ export const useMascota = defineStore('mascota', () => {
             Auth.verificarSesion(err.response.data)
         })
     }
-    const registrarMascota = () =>{
-        
-        mascotaService.registarMascota(mascota.value,Auth.token)
 
+    const registrarMascota = () =>{
+        if(validarDatosMascotaCliente(mascota.value)){
+            errorData.value = true
+            setTimeout(()=>{
+                errorData.value = false
+            },1000)
+            return 
+        }
+        // si existe una raza seleccionada la asignara
+        mascota.value.raza = mascota.value.raza.label ? mascota.value.raza.label : mascota.value.raza 
+
+        mascota.value.tipo_mascota = mascota.value.tipo_mascota.label
+
+        mascota.value.vacunas = extraerNombres(mascota.value.vacunas)
+
+        mascota.value.clienteId = mascota.value.clienteId.id
+
+
+        const edad =  `${mascota.value.edad.toString()}${opcionEdad.value}`
+
+        mascota.value.edad = edad
+        console.log(mascota.value)
+
+        mascotaService.registarMascota(mascota.value,Auth.token)
         .then( res =>{
             // console.log(res)
             // Mensaje 
@@ -256,7 +278,12 @@ export const useMascota = defineStore('mascota', () => {
     }
 
     const editarMascota = ()=> {
+        MascotaUpdate.value.raza = MascotaUpdate.value.raza.label  || MascotaUpdate.value.raza
+        MascotaUpdate.value.tipo_mascota = MascotaUpdate.value.tipo_mascota.label || MascotaUpdate.value.tipo_mascota;
 
+        MascotaUpdate.value.edad =  `${MascotaUpdate.value.edad.toString()}${opcionEdad.value}`
+        MascotaUpdate.value.vacunas = extraerNombres(MascotaUpdate.value.vacunas)
+        console.log(MascotaUpdate.value)
         // MascotaUpdate.value.vacunas = JSON.stringify(MascotaUpdate.value.vacunas)
         mascotaService.editarMascota(Auth.token,MascotaUpdate.value.id,MascotaUpdate.value)
         .then( res =>{

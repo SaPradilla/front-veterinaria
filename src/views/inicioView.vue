@@ -10,11 +10,12 @@ import Contacto from '../components/Inicio/Contacto.vue';
 import Footer from '../components/Inicio/Footer.vue'
 import { onMounted, ref } from 'vue'
 import { useAuthStore } from '../stores/auth';
+import { useInicio } from '../stores/inicio';
 // stores
 const Auth = useAuthStore()
+const InicioStore = useInicio()
 // States
 
-const scrolled = ref(false)
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
@@ -25,9 +26,9 @@ onMounted(() => {
 const handleScroll = () => {
   // console.log(window.scrollY)
   if (window.scrollY > 900) {
-    scrolled.value = true;
+    InicioStore.scrolled = true;
   } else {
-    scrolled.value = false;
+    InicioStore.scrolled = false;
   }
 }
 
@@ -36,7 +37,7 @@ const handleScroll = () => {
 <template>
   <div class="contenedor-inicio">
     <div class="header">
-      <HeaderVue :scrolled="{ 'scrolled': scrolled }" />
+      <HeaderVue />
     </div>
     <div class="inicio-component" id="inicio">
       <Inicio />

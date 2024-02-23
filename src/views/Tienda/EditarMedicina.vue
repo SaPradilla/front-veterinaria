@@ -44,7 +44,7 @@ const minDate = ref(new Date(minYear, minMonth, 1));
 const onUpload = (event) => {
     console.log(event.files[0])
 
-    Inventario.updateMedicinadata.imagen   = event.files[0]
+    Inventario.updateMedicinadata.imagen = event.files[0]
 
     imageUpload.value = event.files[0].objectURL
 }
@@ -92,11 +92,13 @@ const onUpload = (event) => {
                         <FileUpload mode="basic" customUpload name="demo" :auto="true" @uploader="onUpload" accept="image/*"
                             :maxFileSize="1000000" chooseLabel="Cambiar imagen del producto" />
                         <!-- <small >{{ Inventario.medicinaData.imagen.name }}</small> -->
-                    
+
                     </div>
 
-                    <div class="imagen" >
-                        <img class="img-upload" :src="imageUpload ? imageUpload : `http://localhost:6060/uploads/products/${Inventario.updateMedicinadata.imagenUrl}`" alt="">
+                    <div class="imagen">
+                        <img class="img-upload"
+                            :src="imageUpload ? imageUpload : `http://localhost:6060/uploads/products/${Inventario.updateMedicinadata.imagenUrl}`"
+                            alt="">
                         <!-- <i @click="deleteImage"  class="pi pi-undo"></i> -->
                     </div>
                 </div>
@@ -189,4 +191,5 @@ const onUpload = (event) => {
   .opciones {
       margin-bottom: 2vh;
       margin-bottom: 2vh;
-  }</style>
+  }
+</style>

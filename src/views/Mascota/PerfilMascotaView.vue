@@ -65,7 +65,7 @@ const getSeverity = (estado) => {
             <div class="info-mascota">
 
                 <h2>{{ Mascota.perfilMascota.nombre }}</h2>
-                <img class="foto-mascota" src="../../assets/img/wally.jpeg" alt="">
+                <img class="foto-mascota" :src="`http://localhost:6060/uploads/pets/${Mascota.perfilMascota.imagen}`"  alt="">
                 <p>{{ Mascota.perfilMascota.tipo_mascota }} | {{ Mascota.perfilMascota.edad }} Años</p>
                 <p class="id">ID: {{ Mascota.perfilMascota.id }}</p>
             </div>

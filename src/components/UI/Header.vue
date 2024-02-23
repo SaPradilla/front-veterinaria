@@ -1,32 +1,34 @@
 <script setup>
-import { ref,onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import modalMenu from './modalMenu.vue';
 import { useAuthStore } from '../../stores/auth';
 import { useRouter } from 'vue-router'
+
 const router = useRouter()
+
 import SplitButton from 'primevue/splitbutton';
 import Avatar from 'primevue/avatar';
+import OverlayPanel from 'primevue/overlaypanel';
 
 import { usePermisosUser } from '../../stores/permisosUser';
+import { useInicio } from '../../stores/inicio';
 // States
 const modal = ref(false)
 const animar = ref(false)
 const userModal = ref(false)
 const adminOpcion = ref(false)
-// Props
-const props = defineProps({
-    scrolled: {
-        type: String,
-        required: true
-    }
-})
+const modalOptions = ref()
+
+
 // Store
 const Auth = useAuthStore()
 const Permisos = usePermisosUser()
-onMounted(()=>{
+const Inicio = useInicio()
+
+onMounted(() => {
     Auth.extraerUserToken()
-    if(localStorage.getItem('rol')){
-       if( localStorage.getItem('rol') === 'admin') adminOpcion.value = true
+    if (localStorage.getItem('rol')) {
+        if (localStorage.getItem('rol') === 'admin') adminOpcion.value = true
     }
 })
 
@@ -52,28 +54,22 @@ const redirigirTienda = () => {
 
     router.push({ name: 'tienda' })
 }
-const toggleUserModal = () => {
-    userModal.value = !userModal.value
+
+const handleMenu = (event) => {
+    modalOptions.value.toggle(event);
 }
-const items = [
-    {
-        label:'',
-
-    }
-]
-
 </script>
 
 <template>
-    
     <modalMenu v-if="modal" :animar="animar" @toggleModal="toggleModal" />
 
-    <div class="nav-bar" :class="{ 'scrolled' : scrolled && !modal }" >
+    <div class="nav-bar" :class="{ 'scrolled': Inicio.scrolled && !modal }">
 
         <div class="frame">
-            <a href="#inicio" >
+            <a href="#inicio">
                 <img class="pelitos" alt="Pelitos" src="../../assets/img/pelitos-4.png" />
             </a>
+
             <div class="menu-container">
                 <div class="label"> <a href="#nosotros">Nosotros</a></div>
                 <div class="label"> <a href="#servicios">Servicios</a></div>
@@ -90,52 +86,77 @@ const items = [
                 </div>
 
                 <div v-if="Auth.token === null" class="label singIn"><a @click="redirigirLogin">Iniciar Sesion</a></div>
-                
-                <div v-else class="avatar" @click="toggleUserModal" >
-                    <Avatar :label="Permisos.userLogin.nombre.substr(-20, 2)" class="mr-2" size="large" shape="circle"  style=" cursor: pointer; background-color: var(--color-morado-claro-general); color: white"  />
-                
+
+                <div v-else class="avatar" @click="handleMenu">
+
+                    <!-- <Avatar :label="Permisos.userLogin.nombre.substr(-20, 2)"  size="large" shape="circle"
+                        style=" cursor: pointer; background-color: var(--color-morado-claro-general); color: white" />
+                     -->
+                    <Avatar v-if="Permisos.userLogin.imagen" :image="`http://localhost:6060/uploads/clients/${Permisos.userLogin.imagen}`"  size="large" shape="circle" />
+                    
+                    <Avatar v-else :label="Permisos.userLogin.nombre.substr(-20, 2)" shape="circle"
+                    style="background-color: var(--color-morado-claro-general); width: 80px; height: 80px; font-size: 2em;  color: white" />
+                    
                 </div>
                 <!-- <img  v-else  alt="Avatar" src="../../assets/img/avatar.svg" /> -->
             </div>
             <div @click="toggleModal" class="menu-mobile">
-                
+
                 <img v-if="modal" class="x-menu" src="../../assets/img/X.svg" alt="menu">
 
                 <img v-else src="../../assets/img/MENU.svg" alt="menu">
             </div>
 
         </div>
-        <div @click="toggleUserModal" v-if="userModal" class="menu-user">
 
-            <div class="menu">
-                <div class="user-cuenta" @click="router.push({name:'info-perfil'})">
-                    <p class="arriba">Ver Cuenta</p>
-                    <i class="pi pi-user" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></i>
-                </div>
-                <!-- <hr> -->
-                <div v-if="adminOpcion" class="admin-menu" @click="router.push({name:'admin'})">
-                    <p>Adminstrar</p>
-                    <li class="pi pi-cog" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></li>
-                    <!-- <hr> -->
-                </div>
-                <div @click="Auth.cerroSesion">
-                    <div class="cerrar-sesion">
-                        <p class="abajo">Cerrar Sesion</p>
-                        <li class="pi pi-sign-out" style="color: var(--color-morado-claro-general); font-size: 1.2em;"></li>
-                    </div>
-                </div>
+        <OverlayPanel ref="modalOptions" style="padding: 0; margin: 0;">
+
+            <div class="opciones" @click="router.push({ name: 'info-perfil' })">
+                <p>Ver Cuenta</p>
+                <li class="pi pi-user"></li>
+            </div>
+
+            <div v-if="adminOpcion" class="opciones" @click="router.push({ name: 'admin' })" >
+                <p>Adminstrar</p>
+                <li class="pi pi-cog"></li>
+            </div>
+
+            <div class="opciones" @click="Auth.cerroSesion">
+                <p>Cerrar sesion</p>
+                <li class="pi pi-sign-out"></li>
 
             </div>
-        </div>
+
+        </OverlayPanel>
+
+
+
     </div>
 </template>
 <style scoped>
-.user-cuenta,.cerrar-sesion,.admin-menu{
+.opciones {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.opciones:hover {
+
+    background-color: rgb(227, 227, 227);
+}
+
+.user-cuenta,
+.cerrar-sesion,
+.admin-menu {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
+
 .menu-user {
     float: right;
     width: 200px;
@@ -171,9 +192,10 @@ const items = [
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 .menu-user .user-cuenta,
 .menu-user .cerrar-sesion,
-.menu-user .admin-menu{
+.menu-user .admin-menu {
     /* background-color: var(--color-morado-oscuro-general);
     color: white; */
     padding: 10px;
@@ -182,7 +204,7 @@ const items = [
 
 .menu-user .user-cuenta:hover,
 .menu-user .cerrar-sesion:hover,
-.menu-user .admin-menu:hover{
+.menu-user .admin-menu:hover {
     background-color: var(--color-morado-oscuro-general);
     color: white;
     /* padding: 10px; */
@@ -318,6 +340,7 @@ const items = [
         display: unset;
         color: red;
     }
+
     .menu-container .label,
     .menu-container .linea,
     .avatar {

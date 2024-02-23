@@ -17,6 +17,8 @@ import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect';
 import InlineMessage from 'primevue/inlinemessage';
 import Button from 'primevue/button';
+import FileUpload from 'primevue/fileupload';
+
 import { useRouter } from 'vue-router';
 
 // Stores
@@ -103,8 +105,6 @@ const tiposDeMascotas = [
         { label: 'Mini Rex', name: 'Mini Rex' }
     ] }
 ];
-
-
 const razas = ref([]);
 const vacunasOriginales = ref([])
 
@@ -154,10 +154,6 @@ watch(() => Mascota.MascotaUpdate.tipo_mascota, (newTipo) => {
 )
 
 
-// watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
-//     filtrarVacunasDisponibles();
-// }
-// )
 watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
     
     if(!Array.isArray(Mascota.MascotaUpdate.vacunas)){
@@ -178,16 +174,24 @@ watch(() => Mascota.MascotaUpdate.vacunas, (newTipo) => {
 const filtrarVacunasDisponibles = ()=>{
     // Si la vacuna que esta en el state mascota.vacuna es igual al que esta en vacunas, se deja de mostrar
     return vacunas.filter(vacuna => Mascota.MascotaUpdate.vacunas.indexOf(vacuna) === -1);
-    
 }
+const imageUpload = ref(null)
+
 const editar = ()=>{
     Mascota.MascotaUpdate.vacunas = vacunasOriginales.value
+    Mascota.MascotaUpdate.genero =  Mascota.MascotaUpdate.genero ? 'Macho' : 'Hembra'
     console.log(Mascota.MascotaUpdate.vacunas)
-
     Mascota.editarMascotaCliente()
     
 }
+const onUpload = (event) => {
 
+    console.log(event.files[0])
+    Mascota.MascotaUpdate.imagen = event.files[0]
+
+    imageUpload.value = event.files[0].objectURL
+
+}
 </script>
 
 <template>
@@ -243,6 +247,20 @@ const editar = ()=>{
                         <h2>Vacunas</h2>
                         <MultiSelect style="width: 200px;" v-model="vacunasOriginales" display="chip" :options="vacunas" optionLabel="name" placeholder="Seleccione las vacunas"
                         :maxSelectedLabels="3" />
+                        <div class="image-uploaded">
+                            <div>
+                                <FileUpload mode="basic" customUpload name="demo" :auto="true" @uploader="onUpload"
+                                    accept="image/*" :maxFileSize="1000000" chooseLabel="Foto" />
+                                <!-- <small v-if="imageUpload">{{  Mascota.MascotaUpdate.imagen.name }}</small> -->
+                            </div>
+    
+                            <div class="imagen">
+                                <img class="img-upload"  alt=""
+                                :src="imageUpload ? imageUpload : `http://localhost:6060/uploads/pets/${Mascota.MascotaUpdate.imagenUrl}`"
+                                >
+                                <!-- <i @click="deleteImage" class="pi pi-trash"></i> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -260,6 +278,32 @@ const editar = ()=>{
     </div>
 </template>
 <style scoped>
+
+.image-uploaded{
+    display: flex;
+    align-items: start;
+    width :100%;
+    flex-direction: column;
+    justify-content: left;
+    /* align-items: ; */
+    /* justify-content:space-between ; */
+}
+.image-uploaded i{
+    cursor: pointer;
+    color: var(--color-rojo);
+}
+.img-upload{
+    height: 50px;
+    width: 50px;
+}
+.imagen{
+    border: 1px solid var(--color-morado-claro-general);
+    border-radius:5px;
+    padding: 4px ;
+    display: flex;
+    /* gap: 1vh; */
+    align-items: end;
+}
 .acciones{
     width: 100%;
     display: flex;
@@ -275,7 +319,10 @@ const editar = ()=>{
     gap: 10px;
 }
 .vacunas{
-    width: 200px;
+    width: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }
 .genero{
     display: flex;

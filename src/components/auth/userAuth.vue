@@ -4,6 +4,7 @@ import { useAuthStore } from '../../stores/auth';
 import { usePermisosUser } from '../../stores/permisosUser';
 import OverlayPanel from 'primevue/overlaypanel';
 import { useRouter } from 'vue-router';
+import Avatar from 'primevue/avatar';
 
 const Auth = useAuthStore()
 const PermisoUser = usePermisosUser()

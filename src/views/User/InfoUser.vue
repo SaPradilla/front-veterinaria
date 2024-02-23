@@ -13,6 +13,7 @@ import Column from 'primevue/column';
 import Tag from 'primevue/tag';
 
 
+
 import { useRouter } from 'vue-router';
 import { useFormatear } from '../../stores/formatear';
 import {useMascota} from '../../stores/mascota'
@@ -74,6 +75,9 @@ const edit  = ()=>{
     Mascota.MascotaUpdate = selectPet.value
     Mascota.MascotaUpdate.edad = numero
     Mascota.opcionEdad = ' ' + restoCadena
+	Mascota.MascotaUpdate.imagenUrl = selectPet.value.imagen
+	Mascota.MascotaUpdate.genero = Mascota.MascotaUpdate.genero === 'Macho' ? true : false
+
     router.push({name:'editar-mascota-user'})
 }
 
@@ -121,12 +125,16 @@ const edit  = ()=>{
                     >
                         <Column v-if="selectOptionPet" selectionMode="single" headerStyle="width: 3rem"></Column>
     
-                        <Column header="Foto">
+                        <!-- <Column header="Foto">
                             <template #body="slotProps">
                                 <div class="image"></div>
                             </template>
-                        </Column>
-    
+                        </Column> -->
+                        <Column header="Foto">
+                            <template #body="slotProps">
+                                <img class="image" :src="`http://localhost:6060/uploads/pets/${slotProps.data.imagen}`" :alt="slotProps.data.imagen" />
+                            </template>
+					    </Column>
                         <Column header="Info">
                             <template #body="slotProps">
     

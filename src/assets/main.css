@@ -74,7 +74,7 @@ ul#vs6__listbox{
 
 /* Primevue */
 .p-datatable-wrapper{
-	height: clamp(20vh,30vw,34vh);   
+	/* height: clamp(20vh,30vw,34vh);    */
 }
 .contenedor-citas .p-datatable-wrapper,
 .mis-mascotas .p-datatable-wrapper,
@@ -112,8 +112,24 @@ ul#vs6__listbox{
     box-sizing: border-box;
 
 }
+.p-overlaypanel.p-component.xd{
+    position: sticky !important;
+    float: right;
+    top: 0;
+}
+.p-overlaypanel.p-component{
+    z-index: 1220 !important;
+}
 
-
+.p-password.p-component.p-inputwrapper.p-input-icon-right{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+}
+.p-input-icon-left > i, .p-input-icon-left > svg, .p-input-icon-right > i, .p-input-icon-right > svg {
+    cursor: pointer;
+    top: unset !important;
+}
 /* Estilos botones */
 
 .botonVolver{

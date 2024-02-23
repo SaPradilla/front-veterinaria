@@ -18,7 +18,6 @@ import FileUpload from 'primevue/fileupload';
 const fechaHoy = new Date()
 const tipoModal = ref(false)
 const nuevoTipo = ref('')
-const imagen = ref(null)
 const imageUpload = ref(null)
 const handleTipoModal = () => {
     tipoModal.value = !tipoModal.value

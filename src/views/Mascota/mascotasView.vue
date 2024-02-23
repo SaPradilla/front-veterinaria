@@ -17,6 +17,7 @@ import Button from 'primevue/button';
 import { toast } from 'vue3-toastify'
 import ConfirmDialog from 'primevue/confirmdialog';
 import { useConfirm } from "primevue/useconfirm";
+import { useRouter } from 'vue-router';
 
 const Cliente = useCliente()
 const Paginacion = usePaginacion()
@@ -25,7 +26,7 @@ const Mascota = useMascota()
 const Auth = useAuthStore()
 const Admin = useAdmin()
 const confirm = useConfirm();
-
+const router = useRouter()
 
 
 const items = [
@@ -48,7 +49,24 @@ onMounted(() => {
 
 
 const handleSelectOption = () => selectOpcion.value = !selectOpcion.value
+const separarStringNumeros = (cadena)=>{
+    // Utilizamos una expresión regular para encontrar el número en la cadena
+    const match = cadena.match(/\d+/);
 
+    // Si se encuentra un número en la cadena
+    if (match) {
+        // Convertimos el texto del número a un número entero
+        const numero = parseInt(match[0], 10);
+        
+        // Eliminamos el número de la cadena original
+        const restoCadena = cadena.replace(/\d+/, '').trim();
+        
+        return {numero, restoCadena };
+    } else {
+        // Si no se encuentra ningún número en la cadena, retornamos null
+        return { numero: null, restoCadena: cadena };
+    }
+}
 const edit = () => {
 	if (!selectPet.value) {
 		toast.error('Selecciona una mascota para editar', {
@@ -58,7 +76,17 @@ const edit = () => {
 		})
 		return
 	}
-	Mascota.redirigirEditarMascota(selectPet.value)
+	const {numero,restoCadena} = separarStringNumeros(selectPet.value.edad)
+
+	Mascota.MascotaUpdate = selectPet.value
+	Mascota.MascotaUpdate.cliente_nombre = selectPet.value.cliente.nombre
+    Mascota.MascotaUpdate.edad = numero
+    Mascota.opcionEdad = ' ' + restoCadena 
+	Mascota.MascotaUpdate.imagenUrl = selectPet.value.imagen
+	Mascota.MascotaUpdate.genero = Mascota.MascotaUpdate.genero === 'Macho' ? true : false
+	// console.log(Mascota.MascotaUpdate)
+	// console.log(Mascota.opcionEdad)
+	router.push({name:'editar-mascota'})
 }
 const handleClick = () => {
 	if (Mascota.mascotas.length < 4) {
@@ -136,11 +164,16 @@ const confirmVerMascota = () => {
 				>
 
 					<Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
-					<Column class="col" field="nombre" header="Nombre" sortable style="width: 25%"></Column>
-					<Column class="col" field="tipo_mascota" header="Tipo" sortable style="width: 25%"></Column>
-					<Column class="col" field="raza" sortable header="Raza" style="width: 25%"></Column>
-					<Column class="col" field="edad" sortable header="Edad" style="width: 25%"></Column>
-					<Column class="col" field="genero" sortable header="Genero" style="width: 25%"></Column>
+					<Column class="col" field="nombre" header="Nombre" sortable ></Column>
+					<Column header="Foto">
+						<template #body="slotProps">
+							<img class="image" :src="`http://localhost:6060/uploads/pets/${slotProps.data.imagen}`" :alt="slotProps.data.imagen" />
+						</template>
+					</Column>
+					<Column class="col" field="tipo_mascota" header="Tipo" sortable ></Column>
+					<Column class="col" field="raza" sortable header="Raza" ></Column>
+					<Column class="col" field="edad" sortable header="Edad" ></Column>
+					<Column class="col" field="genero" sortable header="Genero" ></Column>
 
 					<Column header="Dueño">
 						<template #body="slotProps">
@@ -165,6 +198,13 @@ const confirmVerMascota = () => {
 </template>
 
 <style scoped>
+
+.image {
+	width:5em;
+	height: 5em;
+	border-radius: 100%;
+	box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
 .botones-accion {
 	display: flex;
 	gap: 20px;

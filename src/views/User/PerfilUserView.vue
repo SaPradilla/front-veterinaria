@@ -6,6 +6,7 @@ import { useCliente } from '../../stores/cliente';
 import { useRouter } from 'vue-router';
 // Primevue 
 import Button from 'primevue/button';
+import Avatar from 'primevue/avatar';
 
 
 
@@ -32,15 +33,20 @@ onMounted(()=>{
         <div class="content-header-perfil">
             <div class="info-perfil">
 
-                <div class="foto-perfil"></div>
-
+                <!-- <div class="foto-perfil"></div> -->
+                
+                <Avatar v-if="Permisos.userLogin.imagen" :image="`http://localhost:6060/uploads/clients/${Permisos.userLogin.imagen}`"  size="xlarge" shape="circle" />
+                    
+                <Avatar v-else :label="Permisos.userLogin.nombre.substr(-20, 2)" shape="circle"
+                style="background-color: var(--color-morado-claro-general); width: 80px; height: 80px; font-size: 2em;  color: white" />
+                    
                 <div class="content-perfil">
                     <div class="nombres">
                         <p class="nombre">{{ Permisos.userLogin.nombre }} </p>
                         <p class="apellido"> {{ Permisos.userLogin.apellido }}</p>
-                    </div>  
+                    </div>
                     <div class="editar-perfil">
-                        <Button @click="router.push({name:'editar-perfil'})" icon="pi pi-cog" outlined severity="secondary" rounded  />
+                        <Button  style="padding: 10px; display: flex ; gap: 2px; font-size: .8em; "  @click="router.push({name:'editar-perfil'})" icon="pi pi-cog" label="Configuracion" outlined severity="secondary" rounded  />
                     </div>
                 </div>
 
@@ -92,7 +98,7 @@ onMounted(()=>{
     border-radius: 100%;
 }
 .nombres{
-    font-size: 1.6em;
+    font-size: 1.2em;
     font-weight: 700;
 }
 .nombre{
@@ -118,6 +124,6 @@ onMounted(()=>{
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    gap: 20px;
+    /* gap: 20px; */
 }
 </style>

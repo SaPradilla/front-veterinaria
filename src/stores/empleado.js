@@ -24,14 +24,41 @@ export const useEmpleado = defineStore('empleado', () => {
         numero_celular: '',
         email: '',
         rol: '',
-        isAdmin: null,
+        isAdmin: false,
+    })
+    const dataEmpleado = reactive({
+        nombre: '',
+        apellido: '',
+        numero_celular: '',
+        email: '',
+        rol: '',
+        imagen:'',
+        isAdmin: false,
+        contrasena: '',
     })
     const perfilEmpleado = ref({})
+    const errorData = ref(false)
     // Metodos
     
-    const registrarEmpleado = (data) =>{
+    const validateData = (empleado)=>{
+        if(empleado.nombre === '') return true
+        if(empleado.apellido === '') return true
+        if(empleado.numero_celular === '') return true
+        if(empleado.email === '') return true
+        if(empleado.rol === '') return true
+    }
 
-        empleadoService.registarEmpleado(Auth.token,data)
+    const registrarEmpleado = () =>{
+        if(validateData(dataEmpleado)){
+            errorData.value = true
+            setTimeout(()=>{
+                errorData.value = false
+            },1000)
+            return 
+        }
+        dataEmpleado.rol = dataEmpleado.rol.label
+        console.log(dataEmpleado)
+        empleadoService.registarEmpleado(Auth.token,dataEmpleado)
         .then(res =>{
 
             toast.success(res.data.msg,{
@@ -65,6 +92,9 @@ export const useEmpleado = defineStore('empleado', () => {
     }
 
     const editarEmpleado = ()=>{
+        
+        empleadoUpdate.value.rol = empleadoUpdate.value.rol.label 
+
         empleadoService.editarEmpleado(Auth.token,empleadoUpdate.value.id,empleadoUpdate.value)
         .then(res =>{
 
@@ -114,10 +144,6 @@ export const useEmpleado = defineStore('empleado', () => {
         })
     }
 
-    const redigiriEditarEmpleado = (empleado)=>{
-        empleadoUpdate.value = empleado
-        router.push({name:'editar-empleado'})
-    }
     const verPerfilEmpleado = (empleadoData)=>{
 
         empleado.value = empleadoData
@@ -138,11 +164,12 @@ export const useEmpleado = defineStore('empleado', () => {
         empleado,
         perfilEmpleado,
         empleadoUpdate,
+        errorData,
+        dataEmpleado,
 
         registrarEmpleado,
         verEmpleados,
         cambiarEstadoEmpleado,
-        redigiriEditarEmpleado,
         editarEmpleado,
         verPerfilEmpleado,
         verEmpleado

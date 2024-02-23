@@ -4,6 +4,7 @@ import {onMounted,watch} from 'vue'
 import { useModals } from '../../stores/modals';
 import { useFormatear } from '../../stores/formatear';
 import { useEmpleado } from '../../stores/empleado';
+import Avatar from 'primevue/avatar';
 
 const Modals = useModals()
 const Formato = useFormatear()
@@ -29,7 +30,11 @@ const Empleado = useEmpleado()
                 </div>
                 <div class="perfil">
                     <div class="info-empleado">
-                        <img class="foto-mascota" src="../../assets/img/fotoperfil.webp" alt="">
+                        <Avatar v-if="Empleado.empleado.imagen" :image="`http://localhost:6060/uploads/employees/${Empleado.empleado.imagen}`"  size="xlarge" shape="circle" />
+							
+                        <Avatar v-else :label="Empleado.empleado.nombre.substr(-20, 2)" size="xlarge" shape="circle"
+                        style="background-color: var(--color-morado-claro-general); color: white" />
+                        <!-- <img class="foto-mascota" :src="`http://localhost:6060/uploads/employees/${Empleado.empleado.imagen}`" alt=""> -->
                         <div>
                             <p>{{  Empleado.empleado.rol }}</p>
                             <h2>{{ Empleado.empleado.nombre}}</h2>
