@@ -99,10 +99,10 @@ h1 {
 
 .menu-dashboard {
     /* background-color: var(--color-morado-general); */
-    background-image: linear-gradient(to right, #e9e0ff, #ece5ff, #efeaff, #f2eeff, #f5f3ff);
-
+    /* background-image: linear-gradient(to right, #e9e0ff, #ece5ff, #efeaff, #f2eeff, #f5f3ff); */
+    background-color: white;
     backdrop-filter: blur(70px);
-    box-shadow: 0px 2px 100px 10px #e9e0ff;
+    box-shadow: 0px 2px 15px 1px #e9e0ff;
     position: fixed;
     height: 100%;
     display: flex;

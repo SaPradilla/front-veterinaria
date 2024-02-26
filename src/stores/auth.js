@@ -45,12 +45,12 @@ export const useAuthStore = defineStore('auth', () =>{
             })
             if(Pagina.ultimaPagina === ''){
                 router.push('/')
-                
+            }
+            if(Pagina.ultimaPagina === 'tienda'){
+                router.push({name:'pagar'})
             }
             if(Pagina.ultimaPagina === 'solicitud-cita'){
-                setTimeout(()=>{
-                    router.push({name:'solicitud-cita'})
-                })
+                router.push({name:'solicitud-cita'})
             }
         })
         .catch(err =>{

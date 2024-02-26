@@ -8,6 +8,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useFormatear } from '../../stores/formatear'
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
+import { useUltimasPaginas } from '../../stores/ultimasPaginas';
 
 
 const carrito = ref(false)
@@ -16,6 +17,7 @@ const carrito = ref(false)
 const Shop = useShop()
 const Auth = useAuthStore()
 const Formato = useFormatear()
+const Pagina = useUltimasPaginas()
 
 const modal = ref(false)
 const animar = ref(false)
@@ -49,6 +51,23 @@ const totalPagar = computed(() => {
     
     }, 0);
 });
+
+const redirigirComprar = ()=>{
+    Pagina.ultimaPagina = 'tienda'
+    if(localStorage.getItem('rol') && localStorage.getItem('token')){
+        
+        router.push({name:'pagar'})
+    }else{
+        toast.warn('Inicia sesion para continuar', {
+                position: toast.POSITION.TOP_CENTER,
+                transition: toast.TRANSITIONS.BOUNCE,
+                autoClose: 555,
+            })
+        setTimeout(()=>{
+            router.push({name:'auth'})
+        },1000)
+    }
+}
 
 </script>
 
@@ -129,7 +148,7 @@ const totalPagar = computed(() => {
                         
                     </div>
                     <div class="boton-carrito">
-                        <Button type="button"  @click="router.push({name:'pagar'})" label="Comprar" severity="success" rounded style="width: 100%;"/>
+                        <Button type="button"  @click="redirigirComprar" label="Comprar" severity="success" rounded style="width: 100%;"/>
                     
                         <Button type="button" @click="router.push({name:'carrito'})" label="Ver Carrito" severity="success" rounded outlined style="width: 100%;" text />
                     </div>

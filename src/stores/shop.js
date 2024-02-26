@@ -26,6 +26,8 @@ export const useShop = defineStore('shop', () => {
         Auth.extraerUserToken()
     })
 
+
+
     const ComprarCarrito = ()=>{
         console.log(Permisos.userLogin)
         productoService.comprarProductos(Auth.token,carritoProducto.value,Permisos.userLogin.id)

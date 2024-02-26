@@ -48,6 +48,11 @@ export default {
         return api.put(`/clientes/approve/request-appointment/${ids.id_cita}/${ids.id_cliente}/${ids.id_solicitud}`,data,{
             headers: {'auth-token': token}
         })
+    },
+    cancelarSolicitudAgendada(token,ids,){
+        return api.put(`/clientes/reject/request-appointment/${ids.id_cita}/${ids.id_cliente}/${ids.id_solicitud}`,{},{
+            headers: {'auth-token': token}
+        })
     }
 
 }

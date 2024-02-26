@@ -197,6 +197,7 @@ const edit  = ()=>{
                         <Column header="Fecha">
                             <template #body="slotProps">
                                 {{ Formato.formatearFecha(slotProps.data.fecha) }}
+                                {{ Formato.formatearHora(slotProps.data.fecha) }}
                             </template>
                         </Column>
         
@@ -230,6 +231,7 @@ const edit  = ()=>{
                         <Column header="Fecha">
                             <template #body="slotProps">
                                 {{ Formato.formatearFecha(slotProps.data.fecha_cita) }}
+                                {{ Formato.formatearHora(slotProps.data.fecha_cita) }}
                             </template>
                         </Column>
         

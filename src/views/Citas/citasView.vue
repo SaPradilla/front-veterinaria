@@ -46,10 +46,10 @@ onMounted(async () => {
 
     try {
         const res = await citasService.obtenerCitas(Auth.token)
-        if(res.data.CitaMedica){
+        if (res.data.CitaMedica) {
             citasData.value = res.data.CitaMedica;
             calendarEvents.value = res.data.CalendarData
-    
+
             console.log(citasData.value)
             console.log(res.data.CalendarData)
             console.log(calendarEvents.value)
@@ -88,14 +88,38 @@ const handleEventClick = (clickInfo) => {
 };
 const handleDateSelect = (selectInfo) => {
     console.log('Fechas seleccionadas:', selectInfo);
-    // Aquí puedes agregar lógica para manejar la selección de fechas
+    // lógica para manejar la selección de fechas
 };
 
 const handleEventDrop = (dropInfo) => {
     console.log('Evento arrastrado:', dropInfo);
+
+    let originalEventPosition = null
+
+    if (!originalEventPosition) {
+        originalEventPosition = dropInfo.oldEvent.start;
+    }
     const daysNumber = dropInfo.delta.days
+    const currentDate = new Date();
+    const dropDate = dropInfo.event.start;
+
+    console.log(currentDate)
+    console.log(dropDate)
     const id = dropInfo.event._def.extendedProps[0].value
+
+    if (dropDate < currentDate.setHours(0, 0, 0, 0)) {
+        toast.error('No es posible realizar esta accion', {
+            position: toast.POSITION.TOP_CENTER,
+            transition: toast.TRANSITIONS.BOUNCE,
+            autoClose: 555,
+        })
+        // Revertir el evento a su posición original
+        dropInfo.event.setStart(originalEventPosition);
+
+        return
+    }
     Citas.cambiarFecha(id, { days: daysNumber })
+
 };
 
 const calendarOptions = {
@@ -120,13 +144,13 @@ const calendarOptions = {
 </script>
 
 <template>
-    <div class="contenedor-principal">
+    <div class="contenedor-principal-citas">
         <!-- <h1>Citas</h1> -->
 
         <div class="contenedor-solicitudes">
             <h2>Solicitudes pendientes</h2>
-            <DataTable :value="Citas.solicitudes" paginator :rows="5" stripedRows
-                :rowsPerPageOptions="[5, 10, 20, 50]">
+            <DataTable v-if="Citas.solicitudes && Citas.solicitudes.length > 0" :value="Citas.solicitudes" paginator
+                :rows="5" stripedRows :rowsPerPageOptions="[5, 10, 20, 50]">
 
                 <Column field="servicio.nombre" header="Tipo"></Column>
                 <Column header="Cliente">
@@ -139,6 +163,7 @@ const calendarOptions = {
                 <Column header="Fecha">
                     <template #body="slotProps">
                         {{ Formato.formatearFecha(slotProps.data.fecha) }}
+                        {{ Formato.formatearHora(slotProps.data.fecha) }}
                     </template>
                 </Column>
 
@@ -151,20 +176,33 @@ const calendarOptions = {
                 </Column>
 
             </DataTable>
-
+            <p v-else>No hay solicitudes pendientes </p>
 
         </div>
 
 
         <Divider />
         <h1>Citas</h1>
+        <div class="contenedor-boton">
+            <div class="contenido-boton">
+                <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
+                    <div class="menu">
+                        <i class="pi pi-list"></i>
+                        <span>Menu</span>
+                    </div>
+                </SplitButton>
+            </div>
+        </div>
         <div class="citas-contenedor">
 
             <div class="calendar">
                 <h2>Calendario</h2>
-                <FullCalendar v-if=" calendarEvents &&  calendarEvents.length > 0" :options="calendarOptions">
+
+                <FullCalendar v-if="calendarEvents && calendarEvents.length > 0" :options="calendarOptions">
                     <template v-slot:eventContent='arg'>
+
                         <div class="custom-event" :class="getSeverity(arg.event.extendedProps[2].value)">
+
                             <b>{{ arg.event.title }}</b>
                             <!-- {{ arg.event.title }} -->
                             <div v-for=" prop in arg.event.extendedProps">
@@ -184,24 +222,15 @@ const calendarOptions = {
 
             <div class="contenedor-citas">
 
-                <div class="contenedor-boton">
-                    <div class="contenido-boton">
-                        <SplitButton :model="items" icon="pi pi-plus" class="bg-primary border-round">
-                            <div class="menu">
-                                <i class="pi pi-list"></i>
-                                <span>Menu</span>
-                            </div>
-                        </SplitButton>
-                    </div>
-                </div>
+
 
                 <div class="contenido-citas">
 
                     <div class="citas">
                         <h2>Listado</h2>
 
-                        <DataTable v-if="Citas.citas.length > 0 " :value="Citas.citas" tableStyle="min-width: 5rem" paginator :rows="5" stripedRows
-                            :rowsPerPageOptions="[5, 10, 20, 50]">
+                        <DataTable v-if="Citas.citas.length > 0" :value="Citas.citas" tableStyle="min-width: 5rem"
+                            paginator :rows="5" stripedRows>
                             <Column v-if="selectOpcion" selectionMode="single" headerStyle="width: 3rem"></Column>
                             <Column header="Estado">
                                 <template #body="slotProps">
@@ -212,11 +241,12 @@ const calendarOptions = {
                             <Column field="servicio.nombre" header="Tipo"></Column>
 
                             <Column field="mascota.nombre" header="Mascota"></Column>
-                            <Column field="consultorio" header="Consultorio"></Column>
+                            <!-- <Column field="consultorio" header="Consultorio"></Column> -->
 
                             <Column header="Fecha">
                                 <template #body="slotProps">
                                     {{ Formato.formatearFecha(slotProps.data.fecha_cita) }}
+                                    {{ Formato.formatearHora(slotProps.data.fecha_cita) }}
                                 </template>
                             </Column>
 
@@ -278,7 +308,7 @@ const calendarOptions = {
 
 .citas-contenedor {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 60% 40%;
     gap: 30px;
     padding: 2vh;
     /* align-items: center; */
@@ -292,10 +322,11 @@ const calendarOptions = {
     cursor: pointer;
 }
 
-.contenedor-principal {
+.contenedor-principal-citas {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    overflow-x: hidden;
 }
 
 .contenedor-boton {

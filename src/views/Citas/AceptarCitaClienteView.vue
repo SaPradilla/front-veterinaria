@@ -12,6 +12,10 @@ import { useAuthStore } from '../../stores/auth';
 import { useFormatear } from '../../stores/formatear';
 import { useConfirm } from "primevue/useconfirm";
 
+import { toast } from 'vue3-toastify';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 const confirm = useConfirm();
 const solicitud = ref({})
 const modalInput = ref(false)
@@ -32,6 +36,7 @@ onMounted(()=>{
             solicitud.value = res.data.solicitud
             fecha_placeholder.value =  new Date(res.data.solicitud.fecha).toISOString().slice(0, 19).replace('T', ' ')
         }).catch(err=>{
+            Auth.verificarSesion(err.response.data)
             console.log(err)
         })
 
@@ -69,6 +74,29 @@ const aprobarCita = ()=>{
         console.log(err)
     })
 }
+const cancelarCita = ()=>{
+    const ids = {
+        id_cita:props.id_cita,
+        id_cliente:props.id_cliente,
+        id_solicitud:props.id_solicitud,
+    }
+
+    clienteService.cancelarSolicitudAgendada(Auth.token,ids)
+    .then(res =>{
+        console.log(res)
+        toast.success(res.data.msg, {
+            position: toast.POSITION.TOP_CENTER,
+            transition: toast.TRANSITIONS.BOUNCE,
+            autoClose: 555,
+        })
+        setTimeout(()=>{
+            router.push('/')
+        },500)
+
+    }).catch(err=>{
+        console.log(err)
+    })
+} 
 
 const confirm2 = () => {
     confirm.require({
@@ -93,16 +121,16 @@ const confirm2 = () => {
 const reject = () => {
     confirm.require({
         message: 'Esta seguro que desea cancelar la cita?',
-        header: 'Cambiar fecha',
+        header: 'Rechazar Cita',
         icon: 'pi pi-info-circle',
         rejectLabel: 'Cancelar',
-        acceptLabel: 'Cambiar',
+        acceptLabel: 'Rechazar',
         rejectClass: 'p-button-secondary p-button-outlined',
         acceptClass: 'p-button-danger',
         accept: () => {
 
             // cancelar la cita
-            
+            cancelarCita()
         },
         reject: () => {
             

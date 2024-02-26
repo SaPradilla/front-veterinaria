@@ -83,7 +83,7 @@ const day = today.getDate();
 
 
 let minYear = year;
-let minMonth = month + 2;
+let minMonth = month;
 
 if (minMonth >= 12) {
     minMonth -= 12;
@@ -159,8 +159,10 @@ const agregarTipo = () => {
 
                     </div>
 
-                    <Calendar v-model="Cita.citaData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon   />
+                    <Calendar showTime hourFormat="24" v-model="Cita.citaData.fecha_cita" placeholder="Fecha" :minDate="minDate"  :manualInput="false" showIcon    />
+                    
                     <InputText type="text" v-model="Cita.citaData.consultorio" placeholder="Nombre del consultorio" />
+                    
                     <Textarea v-model="Cita.citaData.descripcion" rows="3" cols="30" placeholder="Descripcion" />
                     <Button @click="Cita.crearCita"  label="Agregar" />
                     
