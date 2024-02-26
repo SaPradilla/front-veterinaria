@@ -1,15 +1,17 @@
 <script setup>
-import {onMounted} from 'vue'
+import { onMounted } from 'vue'
 import { useShop } from '../../stores/shop';
 const Shop = useShop()
 import Tag from 'primevue/tag';
 import Button from 'primevue/button';
 import { useRouter } from 'vue-router';
-
-onMounted(()=>{
-    Shop.verAccesorios()
-})
 const router = useRouter()
+
+onMounted(() => {
+
+    Shop.verProductos()
+})
+
 </script>
 
 <template>
@@ -17,26 +19,27 @@ const router = useRouter()
 
         <div class="contenedor-productos">
 
-            <div v-for="producto in Shop.accesorios" class="carta-productos" @dblclick="router.push({name:'info-producto',params:{id_producto:producto.id}})">
-                <Tag style="position: absolute; " v-if="producto.estado !== 'Disponible'" class="tag-estado" :value="producto.estado" severity="warning" />
+            <div v-for="producto in Shop.productos" class="carta-productos" @dblclick="router.push({name:'info-producto',params:{id_producto:producto.id}})">
 
+                <Tag style="position: absolute; " v-if="producto.estado !== 'Disponible'" class="tag-estado"
+                    :value="producto.estado" severity="warning" />
+                
                 <img :src="`http://localhost:6060/uploads/products/${producto.imagen}`" alt="" class="fondo">
+
                 <div class="info-compra">
 
-                  
-                    
                     <div class="detalles">
                         <div class="nombres">
-                            <p class="nombre">{{ producto.accesorio.nombre }} </p>
-                            <p class="tipo"> {{ producto.accesorio.tipo_accesorio.nombre }}</p>
+                            <p class="nombre">{{ producto.medicamento ? producto.medicamento.nombre : producto.accesorio.nombre }} </p>
+                            <p class="tipo"> {{ producto.medicamento ? producto.medicamento.tipo_medicina.nombre  : producto.accesorio.tipo_accesorio.nombre }}</p>
                         </div>
-                        <span> {{ producto.accesorio.precio }} $</span>
+                        <span> {{  producto.medicamento ? producto.medicamento.precio : producto.accesorio.precio}} $</span>
                     </div>
 
                     <div class="acciones">
-                        
-                        <Button :disabled="producto.estado !== 'Disponible'"  icon="pi pi-cart-plus" @click="Shop.agregarCarrito(producto)"  outlined />
-                        <!-- <Button :disabled="producto.estado !== 'Disponible'"   label="Comprar" severity="success" /> -->
+                        <Button :disabled="producto.estado !== 'Disponible'" icon="pi pi-cart-plus"
+                            @click="Shop.agregarCarrito(producto)" outlined  :badge="Shop.cantidadItemCarrito(producto.id)"/>
+                        <!-- <Button :disabled="producto.estado !== 'Disponible'" label="Comprar" severity="success" /> -->
                     </div>
                 </div>
             </div>
@@ -47,8 +50,6 @@ const router = useRouter()
 
 
 <style  scoped>
-
-
 .listado-medicamentos {
     display: flex;
     /* width: 100%; */
@@ -64,13 +65,12 @@ const router = useRouter()
     margin-top: 15vh;
     place-items: center;
     width: 100%;
-    /* gap: 2vh; */
 }
 
 
 .carta-productos {
-     /* width: 100px; */
-     height: max-content;
+    /* width: 100px; */
+    height: max-content;
     margin: 5px;
     /* margin: 0 auto; */
     box-sizing: border-box;
@@ -79,8 +79,8 @@ const router = useRouter()
     padding: 2vh;
     cursor: pointer;
     transition: all .3s ease;
-
 }
+
 .carta-productos:hover{
     
     background-color: var(--color-morado-muy-claro);
@@ -89,7 +89,6 @@ const router = useRouter()
 .carta-productos .fondo {
     width: 200px;
     height: 200px;
-    border-radius: 7px;
     /* background-color: rgba(217, 217, 217, 1); */
 }
 
@@ -142,7 +141,6 @@ p.tipo {
     align-items: center;
     gap: 1vh;
     margin-top: 10px;
-
 }
 
 .agregar {
@@ -199,5 +197,4 @@ p.tipo {
     color: #eee;
     background-color: rgba(52, 135, 64, 0.386);
 }
-
 </style>

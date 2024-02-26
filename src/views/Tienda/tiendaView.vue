@@ -5,15 +5,18 @@ import { useShop } from '../../stores/shop'
 import { ToastActions, toast } from 'vue3-toastify'
 import { useAuthStore } from '../../stores/auth';
 import { useRoute, useRouter } from 'vue-router';
-
+import { useFormatear } from '../../stores/formatear'
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
+
 
 const carrito = ref(false)
 
 
 const Shop = useShop()
 const Auth = useAuthStore()
+const Formato = useFormatear()
+
 const modal = ref(false)
 const animar = ref(false)
 const router = useRouter()
@@ -37,6 +40,15 @@ const toggleModal = () => {
     carrito.value = !carrito.value
 
 }
+const totalPagar = computed(() => {
+
+    return Shop.carritoProducto.reduce((total, producto) => {
+        
+        const precioProducto = producto.medicamento ? producto.medicamento.precio : producto.accesorio.precio;
+        return total + (producto.cantidad * precioProducto);
+    
+    }, 0);
+});
 
 </script>
 
@@ -45,7 +57,7 @@ const toggleModal = () => {
     <div class="modal" v-if="modal" :class="animar ? 'animar' : 'cerrar'">
         <img @click="toggleModal" class="x-menu" src="../../assets/img/X.svg" alt="menu">
         <div class="opciones-menu-mobile">
-            <p >Medicamentos</p>
+            <p>Medicamentos</p>
             <hr>
             <p>Accesorios</p>
         </div>
@@ -57,7 +69,10 @@ const toggleModal = () => {
         <template #container="{ closeCallback }">
             <!-- Header carrito -->
             <div class="carrito-header">
-                <p>Carrito</p>
+                <div class="titulo-carrito">
+                    <li class="pi pi-shopping-bag"></li>
+                    <p>Carrito</p>
+                </div>
                 <Button type="button" @click="closeCallback" icon="pi pi-times" rounded></Button>
             </div>
             <!-- Contenido carrito -->
@@ -74,12 +89,10 @@ const toggleModal = () => {
                             <div class="contenedor-carta-carrito">
                                 <div>
                                     <img class="imagen" :src="`http://localhost:6060/uploads/products/${product.imagen}`" />
-                                    <p class="precio">{{ product.accesorioId === null ? product.medicamento.precio :
-                                        product.accesorio.precio }} $</p>
+                                    <p class="precio">{{ product.accesorioId ?  Formato.formatoDinero(product.accesorio.precio) :  Formato.formatoDinero(product.medicamento.precio) }} $</p>
                                 </div>
                                 <div class="detalles-carrito">
-                                    <p class="nombre">{{ product.accesorioId === null ? product.medicamento.nombre :
-                                        product.accesorio.nombre }}</p>
+                                    <p class="nombre">{{ product.accesorioId === null ? product.medicamento.nombre : product.accesorio.nombre }}</p>
                                     <p class="tipo">{{ product.accesorioId === null ?
                                         product.medicamento.tipo_medicina.nombre :
                                         product.accesorio.tipo_accesorio.nombre }}</p>
@@ -110,15 +123,17 @@ const toggleModal = () => {
                 <!-- Botones del carrito -->
                 <div v-if="Shop.carritoProducto.length > 0" class="botones-carrito">
                     <!-- <p>Total a Pagar: <span>$60,000 </span></p> -->
-                    <div class="boton-carrito">
-                        <div class="comprarCarrito">Comprar</div>
-                        <div @click="Shop.vacear" class="vaciar">Vaciar
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M15.306 12.115h-.385L7.306 4.5h11.106q.651 0 .964.536q.312.535-.026 1.168l-2.78 5.13q-.218.404-.502.593q-.283.188-.762.188Zm-7.998 9q-.614 0-1.057-.433q-.443-.434-.443-1.067q0-.632.443-1.066q.443-.434 1.057-.434q.613 0 1.056.434q.444.434.444 1.066q0 .633-.444 1.067q-.443.433-1.056.433Zm13 .608l-5.62-5.608H7.446q-.87 0-1.3-.726q-.43-.726-.027-1.481l1.435-2.612L5.484 6.9L2.239 3.654l.708-.708l18.07 18.07l-.708.707Zm-6.62-6.608l-3-3H8.215l-1.192 2.231q-.154.289-.01.529q.145.24.433.24h6.242Zm3.004 6q-.613 0-1.056-.433q-.444-.434-.444-1.067q0-.632.444-1.066q.443-.434 1.056-.434q.614 0 1.057.434q.443.434.443 1.066q0 .633-.443 1.067q-.443.433-1.057.433Z" />
-                            </svg>
-                        </div>
+                    <div>
+
+                        <p >Total: <strong> {{  Formato.formatoDinero(totalPagar) }} </strong> </p>
+                        
                     </div>
+                    <div class="boton-carrito">
+                        <Button type="button"  @click="router.push({name:'pagar'})" label="Comprar" severity="success" rounded style="width: 100%;"/>
+                    
+                        <Button type="button" @click="router.push({name:'carrito'})" label="Ver Carrito" severity="success" rounded outlined style="width: 100%;" text />
+                    </div>
+
                 </div>
 
             </div>
@@ -131,7 +146,7 @@ const toggleModal = () => {
 
         <!-- Menu -->
         <div class="contenedor-header">
-
+            <div class="anuncio">Los pedidos superiores a 60,000$ incluyen un cuido GRATIS.</div>
             <div class="header">
 
                 <div class="productos">
@@ -142,6 +157,9 @@ const toggleModal = () => {
 
                 <div class="seleccion ">
                     <div class="opciones">
+                        <p @click="router.push({name:'todo'})"
+                        :class="route.name === 'todo' ? 'selected' : '' "
+                        >Ver todo</p>
                         <p 
                         :class="route.name === 'medicamentos' ? 'selected' : '' "
                         @click="router.push({name:'medicamentos'})">Medicamentos</p>
@@ -160,7 +178,7 @@ const toggleModal = () => {
                         <path fill="#ffffff"
                             d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3M97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8" />
                     </svg>
-                    <Button @click="toggleCarrito" :badge="Shop.carritoProducto.length" icon="pi pi-shopping-cart"  rounded /> 
+                    <Button @click="toggleCarrito" :badge="Shop.carritoProducto.length" icon="pi pi-shopping-bag"  rounded outlined="" /> 
                     <!-- <div  class="carrito">
                         <svg width="35" height="35" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -189,6 +207,25 @@ const toggleModal = () => {
 </template>
 
 <style scoped>
+
+.ver-carro{
+    text-align: center;
+    padding: 20px;
+    font-size: 1em;
+}
+.anuncio{
+    padding: 10px;
+    color: white;
+    text-align: center;
+    background-color: var(--color-morado-general);
+    font-size: .8em;
+}
+.titulo-carrito{
+    display: flex;
+    align-items: center;
+    font-size: .8em;
+    gap: 1vh;
+}
 .selected{
     color: var(--color-morado-general);
 }
@@ -267,16 +304,17 @@ const toggleModal = () => {
 }
 
 .botones-carrito {
-    padding: 20px;
+    /* padding: 10px; */
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap:1em;
     /* position: absolute; */
     /* bottom: 0; */
 }
 
 .botones-carrito p {
-    font-size: 1.6em;
+    /* font-size: 1.6em; */
+    text-align: center;
 }
 
 .botones-carrito span {
@@ -285,9 +323,12 @@ const toggleModal = () => {
 
 .boton-carrito {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
+    padding: 20px;
+    gap: 1em;
 }
 
 .comprarCarrito,

@@ -2,141 +2,155 @@ import { defineStore } from "pinia";
 import { ref, reactive } from 'vue'
 
 export const useFormatear = defineStore('formatear', () => {
-    // states
+  // states
 
-    // Metodos
-    const formatearFecha = (fechaString)=>{
-        
-        const fecha = new Date(fechaString);
+  // Metodos
+  const formatearFecha = (fechaString) => {
 
-        // Obtener día, mes y año
-        const dia = fecha.getUTCDate();
-        const mes = fecha.getUTCMonth() + 1; // Los meses en JavaScript son base 0, por lo que se suma 1
-        const año = fecha.getUTCFullYear();
+    const fecha = new Date(fechaString);
 
-        // Construir la cadena de fecha en el formato deseado
-        const fechaFormateada = `${mes}-${dia}-${año}`;
-        return fechaFormateada
-    }
-    const formatearHora = (fechaString)=>{
-      const fecha = new Date(fechaString);
+    // Obtener día, mes y año
+    const dia = fecha.getUTCDate();
+    const mes = fecha.getUTCMonth() + 1; // Los meses en JavaScript son base 0, por lo que se suma 1
+    const año = fecha.getUTCFullYear();
 
-      // Obtener la hora y los minutos
-      let horas = fecha.getUTCHours();
-      const minutos = fecha.getUTCMinutes();
+    // Construir la cadena de fecha en el formato deseado
+    const fechaFormateada = `${mes}-${dia}-${año}`;
+    return fechaFormateada
+  }
+  const formatearHora = (fechaString) => {
+    const fecha = new Date(fechaString);
 
-      // Determinar si es AM o PM
-      const ampm = horas >= 12 ? 'p. m.' : 'a. m.';
+    // Obtener la hora y los minutos
+    let horas = fecha.getUTCHours();
+    const minutos = fecha.getUTCMinutes();
 
-      // Convertir la hora a formato de 12 horas
-      if (horas > 12) {
-        horas -= 12;
-      } else if (horas === 0) {
-        horas = 12;
-      }
+    // Determinar si es AM o PM
+    const ampm = horas >= 12 ? 'p. m.' : 'a. m.';
 
-      // Formatear la cadena de hora
-      const horaFormateada = `${horas}:${minutos < 10 ? '0' : ''}${minutos} ${ampm}`;
-      
-      return horaFormateada;
-      
+    // Convertir la hora a formato de 12 horas
+    if (horas > 12) {
+      horas -= 12;
+    } else if (horas === 0) {
+      horas = 12;
     }
 
-    const formatoFechaDDMMYY = (fechaISO)=>{
-      // Crear un objeto Date a partir de la fecha ISO
-        const fecha = new Date(fechaISO);
+    // Formatear la cadena de hora
+    const horaFormateada = `${horas}:${minutos < 10 ? '0' : ''}${minutos} ${ampm}`;
 
-        // Obtener los componentes de la fecha
-        const dia = fecha.getDate().toString().padStart(2, '0');
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
-        const anio = fecha.getFullYear().toString().slice(2); // Tomamos los últimos dos dígitos del año
+    return horaFormateada;
 
-        // Formatear la fecha al estilo dd/mm/yy
-        const fechaDdMmYy = `${dia}/${mes}/${anio}`;
+  }
 
-        return fechaDdMmYy;
+  const formatoFechaDDMMYY = (fechaISO) => {
+    // Crear un objeto Date a partir de la fecha ISO
+    const fecha = new Date(fechaISO);
+
+    // Obtener los componentes de la fecha
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
+    const anio = fecha.getFullYear().toString().slice(2); // Tomamos los últimos dos dígitos del año
+
+    // Formatear la fecha al estilo dd/mm/yy
+    const fechaDdMmYy = `${dia}/${mes}/${anio}`;
+
+    return fechaDdMmYy;
+  }
+  const formatoFechaYYMMDD = (fechaISO) => {
+    // Crear un objeto Date a partir de la fecha ISO
+    const fecha = new Date(fechaISO);
+
+    // Obtener los componentes de la fecha
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
+    const anio = fecha.getFullYear().toString().slice(2); // Tomamos los últimos dos dígitos del año
+
+    // Formatear la fecha al estilo dd/mm/yy
+    const fechaDdMmYy = `${anio}/${mes}/${dia}`;
+
+    return fechaDdMmYy;
+  }
+
+  const formartoFechaInput = (fechaString) => {
+
+    // Crear un objeto Date a partir de la cadena de fecha
+    const fecha = new Date(fechaString);
+
+    // Obtener los componentes de la fecha
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth();
+    const año = fecha.getFullYear();
+    const nuevaFecha = new Date(año, mes, dia, 0, 0, 0);
+    return nuevaFecha
+
+  }
+  const extraerNumbers = (cadena) => {
+    // Usar una expresión regular para encontrar los dígitos en la cadena
+    const numeros = cadena.match(/\d+/);
+
+    // Si se encontraron dígitos, convertirlos a un número
+    if (numeros !== null) {
+      const numero = parseInt(numeros[0], 10); // Convertir a número base 10
+      return numero;
     }
-    const formatoFechaYYMMDD = (fechaISO)=>{
-        // Crear un objeto Date a partir de la fecha ISO
-          const fecha = new Date(fechaISO);
-  
-          // Obtener los componentes de la fecha
-          const dia = fecha.getDate().toString().padStart(2, '0');
-          const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Sumamos 1 porque los meses van de 0 a 11
-          const anio = fecha.getFullYear().toString().slice(2); // Tomamos los últimos dos dígitos del año
-  
-          // Formatear la fecha al estilo dd/mm/yy
-          const fechaDdMmYy = `${anio}/${mes}/${dia}`;
-  
-          return fechaDdMmYy;
-      }
-      
-    const formartoFechaInput = (fechaString)=>{
 
-        // Crear un objeto Date a partir de la cadena de fecha
-        const fecha = new Date(fechaString);
+    return null;
+  }
 
-        // Obtener los componentes de la fecha
-        const dia = fecha.getDate();
-        const mes = fecha.getMonth();
-        const año = fecha.getFullYear();
-        const nuevaFecha = new Date(año, mes, dia, 0, 0, 0);
-        return nuevaFecha
 
+  const extraerString = (cadena) => {
+    // Usar una expresión regular para encontrar solo letras del alfabeto
+    const letras = cadena.match(/[a-zA-Z]+/g);
+
+    // Si se encontraron letras, unirlas en una cadena
+    if (letras !== null) {
+      return letras.join('');
     }
-    const extraerNumbers = (cadena)=>{
-        // Usar una expresión regular para encontrar los dígitos en la cadena
-        const numeros = cadena.match(/\d+/);
 
-        // Si se encontraron dígitos, convertirlos a un número
-        if (numeros !== null) {
-            const numero = parseInt(numeros[0], 10); // Convertir a número base 10
-            return numero;
+    return '';
+  }
+
+  const formatearCitasCalendar = (citas) => {
+    return citas.map((cita) => {
+      return {
+        title: `${cita.cliente.nombre} - ${cita.mascota.nombre}`, // Título del evento (nombre del cliente y de la mascota)
+        date: formatoFechaYYMMDD(cita.fecha_cita), // Fecha y hora de inicio del evento
+        //   end: null, // En este ejemplo, no se define una fecha de finalización
+        backgroundColor: getColorByState(cita.estado), // Color de fondo basado en el estado de la cita
+        borderColor: '#000', // Color del borde del evento
+        extendedProps: {
+          id: cita.id, // ID de la cita
+          estado: cita.estado, // Estado de la cita
+          consultorio: cita.consultorio, // Consultorio de la cita
+          descripcion: cita.descripcion // Descripción de la cita
         }
+      };
+    });
+  }
 
-        return null;
-    }
+  const formatoDinero = (numero) => {
+
+    // Formatear el número con separadores de miles y dos decimales
+    const numeroFormateado = new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP'
+    }).format(numero);
+
+    return numeroFormateado;
+
+  }
 
 
-    const extraerString = (cadena)=>{
-        // Usar una expresión regular para encontrar solo letras del alfabeto
-        const letras = cadena.match(/[a-zA-Z]+/g);
+  return {
+    formatearFecha,
+    formatoFechaDDMMYY,
+    extraerNumbers,
+    extraerString,
+    formartoFechaInput,
+    formatearCitasCalendar,
+    formatoFechaYYMMDD,
+    formatearHora,
+    formatoDinero,
 
-        // Si se encontraron letras, unirlas en una cadena
-        if (letras !== null) {
-            return letras.join('');
-        }
-
-        return ''; 
-    }
-    
-    const formatearCitasCalendar = (citas)=>{
-        return citas.map((cita) => {
-            return {
-              title: `${cita.cliente.nombre} - ${cita.mascota.nombre}`, // Título del evento (nombre del cliente y de la mascota)
-              date: formatoFechaYYMMDD(cita.fecha_cita), // Fecha y hora de inicio del evento
-            //   end: null, // En este ejemplo, no se define una fecha de finalización
-              backgroundColor: getColorByState(cita.estado), // Color de fondo basado en el estado de la cita
-              borderColor: '#000', // Color del borde del evento
-              extendedProps: {
-                id: cita.id, // ID de la cita
-                estado: cita.estado, // Estado de la cita
-                consultorio: cita.consultorio, // Consultorio de la cita
-                descripcion: cita.descripcion // Descripción de la cita
-              }
-            };
-          });
-    }
-    
-    return {
-        formatearFecha,
-        formatoFechaDDMMYY,
-        extraerNumbers,
-        extraerString,
-        formartoFechaInput,
-        formatearCitasCalendar,
-        formatoFechaYYMMDD,
-        formatearHora,
-
-    }
+  }
 })

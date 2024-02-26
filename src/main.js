@@ -1,6 +1,8 @@
 import './assets/main.css'
 import 'primevue/resources/themes/aura-light-purple/theme.css'
 import 'primeicons/primeicons.css'
+import Badge from 'primevue/badge'
+import BadgeDirective from 'primevue/badgedirective'
 // import '@fullcalendar/common/main.css'
 // import '@fullcalendar/daygrid/main.css'
 
@@ -28,6 +30,8 @@ const app = createApp(App)
 app.component("v-select", vSelect )
 
 app.component(FullCalendar)
+app.directive('badge',BadgeDirective)
+
 app.use(dayGridPlugin)
 app.use(interactionPlugin)
 

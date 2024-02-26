@@ -4,12 +4,13 @@ import { useShop } from '../../stores/shop';
 const Shop = useShop()
 import Tag from 'primevue/tag';
 import Button from 'primevue/button';
+import { useRouter } from 'vue-router';
 
 onMounted(()=>{
 
     Shop.verMedicamentos()
 })
-
+const router = useRouter()
 </script>
 
 <template>
@@ -17,7 +18,7 @@ onMounted(()=>{
 
         <div class="contenedor-productos">
 
-            <div v-for="producto in Shop.medicamentos" class="carta-productos">
+            <div v-for="producto in Shop.medicamentos" class="carta-productos" @dblclick="router.push({name:'info-producto',params:{id_producto:producto.id}})">
 
                 <!-- <div class="fondo">
             
@@ -35,8 +36,8 @@ onMounted(()=>{
                     </div>
 
                     <div class="acciones">
-                        <Button :disabled="producto.estado !== 'Disponible'"  icon="pi pi-cart-plus" @click="Shop.agregarCarrito(producto)" label="Carrito" outlined />
-                        <Button :disabled="producto.estado !== 'Disponible'"   label="Comprar" severity="success" />
+                        <Button :disabled="producto.estado !== 'Disponible'"  icon="pi pi-cart-plus" @click="Shop.agregarCarrito(producto)" outlined />
+                        <!-- <Button :disabled="producto.estado !== 'Disponible'"   label="Comprar" severity="success" /> -->
                     </div>
                 </div>
             </div>
@@ -60,7 +61,7 @@ onMounted(()=>{
 
 .contenedor-productos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     margin-top: 15vh;
     place-items: center;
     width: 100%;
@@ -69,14 +70,22 @@ onMounted(()=>{
 
 
 .carta-productos {
-    /* width: 100px; */
-    height: max-content;
+   /* width: 100px; */
+   height: max-content;
     margin: 5px;
     /* margin: 0 auto; */
     box-sizing: border-box;
+    border: 1px solid var(--color-gris-claro);
+    border-radius: 10px;
+    padding: 2vh;
+    cursor: pointer;
+    transition: all .3s ease;
 
 }
-
+.carta-productos:hover{
+    
+    background-color: var(--color-morado-muy-claro);
+}
 .carta-productos .fondo {
     width: 200px;
     height: 200px;

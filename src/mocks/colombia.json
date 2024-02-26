@@ -1,0 +1,3507 @@
+[
+  {
+    "id": 0,
+    "departamento": "Amazonas",
+    "ciudades": [
+      {
+        "ciudad": "Leticia"
+      },
+      {
+        "ciudad": "Puerto Nariño"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "departamento": "Antioquia",
+    "ciudades": [
+      {
+        "ciudad": "Abejorral"
+      },
+      {
+        "ciudad": "Abriaquí"
+      },
+      {
+        "ciudad": "Alejandría"
+      },
+      {
+        "ciudad": "Amagá"
+      },
+      {
+        "ciudad": "Amalfi"
+      },
+      {
+        "ciudad": "Andes"
+      },
+      {
+        "ciudad": "Angelópolis"
+      },
+      {
+        "ciudad": "Angostura"
+      },
+      {
+        "ciudad": "Anorí"
+      },
+      {
+        "ciudad": "Anzá"
+      },
+      {
+        "ciudad": "Apartadó"
+      },
+      {
+        "ciudad": "Arboletes"
+      },
+      {
+        "ciudad": "Argelia"
+      },
+      {
+        "ciudad": "Armenia"
+      },
+      {
+        "ciudad": "Barbosa"
+      },
+      {
+        "ciudad": "Bello"
+      },
+      {
+        "ciudad": "Belmira"
+      },
+      {
+        "ciudad": "Betania"
+      },
+      {
+        "ciudad": "Betulia"
+      },
+      {
+        "ciudad": "Briceño"
+      },
+      {
+        "ciudad": "Buriticá"
+      },
+      {
+        "ciudad": "Cáceres"
+      },
+      {
+        "ciudad": "Caicedo"
+      },
+      {
+        "ciudad": "Caldas"
+      },
+      {
+        "ciudad": "Campamento"
+      },
+      {
+        "ciudad": "Cañasgordas"
+      },
+      {
+        "ciudad": "Caracolí"
+      },
+      {
+        "ciudad": "Caramanta"
+      },
+      {
+        "ciudad": "Carepa"
+      },
+      {
+        "ciudad": "Carolina del Príncipe"
+      },
+      {
+        "ciudad": "Caucasia"
+      },
+      {
+        "ciudad": "Chigorodó"
+      },
+      {
+        "ciudad": "Cisneros"
+      },
+      {
+        "ciudad": "Ciudad Bolívar"
+      },
+      {
+        "ciudad": "Cocorná"
+      },
+      {
+        "ciudad": "Concepción"
+      },
+      {
+        "ciudad": "Concordia"
+      },
+      {
+        "ciudad": "Copacabana"
+      },
+      {
+        "ciudad": "Dabeiba"
+      },
+      {
+        "ciudad": "Donmatías"
+      },
+      {
+        "ciudad": "Ebéjico"
+      },
+      {
+        "ciudad": "El Bagre"
+      },
+      {
+        "ciudad": "El Carmen de Viboral"
+      },
+      {
+        "ciudad": "El Peñol"
+      },
+      {
+        "ciudad": "El Retiro"
+      },
+      {
+        "ciudad": "El Santuario"
+      },
+      {
+        "ciudad": "Entrerríos"
+      },
+      {
+        "ciudad": "Envigado"
+      },
+      {
+        "ciudad": "Fredonia"
+      },
+      {
+        "ciudad": "Frontino"
+      },
+      {
+        "ciudad": "Giraldo"
+      },
+      {
+        "ciudad": "Girardota"
+      },
+      {
+        "ciudad": "Gómez Plata"
+      },
+      {
+        "ciudad": "Granada"
+      },
+      {
+        "ciudad": "Guadalupe"
+      },
+      {
+        "ciudad": "Guarne"
+      },
+      {
+        "ciudad": "Guatapé"
+      },
+      {
+        "ciudad": "Heliconia"
+      },
+      {
+        "ciudad": "Hispania"
+      },
+      {
+        "ciudad": "Itagüí"
+      },
+      {
+        "ciudad": "Ituango"
+      },
+      {
+        "ciudad": "Jardín"
+      },
+      {
+        "ciudad": "Jericó"
+      },
+      {
+        "ciudad": "La Ceja"
+      },
+      {
+        "ciudad": "La Estrella"
+      },
+      {
+        "ciudad": "La Pintada"
+      },
+      {
+        "ciudad": "La Unión"
+      },
+      {
+        "ciudad": "Liborina"
+      },
+      {
+        "ciudad": "Maceo"
+      },
+      {
+        "ciudad": "Marinilla"
+      },
+      {
+        "ciudad": "Medellín"
+      },
+      {
+        "ciudad": "Montebello"
+      },
+      {
+        "ciudad": "Murindó"
+      },
+      {
+        "ciudad": "Mutatá"
+      },
+      {
+        "ciudad": "Nariño"
+      },
+      {
+        "ciudad": "Nechí"
+      },
+      {
+        "ciudad": "Necoclí"
+      },
+      {
+        "ciudad": "Olaya"
+      },
+      {
+        "ciudad": "Peque"
+      },
+      {
+        "ciudad": "Pueblorrico"
+      },
+      {
+        "ciudad": "Puerto Berrío"
+      },
+      {
+        "ciudad": "Puerto Nare"
+      },
+      {
+        "ciudad": "Puerto Triunfo"
+      },
+      {
+        "ciudad": "Remedios"
+      },
+      {
+        "ciudad": "Rionegro"
+      },
+      {
+        "ciudad": "Sabanalarga"
+      },
+      {
+        "ciudad": "Sabaneta"
+      },
+      {
+        "ciudad": "Salgar"
+      },
+      {
+        "ciudad": "San Andrés de Cuerquia"
+      },
+      {
+        "ciudad": "San Carlos"
+      },
+      {
+        "ciudad": "San Francisco"
+      },
+      {
+        "ciudad": "San Jerónimo"
+      },
+      {
+        "ciudad": "San José de la Montaña"
+      },
+      {
+        "ciudad": "San Juan de Urabá"
+      },
+      {
+        "ciudad": "San Luis"
+      },
+      {
+        "ciudad": "San Pedro de Urabá"
+      },
+      {
+        "ciudad": "San Pedro de los Milagros"
+      },
+      {
+        "ciudad": "San Rafael"
+      },
+      {
+        "ciudad": "San Roque"
+      },
+      {
+        "ciudad": "San Vicente"
+      },
+      {
+        "ciudad": "Santa Bárbara"
+      },
+      {
+        "ciudad": "Santa Fe de Antioquia"
+      },
+      {
+        "ciudad": "Santa Rosa de Osos"
+      },
+      {
+        "ciudad": "Santo Domingo"
+      },
+      {
+        "ciudad": "Segovia"
+      },
+      {
+        "ciudad": "Sonsón"
+      },
+      {
+        "ciudad": "Sopetrán"
+      },
+      {
+        "ciudad": "Támesis"
+      },
+      {
+        "ciudad": "Tarazá"
+      },
+      {
+        "ciudad": "Tarso"
+      },
+      {
+        "ciudad": "Titiribí"
+      },
+      {
+        "ciudad": "Toledo"
+      },
+      {
+        "ciudad": "Turbo"
+      },
+      {
+        "ciudad": "Uramita"
+      },
+      {
+        "ciudad": "Urrao"
+      },
+      {
+        "ciudad": "Valdivia"
+      },
+      {
+        "ciudad": "Valparaíso"
+      },
+      {
+        "ciudad": "Vegachí"
+      },
+      {
+        "ciudad": "Venecia"
+      },
+      {
+        "ciudad": "Vigía del Fuerte"
+      },
+      {
+        "ciudad": "Yalí"
+      },
+      {
+        "ciudad": "Yarumal"
+      },
+      {
+        "ciudad": "Yolombó"
+      },
+      {
+        "ciudad": "Yondó"
+      },
+      {
+        "ciudad": "Zaragoza"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "departamento": "Arauca",
+    "ciudades": [
+      {
+        "ciudad": "Arauca"
+      },
+      {
+        "ciudad": "Arauquita"
+      },
+      {
+        "ciudad": "Cravo Norte"
+      },
+      {
+        "ciudad": "Fortul"
+      },
+      {
+        "ciudad": "Puerto Rondón"
+      },
+      {
+        "ciudad": "Saravena"
+      },
+      {
+        "ciudad": "Tame"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "departamento": "Atlántico",
+    "ciudades": [
+      {
+        "ciudad": "Baranoa"
+      },
+      {
+        "ciudad": "Barranquilla"
+      },
+      {
+        "ciudad": "Campo de la Cruz"
+      },
+      {
+        "ciudad": "Candelaria"
+      },
+      {
+        "ciudad": "Galapa"
+      },
+      {
+        "ciudad": "Juan de Acosta"
+      },
+      {
+        "ciudad": "Luruaco"
+      },
+      {
+        "ciudad": "Malambo"
+      },
+      {
+        "ciudad": "Manatí"
+      },
+      {
+        "ciudad": "Palmar de Varela"
+      },
+      {
+        "ciudad": "Piojó"
+      },
+      {
+        "ciudad": "Polonuevo"
+      },
+      {
+        "ciudad": "Ponedera"
+      },
+      {
+        "ciudad": "Puerto Colombia"
+      },
+      {
+        "ciudad": "Repelón"
+      },
+      {
+        "ciudad": "Sabanagrande"
+      },
+      {
+        "ciudad": "Sabanalarga"
+      },
+      {
+        "ciudad": "Santa Lucía"
+      },
+      {
+        "ciudad": "Santo Tomás"
+      },
+      {
+        "ciudad": "Soledad"
+      },
+      {
+        "ciudad": "Suán"
+      },
+      {
+        "ciudad": "Tubará"
+      },
+      {
+        "ciudad": "Usiacurí"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "departamento": "Bolívar",
+    "ciudades": [
+      {
+        "ciudad": "Achí"
+      },
+      {
+        "ciudad": "Altos del Rosario"
+      },
+      {
+        "ciudad": "Arenal"
+      },
+      {
+        "ciudad": "Arjona"
+      },
+      {
+        "ciudad": "Arroyohondo"
+      },
+      {
+        "ciudad": "Barranco de Loba"
+      },
+      {
+        "ciudad": "Brazuelo de Papayal"
+      },
+      {
+        "ciudad": "Calamar"
+      },
+      {
+        "ciudad": "Cantagallo"
+      },
+      {
+        "ciudad": "Cartagena de Indias"
+      },
+      {
+        "ciudad": "Cicuco"
+      },
+      {
+        "ciudad": "Clemencia"
+      },
+      {
+        "ciudad": "Córdoba"
+      },
+      {
+        "ciudad": "El Carmen de Bolívar"
+      },
+      {
+        "ciudad": "El Guamo"
+      },
+      {
+        "ciudad": "El Peñón"
+      },
+      {
+        "ciudad": "Hatillo de Loba"
+      },
+      {
+        "ciudad": "Magangué"
+      },
+      {
+        "ciudad": "Mahates"
+      },
+      {
+        "ciudad": "Margarita"
+      },
+      {
+        "ciudad": "María la Baja"
+      },
+      {
+        "ciudad": "Mompós"
+      },
+      {
+        "ciudad": "Montecristo"
+      },
+      {
+        "ciudad": "Morales"
+      },
+      {
+        "ciudad": "Norosí"
+      },
+      {
+        "ciudad": "Pinillos"
+      },
+      {
+        "ciudad": "Regidor"
+      },
+      {
+        "ciudad": "Río Viejo"
+      },
+      {
+        "ciudad": "San Cristóbal"
+      },
+      {
+        "ciudad": "San Estanislao"
+      },
+      {
+        "ciudad": "San Fernando"
+      },
+      {
+        "ciudad": "San Jacinto del Cauca"
+      },
+      {
+        "ciudad": "San Jacinto"
+      },
+      {
+        "ciudad": "San Juan Nepomuceno"
+      },
+      {
+        "ciudad": "San Martín de Loba"
+      },
+      {
+        "ciudad": "San Pablo"
+      },
+      {
+        "ciudad": "Santa Catalina"
+      },
+      {
+        "ciudad": "Santa Rosa"
+      },
+      {
+        "ciudad": "Santa Rosa del Sur"
+      },
+      {
+        "ciudad": "Simití"
+      },
+      {
+        "ciudad": "Soplaviento"
+      },
+      {
+        "ciudad": "Talaigua Nuevo"
+      },
+      {
+        "ciudad": "Tiquisio"
+      },
+      {
+        "ciudad": "Turbaco"
+      },
+      {
+        "ciudad": "Turbaná"
+      },
+      {
+        "ciudad": "Villanueva"
+      },
+      {
+        "ciudad": "Zambrano"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "departamento": "Boyacá",
+    "ciudades": [
+      {
+        "ciudad": "Almeida"
+      },
+      {
+        "ciudad": "Aquitania"
+      },
+      {
+        "ciudad": "Arcabuco"
+      },
+      {
+        "ciudad": "Belén"
+      },
+      {
+        "ciudad": "Berbeo"
+      },
+      {
+        "ciudad": "Betéitiva"
+      },
+      {
+        "ciudad": "Boavita"
+      },
+      {
+        "ciudad": "Boyacá"
+      },
+      {
+        "ciudad": "Briceño"
+      },
+      {
+        "ciudad": "Buenavista"
+      },
+      {
+        "ciudad": "Busbanzá"
+      },
+      {
+        "ciudad": "Caldas"
+      },
+      {
+        "ciudad": "Campohermoso"
+      },
+      {
+        "ciudad": "Cerinza"
+      },
+      {
+        "ciudad": "Chinavita"
+      },
+      {
+        "ciudad": "Chiquinquirá"
+      },
+      {
+        "ciudad": "Chíquiza"
+      },
+      {
+        "ciudad": "Chiscas"
+      },
+      {
+        "ciudad": "Chita"
+      },
+      {
+        "ciudad": "Chitaraque"
+      },
+      {
+        "ciudad": "Chivatá"
+      },
+      {
+        "ciudad": "Chivor"
+      },
+      {
+        "ciudad": "Ciénega"
+      },
+      {
+        "ciudad": "Cómbita"
+      },
+      {
+        "ciudad": "Coper"
+      },
+      {
+        "ciudad": "Corrales"
+      },
+      {
+        "ciudad": "Covarachía"
+      },
+      {
+        "ciudad": "Cubará"
+      },
+      {
+        "ciudad": "Cucaita"
+      },
+      {
+        "ciudad": "Cuítiva"
+      },
+      {
+        "ciudad": "Duitama"
+      },
+      {
+        "ciudad": "El Cocuy"
+      },
+      {
+        "ciudad": "El Espino"
+      },
+      {
+        "ciudad": "Firavitoba"
+      },
+      {
+        "ciudad": "Floresta"
+      },
+      {
+        "ciudad": "Gachantivá"
+      },
+      {
+        "ciudad": "Gámeza"
+      },
+      {
+        "ciudad": "Garagoa"
+      },
+      {
+        "ciudad": "Guacamayas"
+      },
+      {
+        "ciudad": "Guateque"
+      },
+      {
+        "ciudad": "Guayatá"
+      },
+      {
+        "ciudad": "Güicán"
+      },
+      {
+        "ciudad": "Iza"
+      },
+      {
+        "ciudad": "Jenesano"
+      },
+      {
+        "ciudad": "Jericó"
+      },
+      {
+        "ciudad": "La Capilla"
+      },
+      {
+        "ciudad": "La Uvita"
+      },
+      {
+        "ciudad": "La Victoria"
+      },
+      {
+        "ciudad": "Labranzagrande"
+      },
+      {
+        "ciudad": "Macanal"
+      },
+      {
+        "ciudad": "Maripí"
+      },
+      {
+        "ciudad": "Miraflores"
+      },
+      {
+        "ciudad": "Mongua"
+      },
+      {
+        "ciudad": "Monguí"
+      },
+      {
+        "ciudad": "Moniquirá"
+      },
+      {
+        "ciudad": "Motavita"
+      },
+      {
+        "ciudad": "Muzo"
+      },
+      {
+        "ciudad": "Nobsa"
+      },
+      {
+        "ciudad": "Nuevo Colón"
+      },
+      {
+        "ciudad": "Oicatá"
+      },
+      {
+        "ciudad": "Otanche"
+      },
+      {
+        "ciudad": "Pachavita"
+      },
+      {
+        "ciudad": "Páez"
+      },
+      {
+        "ciudad": "Paipa"
+      },
+      {
+        "ciudad": "Pajarito"
+      },
+      {
+        "ciudad": "Panqueba"
+      },
+      {
+        "ciudad": "Pauna"
+      },
+      {
+        "ciudad": "Paya"
+      },
+      {
+        "ciudad": "Paz del Río"
+      },
+      {
+        "ciudad": "Pesca"
+      },
+      {
+        "ciudad": "Pisba"
+      },
+      {
+        "ciudad": "Puerto Boyacá"
+      },
+      {
+        "ciudad": "Quípama"
+      },
+      {
+        "ciudad": "Ramiriquí"
+      },
+      {
+        "ciudad": "Ráquira"
+      },
+      {
+        "ciudad": "Rondón"
+      },
+      {
+        "ciudad": "Saboyá"
+      },
+      {
+        "ciudad": "Sáchica"
+      },
+      {
+        "ciudad": "Samacá"
+      },
+      {
+        "ciudad": "San Eduardo"
+      },
+      {
+        "ciudad": "San José de Pare"
+      },
+      {
+        "ciudad": "San Luis de Gaceno"
+      },
+      {
+        "ciudad": "San Mateo"
+      },
+      {
+        "ciudad": "San Miguel de Sema"
+      },
+      {
+        "ciudad": "San Pablo de Borbur"
+      },
+      {
+        "ciudad": "Santa María"
+      },
+      {
+        "ciudad": "Santa Rosa de Viterbo"
+      },
+      {
+        "ciudad": "Santa Sofía"
+      },
+      {
+        "ciudad": "Santana"
+      },
+      {
+        "ciudad": "Sativanorte"
+      },
+      {
+        "ciudad": "Sativasur"
+      },
+      {
+        "ciudad": "Siachoque"
+      },
+      {
+        "ciudad": "Soatá"
+      },
+      {
+        "ciudad": "Socha"
+      },
+      {
+        "ciudad": "Socotá"
+      },
+      {
+        "ciudad": "Sogamoso"
+      },
+      {
+        "ciudad": "Somondoco"
+      },
+      {
+        "ciudad": "Sora"
+      },
+      {
+        "ciudad": "Soracá"
+      },
+      {
+        "ciudad": "Sotaquirá"
+      },
+      {
+        "ciudad": "Susacón"
+      },
+      {
+        "ciudad": "Sutamarchán"
+      },
+      {
+        "ciudad": "Sutatenza"
+      },
+      {
+        "ciudad": "Tasco"
+      },
+      {
+        "ciudad": "Tenza"
+      },
+      {
+        "ciudad": "Tibaná"
+      },
+      {
+        "ciudad": "Tibasosa"
+      },
+      {
+        "ciudad": "Tinjacá"
+      },
+      {
+        "ciudad": "Tipacoque"
+      },
+      {
+        "ciudad": "Toca"
+      },
+      {
+        "ciudad": "Togüí"
+      },
+      {
+        "ciudad": "Tópaga"
+      },
+      {
+        "ciudad": "Tota"
+      },
+      {
+        "ciudad": "Tunja"
+      },
+      {
+        "ciudad": "Tununguá"
+      },
+      {
+        "ciudad": "Turmequé"
+      },
+      {
+        "ciudad": "Tuta"
+      },
+      {
+        "ciudad": "Tutazá"
+      },
+      {
+        "ciudad": "Úmbita"
+      },
+      {
+        "ciudad": "Ventaquemada"
+      },
+      {
+        "ciudad": "Villa de Leyva"
+      },
+      {
+        "ciudad": "Viracachá"
+      },
+      {
+        "ciudad": "Zetaquira"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "departamento": "Caldas",
+    "ciudades": [
+      {
+        "ciudad": "Aguadas"
+      },
+      {
+        "ciudad": "Anserma"
+      },
+      {
+        "ciudad": "Aranzazu"
+      },
+      {
+        "ciudad": "Belalcázar"
+      },
+      {
+        "ciudad": "Chinchiná"
+      },
+      {
+        "ciudad": "Filadelfia"
+      },
+      {
+        "ciudad": "La Dorada"
+      },
+      {
+        "ciudad": "La Merced"
+      },
+      {
+        "ciudad": "Manizales"
+      },
+      {
+        "ciudad": "Manzanares"
+      },
+      {
+        "ciudad": "Marmato"
+      },
+      {
+        "ciudad": "Marquetalia"
+      },
+      {
+        "ciudad": "Marulanda"
+      },
+      {
+        "ciudad": "Neira"
+      },
+      {
+        "ciudad": "Norcasia"
+      },
+      {
+        "ciudad": "Pácora"
+      },
+      {
+        "ciudad": "Palestina"
+      },
+      {
+        "ciudad": "Pensilvania"
+      },
+      {
+        "ciudad": "Riosucio"
+      },
+      {
+        "ciudad": "Risaralda"
+      },
+      {
+        "ciudad": "Salamina"
+      },
+      {
+        "ciudad": "Samaná"
+      },
+      {
+        "ciudad": "San José"
+      },
+      {
+        "ciudad": "Supía"
+      },
+      {
+        "ciudad": "Victoria"
+      },
+      {
+        "ciudad": "Villamaría"
+      },
+      {
+        "ciudad": "Viterbo"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "departamento": "Caquetá",
+    "ciudades": [
+      {
+        "ciudad": "Albania"
+      },
+      {
+        "ciudad": "Belén de los Andaquíes"
+      },
+      {
+        "ciudad": "Cartagena del Chairá"
+      },
+      {
+        "ciudad": "Curillo"
+      },
+      {
+        "ciudad": "El Doncello"
+      },
+      {
+        "ciudad": "El Paujil"
+      },
+      {
+        "ciudad": "Florencia"
+      },
+      {
+        "ciudad": "La Montañita"
+      },
+      {
+        "ciudad": "Milán"
+      },
+      {
+        "ciudad": "Morelia"
+      },
+      {
+        "ciudad": "Puerto Rico"
+      },
+      {
+        "ciudad": "San José del Fragua"
+      },
+      {
+        "ciudad": "San Vicente del Caguán"
+      },
+      {
+        "ciudad": "Solano"
+      },
+      {
+        "ciudad": "Solita"
+      },
+      {
+        "ciudad": "Valparaíso"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "departamento": "Casanare",
+    "ciudades": [
+      {
+        "ciudad": "Aguazul"
+      },
+      {
+        "ciudad": "Chámeza"
+      },
+      {
+        "ciudad": "Hato Corozal"
+      },
+      {
+        "ciudad": "La Salina"
+      },
+      {
+        "ciudad": "Maní"
+      },
+      {
+        "ciudad": "Monterrey"
+      },
+      {
+        "ciudad": "Nunchía"
+      },
+      {
+        "ciudad": "Orocué"
+      },
+      {
+        "ciudad": "Paz de Ariporo"
+      },
+      {
+        "ciudad": "Pore"
+      },
+      {
+        "ciudad": "Recetor"
+      },
+      {
+        "ciudad": "Sabanalarga"
+      },
+      {
+        "ciudad": "Sácama"
+      },
+      {
+        "ciudad": "San Luis de Palenque"
+      },
+      {
+        "ciudad": "Támara"
+      },
+      {
+        "ciudad": "Tauramena"
+      },
+      {
+        "ciudad": "Trinidad"
+      },
+      {
+        "ciudad": "Villanueva"
+      },
+      {
+        "ciudad": "Yopal"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "departamento": "Cauca",
+    "ciudades": [
+      {
+        "ciudad": "Almaguer"
+      },
+      {
+        "ciudad": "Argelia"
+      },
+      {
+        "ciudad": "Balboa"
+      },
+      {
+        "ciudad": "Bolívar"
+      },
+      {
+        "ciudad": "Buenos Aires"
+      },
+      {
+        "ciudad": "Cajibío"
+      },
+      {
+        "ciudad": "Caldono"
+      },
+      {
+        "ciudad": "Caloto"
+      },
+      {
+        "ciudad": "Corinto"
+      },
+      {
+        "ciudad": "El Tambo"
+      },
+      {
+        "ciudad": "Florencia"
+      },
+      {
+        "ciudad": "Guachené"
+      },
+      {
+        "ciudad": "Guapí"
+      },
+      {
+        "ciudad": "Inzá"
+      },
+      {
+        "ciudad": "Jambaló"
+      },
+      {
+        "ciudad": "La Sierra"
+      },
+      {
+        "ciudad": "La Vega"
+      },
+      {
+        "ciudad": "López de Micay"
+      },
+      {
+        "ciudad": "Mercaderes"
+      },
+      {
+        "ciudad": "Miranda"
+      },
+      {
+        "ciudad": "Morales"
+      },
+      {
+        "ciudad": "Padilla"
+      },
+      {
+        "ciudad": "Páez"
+      },
+      {
+        "ciudad": "Patía"
+      },
+      {
+        "ciudad": "Piamonte"
+      },
+      {
+        "ciudad": "Piendamó"
+      },
+      {
+        "ciudad": "Popayán"
+      },
+      {
+        "ciudad": "Puerto Tejada"
+      },
+      {
+        "ciudad": "Puracé"
+      },
+      {
+        "ciudad": "Rosas"
+      },
+      {
+        "ciudad": "San Sebastián"
+      },
+      {
+        "ciudad": "Santa Rosa"
+      },
+      {
+        "ciudad": "Santander de Quilichao"
+      },
+      {
+        "ciudad": "Silvia"
+      },
+      {
+        "ciudad": "Sotará"
+      },
+      {
+        "ciudad": "Suárez"
+      },
+      {
+        "ciudad": "Sucre"
+      },
+      {
+        "ciudad": "Timbío"
+      },
+      {
+        "ciudad": "Timbiquí"
+      },
+      {
+        "ciudad": "Toribío"
+      },
+      {
+        "ciudad": "Totoró"
+      },
+      {
+        "ciudad": "Villa Rica"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "departamento": "Cesar",
+    "ciudades": [
+      {
+        "ciudad": "Aguachica"
+      },
+      {
+        "ciudad": "Agustín Codazzi"
+      },
+      {
+
+        "ciudad": "Astrea"
+      },
+      {
+        "ciudad": "Becerril"
+      },
+      {
+        "ciudad": "Bosconia"
+      },
+      {
+        "ciudad": "Chimichagua"
+      },
+      {
+        "ciudad": "Chiriguaná"
+      },
+      {
+        "ciudad": "Curumaní"
+      },
+      {
+        "ciudad": "El Copey"
+      },
+      {
+        "ciudad": "El Paso"
+      },
+      {
+        "ciudad": "Gamarra"
+      },
+      {
+        "ciudad": "González"
+      },
+      {
+        "ciudad": "La Gloria (Cesar)"
+      },
+      {
+        "ciudad": "La Jagua de Ibirico"
+      },
+      {
+        "ciudad": "La Paz"
+      },
+      {
+        "ciudad": "Manaure Balcón del Cesar"
+      },
+      {
+        "ciudad": "Pailitas"
+      },
+      {
+        "ciudad": "Pelaya"
+      },
+      {
+        "ciudad": "Pueblo Bello"
+      },
+      {
+        "ciudad": "Río de Oro"
+      },
+      {
+        "ciudad": "San Alberto"
+      },
+      {
+        "ciudad": "San Diego"
+      },
+      {
+        "ciudad": "San Martín"
+      },
+      {
+        "ciudad": "Tamalameque"
+      },
+      {
+        "ciudad": "Valledupar"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "departamento": "Chocó",
+    "ciudades": [
+      {
+        "ciudad": "Acandí"
+      },
+      {
+        "ciudad": "Alto Baudó"
+      },
+      {
+        "ciudad": "Bagadó"
+      },
+      {
+        "ciudad": "Bahía Solano"
+      },
+      {
+        "ciudad": "Bajo Baudó"
+      },
+      {
+        "ciudad": "Bojayá"
+      },
+      {
+        "ciudad": "Cantón de San Pablo"
+      },
+      {
+        "ciudad": "Cértegui"
+      },
+      {
+        "ciudad": "Condoto"
+      },
+      {
+        "ciudad": "El Atrato"
+      },
+      {
+        "ciudad": "El Carmen de Atrato"
+      },
+      {
+        "ciudad": "El Carmen del Darién"
+      },
+      {
+        "ciudad": "Istmina"
+      },
+      {
+        "ciudad": "Juradó"
+      },
+      {
+        "ciudad": "Litoral de San Juan"
+      },
+      {
+        "ciudad": "Lloró"
+      },
+      {
+        "ciudad": "Medio Atrato"
+      },
+      {
+        "ciudad": "Medio Baudó"
+      },
+      {
+        "ciudad": "Medio San Juan"
+      },
+      {
+        "ciudad": "Nóvita"
+      },
+      {
+        "ciudad": "Nuquí"
+      },
+      {
+        "ciudad": "Quibdó"
+      },
+      {
+        "ciudad": "Río Iró"
+      },
+      {
+        "ciudad": "Río Quito"
+      },
+      {
+        "ciudad": "Riosucio"
+      },
+      {
+        "ciudad": "San José del Palmar"
+      },
+      {
+        "ciudad": "Sipí"
+      },
+      {
+        "ciudad": "Tadó"
+      },
+      {
+        "ciudad": "Unión Panamericana"
+      },
+      {
+        "ciudad": "Unguía"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "departamento": "Cundinamarca",
+    "ciudades": [
+      {
+        "ciudad": "Agua de Dios"
+      },
+      {
+        "ciudad": "Albán"
+      },
+      {
+        "ciudad": "Anapoima"
+      },
+      {
+        "ciudad": "Anolaima"
+      },
+      {
+        "ciudad": "Apulo"
+      },
+      {
+        "ciudad": "Arbeláez"
+      },
+      {
+        "ciudad": "Beltrán"
+      },
+      {
+        "ciudad": "Bituima"
+      },
+      {
+        "ciudad": "Bogotá"
+      },
+      {
+        "ciudad": "Bojacá"
+      },
+      {
+        "ciudad": "Cabrera"
+      },
+      {
+        "ciudad": "Cachipay"
+      },
+      {
+        "ciudad": "Cajicá"
+      },
+      {
+        "ciudad": "Caparrapí"
+      },
+      {
+        "ciudad": "Cáqueza"
+      },
+      {
+        "ciudad": "Carmen de Carupa"
+      },
+      {
+        "ciudad": "Chaguaní"
+      },
+      {
+        "ciudad": "Chía"
+      },
+      {
+        "ciudad": "Chipaque"
+      },
+      {
+        "ciudad": "Choachí"
+      },
+      {
+        "ciudad": "Chocontá"
+      },
+      {
+        "ciudad": "Cogua"
+      },
+      {
+        "ciudad": "Cota"
+      },
+      {
+        "ciudad": "Cucunubá"
+      },
+      {
+        "ciudad": "El Colegio"
+      },
+      {
+        "ciudad": "El Peñón"
+      },
+      {
+        "ciudad": "El Rosal"
+      },
+      {
+        "ciudad": "Facatativá"
+      },
+      {
+        "ciudad": "Fómeque"
+      },
+      {
+        "ciudad": "Fosca"
+      },
+      {
+        "ciudad": "Funza"
+      },
+      {
+        "ciudad": "Fúquene"
+      },
+      {
+        "ciudad": "Fusagasugá"
+      },
+      {
+        "ciudad": "Gachalá"
+      },
+      {
+        "ciudad": "Gachancipá"
+      },
+      {
+        "ciudad": "Gachetá"
+      },
+      {
+        "ciudad": "Gama"
+      },
+      {
+        "ciudad": "Girardot"
+      },
+      {
+        "ciudad": "Granada"
+      },
+      {
+        "ciudad": "Guachetá"
+      },
+      {
+        "ciudad": "Guaduas"
+      },
+      {
+        "ciudad": "Guasca"
+      },
+      {
+        "ciudad": "Guataquí"
+      },
+      {
+        "ciudad": "Guatavita"
+      },
+      {
+        "ciudad": "Guayabal de Síquima"
+      },
+      {
+        "ciudad": "Guayabetal"
+      },
+      {
+        "ciudad": "Gutiérrez"
+      },
+      {
+        "ciudad": "Jerusalén"
+      },
+      {
+        "ciudad": "Junín"
+      },
+      {
+        "ciudad": "La Calera"
+      },
+      {
+        "ciudad": "La Mesa"
+      },
+      {
+        "ciudad": "La Palma"
+      },
+      {
+        "ciudad": "La Peña"
+      },
+      {
+        "ciudad": "La Vega"
+      },
+      {
+        "ciudad": "Lenguazaque"
+      },
+      {
+        "ciudad": "Machetá"
+      },
+      {
+        "ciudad": "Madrid"
+      },
+      {
+        "ciudad": "Manta"
+      },
+      {
+        "ciudad": "Medina"
+      },
+      {
+        "ciudad": "Mosquera"
+      },
+      {
+        "ciudad": "Nariño"
+      },
+      {
+        "ciudad": "Nemocón"
+      },
+      {
+        "ciudad": "Nilo"
+      },
+      {
+        "ciudad": "Nimaima"
+      },
+      {
+        "ciudad": "Nocaima"
+      },
+      {
+        "ciudad": "Pacho"
+      },
+      {
+        "ciudad": "Paime"
+      },
+      {
+        "ciudad": "Pandi"
+      },
+      {
+        "ciudad": "Paratebueno"
+      },
+      {
+        "ciudad": "Pasca"
+      },
+      {
+        "ciudad": "Puerto Salgar"
+      },
+      {
+        "ciudad": "Pulí"
+      },
+      {
+        "ciudad": "Quebradanegra"
+      },
+      {
+        "ciudad": "Quetame"
+      },
+      {
+        "ciudad": "Quipile"
+      },
+      {
+        "ciudad": "Ricaurte"
+      },
+      {
+        "ciudad": "San Antonio del Tequendama"
+      },
+      {
+        "ciudad": "San Bernardo"
+      },
+      {
+        "ciudad": "San Cayetano"
+      },
+      {
+        "ciudad": "San Francisco"
+      },
+      {
+        "ciudad": "San Juan de Rioseco"
+      },
+      {
+        "ciudad": "Sasaima"
+      },
+      {
+        "ciudad": "Sesquilé"
+      },
+      {
+        "ciudad": "Sibaté"
+      },
+      {
+        "ciudad": "Silvania"
+      },
+      {
+        "ciudad": "Simijaca"
+      },
+      {
+        "ciudad": "Soacha"
+      },
+      {
+        "ciudad": "Sopó"
+      },
+      {
+        "ciudad": "Subachoque"
+      },
+      {
+        "ciudad": "Suesca"
+      },
+      {
+        "ciudad": "Supatá"
+      },
+      {
+        "ciudad": "Susa"
+      },
+      {
+        "ciudad": "Sutatausa"
+      },
+      {
+        "ciudad": "Tabio"
+      },
+      {
+        "ciudad": "Tausa"
+      },
+      {
+        "ciudad": "Tena"
+      },
+      {
+        "ciudad": "Tenjo"
+      },
+      {
+        "ciudad": "Tibacuy"
+      },
+      {
+        "ciudad": "Tibirita"
+      },
+      {
+        "ciudad": "Tocaima"
+      },
+      {
+        "ciudad": "Tocancipá"
+      },
+      {
+        "ciudad": "Topaipí"
+      },
+      {
+        "ciudad": "Ubalá"
+      },
+      {
+        "ciudad": "Ubaque"
+      },
+      {
+        "ciudad": "Ubaté"
+      },
+      {
+        "ciudad": "Une"
+      },
+      {
+        "ciudad": "Útica"
+      },
+      {
+        "ciudad": "Venecia"
+      },
+      {
+        "ciudad": "Vergara"
+      },
+      {
+        "ciudad": "Vianí"
+      },
+      {
+        "ciudad": "Villagómez"
+      },
+      {
+        "ciudad": "Villapinzón"
+      },
+      {
+        "ciudad": "Villeta"
+      },
+      {
+        "ciudad": "Viotá"
+      },
+      {
+        "ciudad": "Yacopí"
+      },
+      {
+        "ciudad": "Zipacón"
+      },
+      {
+        "ciudad": "Zipaquirá"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "departamento": "Córdoba",
+    "ciudades": [
+      {
+        "ciudad": "Ayapel"
+      },
+      {
+        "ciudad": "Buenavista"
+      },
+      {
+        "ciudad": "Canalete"
+      },
+      {
+        "ciudad": "Cereté"
+      },
+      {
+        "ciudad": "Chimá"
+      },
+      {
+        "ciudad": "Chinú"
+      },
+      {
+        "ciudad": "Ciénaga de Oro"
+      },
+      {
+        "ciudad": "Cotorra"
+      },
+      {
+        "ciudad": "La Apartada"
+      },
+      {
+        "ciudad": "Lorica"
+      },
+      {
+        "ciudad": "Los Córdobas"
+      },
+      {
+        "ciudad": "Momil"
+      },
+      {
+        "ciudad": "Montelíbano"
+      },
+      {
+        "ciudad": "Montería"
+      },
+      {
+        "ciudad": "Moñitos"
+      },
+      {
+        "ciudad": "Planeta Rica"
+      },
+      {
+        "ciudad": "Pueblo Nuevo"
+      },
+      {
+        "ciudad": "Puerto Escondido"
+      },
+      {
+        "ciudad": "Puerto Libertador"
+      },
+      {
+        "ciudad": "Purísima"
+      },
+      {
+        "ciudad": "Sahagún"
+      },
+      {
+        "ciudad": "San Andrés de Sotavento"
+      },
+      {
+        "ciudad": "San Antero"
+      },
+      {
+        "ciudad": "San Bernardo del Viento"
+      },
+      {
+        "ciudad": "San Carlos"
+      },
+      {
+        "ciudad": "San José de Uré"
+      },
+      {
+        "ciudad": "San Pelayo"
+      },
+      {
+        "ciudad": "Tierralta"
+      },
+      {
+        "ciudad": "Tuchín"
+      },
+      {
+        "ciudad": "Valencia"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "departamento": "Guainía",
+    "ciudades": [
+      {
+        "ciudad": "Inírida"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "departamento": "Guaviare",
+    "ciudades": [
+      {
+        "ciudad": "Calamar"
+      },
+      {
+        "ciudad": "El Retorno"
+      },
+      {
+        "ciudad": "Miraflores"
+      },
+      {
+        "ciudad": "San José del Guaviare"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "departamento": "Huila",
+    "ciudades": [
+      {
+        "ciudad": "Acevedo"
+      },
+      {
+        "ciudad": "Agrado"
+      },
+      {
+        "ciudad": "Aipe"
+      },
+      {
+        "ciudad": "Algeciras"
+      },
+      {
+        "ciudad": "Altamira"
+      },
+      {
+        "ciudad": "Baraya"
+      },
+      {
+        "ciudad": "Campoalegre"
+      },
+      {
+        "ciudad": "Colombia"
+      },
+      {
+        "ciudad": "El Pital"
+      },
+      {
+        "ciudad": "Elías"
+      },
+      {
+        "ciudad": "Garzón"
+      },
+      {
+        "ciudad": "Gigante"
+      },
+      {
+        "ciudad": "Guadalupe"
+      },
+      {
+        "ciudad": "Hobo"
+      },
+      {
+        "ciudad": "Íquira"
+      },
+      {
+        "ciudad": "Isnos"
+      },
+      {
+        "ciudad": "La Argentina"
+      },
+      {
+        "ciudad": "La Plata"
+      },
+      {
+        "ciudad": "Nátaga"
+      },
+      {
+        "ciudad": "Neiva"
+      },
+      {
+        "ciudad": "Oporapa"
+      },
+      {
+        "ciudad": "Paicol"
+      },
+      {
+        "ciudad": "Palermo"
+      },
+      {
+        "ciudad": "Palestina"
+      },
+      {
+        "ciudad": "Pitalito"
+      },
+      {
+        "ciudad": "Rivera"
+      },
+      {
+        "ciudad": "Saladoblanco"
+      },
+      {
+        "ciudad": "San Agustín"
+      },
+      {
+        "ciudad": "Santa María"
+      },
+      {
+        "ciudad": "Suaza"
+      },
+      {
+        "ciudad": "Tarqui"
+      },
+      {
+        "ciudad": "Tello"
+      },
+      {
+        "ciudad": "Teruel"
+      },
+      {
+        "ciudad": "Tesalia"
+      },
+      {
+        "ciudad": "Timaná"
+      },
+      {
+        "ciudad": "Villavieja"
+      },
+      {
+        "ciudad": "Yaguará"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "departamento": "La Guajira",
+    "ciudades": [
+      {
+        "ciudad": "Albania"
+      },
+      {
+        "ciudad": "Barrancas"
+      },
+      {
+        "ciudad": "Dibulla"
+      },
+      {
+        "ciudad": "Distracción"
+      },
+      {
+        "ciudad": "El Molino"
+      },
+      {
+        "ciudad": "Fonseca"
+      },
+      {
+        "ciudad": "Hatonuevo"
+      },
+      {
+        "ciudad": "La Jagua del Pilar"
+      },
+      {
+        "ciudad": "Maicao"
+      },
+      {
+        "ciudad": "Manaure"
+      },
+      {
+        "ciudad": "Riohacha"
+      },
+      {
+        "ciudad": "San Juan del Cesar"
+      },
+      {
+        "ciudad": "Uribia"
+      },
+      {
+        "ciudad": "Urumita"
+      },
+      {
+        "ciudad": "Villanueva"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "departamento": "Magdalena",
+    "ciudades": [
+      {
+        "ciudad": "Algarrobo"
+      },
+      {
+        "ciudad": "Aracataca"
+      },
+      {
+        "ciudad": "Ariguaní"
+      },
+      {
+        "ciudad": "Cerro de San Antonio"
+      },
+      {
+        "ciudad": "Chibolo"
+      },
+      {
+        "ciudad": "Chibolo"
+      },
+      {
+        "ciudad": "Ciénaga"
+      },
+      {
+        "ciudad": "Concordia"
+      },
+      {
+        "ciudad": "El Banco"
+      },
+      {
+        "ciudad": "El Piñón"
+      },
+      {
+        "ciudad": "El Retén"
+      },
+      {
+        "ciudad": "Fundación"
+      },
+      {
+        "ciudad": "Guamal"
+      },
+      {
+        "ciudad": "Nueva Granada"
+      },
+      {
+        "ciudad": "Pedraza"
+      },
+      {
+        "ciudad": "Pijiño del Carmen"
+      },
+      {
+        "ciudad": "Pivijay"
+      },
+      {
+        "ciudad": "Plato"
+      },
+      {
+        "ciudad": "Pueblo Viejo"
+      },
+      {
+        "ciudad": "Remolino"
+      },
+      {
+        "ciudad": "Sabanas de San Ángel"
+      },
+      {
+        "ciudad": "Salamina"
+      },
+      {
+        "ciudad": "San Sebastián de Buenavista"
+      },
+      {
+        "ciudad": "San Zenón"
+      },
+      {
+        "ciudad": "Santa Ana"
+      },
+      {
+        "ciudad": "Santa Bárbara de Pinto"
+      },
+      {
+        "ciudad": "Santa Marta"
+      },
+      {
+        "ciudad": "Sitionuevo"
+      },
+      {
+        "ciudad": "Tenerife"
+      },
+      {
+        "ciudad": "Zapayán"
+      },
+      {
+        "ciudad": "Zona Bananera"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "departamento": "Meta",
+    "ciudades": [
+      {
+        "ciudad": "Acacías"
+      },
+      {
+        "ciudad": "Barranca de Upía"
+      },
+      {
+        "ciudad": "Cabuyaro"
+      },
+      {
+        "ciudad": "Castilla la Nueva"
+      },
+      {
+        "ciudad": "Cubarral"
+      },
+      {
+        "ciudad": "Cumaral"
+      },
+      {
+        "ciudad": "El Calvario"
+      },
+      {
+        "ciudad": "El Castillo"
+      },
+      {
+        "ciudad": "El Dorado"
+      },
+      {
+        "ciudad": "Fuente de Oro"
+      },
+      {
+        "ciudad": "Granada"
+      },
+      {
+        "ciudad": "Guamal"
+      },
+      {
+        "ciudad": "La Macarena"
+      },
+      {
+        "ciudad": "La Uribe"
+      },
+      {
+        "ciudad": "Lejanías"
+      },
+      {
+        "ciudad": "Mapiripán"
+      },
+      {
+        "ciudad": "Mesetas"
+      },
+      {
+        "ciudad": "Puerto Concordia"
+      },
+      {
+        "ciudad": "Puerto Gaitán"
+      },
+      {
+        "ciudad": "Puerto Lleras"
+      },
+      {
+        "ciudad": "Puerto López"
+      },
+      {
+        "ciudad": "Puerto Rico"
+      },
+      {
+        "ciudad": "Restrepo"
+      },
+      {
+        "ciudad": "San Carlos de Guaroa"
+      },
+      {
+        "ciudad": "San Juan de Arama"
+      },
+      {
+        "ciudad": "San Juanito"
+      },
+      {
+        "ciudad": "San Martín"
+      },
+      {
+        "ciudad": "Villavicencio"
+      },
+      {
+        "ciudad": "Vista Hermosa"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "departamento": "Nariño",
+    "ciudades": [
+      {
+        "ciudad": "Aldana"
+      },
+      {
+        "ciudad": "Ancuyá"
+      },
+      {
+        "ciudad": "Arboleda"
+      },
+      {
+        "ciudad": "Barbacoas"
+      },
+      {
+        "ciudad": "Belén"
+      },
+      {
+        "ciudad": "Buesaco"
+      },
+      {
+        "ciudad": "Chachagüí"
+      },
+      {
+        "ciudad": "Colón"
+      },
+      {
+        "ciudad": "Consacá"
+      },
+      {
+        "ciudad": "Contadero"
+      },
+      {
+        "ciudad": "Córdoba"
+      },
+      {
+        "ciudad": "Cuaspud"
+      },
+      {
+        "ciudad": "Cumbal"
+      },
+      {
+        "ciudad": "Cumbitara"
+      },
+      {
+        "ciudad": "El Charco"
+      },
+      {
+        "ciudad": "El Peñol"
+      },
+      {
+        "ciudad": "El Rosario"
+      },
+      {
+        "ciudad": "El Tablón"
+      },
+      {
+        "ciudad": "El Tambo"
+      },
+      {
+        "ciudad": "Francisco Pizarro"
+      },
+      {
+        "ciudad": "Funes"
+      },
+      {
+        "ciudad": "Guachucal"
+      },
+      {
+        "ciudad": "Guaitarilla"
+      },
+      {
+        "ciudad": "Gualmatán"
+      },
+      {
+        "ciudad": "Iles"
+      },
+      {
+        "ciudad": "Imués"
+      },
+      {
+        "ciudad": "Ipiales"
+      },
+      {
+        "ciudad": "La Cruz"
+      },
+      {
+        "ciudad": "La Florida"
+      },
+      {
+        "ciudad": "La Llanada"
+      },
+      {
+        "ciudad": "La Tola"
+      },
+      {
+        "ciudad": "La Unión"
+      },
+      {
+        "ciudad": "Leiva"
+      },
+      {
+        "ciudad": "Linares"
+      },
+      {
+        "ciudad": "Los Andes"
+      },
+      {
+        "ciudad": "Magüí Payán"
+      },
+      {
+        "ciudad": "Mallama"
+      },
+      {
+        "ciudad": "Mosquera"
+      },
+      {
+        "ciudad": "Nariño"
+      },
+      {
+        "ciudad": "Olaya Herrera"
+      },
+      {
+        "ciudad": "Ospina"
+      },
+      {
+        "ciudad": "Pasto"
+      },
+      {
+        "ciudad": "Policarpa"
+      },
+      {
+        "ciudad": "Potosí"
+      },
+      {
+        "ciudad": "Providencia"
+      },
+      {
+        "ciudad": "Puerres"
+      },
+      {
+        "ciudad": "Pupiales"
+      },
+      {
+        "ciudad": "Ricaurte"
+      },
+      {
+        "ciudad": "Roberto Payán"
+      },
+      {
+        "ciudad": "Samaniego"
+      },
+      {
+        "ciudad": "San Bernardo"
+      },
+      {
+        "ciudad": "San José de Albán"
+      },
+      {
+        "ciudad": "San Lorenzo"
+      },
+      {
+        "ciudad": "San Pablo"
+      },
+      {
+        "ciudad": "San Pedro de Cartago"
+      },
+      {
+        "ciudad": "Sandoná"
+      },
+      {
+        "ciudad": "Santa Bárbara"
+      },
+      {
+        "ciudad": "Santacruz"
+      },
+      {
+        "ciudad": "Sapuyes"
+      },
+      {
+        "ciudad": "Taminango"
+      },
+      {
+        "ciudad": "Tangua"
+      },
+      {
+        "ciudad": "Tumaco"
+      },
+      {
+        "ciudad": "Túquerres"
+      },
+      {
+        "ciudad": "Yacuanquer"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "departamento": "Norte de Santander",
+    "ciudades": [
+      {
+        "ciudad": "Ábrego"
+      },
+      {
+        "ciudad": "Arboledas"
+      },
+      {
+        "ciudad": "Bochalema"
+      },
+      {
+        "ciudad": "Bucarasica"
+      },
+      {
+        "ciudad": "Cáchira"
+      },
+      {
+        "ciudad": "Cácota"
+      },
+      {
+        "ciudad": "Chinácota"
+      },
+      {
+        "ciudad": "Chitagá"
+      },
+      {
+        "ciudad": "Convención"
+      },
+      {
+        "ciudad": "Cúcuta"
+      },
+      {
+        "ciudad": "Cucutilla"
+      },
+      {
+        "ciudad": "Duranía"
+      },
+      {
+        "ciudad": "El Carmen"
+      },
+      {
+        "ciudad": "El Tarra"
+      },
+      {
+        "ciudad": "El Zulia"
+      },
+      {
+        "ciudad": "Gramalote"
+      },
+      {
+        "ciudad": "Hacarí"
+      },
+      {
+        "ciudad": "Herrán"
+      },
+      {
+        "ciudad": "La Esperanza"
+      },
+      {
+        "ciudad": "La Playa de Belén"
+      },
+      {
+        "ciudad": "Labateca"
+      },
+      {
+        "ciudad": "Los Patios"
+      },
+      {
+        "ciudad": "Lourdes"
+      },
+      {
+        "ciudad": "Mutiscua"
+      },
+      {
+        "ciudad": "Ocaña"
+      },
+      {
+        "ciudad": "Pamplona"
+      },
+      {
+        "ciudad": "Pamplonita"
+      },
+      {
+        "ciudad": "Puerto Santander"
+      },
+      {
+        "ciudad": "Ragonvalia"
+      },
+      {
+        "ciudad": "Salazar de Las Palmas"
+      },
+      {
+        "ciudad": "San Calixto"
+      },
+      {
+        "ciudad": "San Cayetano"
+      },
+      {
+        "ciudad": "Santiago"
+      },
+      {
+        "ciudad": "Santo Domingo de Silos"
+      },
+      {
+        "ciudad": "Sardinata"
+      },
+      {
+        "ciudad": "Teorama"
+      },
+      {
+        "ciudad": "Tibú"
+      },
+      {
+        "ciudad": "Toledo"
+      },
+      {
+        "ciudad": "Villa Caro"
+      },
+      {
+        "ciudad": "Villa del Rosario"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "departamento": "Putumayo",
+    "ciudades": [
+      {
+        "ciudad": "Colón"
+      },
+      {
+        "ciudad": "Mocoa"
+      },
+      {
+        "ciudad": "Orito"
+      },
+      {
+        "ciudad": "Puerto Asís"
+      },
+      {
+        "ciudad": "Puerto Caicedo"
+      },
+      {
+        "ciudad": "Puerto Guzmán"
+      },
+      {
+        "ciudad": "Puerto Leguízamo"
+      },
+      {
+        "ciudad": "San Francisco"
+      },
+      {
+        "ciudad": "San Miguel"
+      },
+      {
+        "ciudad": "Santiago"
+      },
+      {
+        "ciudad": "Sibundoy"
+      },
+      {
+        "ciudad": "Valle del Guamuez"
+      },
+      {
+        "ciudad": "Villagarzón"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "departamento": "Quindío",
+    "ciudades": [
+      {
+        "ciudad": "Armenia"
+      },
+      {
+        "ciudad": "Buenavista"
+      },
+      {
+        "ciudad": "Calarcá"
+      },
+      {
+        "ciudad": "Circasia"
+      },
+      {
+        "ciudad": "Córdoba"
+      },
+      {
+        "ciudad": "Filandia"
+      },
+      {
+        "ciudad": "Génova"
+      },
+      {
+        "ciudad": "La Tebaida"
+      },
+      {
+        "ciudad": "Montenegro"
+      },
+      {
+        "ciudad": "Pijao"
+      },
+      {
+        "ciudad": "Quimbaya"
+      },
+      {
+        "ciudad": "Salento"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "departamento": "Risaralda",
+    "ciudades": [
+      {
+        "ciudad": "Apía"
+      },
+      {
+        "ciudad": "Balboa"
+      },
+      {
+        "ciudad": "Belén de Umbría"
+      },
+      {
+        "ciudad": "Dosquebradas"
+      },
+      {
+        "ciudad": "Guática"
+      },
+      {
+        "ciudad": "La Celia"
+      },
+      {
+        "ciudad": "La Virginia"
+      },
+      {
+        "ciudad": "Marsella"
+      },
+      {
+        "ciudad": "Mistrató"
+      },
+      {
+        "ciudad": "Pereira"
+      },
+      {
+        "ciudad": "Pueblo Rico"
+      },
+      {
+        "ciudad": "Quinchía"
+      },
+      {
+        "ciudad": "Santa Rosa de Cabal"
+      },
+      {
+        "ciudad": "Santuario"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "departamento": "San Andrés y Providencia",
+    "ciudades": [
+      {
+        "ciudad": "Providencia y Santa Catalina Islas"
+      },
+      {
+        "ciudad": "San Andrés"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "departamento": "Santander",
+    "ciudades": [
+      {
+        "ciudad": "Aguada"
+      },
+      {
+        "ciudad": "Albania"
+      },
+      {
+        "ciudad": "Aratoca"
+      },
+      {
+        "ciudad": "Barbosa"
+      },
+      {
+        "ciudad": "Barichara"
+      },
+      {
+        "ciudad": "Barrancabermeja"
+      },
+      {
+        "ciudad": "Betulia"
+      },
+      {
+        "ciudad": "Bolívar"
+      },
+      {
+        "ciudad": "Bucaramanga"
+      },
+      {
+        "ciudad": "Cabrera"
+      },
+      {
+        "ciudad": "California"
+      },
+      {
+        "ciudad": "Capitanejo"
+      },
+      {
+        "ciudad": "Carcasí"
+      },
+      {
+        "ciudad": "Cepitá"
+      },
+      {
+        "ciudad": "Cerrito"
+      },
+      {
+        "ciudad": "Charalá"
+      },
+      {
+        "ciudad": "Charta"
+      },
+      {
+        "ciudad": "Chima"
+      },
+      {
+        "ciudad": "Chipatá"
+      },
+      {
+        "ciudad": "Cimitarra"
+      },
+      {
+        "ciudad": "Concepción"
+      },
+      {
+        "ciudad": "Confines"
+      },
+      {
+        "ciudad": "Contratación"
+      },
+      {
+        "ciudad": "Coromoro"
+      },
+      {
+        "ciudad": "Curití"
+      },
+      {
+        "ciudad": "El Carmen de Chucurí"
+      },
+      {
+        "ciudad": "El Guacamayo"
+      },
+      {
+        "ciudad": "El Peñón"
+      },
+      {
+        "ciudad": "El Playón"
+      },
+      {
+        "ciudad": "El Socorro"
+      },
+      {
+        "ciudad": "Encino"
+      },
+      {
+        "ciudad": "Enciso"
+      },
+      {
+        "ciudad": "Florián"
+      },
+      {
+        "ciudad": "Floridablanca"
+      },
+      {
+        "ciudad": "Galán"
+      },
+      {
+        "ciudad": "Gámbita"
+      },
+      {
+        "ciudad": "Girón"
+      },
+      {
+        "ciudad": "Guaca"
+      },
+      {
+        "ciudad": "Guadalupe"
+      },
+      {
+        "ciudad": "Guapotá"
+      },
+      {
+        "ciudad": "Guavatá"
+      },
+      {
+        "ciudad": "Güepsa"
+      },
+      {
+        "ciudad": "Hato"
+      },
+      {
+        "ciudad": "Jesús María"
+      },
+      {
+        "ciudad": "Jordán"
+      },
+      {
+        "ciudad": "La Belleza"
+      },
+      {
+        "ciudad": "La Paz"
+      },
+      {
+        "ciudad": "Landázuri"
+      },
+      {
+        "ciudad": "Lebrija"
+      },
+      {
+        "ciudad": "Los Santos"
+      },
+      {
+        "ciudad": "Macaravita"
+      },
+      {
+        "ciudad": "Málaga"
+      },
+      {
+        "ciudad": "Matanza"
+      },
+      {
+        "ciudad": "Mogotes"
+      },
+      {
+        "ciudad": "Molagavita"
+      },
+      {
+        "ciudad": "Ocamonte"
+      },
+      {
+        "ciudad": "Oiba"
+      },
+      {
+        "ciudad": "Onzaga"
+      },
+      {
+        "ciudad": "Palmar"
+      },
+      {
+        "ciudad": "Palmas del Socorro"
+      },
+      {
+        "ciudad": "Páramo"
+      },
+      {
+        "ciudad": "Piedecuesta"
+      },
+      {
+        "ciudad": "Pinchote"
+      },
+      {
+        "ciudad": "Puente Nacional"
+      },
+      {
+        "ciudad": "Puerto Parra"
+      },
+      {
+        "ciudad": "Puerto Wilches"
+      },
+      {
+        "ciudad": "Rionegro"
+      },
+      {
+        "ciudad": "Sabana de Torres"
+      },
+      {
+        "ciudad": "San Andrés"
+      },
+      {
+        "ciudad": "San Benito"
+      },
+      {
+        "ciudad": "San Gil"
+      },
+      {
+        "ciudad": "San Joaquín"
+      },
+      {
+        "ciudad": "San José de Miranda"
+      },
+      {
+        "ciudad": "San Miguel"
+      },
+      {
+        "ciudad": "San Vicente de Chucurí"
+      },
+      {
+        "ciudad": "Santa Bárbara"
+      },
+      {
+        "ciudad": "Santa Helena del Opón"
+      },
+      {
+        "ciudad": "Simacota"
+      },
+      {
+        "ciudad": "Suaita"
+      },
+      {
+        "ciudad": "Sucre"
+      },
+      {
+        "ciudad": "Suratá"
+      },
+      {
+        "ciudad": "Tona"
+      },
+      {
+        "ciudad": "Valle de San José"
+      },
+      {
+        "ciudad": "Vélez"
+      },
+      {
+        "ciudad": "Vetas"
+      },
+      {
+        "ciudad": "Villanueva"
+      },
+      {
+        "ciudad": "Zapatoca"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "departamento": "Sucre",
+    "ciudades": [
+      {
+        "ciudad": "Buenavista"
+      },
+      {
+        "ciudad": "Caimito"
+      },
+      {
+        "ciudad": "Chalán"
+      },
+      {
+        "ciudad": "Colosó"
+      },
+      {
+        "ciudad": "Corozal"
+      },
+      {
+        "ciudad": "Coveñas"
+      },
+      {
+        "ciudad": "El Roble"
+      },
+      {
+        "ciudad": "Galeras"
+      },
+      {
+        "ciudad": "Guaranda"
+      },
+      {
+        "ciudad": "La Unión"
+      },
+      {
+        "ciudad": "Los Palmitos"
+      },
+      {
+        "ciudad": "Majagual"
+      },
+      {
+        "ciudad": "Morroa"
+      },
+      {
+        "ciudad": "Ovejas"
+      },
+      {
+        "ciudad": "Sampués"
+      },
+      {
+        "ciudad": "San Antonio de Palmito"
+      },
+      {
+        "ciudad": "San Benito Abad"
+      },
+      {
+        "ciudad": "San Juan de Betulia"
+      },
+      {
+        "ciudad": "San Marcos"
+      },
+      {
+        "ciudad": "San Onofre"
+      },
+      {
+        "ciudad": "San Pedro"
+      },
+      {
+        "ciudad": "Sincé"
+      },
+      {
+        "ciudad": "Sincelejo"
+      },
+      {
+        "ciudad": "Sucre"
+      },
+      {
+        "ciudad": "Tolú"
+      },
+      {
+        "ciudad": "Tolú Viejo"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "departamento": "Tolima",
+    "ciudades": [
+      {
+        "ciudad": "Alpujarra"
+      },
+      {
+        "ciudad": "Alvarado"
+      },
+      {
+        "ciudad": "Ambalema"
+      },
+      {
+        "ciudad": "Anzoátegui"
+      },
+      {
+        "ciudad": "Armero"
+      },
+      {
+        "ciudad": "Ataco"
+      },
+      {
+        "ciudad": "Cajamarca"
+      },
+      {
+        "ciudad": "Carmen de Apicalá"
+      },
+      {
+        "ciudad": "Casabianca"
+      },
+      {
+        "ciudad": "Chaparral"
+      },
+      {
+        "ciudad": "Coello"
+      },
+      {
+        "ciudad": "Coyaima"
+      },
+      {
+        "ciudad": "Cunday"
+      },
+      {
+        "ciudad": "Dolores"
+      },
+      {
+        "ciudad": "El Espinal"
+      },
+      {
+        "ciudad": "Falán"
+      },
+      {
+        "ciudad": "Flandes"
+      },
+      {
+        "ciudad": "Fresno"
+      },
+      {
+        "ciudad": "Guamo"
+      },
+      {
+        "ciudad": "Herveo"
+      },
+      {
+        "ciudad": "Honda"
+      },
+      {
+        "ciudad": "Ibagué"
+      },
+      {
+        "ciudad": "Icononzo"
+      },
+      {
+        "ciudad": "Lérida"
+      },
+      {
+        "ciudad": "Líbano"
+      },
+      {
+        "ciudad": "Mariquita"
+      },
+      {
+        "ciudad": "Melgar"
+      },
+      {
+        "ciudad": "Murillo"
+      },
+      {
+        "ciudad": "Natagaima"
+      },
+      {
+        "ciudad": "Ortega"
+      },
+      {
+        "ciudad": "Palocabildo"
+      },
+      {
+        "ciudad": "Piedras"
+      },
+      {
+        "ciudad": "Planadas"
+      },
+      {
+        "ciudad": "Prado"
+      },
+      {
+        "ciudad": "Purificación"
+      },
+      {
+        "ciudad": "Rioblanco"
+      },
+      {
+        "ciudad": "Roncesvalles"
+      },
+      {
+        "ciudad": "Rovira"
+      },
+      {
+        "ciudad": "Saldaña"
+      },
+      {
+        "ciudad": "San Antonio"
+      },
+      {
+        "ciudad": "San Luis"
+      },
+      {
+        "ciudad": "Santa Isabel"
+      },
+      {
+        "ciudad": "Suárez"
+      },
+      {
+        "ciudad": "Valle de San Juan"
+      },
+      {
+        "ciudad": "Venadillo"
+      },
+      {
+        "ciudad": "Villahermosa"
+      },
+      {
+        "ciudad": "Villarrica"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "departamento": "Valle del Cauca",
+    "ciudades": [
+      {
+        "ciudad": "Alcalá"
+      },
+      {
+        "ciudad": "Andalucía"
+      },
+      {
+        "ciudad": "Ansermanuevo"
+      },
+      {
+        "ciudad": "Argelia"
+      },
+      {
+        "ciudad": "Bolívar"
+      },
+      {
+        "ciudad": "Buenaventura"
+      },
+      {
+        "ciudad": "Buga"
+      },
+      {
+        "ciudad": "Bugalagrande"
+      },
+      {
+        "ciudad": "Caicedonia"
+      },
+      {
+        "ciudad": "Cali"
+      },
+      {
+        "ciudad": "Calima"
+      },
+      {
+        "ciudad": "Candelaria"
+      },
+      {
+        "ciudad": "Cartago"
+      },
+      {
+        "ciudad": "Dagua"
+      },
+      {
+        "ciudad": "El Águila"
+      },
+      {
+        "ciudad": "El Cairo"
+      },
+      {
+        "ciudad": "El Cerrito"
+      },
+      {
+        "ciudad": "El Dovio"
+      },
+      {
+        "ciudad": "Florida"
+      },
+      {
+        "ciudad": "Ginebra"
+      },
+      {
+        "ciudad": "Guacarí"
+      },
+      {
+        "ciudad": "Jamundí"
+      },
+      {
+        "ciudad": "La Cumbre"
+      },
+      {
+        "ciudad": "La Unión"
+      },
+      {
+        "ciudad": "La Victoria"
+      },
+      {
+        "ciudad": "Obando"
+      },
+      {
+        "ciudad": "Palmira"
+      },
+      {
+        "ciudad": "Pradera"
+      },
+      {
+        "ciudad": "Restrepo"
+      },
+      {
+        "ciudad": "Riofrío"
+      },
+      {
+        "ciudad": "Roldanillo"
+      },
+      {
+        "ciudad": "San Pedro"
+      },
+      {
+        "ciudad": "Sevilla"
+      },
+      {
+        "ciudad": "Toro"
+      },
+      {
+        "ciudad": "Trujillo"
+      },
+      {
+        "ciudad": "Tuluá"
+      },
+      {
+        "ciudad": "Ulloa"
+      },
+      {
+        "ciudad": "Versalles"
+      },
+      {
+        "ciudad": "Vijes"
+      },
+      {
+        "ciudad": "Yotoco"
+      },
+      {
+        "ciudad": "Yumbo"
+      },
+      {
+        "ciudad": "Zarzal"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "departamento": "Vaupés",
+    "ciudades": [
+      {
+        "ciudad": "Carurú"
+      },
+      {
+        "ciudad": "Mitú"
+      },
+      {
+        "ciudad": "Taraira"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "departamento": "Vichada",
+    "ciudades": [
+      {
+        "ciudad": "Cumaribo"
+      },
+      {
+        "ciudad": "La Primavera"
+      },
+      {
+        "ciudad": "Puerto Carreño"
+      },
+      {
+        "ciudad": "Santa Rosalía"
+      }
+    ]
+  }
+]

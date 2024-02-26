@@ -10,6 +10,9 @@ export default{
     obtenerProductos(){
         return api.get(`/shop/list/products`)
     },
+    obtenerProducto(id_producto){
+        return api.get(`/shop/list/product/${id_producto}`)
+    },
     registrarMedicina(token,data){
         return api.post('/admin/register/product/medicine',data,
             { headers: {'auth-token': token, 'Content-Type': 'multipart/form-data',} }
@@ -57,6 +60,11 @@ export default{
     },
     cambiarEstadoAccesorio(token,id){
         return api.put(`/admin/status/product/accesory/${id}`,{},{
+            headers: {'auth-token': token}
+        })
+    }, 
+    comprarProductos(token,data,id){
+        return api.post(`/clientes/register/sales/product/${id}`,data,{
             headers: {'auth-token': token}
         })
     }

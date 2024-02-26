@@ -73,6 +73,7 @@ ul#vs6__listbox{
 
 
 /* Primevue */
+
 .p-datatable-wrapper{
 	/* height: clamp(20vh,30vw,34vh);    */
 }
@@ -130,6 +131,28 @@ ul#vs6__listbox{
     cursor: pointer;
     top: unset !important;
 }
+
+.cantidad .p-inputtext.p-component.p-inputnumber-input
+{
+    width: 40px;
+}
+.p-accordion-header-link.p-accordion-header-action,
+.p-accordion-content
+{
+    padding: 0;
+}
+
+.card-envio .p-accordion-content{
+    padding: 20px;
+}
+.card-envio .p-accordion-header-link.p-accordion-header-action {
+    padding: 1em;
+}
+.card-envio .p-accordion-tab.p-accordion-tab-active .p-accordion-header-link.p-accordion-header-action{
+    background-color: var(--color-morado-claro-genera1l)
+
+}
+
 /* Estilos botones */
 
 .botonVolver{

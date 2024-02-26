@@ -14,6 +14,9 @@ import SplitButton from 'primevue/splitbutton';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tag from 'primevue/tag'
+import InputGroup from 'primevue/inputgroup';
+import InputNumber from 'primevue/inputnumber';
+
 import Button from 'primevue/button';
 // import {toast} from 'vue3-toastify'
 import Dropdown from 'primevue/dropdown';
@@ -78,6 +81,7 @@ const year = today.getFullYear();
 const month = today.getMonth();
 const day = today.getDate();
 
+
 let minYear = year;
 let minMonth = month + 2;
 
@@ -88,6 +92,28 @@ if (minMonth >= 12) {
 
 const minDate = ref(new Date(minYear, minMonth, day));
 
+const tipoModal = ref(false)
+
+const handleTipoModal = () => {
+    tipoModal.value = !tipoModal.value
+}
+const nuevoTipo = ref({
+    nombre:'',
+    costo:0
+})
+const agregarTipo = () => {
+
+    servicioService.agregarServicio(Auth.token,nuevoTipo.value)
+    .then(res =>{
+        Servicios.value.push(res.data.Servicio)
+        console.log(res)
+    }).catch(err => {
+        Auth.verificarSesion(err.response.data)
+        console.log(err)
+
+    })
+
+}
 
 </script>
 
@@ -108,7 +134,25 @@ const minDate = ref(new Date(minYear, minMonth, day));
                         <small @click="">¿El cliente no se encuentra? <strong>Agregar</strong> </small>
                     
                     </div>
-                    <Dropdown v-model="Cita.citaData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" />
+                    <div class="select">
+                        <Dropdown v-model="Cita.citaData.tipo_cita" :options="Servicios"   checkmark  optionLabel="nombre" placeholder="Tipo de cita" />
+                    
+                        <small @click="handleTipoModal"> Agregar </small>
+
+                        <div class="nuevo"  v-if="tipoModal">
+
+                            <InputText v-model="nuevoTipo.nombre" placeholder="Nombre" />
+                            <InputNumber v-model="nuevoTipo.costo" inputId="currency-us" mode="currency" currency="COP"
+                                locale="es-ES" placeholder="Costo" />
+                            
+                            <Button @click="handleTipoModal" outlined icon="pi pi-times" severity="danger" />
+                            <Button @click="agregarTipo" :disabled="nuevoTipo.nombre === '' && nuevoTipo.costo === 0 || nuevoTipo.nombre === '' || nuevoTipo.costo === 0 || !nuevoTipo.nombre || !nuevoTipo.costo " icon="pi pi-check" />
+
+                        </div>
+
+                    </div>
+                    
+                    
                     <div class="menu-input">
                         <Dropdown v-model="Cita.citaData.mascotaId" :options="Cliente.mascotasCliente"   checkmark  optionLabel="nombre" placeholder="Mascota" />
                         <small @click="">¿El cliente no tiene mascotas? <strong>Agregar</strong> </small>
@@ -132,6 +176,24 @@ const minDate = ref(new Date(minYear, minMonth, day));
 
 
 <style scoped>
+.nuevo{
+    display: flex;
+}
+.select {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+}
+
+.select small {
+    text-align: left;
+    color: #5f5f5fee;
+    cursor: pointer;
+}
+
+
+
 .con{
         position: absolute;
         top: 25vh;

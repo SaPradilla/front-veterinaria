@@ -38,8 +38,34 @@ const router = createRouter({
           path:'accesorios',
           name:'accesorios',
           component: ()=> import('../views/Tienda/AccesoriosView.vue')
+        },{
+          path:'todo',
+          name:'todo',
+          component:()=> import('../views/Tienda/ProductosTiendaView.vue')
+        },{
+          path:'info-producto/:id_producto',
+          name:'info-producto',
+          component:()=> import('../views/Tienda/ProductoInfoView.vue'),
+          props: true
         },
+        {
+          path:'/carrito',
+          name:'carrito',
+          component: ()=> import('../views/Tienda/CarritoView.vue')
+        }
       ]
+    },
+    {
+      path:'/tienda/pagar',
+      name:'pagar',
+      component: ()=> import('../views/Tienda/PagarView.vue'),
+      meta: { requireAuth: true },
+    },
+    {
+      path:'/tienda/pagar/pago-realizado',
+      name:'pago-realizado',
+      component: ()=> import('../views/Tienda/PagoExisotoView.vue'),
+      
     },
     // rutas de Administrador
     {

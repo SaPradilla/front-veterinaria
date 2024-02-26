@@ -52,7 +52,7 @@ const redirigirLogin = () => {
 }
 const redirigirTienda = () => {
 
-    router.push({ name: 'tienda' })
+    router.push({ name: 'todo' })
 }
 
 const handleMenu = (event) => {
@@ -94,8 +94,8 @@ const handleMenu = (event) => {
                      -->
                     <Avatar v-if="Permisos.userLogin.imagen" :image="`http://localhost:6060/uploads/clients/${Permisos.userLogin.imagen}`"  size="large" shape="circle" />
                     
-                    <Avatar v-else :label="Permisos.userLogin.nombre.substr(-20, 2)" shape="circle"
-                    style="background-color: var(--color-morado-claro-general); width: 80px; height: 80px; font-size: 2em;  color: white" />
+                    <Avatar v-else :label="Permisos.userLogin.nombre.substr(-20, 2)" shape="circle" size="large"
+                    style="background-color: var(--color-morado-claro-general); color: white; cursor: pointer;" />
                     
                 </div>
                 <!-- <img  v-else  alt="Avatar" src="../../assets/img/avatar.svg" /> -->

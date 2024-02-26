@@ -95,7 +95,7 @@ const deleteImage = () => {
                 <InputText v-model="Empleado.dataEmpleado.email" type="email" placeholder="Correo" />
             </InputGroup>
 
-            <Dropdown v-model="Empleado.dataEmpleado.rol" :options="options" optionLabel="label" placeholder="Select a City"
+            <Dropdown v-model="Empleado.dataEmpleado.rol" :options="options" optionLabel="label" placeholder="Rol"
                 class="w-full md:w-14rem" />
 
             <div class="image-uploaded">
